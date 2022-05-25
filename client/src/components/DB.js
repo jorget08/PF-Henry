@@ -1,3 +1,15 @@
+let adv = "adventures";
+let sci = "sci-fi";
+let pol = "crime Fiction";
+let horr = "horror and mystery";
+let romance = "romance";
+let humor = "humor";
+let poet = "poetry";
+let myth = "mythology";
+let tale = "tales";
+let academic = "academic";
+let susp = "thriller";
+
 export const books = [
     {
         id: 0,
