@@ -12,7 +12,8 @@ let susp = "Thriller";
 let dra = "Drama";
 let self = "Self-help";
 let cook = "Cookbook";
-
+let bio = "Autobiography";
+let history = "History";
 export const books = [
   {
     id: 0,
@@ -104,6 +105,7 @@ export const books = [
     review: "3.0 out of 5 stars",
     description:
       "DIRK PITT IS BACK. AND ON HIS SHOULDERS RESTS THE FATE OF THE ENTIRE PLANET.JOIN THE LATEST THRILL RIDE FROM THE GRAND MASTER OF ADVENTURE, CLIVE CUSSLER_____Tibet, 1959.In the turmoil of the Communist takeover of the mountain kingdom, a Buddhist artefact of immense importance appears to have been lost to history.Until, sixty years later, clues to its survival emerged from the wreckage of a cargo plane discovered deep beneath the surface of the Philippine Sea . . .NUMA Director Dirk Pitt and his old friend Al Giordino already have their hands full dealing with the recovery of a top secret hypersonic missile that went down in the Luzon Strait. Especially when it becomes clear that a rogue Chinese military team has its sights set on the same prize.And that, after making their own earth-shattering discovery about what lies below the waves, they're prepared to go to any lengths to ensure that they possess it.Any lengths at all.From the cold, dark depths of the Pacific Ocean to the vertiginous peaks of the Himalayas, only Dirk Pitt can unravel the mysteries that will bring the world back from the brink of war . . .Praise for Clive Cussler:'The Adventure King' Sunday Express'Just about the best in the business' New York Post 'Cussler is hard to beat' Daily Mail",
+    categories: [susp, adv],
     source: "www.amazon.co.uk",
   },
   {
@@ -249,7 +251,7 @@ export const books = [
     review: "4.5 out of 5 stars",
     description:
       "'A beautiful and profound retelling' - Madeline MillerA dazzling, feminist retelling of Greek myth from the internationally bestselling author of The Miniaturist, stunningly illustrated by Olivia Lomenech Gill.Exiled to a far-flung island by the whims of the gods, Medusa has little company except the snakes that adorn her head instead of hair. But when a charmed, beautiful boy called Perseus arrives on the island, her lonely existence is disrupted with the force of a supernova, unleashing desire, love and betrayal.Filled with glorious full-colour illustrations by award-winning Olivia Lomenech Gill, this astonishing retelling of Greek myth is perfect for readers of Circe and The Silence of the Girls. Illuminating the girl behind the legend, it brings alive Medusa for a new generation.",
-    categories: [myth],
+    categories: [myth, adv],
     source: "www.amazon.co.uk",
   },
   {
@@ -262,7 +264,7 @@ export const books = [
     review: "4.8 out of 5 stars",
     description:
       "*THE SUNDAY TIMES BESTSELLER*'Compelling, penetrating, devastating - Silent Earth is a wake-up call for the world.' Isabella TreeWe have to learn to live as part of nature, not apart from it. And the first step is to start looking after the insects, the little creatures that make our shared world go round.Insects are essential for life as we know it. As they become more scarce, our world will slowly grind to a halt; we simply cannot function without them. Drawing on the latest ground-breaking research and a lifetime's study, Dave Goulson reveals the shocking decline of insect populations that has taken place in recent decades, with potentially catastrophic consequences. He passionately argues that we must all learn to love, respect and care for our six-legged friends.Eye-opening, inspiring and riveting, Silent Earth is part love letter to the insect world, part elegy, part rousing manifesto for a greener planet. It is a call to arms for profound change at every level - in government policy, agriculture, industry and in our own homes and gardens. Although time is running out, it is not yet too late for insect populations to recover. We may feel helpless in the face of many of the environmental issues that loom on our horizon, but Goulson shows us how we can all take simple steps to encourage insects and counter their destruction.",
-    categories: [academic, horr],
+    categories: [academic, horr, history],
     source: "www.amazon.co.uk",
   },
   {
@@ -275,7 +277,7 @@ export const books = [
     review: "4.8 out of 5 stars",
     description:
       "The quintessential style, cooking, and home interior book from Soho House, the world's leading members club.Since the first Soho House opened its doors over 25 years ago, we've learnt a bit about what works. Contemporary, global yet with something quintessentially English and homely at its heart, this is Soho House style explained by its experts:- From planning a room to vintage finds: bringing the Soho House look home.- Our House curator's advice on how to buy, collect and hang art.- The art of a great night's sleep: how to design the perfect bedroom.- No-fuss recipes and chef's tips: here's how to make your favourite House dishes.- Inside Babington: our take on country-house living. Wellies optional.- Flip-flop glamour and poolside style from Soho House Miami Beach.- All the secrets of cocktail hour: House tonics and barman's tips.- Spa treatment at home, DIY facials and chocolate brownies.Eat Drink Nap, a 300-page highly illustrated book, with a foreword from founder Nick Jones, and photography from leading food and interiors photographers Mark Seelen and Jean Cazals, shares the Soho House blueprint for stylish, modern living, the Soho House way._______________Readers love EAT, DRINK, NAP:'A fun and stylish guide to a better life''A perfect coffee table book!''I love it and people comment and do flick though it when they are at my home''Simple but elegant. . . and chocked full of beautiful pictures and wonderful information for making your house a home.'",
-    categories: [academic, horr],
+    categories: [cook],
     source: "www.amazon.co.uk",
   },
   {
@@ -288,6 +290,7 @@ export const books = [
     review: "4.7 out of 5 stars",
     description:
       "AN EPIC BATTLE THAT LASTED TEN YEARS. A LEGENDARY STORY THAT HAS SURVIVED THOUSANDS.'An inimitable retelling of the siege of Troy . . . Fry's narrative, artfully humorous and rich in detail, breathes life and contemporary relevance into these ancient tales' OBSERVER'Stephen Fry has done it again. Well written and super storytelling' 5*** READER REVIEW ___ 'Troy. The most marvellous kingdom in all the world. The Jewel of the Aegean. Glittering Ilion, the city that rose and fell not once but twice . . .'When Helen, the beautiful Greek queen, is kidnapped by the Trojan prince Paris, the most legendary war of all time begins.Watch in awe as a thousand ships are launched against the great city of Troy.Feel the fury of the battleground as the Trojans stand resolutely against Greek might for an entire decade.And witness the epic climax - the wooden horse, delivered to the city of Troy in a masterclass of deception by the Greeks . . .In Stephen Fry's exceptional retelling of our greatest story, TROY will transport you to the depths of ancient Greece and beyond. ___ 'A fun romp through the world's greatest story. Fry's knowledge of the world - ancient and modern - bursts through' Daily Telegraph'An excellent retelling . . . told with compassion and wit' 5*** Reader Review'Hugely successful, graceful' The Times'If you want to read about TROY, this book is a must over any other' 5*** Reader Review'Fluent, crisp, nuanced, begins with a bang' The Times Literary Supplement'The characters . . . are brilliantly brought to life' 5*** Reader Review PRAISE FOR STEPHEN FRY'S GREEK SERIES: 'A romp through the lives of ancient Greek gods. Fry is at his story-telling best . . . the gods will be pleased' Times 'A head-spinning marathon of legends' Guardian 'An Olympian feat. The gods seem to be smiling on Fry - his myths are definitely a hit' Evening Standard 'An odyssey through Greek mythology. Brilliant . . . all hail Stephen Fry' Daily Mail 'A rollicking good read' Independent",
+    categories: [myth, adv],
     source: "www.amazon.co.uk",
   },
   {
@@ -300,6 +303,7 @@ export const books = [
     review: "4.6 out of 5 stars",
     description:
       "___AVAILABLE NOW'The best memoir I ever read'- Oprah Winfrey'If you read one book this year, make it this one'- Jay Shetty'A wild ride'- New York Times'Raw, comedic, inspirational'- GQOne of the most dynamic and globally recognized entertainment forces of our time opens up fully about his life, in a brave and inspiring book that traces his learning curve to a place where outer success, inner happiness, and human connection are aligned. Along the way, Will tells the story in full of one of the most amazing rides through the worlds of music and film that anyone has ever had.Will Smith's transformation from a fearful child in a tense West Philadelphia home to one of the biggest rap stars of his era and then one of the biggest movie stars in Hollywood history, with a string of box office successes that will likely never be broken, is an epic tale of inner transformation and outer triumph, and Will tells it astonishingly well. But it's only half the story. Will Smith thought, with good reason, that he had won at life: not only was his own success unparalleled, his whole family was at the pinnacle of the entertainment world. Only they didn't see it that way: they felt more like star performers in his circus, a seven-days-a-week job they hadn't signed up for. It turned out Will Smith's education wasn't nearly over. This memoir is the product of a profound journey of self-knowledge, a reckoning with all that your will can get you and all that it can leave behind. Written with the help of Mark Manson, author of the multi-million-copy bestseller The Subtle Art of Not Giving a F*ck, Will is the story of how one exceptional man mastered his own emotions, written in a way that can help everyone else do the same. Few of us will know the pressure of performing on the world's biggest stages for the highest of stakes, but we can all understand that the fuel that works for one stage of our journey might have to be changed if we want to make it all the way home. The combination of genuine wisdom of universal value and a life story that is preposterously entertaining, even astonishing, puts Will the book, like its author, in a category by itself.",
+    categories: [bio],
     source: "www.amazon.co.uk",
   },
   {
@@ -312,6 +316,7 @@ export const books = [
     review: "4.8 out of 5 stars",
     description:
       "A #1 New York Times and Sunday Times bestsellerThe long-awaited sequel to 12 RULES FOR LIFE, which has sold over 5 million copies around the worldIn 12 Rules for Life, acclaimed public thinker and clinical psychologist Jordan B. Peterson offered an antidote to the chaos in our lives: eternal truths applied to modern anxieties. His insights have helped millions of readers and resonated powerfully around the world. Now in this much-anticipated sequel, Peterson goes further, showing that part of life's meaning comes from reaching out into the domain beyond what we know, and adapting to an ever-transforming world. While an excess of chaos threatens us with uncertainty, an excess of order leads to a lack of curiosity and creative vitality. Beyond Order therefore calls on us to balance the two fundamental principles of reality - order and chaos ­- and reveals the profound meaning that can be found on the path that divides them.In times of instability and suffering, Peterson reminds us that there are sources of strength on which we can all draw: insights borrowed from psychology, philosophy, and humanity's greatest myths and stories. Drawing on the hard-won truths of ancient wisdom, as well as deeply personal lessons from his own life and clinical practice, Peterson offers twelve new principles to guide readers towards a more courageous, truthful and meaningful life.",
+    categories: [self],
     source: "www.amazon.co.uk",
   },
   {
@@ -324,6 +329,7 @@ export const books = [
     review: "4.7 out of 5 stars",
     description:
       "In love with all things Japan or looking to absorb a little Japanese wisdom into your daily life?From the philosophies of ikigai and wabi sabi to kitsch karaoke nights and futuristic robot restaurants; traditional tea ceremonies and tranquil onsen dwellings to cosplay culture and J-Pop megastars; Japan is full of intriguing contradictions.Though renowned for its ultramodern capital Tokyo - a sprawling neon-lit metropolis straight from the pages of a science fiction novel - Japan is still deeply rooted in ancient tradition. And while the country runs with clockwork precision, the cultural life of the inhabitants is transformed with the changing of the seasons, a testament to the enduring power of nature's rhythms.With each page alive with facts, history and inspiration, Be More Japan unlocks the secrets behind modern Japanese living - whether you're eating sushi in London or enjoying the cherry blossoms in San Francisco. And if you're dreaming of a future trip to Japan (or awaiting the 2021 Olympics) this book will get you closer to your destination before you've even departed.",
+    categories: [academic, adv],
     source: "www.amazon.co.uk",
   },
   {
@@ -336,6 +342,7 @@ export const books = [
     review: "4.4 out of 5 stars",
     description:
       "INSTANT NEW YORK TIMES BESTSELLER'An urgent call to arms for each and all of us.' Matthew McConaughey'Ryan Holiday is a genius.' Chris Evans'A clear and inspiring guide for how to develop this highest of human virtues.' - Robert GreeneAn inspiring anthem to the power, promise, and challenges of courage, the first in a series examining the timeless Stoic virtues from #1 New York Times bestselling author Ryan HolidayFortune favours the bold. All great leaders of history have known this, and were successful because of the risks they dared to take. But today so many of us are paralysed by fear. Drawing on ancient Stoic wisdom and examples across history and around the world, Ryan Holiday shows why courage is so important, and how to cultivate it in our own lives. Courage is not simply physical bravery but also doing the right thing and standing up for what you believe; it's creativity, generosity and perseverance. And it is the only way to live an extraordinary, fulfilled and effective life. Everything in life begins with courage. This book will equip you with the bravery to begin.",
+    categories: [self],
     source: "www.amazon.co.uk",
   },
   {
@@ -348,6 +355,7 @@ export const books = [
     review: "2.3 out of 5 stars",
     description:
       "The second volume of an epic, beautifully illustrated graphic history of humankind, based on Yuval Noah Harari's internationally bestselling phenomenonWhen nomadic Homo sapiens settled to live in one place, they started working harder and harder. But why didn't they get a better life in return?In The Pillars of Civilization, Yuval Noah Harari and his companions including Prof. Saraswati and Dr. Fiction travel the length and breadth of human history to investigate how the Agricultural Revolution changed society forever. Discover how wheat took over the world, how war, famine, disease and inequality became a part of the human condition, and why we might only have ourselves to blame.The origins of modern farming are told through Elizabethan tragedy, the changing fortunes of domesticated plants and animals are tracked in the columns of the Daily Business News, and the history of inequality is revealed in a superhero detective story.A radical, witty and colourful retelling of the story of humankind, adapted from Yuval Noah Harari's Sapiens: A Brief History of Humankind, Volume 2 can be read as a standalone or as a follow-up to Volume 1, The Birth of Humankind.Praise for Yuval Noah Harari's Sapiens: A Brief History of Humankind:'I would recommend Sapiens to anyone who's interested in the history and future of our species.' - Bill Gates'Interesting and provocative... It gives you a sense of how briefly we've been on this Earth' - Barack Obama'Jaw-dropping from the first word to the last... It may be the best book I've ever read' - Chris Evans'Contains a remarkable piece of information on almost every page and reminds us that we should be grateful to be human.' - Matt Haig'Sweeps the cobwebs out of your brain... Radiates power and clarity, making the world strange and new' - Sunday Times'Provocative and fascinating and opinionated...it makes the familiar seem unfamiliar. It altered how I view our species and our world.' - Guardian",
+    categories: [academic, history],
     source: "www.amazon.co.uk",
   },
   {
@@ -360,6 +368,7 @@ export const books = [
     review: "4.9 out of 5 stars",
     description:
       "Winner of the 2016 Pulitzer Prize for DramaNow a major motion picture, available on Disney Plus.Goodreads best non-fiction book of 2016From Tony Award-winning composer-lyricist-star Lin-Manuel Miranda comes a backstage pass to his groundbreaking, hit musical Hamilton.Lin-Manuel Miranda's groundbreaking musical Hamilton is as revolutionary as its subject, the poor kid from the Caribbean who fought the British, defended the Constitution, and helped to found the United States. Fusing hip-hop, pop, R&B, and the best traditions of theater, this once-in-a-generation show broadens the sound of Broadway, reveals the storytelling power of rap, and claims the origins of the United States for a diverse new generation.HAMILTON: THE REVOLUTION gives readers an unprecedented view of both revolutions, from the only two writers able to provide it. Miranda, along with Jeremy McCarter, a cultural critic and theater artist who was involved in the project from its earliest stages - \"since before this was even a show,\" according to Miranda - traces its development from an improbable perfor­mance at the White House to its landmark opening night on Broadway six years later. In addition, Miranda has written more than 200 funny, revealing footnotes for his award-winning libretto, the full text of which is published here.Their account features photos by the renowned Frank Ockenfels and veteran Broadway photographer, Joan Marcus; exclusive looks at notebooks and emails; interviews with Questlove, Stephen Sond­heim, leading political commentators, and more than 50 people involved with the production; and multiple appearances by Presi­dent Obama himself. The book does more than tell the surprising story of how a Broadway musical became an international phenomenon: It demonstrates that America has always been renewed by the brash upstarts and brilliant outsiders, the men and women who don't throw away their shot.",
+    categories: [dra],
     source: "www.amazon.co.uk",
   },
   {
@@ -372,6 +381,7 @@ export const books = [
     review: "5.0 out of 5 stars",
     description:
       "The Wonder of Flight. The Science of Evolution. From both, Richard Dawkins weaves a fascinating and beautifully illustrated account of how nature and humans have learned to overcome the pull of gravity and take to the skies.",
+    categories: [academic],
     source: "www.amazon.co.uk",
   },
   {
@@ -385,6 +395,7 @@ export const books = [
     review: "4.8 out of 5 stars",
     description:
       "'Seamlessly melding scholarship with passion, Unwell Women is the definition of unputdownable' Telegraph'A richly detailed, wide-ranging and enraging history... Unwell Women is not just a compelling investigation, but an essential one' Observer'A passionate and indignant history' The Times'A searing, brilliant investigation, an intricate and urgent book on how women's health has constantly been misunderstood and miscast throughout history' Kate Williams'One of the most important books of our generation' Fern Riddell'UNWELL WOMEN is a powerful and fascinating book that takes an unsparing look at how women's bodies have been misunderstood and misdiagnosed for centuries.' Lindsey Fitzharris'We are taught that medicine is the art of solving our body's mysteries. And as a science, we expect medicine to uphold the principles of evidence and impartiality. We want our doctors to listen to us and care for us as people, but we also need their assessments of our pain and fevers, aches and exhaustion to be free of any prejudice about who we are, our gender, or the colour of our skin. But medicine carries the burden of its own troubling history. The history of medicine, of illness, is a history of people, of their bodies and their lives, not just physicians, surgeons, clinicians and researchers. And medical progress has always reflected the realities of a changing world, and the meanings of being human.'In Unwell Women Elinor Cleghorn unpacks the roots of the perpetual misunderstanding, mystification and misdiagnosis of women's bodies, and traces the journey from the 'wandering womb' of ancient Greece, the rise of witch trials in Medieval Europe, through the dawn of Hysteria, to modern day understandings of autoimmune diseases, the menopause and conditions like endometriosis. Packed with character studies of women who have suffered, challenged and rewritten medical orthodoxy - and drawing on her own experience of un-diagnosed Lupus disease - this is a ground-breaking and timely exposé of the medical world and woman's place within it.",
+    categories: [academic],
     source: "www.amazon.co.uk",
   },
   {
@@ -397,6 +408,7 @@ export const books = [
     review: "4.7 out of 5 stars",
     description:
       "A deluxe special edition of the ancient classic written by the Roman Emperor known as “The Philosopher”",
+    categories: [self, history],
     source: "www.amazon.co.uk",
   },
   {
@@ -409,6 +421,7 @@ export const books = [
     review: "4.8 out of 5 stars",
     description:
       "A great gift for birthdays and other special occasions, My Awesome Year Being 8 is bursting with ideas and inspiration for making awesome memories!",
+    categories: [tale],
     source: "www.amazon.co.uk",
   },
   {
@@ -422,6 +435,7 @@ export const books = [
     review: "4.5 out of 5 stars",
     description:
       "THE INSTANT SUNDAY TIMES BESTSELLER A BBC BETWEEN THE COVERS BOOK CLUB PICKA BBC RADIO 4 BOOK AT BEDTIME WINNER OF THE INWORDS LITERARY AWARD",
+    categories: [romance, poet],
     source: "www.amazon.co.uk",
   },
   {
@@ -434,6 +448,7 @@ export const books = [
     review: "4.5 out of 5 stars",
     description:
       "'A must-read for everyone who cares about driving customer engagement' Eric Ries, author of The Lean Startup'The most high bandwidth, high octane, and valuable presentation I have ever seen on this subject' Rory Sutherland, vice chairman, Ogilvy & MatherNir Eyal reveals how successful companies create products people can't put down - and how you can too Why do some products capture our attention while others flop? What makes us engage with certain things out of sheer habit? Is there an underlying pattern to how technologies hook us? Nir Eyal answers these questions (and many more) with the Hook Model - a four-step process that, when embedded into products, subtly encourages customer behaviour. Through consecutive \"hook cycles,\" these products bring people back again and again without depending on costly advertising or aggressive messaging.Hooked is based on Eyal's years of research, consulting, and practical experience. He wrote the book he wished had been available to him as a start-up founder - not abstract theory, but a how-to guide for building better products. Hooked is written for product managers, designers, marketers, start-up founders, and anyone who seeks to understand how products influence our behaviour.Eyal provides readers with practical insights to create user habits that stick; actionable steps for building products people love; and riveting examples from the iPhone to Twitter, Pinterest and the Bible App.",
+    categories: [self],
     source: "www.amazon.co.uk",
   },
   {
@@ -447,6 +462,7 @@ export const books = [
     review: "4.6 out of 5 stars",
     description:
       "Little Book of Louis Vuitton is the pocket-sized and fully illustrated story of one of the world's most luxurious fashion houses.",
+    categories: [history],
     source: "www.amazon.co.uk",
   },
   {
@@ -460,6 +476,7 @@ export const books = [
     review: "4.5 out of 5 stars",
     description:
       "THE SUNDAY TIMES BESTSELLER  'Enlightening, thought-provoking and illuminating. Derren Brown asks questions about the world, and his intelligent curiosity benefits us all.' ELIZABETH DAY In A Book of Secrets, internationally bestselling author Derren Brown shows us that it is in those  moments when we are faced with adversity that we can find life's most lasting rewards.  In thirteen fascinating chapters, Derren takes us on a personal journey - to the scene of a childhood humiliation, to lonely evenings on tour, to being paralysed by shyness at a dinner party, to navigating middle age and to finding love. Sharing moments of anger, frustration, loneliness and loss, Derren reveals how it's possible to find consolation and compassion. Even in our most challenging times we can find meaning and grow.'Derren Brown is a mine of wisdom, humanity and kindness - everything we need to sustain and nourish ourselves.' ALAIN DE BOTTON*** 'This is the most I've seen Derren lay himself bare'** 'Funny, moving and always, always meaningful'** 'Derren's best book to date and the best book I have read this year' *** 'Everything you need in this is a gem. I can't wait to read it a second time'",
+    categories: [self],
     source: "www.amazon.co.uk",
   },
   {
@@ -473,6 +490,7 @@ export const books = [
     review: "4.1 out of 5 stars",
     description:
       "'Exhilaratingly whizzes through billions of years . . . Gee is a marvellously engaging writer, juggling humour, precision, polemic and poetry to enrich his impossibly telescoped account . . . [making] clear sense out of very complex narratives' - The Times'Henry Gee makes the kaleidoscopically changing canvas of life understandable and exciting. Who will enjoy reading this book? - Everybody!' Jared Diamond, author of Guns, Germs, and SteelFor billions of years, Earth was an inhospitably alien place – covered with churning seas, slowly crafting its landscape by way of incessant volcanic eruptions, the atmosphere in a constant state of chemical flux. And yet, despite facing literally every conceivable setback that living organisms could encounter, life has been extinguished and picked itself up to evolve again. Life has learned and adapted and continued through the billions of years that followed. It has weathered fire and ice. Slimes begat sponges, who through billions of years of complex evolution and adaptation grew a backbone, braved the unknown of pitiless shores, and sought an existence beyond the sea.From that first foray to the spread of early hominids who later became Homo sapiens, life has persisted, undaunted. A (Very) Short History of Life is an enlightening story of survival, of persistence, illuminating the delicate balance within which life has always existed, and continues to exist today. It is our planet like you’ve never seen it before.Life teems through Henry Gee’s lyrical prose – colossal supercontinents drift, collide, and coalesce, fashioning the face of the planet as we know it today. Creatures are engagingly personified, from ‘gregarious’ bacteria populating the seas to duelling dinosaurs in the Triassic period to magnificent mammals with the future in their (newly evolved) grasp. Those long extinct, almost alien early life forms are resurrected in evocative detail. Life’s evolutionary steps – from the development of a digestive system to the awe of creatures taking to the skies in flight – are conveyed with an alluring, up-close intimacy.",
+    categories: [academic, history],
     source: "www.amazon.co.uk",
   },
   {
@@ -485,6 +503,7 @@ export const books = [
     review: "4.7 out of 5 stars",
     description:
       'Which were the most powerful African empires? Who were the pioneers of jazz? What sparked the Black Lives Matter movement? This book answers these questions and many more, exploring the rich history of the peoples of Africa and the African diaspora, and the struggles and triumphs of Black communities around the world. The Black History Book provides clear and concise explanations of important events and cultural milestones. It is packed with memorable quotations from Black figures, bold illustrations, and step-by-step diagrams that untangle complex concepts.From the earliest human migrations to modern Black communities, this thought-provoking book presents a vivid overview of Black history. It brings to life the stories of the early kingdoms of Ancient Egypt and Nubia; the powerful medieval and early modern empires; and the struggle against colonization. It also explores Black history beyond the African continent - including the Atlantic slave trade and slave resistance settlements; the Harlem Renaissance and Jazz Age; the Windrush migration; civil rights and Black feminist movements; and Black Lives Matter. Continuing the "Big Ideas" series\' trademark combination of authoritative text and bold graphics, The Black History Book uses an innovative visual approach to make the subject accessible to everyone, whether you are eager to discover more about Black history, a history student looking to broaden your knowledge, or an armchair reader.',
+    categories: [academic, history],
     source: "www.amazon.co.uk",
   },
 ];
