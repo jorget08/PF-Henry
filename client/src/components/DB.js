@@ -1,14 +1,14 @@
-let adv = "adventures";
-let sci = "sci-fi";
-let pol = "crime Fiction";
-let horr = "horror and mystery";
-let romance = "romance";
-let humor = "humor";
-let poet = "poetry";
-let myth = "mythology";
-let tale = "tales";
-let academic = "academic";
-let susp = "thriller";
+let adv = "Adventures";
+let sci = "Sci-Fi";
+let pol = "Crime Fiction";
+let horr = "Horror and Mystery";
+let romance = "Romance";
+let humor = "Humor";
+let poet = "Poetry";
+let myth = "Mythology";
+let tale = "Tales";
+let academic = "Academic";
+let susp = "Thriller";
 
 export const books = [
     {
