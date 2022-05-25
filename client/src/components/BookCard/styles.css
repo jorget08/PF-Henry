@@ -1,0 +1,40 @@
+a {
+  text-decoration: none;
+}
+.card {
+  display: flex;
+  background-color: aliceblue;
+  height: 13rem;
+  margin: 1rem;
+  border-radius: 20px;
+  box-shadow: 5px 5px 40px -2px black;
+  transition: transform 0.5s;
+}
+.card img {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  max-width: max-content;
+  max-height: max-content;
+}
+.card .info {
+  display: block;
+  margin: auto 10px;
+  text-align: justify;
+}
+.card .info h3,
+.card .info h4,
+.card .info h5 {
+  color: black;
+}
+.card .info h3 {
+  font-size: 20px;
+}
+.card .info h5 {
+  font-size: 16px;
+}
+.card .info h4 {
+  font-size: 12px;
+}
+.card:hover {
+  transform: scale(1.1);
+}

@@ -1,0 +1,9 @@
+.catalogue {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: #ffe4f0;
+  background: linear-gradient(194deg, #ffe4f0 0%, #b2f8ff 45%, rgba(255, 249, 152, 0.88279062) 95%);
+  margin: 2rem 3rem;
+  padding: 1rem;
+  border-radius: 10px;
+}
