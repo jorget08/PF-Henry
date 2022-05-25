@@ -9,6 +9,7 @@ let myth = "Mythology";
 let tale = "Tales";
 let academic = "Academic";
 let susp = "Thriller";
+let dra= "Drama"
 
 export const books = [
     {
@@ -19,7 +20,8 @@ export const books = [
         price: "£16.00",
         review: "3.2 out of 5 stars",
         description: "THE AMAZING NEW THRILLER FROM TERRY HAYES. ",
-        source: "www.amazon.co.uk"
+        source: "www.amazon.co.uk",
+        categories:[pol,susp]
     },
     {
         id: 1,
@@ -29,7 +31,8 @@ export const books = [
         price: "£10.00",
         review: "4.6 out of 5 stars",
         description: "'A dazzlingly shapeshifting novel . . . equally good at action scenes and in-depth psychology' The Sunday Times'A thriller with a surprisingly heartfelt and redemptive ending, Billy Summers is a compelling and engrossing read' Sunday ExpressFrom legendary storyteller and No. 1 bestseller Stephen King, whose 'restless imagination is a power that cannot be contained' (The New York Times Book Review), comes a thrilling new novel about a good guy in a bad job.Billy Summers is a man in a room with a gun. He's a killer for hire and the best in the business. But he'll do the job only if the target is a truly bad guy. And now Billy wants out. But first there is one last hit. Billy is among the best snipers in the world, a decorated Iraq war vet, a Houdini when it comes to vanishing after the job is done. So what could possibly go wrong? How about everything.This spectacular can't-put-it-down novel is part war story, part love letter to small town America and the people who live there, and it features one of the most compelling and surprising duos in King fiction, who set out to avenge the crimes of an extraordinarily evil man. It's about love, luck, fate, and a complex hero with one last shot at redemption. You won't put this story down, and you won't forget Billy.",
-        source: "www.amazon.co.uk"
+        source: "www.amazon.co.uk",
+        categories:[pol,susp]
     },
     {
         id: 2,
@@ -39,7 +42,8 @@ export const books = [
         price: "£4.50",
         review: "4.2 out of 5 stars",
         description: "‘Sensational. Gripping, haunting, and beautifully written’ RICHARD OSMAN‘Haunting, powerful, with a pitch-perfect ending’ THE NEW YORK TIMES",
-        source: "www.amazon.co.uk"
+        source: "www.amazon.co.uk",
+        categories:[susp,horr]
     },
     {
         id: 3,
@@ -49,7 +53,8 @@ export const books = [
         price: "£9.00",
         review: "4.4 out of 5 stars",
         description: "**THE SUNDAY TIMES THRILLER OF THE MONTH**Nonstop suspense from the Sunday Times bestselling author: Investigator Lacy Stoltz follows the trail of a serial killer, and closes in on a shocking suspect - a sitting judge.In The Whistler, Lacy Stoltz investigated a corrupt judge who was taking millions in bribes from a crime syndicate. She put the criminals away, but only after being attacked and nearly killed. Three years later, and approaching forty, she is tired of her work for the Florida Board on Judicial Conduct and ready for a change.Then she meets a mysterious woman who is so frightened she uses a number of aliases. Jeri Crosby's father was murdered twenty years earlier in a case that remains unsolved and that has grown stone cold. But Jeri has a suspect whom she has become obsessed with and has stalked for two decades. Along the way, she has discovered other victims.Suspicions are easy enough, but proof seems impossible. The man is brilliant, patient, and always one step ahead of law enforcement. He is the most cunning of all serial killers. He knows forensics, police procedure, and most important: he knows the law.He is a judge, in Florida - under Lacy's jurisdiction.He has a list, with the names of his victims and targets, all unsuspecting people unlucky enough to have crossed his path and wronged him in some way. How can Lacy pursue him, without becoming the next name on his list?The Judge's List is by any measure John Grisham's most surprising, chilling novel yet.PRAISE FOR JOHN GRISHAM'When Grisham gets in the courtroom he lets rip, drawing scenes so real they're not just alive, they're pulsating' Mirror'A superb, instinctive storyteller' The Times'Storytelling genius . . . he is in a league of his own' Daily Record 350+ million copies, 45 languages, 9 blockbuster films:NO ONE WRITES DRAMA LIKE JOHN GRISHAM",
-        source: "www.amazon.co.uk"
+        source: "www.amazon.co.uk",
+        categories:[susp,horr,sci]
     },
     {
         id: 4,
@@ -59,7 +64,8 @@ export const books = [
         price: "£10.00",
         review: "4.0 out of 5 stars",
         description: "Reacher never backs down from a problem.And he's about to find a big one, on a deserted Arizona road, where a Jeep has crashed into the only tree for miles around. Under the merciless desert sun, nothing is as it seems.Minutes later Reacher is heading into the nearby border town, a backwater that has seen better days. Next to him is Michaela Fenton, an army veteran turned FBI agent, who is trying to find her twin brother. He might have got mixed up with some dangerous people.And Reacher might just need to pay them a visit.Their leader has burrowed his influence deep into the town. Just to get in and meet the mysterious Dendoncker, Reacher is going to have to achieve the impossible.To get answers will be even harder. There are people in this hostile, empty place who would rather die than reveal their secrets.But then, if Reacher is coming after you, you might be better off dead.*'Jack Reacher is today's James Bond, a thriller hero we can't get enough of.' Ken Follett'If you haven't read any Jack Reacher, you have a treat in store . . . a hitchhiker without a phone, a one-man force for good.' The Times'A contemporary version of the knight in shining armour . . . Reacher is a mythic figure.' Literary Review'Jack Reacher is a wonderfully epic hero; tough, taciturn, yet vulnerable... Irresistible.' People'Jack Reacher has long since earned his prominent place in the pantheon of cool, smart-talking American heroes.' New York Times",
-        source: "www.amazon.co.uk"
+        source: "www.amazon.co.uk",
+        categories:[susp,horr,adv]
     },
     {
         id: 5,
@@ -69,7 +75,8 @@ export const books = [
         price: "£14.29",
         review: "4.4 out of 5 stars",
         description: "Your favourite authors have been gripped by this electric psychological thriller!'A dark world of emotional complexity and betrayal, where twist follows twist and nothing is what it seems' ALEX MICHAELIDES'Exhilarating, addictive, fierce' BRIDGET COLLINS'A psychological thriller you can't put down and an antiheroine you won't forget' HARLAN COBEN'Dark, Gothic, and propulsively readable - past secrets and present discoveries entangle in an intricately crafted conclusion' RUTH WARE'Engrossing, cunning, sharp, sinister . . . kept me enthralled till the final pages' CHRIS WHITAKER'A clever chess game of repressed fears, power struggles, secrets and lies' LUCY ATKINS 'A complex, chilling mystery full of shifting truths and dark corners where the unburied past lies in wait' TAMMY COHEN'A dark and richly enjoyable novel that already feels like a classic' ELLY GRIFFITHS'Irresistibly readable, dark and brilliant with a masterful emotional punch' CATRIONA WARD* * * * Now I'm in charge, the gates are my gates. The rules are my rules. It's an incendiary moment for St Oswald's school. For the first time in its history, a headmistress is in power, the gates opening to girls.Rebecca Buckfast has spilled blood to reach this position. Barely forty, she is just starting to reap the harvest of her ambition. As the new regime takes on the old guard, the ground shifts. And with it, the remains of a body are discovered. But Rebecca is here to make her mark. She'll bury the past so deep it will evade even her own memory, just like she has done before. After all... You can't keep a good woman down. * * * * Praise for Joanne Harris's other books set in the St Oswald's world - which all read as standalone thrillers: 'A masterpiece of misdirection' Val McDermid 'Delivers an almighty twist . . . brilliantly atmospheric ' The Times 'Crime novel or literary novel? Categories really don't matter; readers will find themselves comprehensively gripped' Independent '[A] gripping psychological thriller . . . Harris is one of our most accomplished novelists' Daily Express 'Marvellously mischievous' Good Housekeeping 'A classic whodunnit with the characters carefully crafted and the tension at a knife edge' Sunday Express '[A] delicious black comedy' Daily Mail",
-        source: "www.amazon.co.uk"
+        source: "www.amazon.co.uk",
+        categories: [susp,sci]
     },
     {
         id: 6,
@@ -89,7 +96,8 @@ export const books = [
         price: "£10.00",
         review: "4.5 out of 5 stars",
         description: "'Bold in scale and meticulously researched' - Sunday Times'A stunning thriller and one of the most compelling reads of the year' – Daily ExpressExpertly researched, visionary in scale and the first contemporary novel in over a decade from international number one bestseller Ken Follett, Never is more than a thriller. It imagines a scenario we all hope never comes true, one which will keep you transfixed until the final page . . .A stolen US army drone.A shrinking oasis in the Sahara Desert. A secret stash of deadly chemicals.Each is a threat to the stability of the world but individually are problems that can be overcome. In the diplomatic arena though, everyone will have a different way of dealing with such a threat. And when those in charge disagree and refuse to back down, it will kick off an international chain reaction with potentially catastrophic consequences: a world edging closer to war . . .Now three people must work tirelessly and with the utmost skill to stop that from happening:A spy working undercover with jihadists. A brilliant Chinese spymaster. A US president beleaguered by a populist rival for the next election.The only question is, in a game of brinksmanship can the inevitable ever be stopped? 'A compelling story, and only too realistic' – Lawrence H. Summers, former U.S. Treasury Secretary",
-        source: "www.amazon.co.uk"
+        source: "www.amazon.co.uk",
+        categories: [humor,dra]
     },
     {
         id: 8,
@@ -99,7 +107,8 @@ export const books = [
         price: "£11.00",
         review: "4.5 out of 5 stars",
         description: "'If only all history mysteries could be as good as The Midnight Hour' The TimesA twisty new murder story from the bestselling author of the Dr Ruth Galloway Mysteries. An old man lies dead and it looks like poison, but his wife isn't the only one who had reason to kill him. Brighton, 1965When theatrical impresario Bert Billington is found dead in his retirement home, no one suspects foul play. But when the postmortem reveals that he was poisoned, suspicion falls on his wife, eccentric ex-Music Hall star Verity Malone. Frustrated by the police response to Bert's death and determined to prove her innocence, Verity calls in private detective duo Emma Holmes and Sam Collins. This is their first real case, but as luck would have it they have a friend on the inside: Max Mephisto is filming a remake of Dracula, starring Seth Billington, Bert's son. But when they question Max, they feel he isn't telling them the whole story.Emma and Sam must vie with the police to untangle the case and bring the killer to justice. They're sure the answers must lie in Bert's dark past and in the glamorous, occasionally deadly, days of Music Hall. But the closer they get to the truth, the more danger they find themselves in...",
-        source: "www.amazon.co.uk"
+        source: "www.amazon.co.uk",
+        categories: [horr,sci]
     },
     {
         id: 9,
@@ -109,7 +118,8 @@ export const books = [
         price: "£7.00",
         review: "3.9 out of 5 stars",
         description: "",
-        source: "www.amazon.co.uk"
+        source: "www.amazon.co.uk",
+        categories:[susp,horr,sci]
     },
     {
         id: 10,
