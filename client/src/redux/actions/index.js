@@ -1,4 +1,4 @@
-import { GET_BY_SEARCH, GET_DETAIL, CLEAR_DETAIL, FILTER_CATEGORY, FILTER_REVIEW, FILTER_PRICE, ORDEN_TITLE } from "./types";
+import { GET_BY_SEARCH, GET_DETAIL, CLEAR_DETAIL, FILTER_CATEGORY, FILTER_REVIEW, FILTER_PRICE, ORDEN_TITLE, GET_BOOKS } from "./types";
 import axios from "axios";
 
 export function getBySearch(input) {
@@ -10,6 +10,18 @@ export function getBySearch(input) {
     //     .catch((err) => console.log(err));
     // }
   };
+}
+
+export function getBooks(){
+    return async function (dispatch){
+        try{
+            var response = await axios.get(`http://localhost:3001/books`)
+            return dispatch({type: GET_BOOKS, payload: response.data})
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
 }
 
 export function getDetail(id){

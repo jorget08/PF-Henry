@@ -1,4 +1,4 @@
-import { GET_BY_SEARCH, GET_DETAIL, CLEAR_DETAIL, FILTER_CATEGORY, FILTER_REVIEW, FILTER_PRICE, ORDEN_TITLE } from "../actions/types";
+import { GET_BY_SEARCH, GET_DETAIL, CLEAR_DETAIL, FILTER_CATEGORY, FILTER_REVIEW, FILTER_PRICE, ORDEN_TITLE, GET_BOOKS } from "../actions/types";
 
 const initialState = {
   allBook: [],
@@ -10,6 +10,13 @@ const initialState = {
 export default function rootReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
+    case GET_BOOKS:
+      return {
+        ...state,
+        allBook: payload,
+        allBookBackup: payload,
+        books: payload
+      };
     case GET_BY_SEARCH:
       return {
         ...state,
