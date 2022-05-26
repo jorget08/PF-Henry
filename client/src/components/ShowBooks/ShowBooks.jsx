@@ -43,19 +43,46 @@ export default function ShowBooks() {
         if (e.target.name === "last") setPage(limitPage)
     }
 
+    const paginat = (e, pageNumber) => {
+        for (let i = 1; i <= limitPage; i++) {
+            let page = document.getElementById(i);
+            page.classList.remove("currentPage");
+        }
+        if (pageNumber === "next" && page + 1 <= limitPage) {
+            console.log("page + 1 =", page + 1)
+            setPage(page + 1)
+            console.log(page)
+            let current = document.getElementById(page + 1);
+            current.classList.add("currentPage")
+        } else if (pageNumber === "prev" && page - 1 >= 1) {
+            setPage(page - 1)
+            let current = document.getElementById(page - 1);
+            current.classList.add("currentPage")
+        } else {
+            setPage(pageNumber)
+            let current = document.getElementById(pageNumber);
+            current.classList.add("currentPage")
+        }
+
+
+    }
+
+
     return (
-        <div className='catalogue'>
-            {
-                currentBooks
-                    ? currentBooks.map(b => {
-                        return (
-                            <Link to={"introducir path segun routing"}>
-                                <BookCard title={b.title} img={b.imgUrl} author={b.author} price={b.price}></BookCard>
-                            </Link>
-                        )
-                    })
-                    : <h2>Loading...</h2>}
-            <Paginated pageControl={pageControl} page={page} limitPage={limitPage} firstPrevControl={firstPrevControl} nextLastControl={nextLastControl}></Paginated>
+        <div>
+            <div className='catalogue'>
+                {
+                    currentBooks
+                        ? currentBooks.map(b => {
+                            return (
+                                <Link to={"introducir path segun routing"}>
+                                    <BookCard title={b.title} img={b.imgUrl} author={b.author} price={b.price}></BookCard>
+                                </Link>
+                            )
+                        })
+                        : <h2>Loading...</h2>}
+            </div>
+            <Paginated pageControl={pageControl} paginat={paginat} limitPage={limitPage} firstPrevControl={firstPrevControl} nextLastControl={nextLastControl}></Paginated>
         </div>
     )
 }
