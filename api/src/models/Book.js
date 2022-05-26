@@ -19,20 +19,19 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     description:{
-      type: DataTypes.STRING(10000),
+      type: DataTypes.TEXT,
     },
     score:{
+      type: DataTypes.DECIMAL,
+    },
+    stock:{
       type: DataTypes.INTEGER,
     },
-    // stock:{
-    //   type: DataTypes.INTEGER,
-    // },
     image:{
       type: DataTypes.STRING,
     },
     price:{
       type:DataTypes.STRING,
-    }
+    },
   });
 };
-

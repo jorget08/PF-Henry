@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import {getDetail, clear} from "../../redux/actions";
+import {getDetail, clearDetail} from "../../redux/actions";
 
 export default function BookDetail() {
   
@@ -12,7 +12,7 @@ export default function BookDetail() {
   useEffect(()=>{
     dispatch(getDetail(id))
     return ()=>{
-      dispatch(clear())
+      dispatch(clearDetail())
     }
   },[dispatch, id])
   
@@ -23,7 +23,7 @@ export default function BookDetail() {
       <Link to="/home"><button>Volver a página principal</button></Link>
       <h1>{bookDet.title}</h1>
       <h2>{bookDet.author}</h2>
-      <h3>{bookDet.genre}</h3>
+      <h3>Género:</h3>{bookDet.categories.map(e=>{return <h3>{e}</h3>})}
       <img src={bookDet.imgUrl} alt=""/>
       <h3>{bookDet.price}</h3>
       <h3>{bookDet.review}</h3>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Paginated({pag, limitPag, pageContrl,firstPrevContrl, nextLastContrl}) {
+export default function Paginated({page, limitPage, pageControl,firstPrevControl, nextLastControl}) {
 
 // trae las pags, el limite, el controlador de los botones sobre el estado de las paginas
 // y las validaciones de los botones, para que no se puedan oprimir en casos imposibles
@@ -11,12 +11,12 @@ export default function Paginated({pag, limitPag, pageContrl,firstPrevContrl, ne
 return (
     <>
         <ul>
-            <button disabled={firstPrevContrl} onClick={(e) => pageContrl(e)} name="first">Primera página</button>
-            <button disabled={firstPrevContrl} onClick={(e) => pageContrl(e)} name="previous">Página anterior</button>
-            <button disabled={nextLastContrl} onClick={(e) => pageContrl(e)} name="next">Página siguiente</button>
-            <button disabled={nextLastContrl} onClick={(e) => pageContrl(e)} name="last">Última página</button>
+            <button disabled={firstPrevControl} onClick={(e) => pageControl(e)} name="first">Primera página</button>
+            <button disabled={firstPrevControl} onClick={(e) => pageControl(e)} name="previous">Página anterior</button>
+            <button disabled={nextLastControl} onClick={(e) => pageControl(e)} name="next">Página siguiente</button>
+            <button disabled={nextLastControl} onClick={(e) => pageControl(e)} name="last">Última página</button>
         </ul>
-        <h3>Página {pag} de {limitPag}</h3>
+        <h3>Página {page} de {limitPage}</h3>
     </>
 )
 
