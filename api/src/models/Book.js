@@ -26,6 +26,7 @@ module.exports = (sequelize) => {
     },
     stock:{
       type: DataTypes.INTEGER,
+      defaultValue:1
     },
     image:{
       type: DataTypes.STRING,
