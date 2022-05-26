@@ -1,40 +1,49 @@
-a{
+a {
     text-decoration: none;
-
+    margin: 1rem;
 }
-.card{
+
+.card {
     display: flex;
     background-color: aliceblue;
-    height: 13rem;
-    margin: 1rem;
+    height: 206px;
     border-radius: 20px;
-    box-shadow:  5px 5px 40px -2px black ;
-    img{
+    box-shadow: 5px 5px 40px -2px black;
+
+    img {
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
-        max-width: max-content;
-        max-height: max-content;
+        max-width: 135px;
     }
+
     .info {
         display: block;
-        margin: auto 10px;
-        text-align: justify;
-        h3, h4,h5{
+        margin: auto;
+
+        h3,
+        h4,
+        h5 {
             color: black;
 
         }
-        h3{
+
+        h3 {
             font-size: 20px;
+            text-align: center;
         }
-        h5{
+
+        h5 {
             font-size: 16px;
         }
-        h4{
+
+        h4 {
             font-size: 12px;
         }
     }
+
     transition: transform 0.5s;
-    &:hover{
+
+    &:hover {
         transform: scale(1.1);
     }
 }
