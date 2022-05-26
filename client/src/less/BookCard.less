@@ -1,0 +1,49 @@
+a {
+    text-decoration: none;
+    margin: 1rem;
+}
+
+.card {
+    display: flex;
+    background-color: aliceblue;
+    height: 206px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 40px -2px black;
+
+    img {
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        max-width: 135px;
+    }
+
+    .info {
+        display: block;
+        margin: auto;
+
+        h3,
+        h4,
+        h5 {
+            color: black;
+
+        }
+
+        h3 {
+            font-size: 20px;
+            text-align: center;
+        }
+
+        h5 {
+            font-size: 16px;
+        }
+
+        h4 {
+            font-size: 12px;
+        }
+    }
+
+    transition: transform 0.5s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
