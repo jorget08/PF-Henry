@@ -27,13 +27,13 @@ async function dataBaseLoad() {
         return book
 
     })
-    console.log(apiBooks[0])
+
     apiBooks.forEach(async (book) => {
 
         const bookCreado = await Book.create(book)
 
         book.categories.map(async (cat) => {
-            console.log('name caaat', cat)
+
             const catEncontrado = await Category.findOne({
                 where: {
                     name: cat
