@@ -1,12 +1,48 @@
 const { Router } = require("express");
-const { Book, Category } = require('../db')
+const { Book, Category, bookxcategory } = require('../db')
 const router = Router()
-const { Op, where } = require('sequelize')
+const { Op } = require('sequelize')
+
+
+
+
 
 router.get('/', async (req, res, next) => {
     try {
-        const { titleOrAuthor } = req.query
+        const { titleOrAuthor, score, rango1, rango2,category } = req.query
+        if (score) {
+            const bookScores= await Book.findAll({
+                where:{
+                    score:score
+                }
+            })
+            return res.json(bookScores)
 
+        }
+        if(rango1 && rango2){
+
+            const bookRange= await Book.findAll({
+                where:{
+                    price:{[Op.between]:[rango1,rango2],
+                    },  
+                },
+                order:[['price','ASC']]
+            })
+            return res.json(bookRange)
+        }
+        if (category) {
+            const bookCategory= await Book.findAll({
+               
+                include:{
+                    model:Category,
+                    where:{
+                        name:category
+                    }
+                }
+            })
+            
+            return res.json(bookCategory)
+        }
         if (titleOrAuthor) {
             const bookFound = await Book.findAll({
                 where: {
@@ -64,4 +100,8 @@ router.get('/:id', async (req, res, next) => {
         next(error)
     }
 })
+
+// FIlterss
+
+
 module.exports = router

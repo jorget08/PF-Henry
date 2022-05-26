@@ -32,7 +32,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     price:{
-      type:DataTypes.STRING,
+      type:DataTypes.INTEGER,
     },
   });
 };
