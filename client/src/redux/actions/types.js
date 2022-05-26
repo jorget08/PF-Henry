@@ -5,4 +5,8 @@ export const FILTER_CATEGORY = "FILTER_CATEGORY";
 export const FILTER_REVIEW = "FILTER_REVIEW";
 export const FILTER_PRICE = "FILTER_PRICE";
 export const ORDEN_TITLE = "ORDEN_TITLE";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_ONE_FROM_CART="REMOVE_ONE_FROM_CART";
+export const REMOVE_ALL_FROM_CART= "REMOVE_ALL_FROM_CART";
 export const GET_BOOKS = "GET_BOOKS";
+

@@ -1,13 +1,5 @@
 
-import {
-  GET_BY_SEARCH,
-  GET_DETAIL,
-  CLEAR_DETAIL,
-  FILTER_CATEGORY,
-  FILTER_REVIEW,
-  FILTER_PRICE,
-  ORDEN_TITLE,
-} from "./types";
+import { GET_BY_SEARCH, GET_DETAIL, CLEAR_DETAIL, FILTER_CATEGORY, FILTER_REVIEW, FILTER_PRICE, ORDEN_TITLE, ADD_TO_CART ,REMOVE_ONE_FROM_CART,REMOVE_ALL_FROM_CART} from "./types";
 
 import axios from "axios";
 
@@ -94,4 +86,16 @@ export function filterPrice(price1, price2) {
 
 export function ordenTitle(payload) {
   return { type: ORDEN_TITLE, payload };
+}
+
+export function addToCar(id){
+    return {type: ADD_TO_CART, payload:id}
+}
+
+export function removeAllFromCart(){
+    return{type:REMOVE_ALL_FROM_CART}
+}
+
+export function removeOneFromCart(id){
+    return {type:REMOVE_ONE_FROM_CART,payload:id}
 }

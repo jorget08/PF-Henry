@@ -1,10 +1,14 @@
-import { GET_BY_SEARCH, GET_DETAIL, CLEAR_DETAIL, FILTER_CATEGORY, FILTER_REVIEW, FILTER_PRICE, ORDEN_TITLE, GET_BOOKS } from "../actions/types";
+
+import { GET_BY_SEARCH, GET_DETAIL, CLEAR_DETAIL, FILTER_CATEGORY, FILTER_REVIEW, FILTER_PRICE, ORDEN_TITLE, ADD_TO_CART, REMOVE_ALL_FROM_CART,REMOVE_ONE_FROM_CART, GET_BOOKS } from "../actions/types";
+
+
 
 const initialState = {
   allBook: [],
   allBookBackup:[],
   books: [],
   detail: [],
+  cart: [],
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -74,6 +78,48 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         allBook: sortBook
       }
+      case ADD_TO_CART:
+        let newbook=state.allBook.find(book=>book.id === payload);
+      
+        let bookinCart=state.cart.find(book=>book.id === newbook.id)
+        
+        return bookinCart
+        ?{
+          ...state,
+          cart:state.cart.map(book=>book.id===newbook.id
+            ?{...book,quantity:book.quantity+1}
+            
+            :book)
+        }
+        :{
+        ...state,
+        cart:[...state.cart,{...newbook,quantity:1}]
+        }
+        
+        case REMOVE_ALL_FROM_CART:
+          return{
+            cart:[]
+          }
+
+          case REMOVE_ONE_FROM_CART:
+            let bookToDelete= state.cart.find(book => book.id ===payload)
+            return bookToDelete.quantity>1
+            ?{
+              ...state,
+              cart:state.cart.map(book => 
+                book.id ===payload.id
+                ?{...book,quantity:book.quantity-1}
+                :book
+                )
+            }
+            :{
+              ...state,
+              cart:state.cart.filter(book => book.id !==payload)
+            }
+
+
+
+
 
     default: return state
   }
