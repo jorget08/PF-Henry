@@ -1,16 +1,7 @@
 const { Router } = require('express');
-const books=require('./books')
-const categories=require('./categories')
+const {Book, Category} = require('../db');
 const router = Router();
 
-router.use('/books', books)
-router.use('/categories', categories)
-const books2 = require('./books2')
-
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
-
-//router.use("/book2", books2)
 router.post('/book', async (req, res, next) => {
     try {
         const {title, author, description, stock, image, price, categories} = req.body
@@ -121,4 +112,3 @@ router.delete('/delete/book/:id', async (req, res, next) => {
         next(error)
     }
 })
-module.exports = router;
