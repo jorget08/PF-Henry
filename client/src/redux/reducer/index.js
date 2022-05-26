@@ -1,4 +1,4 @@
-import { GET_BY_SEARCH, GET_DETAIL, CLEAR_DETAIL, FILTER_CATEGORY, FILTER_REVIEW, FILTER_PRICE, ORDEN_TITLE } from "../actions/types";
+import { GET_BY_SEARCH, GET_DETAIL, CLEAR_DETAIL, FILTER_CATEGORY, FILTER_SCORE, FILTER_PRICE, ORDEN_TITLE } from "../actions/types";
 
 const initialState = {
   allBook: [],
@@ -30,7 +30,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         allBook: payload
       }
-    case FILTER_REVIEW:
+    case FILTER_SCORE:
       return{
         ...state,
         allBook: payload

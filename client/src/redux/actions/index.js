@@ -1,4 +1,4 @@
-import { GET_BY_SEARCH, GET_DETAIL, CLEAR_DETAIL, FILTER_CATEGORY, FILTER_REVIEW, FILTER_PRICE, ORDEN_TITLE } from "./types";
+import { GET_BY_SEARCH, GET_DETAIL, CLEAR_DETAIL, FILTER_CATEGORY, FILTER_SCORE, FILTER_PRICE, ORDEN_TITLE } from "./types";
 import axios from "axios";
 
 export function getBySearch(input) {
@@ -40,11 +40,11 @@ export function filterCategory(category){
     }
 }
 
-export function filterReview(review){
+export function filterScore(score){
     return async function (dispatch){
         try{
-            var response = await axios.get(`ruta del back${review}`)
-            return dispatch({type: FILTER_CATEGORY, payload: response.data})
+            var response = await axios.get(`ruta del back${score}`)
+            return dispatch({type: FILTER_SCORE, payload: response.data})
         }
         catch(e){
             console.log(e)
@@ -52,10 +52,10 @@ export function filterReview(review){
     }
 }
 
-export function filterPrice(price1, price2){
+export function filterPrice(rango1, rango2){
     return async function (dispatch){
         try{
-            var response = await axios.get(`ruta del back${price1, price2}`)
+            var response = await axios.get(`/books?rango1=${rango1}0&rango2=${rango2}`)
             return dispatch({type: FILTER_PRICE, payload: response.data})
         }
         catch(e){
