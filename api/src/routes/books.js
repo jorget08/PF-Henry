@@ -30,13 +30,11 @@ router.get('/', async (req, res, next) => {
             let id ='id'
 
             for (var i in allfound) {
-                console.log('prop araay',allfound[i][id])
+
                 lookup[allfound[i][id]] = allfound[i];
             }
 
             for (i in lookup) {
-                console.log('loooookup',lookup[i])
-                console.log('loooookup objjjj',lookup)
                 allfoundResult.push(lookup[i]);
             }
 
