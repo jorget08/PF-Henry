@@ -77,17 +77,27 @@ const createUser = async (req, res) => {
 
 }
 const getUsers = async (req, res) => {
+    const { page = 1, limit = 10 } = req.query; 
     try {
+        //? paginacion 
+        const start = (page - 1) * limit;
+        const end = page * limit;
+        //? contar usuarios
+        const count = await Users.count();
+        //? obtener usuarios
         const users = await Users.findAll({
-            attributes: ['idUser', 'name', 'lastName', 'email', 'imgProfile', 'roleIdRole'],
-            include: [{
+            attributes: { exclude: ['password'] },
+            include: {
                 model: Roles,
                 attributes: ['name']
-            }]
+            },
+            offset: start,
+            limit: end
         });
         res.json({
             ok: true,
-            users
+            users,
+            total: count
         });
     } catch (error) {
         console.log(error);
@@ -97,6 +107,68 @@ const getUsers = async (req, res) => {
         });
     }
 }
+const updateUser = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const userExist = await Users.findOne({ where: { idUser: id } });
+        if (!userExist) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'El usuario no existe'
+            });
+        }
+        //? eliminar email de req.body
+        if (req.body.email) {
+            delete req.body.email;
+        }
+        await Users.update(req.body, {
+            where: { idUser: id }
+        });
+        const userUp = await Users.findOne({
+            where: { idUser: id },
+            attributes: { exclude: ['createdAt', 'updatedAt'] },
+            include: {
+                model: Roles,
+                attributes: ['name']
+            }
+        });
+        //? respuesta
+        res.json({
+            ok: true,
+            userUp
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado'
+        });
+    }
+}
+const deleteUser = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const userExist = await Users.findOne({ where: { idUser: id } });
+        if (!userExist) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'El usuario no existe'
+            });
+        }
+        await Users.destroy({ where: { idUser: id } });
+        res.json({
+            ok: true,
+            msg: 'Usuario eliminado'
+        });
+    } 
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado'
+        });
+    }
+}
 
-module.exports = { createUser, getUsers };
+module.exports = { createUser, getUsers, updateUser, deleteUser };
 
