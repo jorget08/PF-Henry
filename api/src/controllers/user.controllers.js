@@ -76,6 +76,27 @@ const createUser = async (req, res) => {
     }
 
 }
+const getUsers = async (req, res) => {
+    try {
+        const users = await Users.findAll({
+            attributes: ['idUser', 'name', 'lastName', 'email', 'imgProfile', 'roleIdRole'],
+            include: [{
+                model: Roles,
+                attributes: ['name']
+            }]
+        });
+        res.json({
+            ok: true,
+            users
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado'
+        });
+    }
+}
 
-module.exports = { createUser };
+module.exports = { createUser, getUsers };
 
