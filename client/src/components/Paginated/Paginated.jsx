@@ -1,17 +1,18 @@
 import React from 'react'
 import styles from './styles.css'
 
-export default function Paginated({ pag, limitPag, firstPrevContrl, nextLastContrl, paginat }) {
+export default function Paginated({limitPag, firstPrevContrl, nextLastContrl, paginat }) {
+
 
     // trae las pags, el limite, el controlador de los botones sobre el estado de las paginas
     // y las validaciones de los botones, para que no se puedan oprimir en casos imposibles
     // ej: si estamos en la pagina 1, no poder hacer un firstPage o previousPage
 
     //se agrega información en un <h3> a modo de guía para indicar el alcance del paginado al usuario.
-    var numerPages = []
-
+    var numerPages = [];
+    
     for (let i = 1; i <= limitPag; i++) {
-        numerPages.push(i)
+        numerPages.push(i);
     }
     return (
         <div className='containerPag'>
@@ -38,5 +39,6 @@ export default function Paginated({ pag, limitPag, firstPrevContrl, nextLastCont
             </ul>
         </div>
     )
+
 
 }

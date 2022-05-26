@@ -74,6 +74,7 @@ export default function ShowBooks() {
                         : <h2>Loading...</h2>}
             </div>
             <Paginated pag={page} limitPag={limitPage} firstPrevContrl={firstPrevControl} nextLastContrl={nextLastControl} paginat={paginat}></Paginated>
+
         </div>
     )
 }
