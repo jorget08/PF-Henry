@@ -55,7 +55,7 @@ export default function ShowBooks() {
                         )
                     })
                     : <h2>Loading...</h2>}
-            <Paginated pageContrl={pageControl} pag={page} limitPag={limitPage} firstPrevContrl={firstPrevControl} nextLastContrl={nextLastControl}></Paginated>
+            <Paginated pageControl={pageControl} page={page} limitPage={limitPage} firstPrevControl={firstPrevControl} nextLastControl={nextLastControl}></Paginated>
         </div>
     )
 }
