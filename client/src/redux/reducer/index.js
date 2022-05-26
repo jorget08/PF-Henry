@@ -1,8 +1,16 @@
-import { GET_BY_SEARCH, GET_DETAIL, CLEAR_DETAIL, FILTER_CATEGORY, FILTER_REVIEW, FILTER_PRICE, ORDEN_TITLE } from "../actions/types";
+import {
+  GET_BY_SEARCH,
+  GET_DETAIL,
+  CLEAR_DETAIL,
+  FILTER_CATEGORY,
+  FILTER_REVIEW,
+  FILTER_PRICE,
+  ORDEN_TITLE,
+} from "../actions/types";
 
 const initialState = {
-  allBook: [],
-  allBookBackup:[],
+  allBooks: [],
+  allBookBackup: [],
   books: [],
   detail: [],
 };
@@ -18,56 +26,60 @@ export default function rootReducer(state = initialState, action) {
     case GET_DETAIL:
       return {
         ...state,
-        detail: payload
+        detail: payload,
       };
     case CLEAR_DETAIL:
       return {
         ...state,
-        detail: []
-      }
+        detail: [],
+      };
     case FILTER_CATEGORY:
-      return{
+      return {
         ...state,
-        allBook: payload
-      }
+        allBooks: payload,
+      };
     case FILTER_REVIEW:
-      return{
+      return {
         ...state,
-        allBook: payload
-      }
+        allBooks: payload,
+      };
     case FILTER_PRICE:
-      return{
+      return {
         ...state,
-        allBook: payload
-      }
+        allBooks: payload,
+      };
     case ORDEN_TITLE:
-      let sortBook=[]
-      if (payload==="asc"){
-      sortBook=state.allBook.sort(function(a,b){
-        if(a.title>b.title){
-          return 1;
-        }
-        if(a.title<b.title){
-          return -1;
-        }
-        return 0;
-      })}
-      if (payload==="desc"){
-        sortBook=state.allBook.sort(function(a,b){
-          if(a.title<b.title){
+      let sortBook = [];
+      if (payload === "asc") {
+        sortBook = state.allBooks.sort(function (a, b) {
+          if (a.title > b.title) {
             return 1;
           }
-          if(a.title>b.title){
+          if (a.title < b.title) {
             return -1;
           }
           return 0;
-        })}
-      else {sortBook=state.allBookBackup}
-      return{
-        ...state,
-        allBook: sortBook
+        });
       }
+      if (payload === "desc") {
+        sortBook = state.allBooks.sort(function (a, b) {
+          if (a.title < b.title) {
+            return 1;
+          }
+          if (a.title > b.title) {
+            return -1;
+          }
+          return 0;
+        });
+      } else {
+        sortBook = state.allBookBackup;
+      }
+      return {
+        ...state,
+        allBooks: sortBook,
+      };
 
-    default: return state
+    default:
+      return state;
   }
 }
