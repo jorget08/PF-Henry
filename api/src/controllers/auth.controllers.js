@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const { Users, Roles } = require("../db");
-const { validationResult } = require('express-validator');
 const { generateJwt } = require('../helpers/generateJwt');
+const { googleVerify } = require('../helpers/googleVerify');
 
 const login = async (req, res) => {
     const { email, password } = req.body;
@@ -77,7 +77,52 @@ const renewToken = async (req, res) => {
             msg: 'Error al renovar token'
         });    
     }
+}
+const googleSignIn = async (req, res) => {
+    const googleToken = req.body.tokenId;
+    const { givenName, familyName } = req.body;
+    try {
+        const { name, email, picture } = await googleVerify(googleToken);
+        const user = await Users.findOne({
+            where: { email }
+        });
+        if (user) {
+            const token = await generateJwt(user.idUser);
+            //? no enviar password
+            user.password = undefined;
+            res.json({
+                ok: true,
+                user,
+                token
+            });
+        } else {
+            const roles = await Roles.findOne({ where: { name: 'user' } });
+            const newUser = await Users.create({
+                name: givenName,
+                lastName: familyName,
+                email,
+                password: ':)',
+                imgProfile: picture,
+                favoritos: [],
+                roleIdRole: roles.idRole
+            });
+            const token = await generateJwt(newUser.idUser);
+            //? no enviar password
+            newUser.password = undefined;
+            res.json({
+                ok: true,
+                user: newUser,
+                token
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al iniciar sesión'
+        });
+    }
 
 }
 
-module.exports = { login, renewToken };
+module.exports = { login, renewToken, googleSignIn };
