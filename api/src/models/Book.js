@@ -4,7 +4,13 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('book', {
-    name: {
+    id:{
+      type:DataTypes.UUID,
+      primaryKey:true,
+      allowNull:false,
+      defaultValue:DataTypes.UUIDV4
+  },
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -13,17 +19,20 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     description:{
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(10000),
     },
     score:{
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
-    stock:{
-      type: DataTypes.INTEGER,
-    },
+    // stock:{
+    //   type: DataTypes.INTEGER,
+    // },
     image:{
       type: DataTypes.STRING,
     },
+    price:{
+      type:DataTypes.STRING,
+    }
   });
 };
 
