@@ -1,29 +1,19 @@
 import { React, useState } from 'react'
 import BookCard from '../BookCard/BookCard'
 import Paginated from '../Paginated/Paginated'
-import { books } from "../DB.js"
 import { Link } from 'react-router-dom'
 import styles from './styles.css'
+import { useSelector } from 'react-redux'
 
-export default function ShowBooks() {
-
-    // ----------
-    // var books -> proviene del store (useSelector) cargado previamente?
-    // importar react redux para los hooks
-    // Link de react-router-dom para el linkeado
-    // ----------
+export default function ShowBooks({books}) {
 
     var [page, setPage] = useState(1)
 
     const booksPerPage = 9
 
-    console.log(books)
-
     var lastIndex = page * booksPerPage                     //indice incial para metodo slice 
     var firstIndex = lastIndex - booksPerPage               //indice final para metodo slice
     var currentBooks = books.slice(firstIndex, lastIndex)   //metodo slice para determinar del array los libros a mostrar por pagina
-
-    console.log(currentBooks)
 
     const limitPage = Math.ceil(books.length / booksPerPage)
 
@@ -75,7 +65,7 @@ export default function ShowBooks() {
                     currentBooks
                         ? currentBooks.map(b => {
                             return (
-                                <Link to={"introducir path segun routing"}>
+                                <Link to={`book/:${b.id}`}>
                                     <BookCard title={b.title} img={b.imgUrl} author={b.author} price={b.price}></BookCard>
                                 </Link>
                             )
