@@ -22,10 +22,11 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
     },
     score:{
-      type: DataTypes.DECIMAL,
+      type: DataTypes.INTEGER,
     },
     stock:{
       type: DataTypes.INTEGER,
+      defaultValue:1
     },
     image:{
       type: DataTypes.STRING,

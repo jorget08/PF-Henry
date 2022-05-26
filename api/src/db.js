@@ -36,14 +36,14 @@ const { Book, Rol, Category, User, Shop, Review, Order } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Book.belongsToMany(User, { through:'recipe_types' })
-User.belongsToMany(Book, { through:'recipe_types' })
+Book.belongsToMany(User, { through:'bookxuser' })
+User.belongsToMany(Book, { through:'bookxuser' })
 
-Book.belongsToMany(Category, { through:'recipe_types' })
-Category.belongsToMany(Book, { through:'recipe_types' })
+Book.belongsToMany(Category, { through:'bookxcategory' })
+Category.belongsToMany(Book, { through:'bookxcategory' })
 
-Book.belongsToMany(Shop, { through:'recipe_types' })
-Shop.belongsToMany(Book, { through:'recipe_types' })
+Book.belongsToMany(Shop, { through:'bookxshop' })
+Shop.belongsToMany(Book, { through:'bookxshop' })
 
 Book.hasMany(Review)
 Review.belongsTo(Book)
