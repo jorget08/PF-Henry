@@ -33,13 +33,14 @@
     "nodemailer": "^6.7.4",
     "pg": "^8.7.3",
     "postgre": "^0.1.8",
-    "sequelize": "^6.19.0"
+    "sequelize": "^6.19.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "supertest-session": "^4.1.0",
-    "mocha": "^8.2.1",
     "chai": "^4.2.0",
+    "mocha": "^8.2.1",
     "nodemon": "^2.0.6",
-    "supertest": "^6.0.1"
+    "supertest": "^6.0.1",
+    "supertest-session": "^4.1.0"
   }
 }
