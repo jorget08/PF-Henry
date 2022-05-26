@@ -1,9 +1,13 @@
-.catalogue{
+.catalogue {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    background: rgb(255,228,240);
-    background: linear-gradient(194deg, rgba(255,228,240,1) 0%, rgba(178,248,255,1) 45%, rgba(255,249,152,0.8827906162464986) 95%);
+    background: rgb(255, 228, 240);
+    background: linear-gradient(194deg, rgba(255, 228, 240, 1) 0%, rgba(178, 248, 255, 1) 45%, rgba(255, 249, 152, 0.8827906162464986) 95%);
     margin: 2rem 3rem;
     padding: 1rem;
     border-radius: 10px;
+
+    @media (max-width: 1224px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

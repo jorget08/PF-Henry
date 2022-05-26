@@ -12,6 +12,29 @@ export default function ShowBooks() {
     // importar react redux para los hooks
     // Link de react-router-dom para el linkeado
     // ----------
+    const paginat = (e, pageNumber) => {
+        e.preventDefault();
+        for (let i = 1; i <= Math.ceil(books.length / booksPerPage); i++) {
+            let page = document.getElementById(i);
+            page.classList.remove("currentPage");
+        }
+        if (pageNumber === 'next' && page + 1 <= limitPage) {
+            setPage(page += 1)
+            let current = document.getElementById(page);
+            current.classList.add("currentPage")
+        }
+        else if (pageNumber === 'prev' && page - 1 >= 1) {
+            setPage(page -= 1)
+            let current = document.getElementById(page);
+            current.classList.add("currentPage")
+        }
+        else {
+            let current = document.getElementById(pageNumber);
+            current.classList.add("currentPage")
+            setPage(pageNumber)
+        }
+
+    }
 
     var [page, setPage] = useState(1)
 
@@ -36,26 +59,21 @@ export default function ShowBooks() {
     // pageControl realiza el control del paginado, recibe la información del evento y renderiza mediante el componente Paginated.
     // setea las páginas segun el botón clickeado.
 
-    var pageControl = (e) => {
-        if (e.target.name === "first") setPage(1)
-        if (e.target.name === "previous") setPage(page - 1)
-        if (e.target.name === "next") setPage(page + 1)
-        if (e.target.name === "last") setPage(limitPage)
-    }
-
     return (
-        <div className='catalogue'>
-            {
-                currentBooks
-                    ? currentBooks.map(b => {
-                        return (
-                            <Link to={"introducir path segun routing"}>
-                                <BookCard title={b.title} img={b.imgUrl} author={b.author} price={b.price}></BookCard>
-                            </Link>
-                        )
-                    })
-                    : <h2>Loading...</h2>}
-            <Paginated pageContrl={pageControl} pag={page} limitPag={limitPage} firstPrevContrl={firstPrevControl} nextLastContrl={nextLastControl}></Paginated>
+        <div>
+            <div className='catalogue'>
+                {
+                    currentBooks
+                        ? currentBooks.map(b => {
+                            return (
+                                <Link to={"introducir path segun routing"}>
+                                    <BookCard title={b.title} img={b.imgUrl} author={b.author} price={b.price}></BookCard>
+                                </Link>
+                            )
+                        })
+                        : <h2>Loading...</h2>}
+            </div>
+            <Paginated pag={page} limitPag={limitPage} firstPrevContrl={firstPrevControl} nextLastContrl={nextLastControl} paginat={paginat}></Paginated>
         </div>
     )
 }

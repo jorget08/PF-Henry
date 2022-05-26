@@ -7,3 +7,8 @@
   padding: 1rem;
   border-radius: 10px;
 }
+@media (max-width: 1224px) {
+  .catalogue {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
