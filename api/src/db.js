@@ -6,7 +6,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@localhost:${DB_HOST}/books`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/books`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -35,14 +35,15 @@ const { Book, Rol, Category, User, Shop, Review, Order } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-Book.belongsToMany(User, { through:'recipe_types' })
-User.belongsToMany(Book, { through:'recipe_types' })
 
-Book.belongsToMany(Category, { through:'recipe_types' })
-Category.belongsToMany(Book, { through:'recipe_types' })
+Book.belongsToMany(User, { through:'bookxuser' })
+User.belongsToMany(Book, { through:'bookxuser' })
 
-Book.belongsToMany(Shop, { through:'recipe_types' })
-Shop.belongsToMany(Book, { through:'recipe_types' })
+Book.belongsToMany(Category, { through:'bookxcategory' })
+Category.belongsToMany(Book, { through:'bookxcategory' })
+
+Book.belongsToMany(Shop, { through:'bookxshop' })
+Shop.belongsToMany(Book, { through:'bookxshop' })
 
 Book.hasMany(Review)
 Review.belongsTo(Book)
@@ -58,7 +59,6 @@ Order.belongsTo(User)
 
 Order.hasOne(Shop)
 Shop.belongsTo(Order)
-
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
