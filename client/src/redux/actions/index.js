@@ -1,3 +1,4 @@
+
 import {
   GET_BY_SEARCH,
   GET_DETAIL,
@@ -7,6 +8,7 @@ import {
   FILTER_PRICE,
   ORDEN_TITLE,
 } from "./types";
+
 import axios from "axios";
 
 export function getBySearch(input) {
@@ -26,13 +28,29 @@ export function getBySearch(input) {
   };
 }
 
-export function getDetail(id) {
-  return async function (dispatch) {
-    try {
-      var response = await axios.get(`ruta del back${id}`);
-      return dispatch({ type: GET_DETAIL, payload: response.data });
-    } catch (e) {
-      console.log(e);
+
+export function getBooks(){
+    return async function (dispatch){
+        try{
+            var response = await axios.get(`http://localhost:3001/books`)
+            return dispatch({type: GET_BOOKS, payload: response.data})
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
+}
+
+export function getDetail(id){
+    return async function (dispatch){
+        try{
+            var response = await axios.get(`ruta del back${id}`)
+            return dispatch({type: GET_DETAIL, payload: response.data})
+        }
+        catch(e){
+            console.log(e)
+        }
+
     }
   };
 }
