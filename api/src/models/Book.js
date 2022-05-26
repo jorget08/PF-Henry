@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(10000),
     },
     score:{
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     // stock:{
     //   type: DataTypes.INTEGER,

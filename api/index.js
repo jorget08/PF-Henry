@@ -24,7 +24,9 @@ const {dataBaseLoad,dataBaseLoadCategories}= require('./src/data/preLoad.js')
 conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
     dataBaseLoadCategories()
+    console.log('categories cargads')
     dataBaseLoad()
+
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });
