@@ -56,17 +56,17 @@ export default function rootReducer(state = initialState, action) {
 		case FILTER_CATEGORY:
 			return {
 				...state,
-				allBook: payload
+				books: payload
 			};
       case FILTER_SCORE:
       return{
         ...state,
-        allBook: payload
+        books: payload
       };
 		case FILTER_PRICE:
 			return {
 				...state,
-				allBook: payload
+				books: payload
 			};
 		case ORDEN_TITLE:
 			let sortBook = [];
@@ -96,7 +96,7 @@ export default function rootReducer(state = initialState, action) {
 			}
 			return {
 				...state,
-				allBook: sortBook
+				books: sortBook
 			};
 		case ADD_TO_CART:
 			let newbook = state.allBook?.find((book) => book?.id === payload);
