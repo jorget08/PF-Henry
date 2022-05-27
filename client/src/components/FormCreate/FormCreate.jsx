@@ -1,135 +1,142 @@
-import React from 'react'
-import {Formik} from "formik"
+import {React, useState} from 'react'
+import {Formik, Form, Field} from "formik"
 
 export default function FormCreate() {
+    
+    var [formSubmit, setFormSubmit] = useState(false)
 
-return (
-    <>
-        <Formik
+    return (
+        <>
+            <Formik
 
-            initialValues={{
-                title: "",
-                author: "",
-                price: "",
-                review: "",
-                description: "",
-            }}
+                // {title, author, description, stock, image, price, categories => array} = req.body
 
-            validate={(valores) => {
-
-                let errors = {}
+                initialValues={{
+                    title: "",
+                    author: "",
+                    categories: [],
+                    price: "",
+                    description: "",
+                    image: ""
+                }}
                 
-                if(!valores.title) {
-                    errors.title = "Por favor introduce un título"
-                } else if(valores.title.length > 100) {
-                    errors.title = "El título no puede exceder los 100 caracteres"
-                } else if(!/^[A-Za-z0-9_-]$/.test(valores.title)) {
-                    errors.title = "El título no puede poseer caracteres especiales"
-                }
+                validate={(valores) => {
 
-                if(!valores.author) {
-                    errors.author = "Por favor introduce un autor"
-                } else if(valores.author.length > 50) {
-                    errors.title = "El nombre del autor no puede exceder los 100 caracteres"
-                } else if(!/^[A-Za-z0-9_-]$/.test(valores.author)) {
-                    errors.title = "El nombre del autor no puede poseer caracteres especiales"
-                }
+                    let errors = {}
 
-                if(!valores.price) {
-                    errors.price = "Por favor introducir el precio"
-                } else if(valores.price < 0) {
-                    errors.title = "El precio no puede ser inferior a 0 (cero)"
-                } else if(!/^[0-9]$/.test(valores.price)) {
-                    errors.title = "Este campo no puede tener caracteres especiales"
-                }
+                    if(!valores.title) {
+                        errors.title = "Por favor introduce un título"
+                    } else if(valores.title.length > 100) {
+                        errors.title = "El título no puede exceder los 100 caracteres"
+                    }
 
-                if(!valores.review) {
-                    errors.review = "Por favor introduce una reseña"
-                } else if(valores.review.length > 300) {
-                    errors.review = "La longitud de la reseña no puede superar los 300 caracteres"
-                }
+                    if(!valores.author) {
+                        errors.author = "Por favor introduce un autor"
+                    } else if(valores.author.length > 50) {
+                        errors.author = "El nombre del autor no puede exceder los 100 caracteres"
+                    } else if((/\W/).test(valores.title)) {
+                        errors.author = "El nombre del autor no puede poseer caracteres especiales"
+                    }
 
-                if(valores.description.length > 1000) {
-                    errors.review = "La longitud de la reseña no puede superar los 1000 caracteres"
-                }
+                    if(!valores.price) {
+                        errors.price = "Por favor introducir el precio"
+                    } else if(valores.price < 0) {
+                        errors.price = "El precio no puede ser inferior a 0 (cero)"
+                    }
 
-                return errors
+                    if(valores.stock < 0) {
+                        errors.stock = "El stock no puede ser negativo"
+                    }
 
-            }}
+                    if(valores.description.length > 1000) {
+                        errors.description = "La longitud de la descripción no puede superar los 1000 caracteres"
+                    }
 
-            onSubmit={(valores) => {
-                console.log("prueba")
-                console.log(valores)
-            }}
-        >
-            {( {values, errors, handleSubmit, handleChange, handleBlur} ) => (
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label name="title"></label>
-                        <input 
-                        type="text" 
-                        name="title" 
-                        placeholder='Título' 
-                        value={values.title}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        />
-                        {errors.title && <span>{errors.title}</span>}
-                    </div>
-                    <div>
-                        <label name="author"></label>
-                        <input 
-                        type="text" 
-                        name="author" 
-                        placeholder='Autor' 
-                        value={values.author}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        />
-                        {errors.author && <span>{errors.author}</span>}
-                    </div>
-                    {/* "Introducir select desplegable para seleccionar categoría" */}
-                    <div>
-                        <label name="price"></label>
-                        <input 
-                        type="number" 
-                        name="price" 
-                        placeholder='Indica el precio' 
-                        value={values.price}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        />
-                        {errors.price && <span>{errors.price}</span>}
-                    </div>
-                    <div>
-                        <label name="review"></label>
-                        <input 
-                        type="text" 
-                        name="review" 
-                        placeholder='Una breve reseña' 
-                        value={values.review}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        />
-                        {errors.review && <span>{errors.review}</span>}
-                    </div>
-                    <div>
-                        <label name="description"></label>
-                        <input 
-                        type="text" 
-                        name="description" 
-                        placeholder='Añádele alguna descripción' 
-                        value={values.description}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        />
-                        {errors.description && <span>{errors.description}</span>}
-                    </div>
-                    {/* "Introducir opción para carga de imagen, local o URL */}
-                </form>
-            )}
-        </Formik>
-    </>
-)
+                    return errors
+
+                }}
+
+                onSubmit={(valores, {resetForm}) => {
+                    resetForm()
+                    console.log("prueba")
+                    console.log(valores)
+                    setFormSubmit(true)
+                    setTimeout(() => setFormSubmit(false), "3000")
+                }}
+            >
+                {( {errors, touched} ) => (
+                    <>
+                    <div>Agrega un libro!</div>
+                    <Form>
+                        <div>
+                            <label name="title">Título</label>
+                            <Field 
+                            type="text" 
+                            name="title" 
+                            placeholder='Título' 
+                            />
+                            {touched.title && errors.title && <span>{errors.title}</span>}
+                        </div>
+                        <div>
+                            <label name="author">Autor</label>
+                            <Field
+                            type="text" 
+                            name="author" 
+                            placeholder='Autor' 
+                            />
+                            {touched.author && errors.author && <span>{errors.author}</span>}
+                        </div>
+                        <div>
+                            <label name="categories">Categorías</label>
+                            <Field 
+                            name="categories" 
+                            as="select">
+                                <option value="opcion">Opcion</option>
+                                <option value="opcion">Opcio</option>
+                            </Field>
+                        </div>
+                        <div>
+                            <label name="price">Precio</label>
+                            <Field
+                            type="number" 
+                            name="price" 
+                            placeholder='Indica el precio' 
+                            />
+                            {touched.price && errors.price && <span>{errors.price}</span>}
+                        </div>
+                        <div>
+                            <label name="stock">Stock</label>
+                            <Field
+                            type="number" 
+                            name="stock" 
+                            placeholder='Indica el precio' 
+                            />
+                            {touched.stock && errors.stock && <span>{errors.stock}</span>}
+                        </div>
+                        <div>
+                            <label name="description">Descripción</label>
+                            <Field
+                            type="text" 
+                            name="description" 
+                            placeholder='Añádele alguna descripción'
+                            />
+                            {touched.description && errors.description && <span>{errors.description}</span>}
+                        </div>
+                        <div>
+                            <label name="iamge">URL Imágen</label>
+                            <Field
+                            type="text" 
+                            name="image" 
+                            placeholder='URL'
+                            />
+                        </div>
+                        <button type="submit">Submit</button>
+                        {formSubmit && <span>El formulario ha sido enviado con éxito!</span>}
+                    </Form>
+                    </>
+                )}
+            </Formik>
+        </>
+    )
 
 }
