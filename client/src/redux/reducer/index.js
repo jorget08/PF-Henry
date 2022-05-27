@@ -92,24 +92,13 @@ export default function rootReducer(state = initialState, action) {
 				allBook: sortBook
 			};
 		case ADD_TO_CART:
-			let newbook = state.allBook.find((book) => book.id === payload);
-
-      let bookinCart = state.cart.find((book) => book.id === newbook.id);
-
-      return bookinCart
-        ? {
-            ...state,
-            cart: state.cart.map((book) =>
-              book.id === newbook.id
-                ? { ...book, quantity: book.quantity + 1 }
-                : book
-            ),
-          }
-        : {
-            ...state,
-            cart: [...state.cart, { ...newbook, quantity: 1 }],
-          };
-
+			let newbook = state.allBook?.find((book) => book?.id === payload);
+			console.log("SOY ALLBOOK", state.allBook)
+			console.log("SOY NEWBOOK", newbook)
+			return {
+				...state,
+				cart : [...state.cart, newbook]
+			}
     case REMOVE_ALL_FROM_CART:
       return {
         cart: [],
