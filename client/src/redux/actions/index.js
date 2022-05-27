@@ -9,7 +9,8 @@ import {
 	ORDEN_TITLE,
 	ADD_TO_CART,
 	REMOVE_ONE_FROM_CART,
-	REMOVE_ALL_FROM_CART
+	REMOVE_ALL_FROM_CART,
+  GET_CATEGORIES
 } from './types';
 
 import axios from "axios";
@@ -35,6 +36,13 @@ export const getBooks = (dispatch) => {
   axios
     .get(`http://localhost:3001/books`)
     .then((res) => dispatch({ type: GET_BOOKS, payload: res.data }))
+    .catch((e) => console.log(e));
+};
+
+export const getCategories = (dispatch) => {
+  axios
+    .get(`http://localhost:3001/categories`)
+    .then((res) => dispatch({ type: GET_CATEGORIES, payload: res.data }))
     .catch((e) => console.log(e));
 };
 
