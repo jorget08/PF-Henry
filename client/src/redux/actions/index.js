@@ -41,7 +41,7 @@ export const getBooks = (dispatch) => {
 export function getDetail(id) {
   return async function (dispatch) {
     try {
-      var response = await axios.get(`ruta del back${id}`);
+      var response = await axios.get(`http://localhost:3001/books/${id}`);
       return dispatch({ type: GET_DETAIL, payload: response.data });
     } catch (e) {
       console.log(e);
@@ -104,7 +104,7 @@ export function filterScore(score){
 
 
 
-export function addToCart(id) {
+export function addToCart(id) {  
 	return { type: ADD_TO_CART, payload: id };
 }
 
