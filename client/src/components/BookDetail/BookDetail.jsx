@@ -29,7 +29,7 @@ export default function BookDetail() {
       <h4>Reseña: {bookDet.description}</h4>
       </div>
       <div className='Der'>
-        <DetailCompra title={bookDet.title} author={bookDet.author} price={bookDet.price} categories={bookDet.categories}></DetailCompra>
+        <DetailCompra title={bookDet.title} author={bookDet.author} price={bookDet.price} categories={bookDet.categories} id={bookDet.id}></DetailCompra>
       </div>
     </div>
   )
