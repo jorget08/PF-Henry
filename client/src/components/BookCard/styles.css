@@ -30,10 +30,17 @@ a {
 }
 .card .info h5 {
   font-size: 16px;
+  text-align: center;
 }
 .card .info h4 {
   font-size: 12px;
 }
 .card:hover {
   transform: scale(1.1);
+}
+.card .price {
+  text-align: center;
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
 }
