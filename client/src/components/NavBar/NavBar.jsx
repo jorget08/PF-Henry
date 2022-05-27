@@ -16,6 +16,9 @@ export default function NavBar() {
                     <Link to='/aboutUs' className='link'>
                         <span >ABOUT US</span>
                     </Link>
+                    <Link to='/cart'>
+                        <span>Cart</span>
+                    </Link>
                 </div>
             </nav>
             <SearchBar />

@@ -41,7 +41,7 @@ export const getBooks = (dispatch) => {
 export function getDetail(id) {
   return async function (dispatch) {
     try {
-      var response = await axios.get(`ruta del back${id}`);
+      var response = await axios.get(`http://localhost:3001/books/${id}`);
       return dispatch({ type: GET_DETAIL, payload: response.data });
     } catch (e) {
       console.log(e);
@@ -103,8 +103,9 @@ export function filterScore(score){
 }
 
 
-export function addToCar(id) {
-  return { type: ADD_TO_CART, payload: id };
+
+export function addToCart(id) {  
+	return { type: ADD_TO_CART, payload: id };
 }
 
 export function removeAllFromCart() {
@@ -112,5 +113,6 @@ export function removeAllFromCart() {
 }
 
 export function removeOneFromCart(id) {
+  console.log(id)
   return { type: REMOVE_ONE_FROM_CART, payload: id };
 }
