@@ -1,16 +1,16 @@
 import {
-  GET_BOOKS,
-  GET_BY_SEARCH,
-  GET_DETAIL,
-  CLEAR_DETAIL,
-  FILTER_CATEGORY,
-  FILTER_REVIEW,
-  FILTER_PRICE,
-  ORDEN_TITLE,
-  ADD_TO_CART,
-  REMOVE_ONE_FROM_CART,
-  REMOVE_ALL_FROM_CART,
-} from "./types";
+	GET_BOOKS,
+	GET_BY_SEARCH,
+	GET_DETAIL,
+	CLEAR_DETAIL,
+	FILTER_CATEGORY,
+	FILTER_SCORE,
+	FILTER_PRICE,
+	ORDEN_TITLE,
+	ADD_TO_CART,
+	REMOVE_ONE_FROM_CART,
+	REMOVE_ALL_FROM_CART
+} from './types';
 
 import axios from "axios";
 
@@ -89,6 +89,19 @@ export function filterPrice(price1, price2) {
 export function ordenTitle(payload) {
   return { type: ORDEN_TITLE, payload };
 }
+
+export function filterScore(score){
+    return async function (dispatch){
+        try{
+            var response = await axios.get(`ruta del back${score}`)
+            return dispatch({type: FILTER_SCORE, payload: response.data})
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
+}
+
 
 export function addToCar(id) {
   return { type: ADD_TO_CART, payload: id };

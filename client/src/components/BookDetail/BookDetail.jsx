@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import {getDetail, clearDetail} from "../../redux/actions";
+import DetailCompra from '../DetailCompra/DetailCompra';
+import "./BookDetail.css"
 
 export default function BookDetail() {
   
@@ -21,14 +23,14 @@ export default function BookDetail() {
   return (
     <div>
       <Link to="/home"><button>Volver a página principal</button></Link>
-      <h1>{bookDet.title}</h1>
-      <h2>{bookDet.author}</h2>
-      <h3>Género:</h3>{bookDet.categories.map(e=>{return <h3>{e}</h3>})}
+      <div className='Izq'>
       <img src={bookDet.imgUrl} alt=""/>
-      <h3>{bookDet.price}</h3>
-      <h3>{bookDet.review}</h3>
+      <h3>{bookDet.score}</h3>
       <h4>Reseña: {bookDet.description}</h4>
-      <button>Agregar a carrito</button>
+      </div>
+      <div className='Der'>
+        <DetailCompra title={bookDet.title} author={bookDet.author} price={bookDet.price} categories={bookDet.categories}></DetailCompra>
+      </div>
     </div>
   )
 }
