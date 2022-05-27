@@ -3,7 +3,7 @@ import {
 	GET_DETAIL,
 	CLEAR_DETAIL,
 	FILTER_CATEGORY,
-	FILTER_REVIEW,
+	FILTER_SCORE,
 	FILTER_PRICE,
 	ORDEN_TITLE,
 	ADD_TO_CART,
@@ -50,11 +50,11 @@ export default function rootReducer(state = initialState, action) {
 				...state,
 				allBook: payload
 			};
-		case FILTER_REVIEW:
-			return {
-				...state,
-				allBook: payload
-			};
+      case FILTER_SCORE:
+      return{
+        ...state,
+        allBook: payload
+      };
 		case FILTER_PRICE:
 			return {
 				...state,

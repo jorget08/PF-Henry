@@ -4,7 +4,7 @@ import {
 	GET_DETAIL,
 	CLEAR_DETAIL,
 	FILTER_CATEGORY,
-	FILTER_REVIEW,
+	FILTER_SCORE,
 	FILTER_PRICE,
 	ORDEN_TITLE,
 	ADD_TO_CART,
@@ -92,6 +92,28 @@ export function ordenTitle(payload) {
 	return { type: ORDEN_TITLE, payload };
 }
 
+export function filterScore(score){
+    return async function (dispatch){
+        try{
+            var response = await axios.get(`ruta del back${score}`)
+            return dispatch({type: FILTER_SCORE, payload: response.data})
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
+}
+
+export function filterPrice(rango1, rango2){
+    return async function (dispatch){
+        try{
+            var response = await axios.get(`/books?rango1=${rango1}0&rango2=${rango2}`)
+            return dispatch({type: FILTER_PRICE, payload: response.data})
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
 export function addToCar(id) {
 	return { type: ADD_TO_CART, payload: id };
 }
