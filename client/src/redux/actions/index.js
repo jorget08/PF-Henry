@@ -62,14 +62,24 @@ export function clearDetail() {
 }
 
 export function filterCategory(category) {
-  return async function (dispatch) {
+  if(category==="All"){
+    return async function (dispatch) {
+      try {
+        var response = await axios.get(`http://localhost:3001/books`);
+        return dispatch({ type: FILTER_CATEGORY, payload: response.data });
+      } catch (e) {
+        console.log(e);
+      }
+    };
+  }
+  else {return async function (dispatch) {
     try {
       var response = await axios.get(`http://localhost:3001/books?category=${category}`);
       return dispatch({ type: FILTER_CATEGORY, payload: response.data });
     } catch (e) {
       console.log(e);
     }
-  };
+  };}
 }
 
 export function filterPrice(price1, price2) {
