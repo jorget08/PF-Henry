@@ -1,7 +1,8 @@
 @import './variables.less';
 
 .container {
-    background-color: rgb(230, 214, 214);
+    background: @background;
+    background: @gradient;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,6 +10,7 @@
 }
 
 .container__info {
+    box-shadow: 5px 5px 20px -2px black;
     display: flex;
     justify-content: space-evenly;
     background-color: white;
@@ -23,7 +25,7 @@
         align-items: flex-end;
         flex-direction: column;
         padding-right: 1rem;
-        border-right: 1px solid gray;
+        border-right: 1px solid @borderColor;
 
         img {
             max-width: 15rem;

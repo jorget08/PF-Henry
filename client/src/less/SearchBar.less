@@ -1,3 +1,5 @@
+@import './variables.less';
+
 .searchbar {
     display: flex;
     justify-content: center;
@@ -7,18 +9,23 @@
         border-top-left-radius: 10px;
         font-size: 20px;
         padding: 10px;
-        border: 1px solid gray;
+        border: 1px solid @borderColor;
         border-right: none;
         outline: none;
     }
 
     button {
-        background-color: antiquewhite;
-        border: 1px solid gray;
+        background-color: rgb(216, 83, 83);
+        border: none;
         outline: none;
         padding: 0 1rem;
-        border-left: none;
-        border-bottom-right-radius: 5px;
-        border-top-right-radius: 5px;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        color: white;
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgb(250, 145, 145);
+        }
     }
 }

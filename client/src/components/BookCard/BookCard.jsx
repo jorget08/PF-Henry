@@ -1,5 +1,6 @@
 import React from 'react'
-import styles from './styles.css'
+import './styles.css'
+import Stars from '../Stars/Stars';
 
 export default function BookCard({ title, author, img, price, score }) {
     title = title.split(':')[0];
@@ -11,10 +12,10 @@ export default function BookCard({ title, author, img, price, score }) {
 
                 <h3>{title}</h3>
 
-                <h5>{author}</h5>
+                <h5>Author: {author}</h5>
                 <div className='price'>
-                    <h4>${price}</h4>
-                    <h4>Stars: {score}</h4>
+                    <Stars score={score} className="icon" />
+                    <span>${price}, 00</span>
                 </div>
 
             </div>

@@ -8,6 +8,7 @@ a {
   height: 206px;
   border-radius: 20px;
   box-shadow: 5px 5px 40px -2px black;
+  font-family: 'Merriweather', serif;
   transition: transform 0.5s;
 }
 .card img {
@@ -16,8 +17,10 @@ a {
   max-width: 135px;
 }
 .card .info {
-  display: block;
+  display: flex;
+  flex-direction: column;
   margin: auto;
+  text-align: center;
 }
 .card .info h3,
 .card .info h4,
@@ -39,8 +42,17 @@ a {
   transform: scale(1.1);
 }
 .card .price {
+  font-family: 'Merriweather', serif;
   text-align: center;
-  justify-content: space-around;
   display: flex;
   align-items: center;
+  color: black;
+  justify-content: center;
+}
+.card .price .icon {
+  margin-right: 1rem;
+}
+.card .price span {
+  font-size: 18px;
+  margin-left: 1rem;
 }
