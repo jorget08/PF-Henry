@@ -1,3 +1,5 @@
+@import "./variables.less";
+
 a {
     text-decoration: none;
     margin: 1rem;
@@ -9,6 +11,7 @@ a {
     height: 206px;
     border-radius: 20px;
     box-shadow: 5px 5px 40px -2px black;
+    font-family: @merri;
 
     img {
         border-top-left-radius: 20px;
@@ -17,8 +20,10 @@ a {
     }
 
     .info {
-        display: block;
+        display: flex;
+        flex-direction: column;
         margin: auto;
+        text-align: center;
 
         h3,
         h4,
@@ -49,9 +54,21 @@ a {
     }
 
     .price {
+        font-family: @merri;
         text-align: center;
-        justify-content: space-around;
         display: flex;
         align-items: center;
+        color: black;
+        justify-content: center;
+
+        .icon {
+            margin-right: 1rem;
+
+        }
+
+        span {
+            font-size: 18px;
+            margin-left: 1rem;
+        }
     }
 }
