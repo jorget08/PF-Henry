@@ -10,7 +10,8 @@ import {
 	ADD_TO_CART,
 	REMOVE_ALL_FROM_CART,
 	REMOVE_ONE_FROM_CART,
-	GET_BOOKS
+	GET_BOOKS,
+	GET_CATEGORIES
 } from '../actions/types';
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   books: [],
   detail: [],
   cart: [],
+  categories: []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -31,6 +33,11 @@ export default function rootReducer(state = initialState, action) {
 				allBookBackup: payload,
 				books: payload
 			};
+		case GET_CATEGORIES:
+		return {
+			...state,
+			categories: payload,
+		};
 		case GET_BY_SEARCH:
 			return {
 				...state,
