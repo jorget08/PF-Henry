@@ -113,5 +113,6 @@ export function removeAllFromCart() {
 }
 
 export function removeOneFromCart(id) {
+  console.log(id)
   return { type: REMOVE_ONE_FROM_CART, payload: id };
 }
