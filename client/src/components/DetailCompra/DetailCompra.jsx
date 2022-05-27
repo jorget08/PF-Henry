@@ -1,27 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { addToCart } from '../../redux/actions';
 import { useSelector } from 'react-redux';
+import { BsCartPlus } from 'react-icons/bs'
+import { BsCartCheckFill } from 'react-icons/bs'
+import './styles.css'
 
-export default function Compra({title, author, price, categories, id}) {
+export default function Compra({ title, author, price, categories, id }) {
 
   const dispatch = useDispatch();
-  const carrito = useSelector(state => state.cart)
-
-  function handleClick (){
+  const cart = useSelector(state => state.cart)
+  const [cartIcon, setCartIcon] = useState(<BsCartPlus size={25} onClick={handleClick} className="icon" />)
+  function handleClick() {
     dispatch(addToCart(id))
-    console.log("SOY EL CARRO", carrito)
+    setCartIcon(<BsCartCheckFill size={25} className="done" />)
   }
-  
+
   return (
-    <div>
-        <h1>{title}</h1>
-        <h2>{author}</h2>
-        <h3>Género:</h3>{categories?.map(e=>{return <h3>{e.name}</h3>})}
-        <h3>{price}</h3>
-        <button onClick={handleClick}>Agregar a carrito</button>
-        <Link to={"Componente para realizar la compra"}><button>Comprar</button></Link>
+    <div className='detailCompra'>
+      <h3>${price}, 00</h3>
+      <div className='addTo'>
+        <p>Add to Cart</p>
+        <button>
+          {cartIcon}
+        </button>
+
+      </div>
+      <Link to={"/cart"}><button onClick={handleClick} className="buy">Buy This Book</button></Link>
     </div>
   )
 }

@@ -1,0 +1,45 @@
+@import './variables.less';
+
+.container {
+    background-color: rgb(230, 214, 214);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 0;
+}
+
+.container__info {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem 3rem;
+    font-family: @Source;
+    font-weight: 400;
+    margin: 0 2rem;
+
+    .image {
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        padding-right: 1rem;
+        border-right: 1px solid gray;
+
+        img {
+            max-width: 15rem;
+            border-radius: 10px;
+        }
+    }
+
+    .genres {
+        display: flex;
+
+        .genre {
+            margin-right: 2rem;
+        }
+    }
+
+    .info {
+        margin: 1rem;
+    }
+}

@@ -1,0 +1,37 @@
+.container {
+  background-color: #e6d6d6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 0;
+}
+.container__info {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: white;
+  border-radius: 10px;
+  padding: 2rem 3rem;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  margin: 0 2rem;
+}
+.container__info .image {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  padding-right: 1rem;
+  border-right: 1px solid gray;
+}
+.container__info .image img {
+  max-width: 15rem;
+  border-radius: 10px;
+}
+.container__info .genres {
+  display: flex;
+}
+.container__info .genres .genre {
+  margin-right: 2rem;
+}
+.container__info .info {
+  margin: 1rem;
+}
