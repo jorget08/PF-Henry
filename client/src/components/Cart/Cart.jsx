@@ -1,23 +1,29 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Item from '../Item/Item'
 import NavBar from '../NavBar/NavBar'
 //import { useLocalStore } from '../Utils/useLocalStorage'
-import {removeAllFromCart} from '../../redux/actions';
+import {removeAllFromCart,getCart} from '../../redux/actions';
 
 export default function Cart() {
 
     const dispatch = useDispatch()
     const bookCarts = useSelector(state => state.cart)
-    useEffect(()=>{    
-        //dispatch(useLocalStore(bookCarts))
-    },[dispatch])
+    const[cart,setCart]= useState([])
+    
+    console.log("soy bookCarts", bookCarts)
+    
 
     function handleDeleteAll(e){
         e.preventDefault();
         dispatch(removeAllFromCart())
     }
-        
+     useEffect(() =>{
+    dispatch(getCart())
+    
+     },[dispatch])   
+
+    
     return (
         <>
         <NavBar/>

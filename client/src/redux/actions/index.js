@@ -10,7 +10,8 @@ import {
 	ADD_TO_CART,
 	REMOVE_ONE_FROM_CART,
 	REMOVE_ALL_FROM_CART,
-  GET_CATEGORIES
+  GET_CATEGORIES,
+  GET_CART
 } from './types';
 
 import axios from "axios";
@@ -122,4 +123,8 @@ export function removeAllFromCart() {
 export function removeOneFromCart(id) {
   console.log(id)
   return { type: REMOVE_ONE_FROM_CART, payload: id };
+}
+
+export function getCart(){
+  return{type: GET_CART}
 }
