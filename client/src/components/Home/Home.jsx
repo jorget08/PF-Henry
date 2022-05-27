@@ -7,18 +7,18 @@ import { getBooks } from '../../redux/actions';
 
 export default function Home() {
 
-    const dispatch= useDispatch()
+    const dispatch = useDispatch()
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getBooks)
-    },[dispatch])
+    }, [dispatch])
 
-    var books = useSelector(state=>state.books)
-
+    var books = useSelector(state => state.books)
+    console.log(books)
     return (
         <div>
             <NavBar />
-            <ShowBooks books={books}/>
+            <ShowBooks books={books} />
         </div>
     )
 }

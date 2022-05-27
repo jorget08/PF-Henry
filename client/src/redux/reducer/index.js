@@ -1,4 +1,5 @@
 import {
+
 	GET_BY_SEARCH,
 	GET_DETAIL,
 	CLEAR_DETAIL,
@@ -13,11 +14,11 @@ import {
 } from '../actions/types';
 
 const initialState = {
-	allBook: [],
-	allBookBackup: [],
-	books: [],
-	detail: [],
-	cart: []
+  allBook: [],
+  allBookBackup: [],
+  books: [],
+  detail: [],
+  cart: [],
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -93,40 +94,44 @@ export default function rootReducer(state = initialState, action) {
 		case ADD_TO_CART:
 			let newbook = state.allBook.find((book) => book.id === payload);
 
-			let bookinCart = state.cart.find((book) => book.id === newbook.id);
+      let bookinCart = state.cart.find((book) => book.id === newbook.id);
 
-			return bookinCart
-				? {
-						...state,
-						cart: state.cart.map(
-							(book) => (book.id === newbook.id ? { ...book, quantity: book.quantity + 1 } : book)
-						)
-					}
-				: {
-						...state,
-						cart: [ ...state.cart, { ...newbook, quantity: 1 } ]
-					};
+      return bookinCart
+        ? {
+            ...state,
+            cart: state.cart.map((book) =>
+              book.id === newbook.id
+                ? { ...book, quantity: book.quantity + 1 }
+                : book
+            ),
+          }
+        : {
+            ...state,
+            cart: [...state.cart, { ...newbook, quantity: 1 }],
+          };
 
-		case REMOVE_ALL_FROM_CART:
-			return {
-				cart: []
-			};
+    case REMOVE_ALL_FROM_CART:
+      return {
+        cart: [],
+      };
 
-		case REMOVE_ONE_FROM_CART:
-			let bookToDelete = state.cart.find((book) => book.id === payload);
-			return bookToDelete.quantity > 1
-				? {
-						...state,
-						cart: state.cart.map(
-							(book) => (book.id === payload.id ? { ...book, quantity: book.quantity - 1 } : book)
-						)
-					}
-				: {
-						...state,
-						cart: state.cart.filter((book) => book.id !== payload)
-					};
+    case REMOVE_ONE_FROM_CART:
+      let bookToDelete = state.cart.find((book) => book.id === payload);
+      return bookToDelete.quantity > 1
+        ? {
+            ...state,
+            cart: state.cart.map((book) =>
+              book.id === payload.id
+                ? { ...book, quantity: book.quantity - 1 }
+                : book
+            ),
+          }
+        : {
+            ...state,
+            cart: state.cart.filter((book) => book.id !== payload),
+          };
 
-		default:
-			return state;
-	}
+    default:
+      return state;
+  }
 }

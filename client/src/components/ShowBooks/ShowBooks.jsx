@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import styles from './styles.css'
 import { useSelector } from 'react-redux'
 
-export default function ShowBooks({books}) {
+export default function ShowBooks({ books }) {
 
     var [page, setPage] = useState(1)
 
@@ -66,7 +66,7 @@ export default function ShowBooks({books}) {
                         ? currentBooks.map(b => {
                             return (
                                 <Link to={`book/:${b.id}`}>
-                                    <BookCard title={b.title} img={b.imgUrl} author={b.author} price={b.price}></BookCard>
+                                    <BookCard title={b.title} img={b.image} author={b.author} price={b.price} score={b.score} ></BookCard>
                                 </Link>
                             )
                         })
