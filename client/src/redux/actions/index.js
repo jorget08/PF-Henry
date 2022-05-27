@@ -64,18 +64,7 @@ export function clearDetail() {
 export function filterCategory(category) {
   return async function (dispatch) {
     try {
-      var response = await axios.get(`ruta del back${category}`);
-      return dispatch({ type: FILTER_CATEGORY, payload: response.data });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-}
-
-export function filterReview(review) {
-  return async function (dispatch) {
-    try {
-      var response = await axios.get(`ruta del back${review}`);
+      var response = await axios.get(`http://localhost:3001/books?category=${category}`);
       return dispatch({ type: FILTER_CATEGORY, payload: response.data });
     } catch (e) {
       console.log(e);
@@ -86,7 +75,7 @@ export function filterReview(review) {
 export function filterPrice(price1, price2) {
   return async function (dispatch) {
     try {
-      var response = await axios.get(`ruta del back${(price1, price2)}`);
+      var response = await axios.get(`http://localhost:3001/books?rango1=${price1}&rango2=${price2}`);
       return dispatch({ type: FILTER_PRICE, payload: response.data });
     } catch (e) {
       console.log(e);
@@ -101,7 +90,7 @@ export function ordenTitle(payload) {
 export function filterScore(score){
     return async function (dispatch){
         try{
-            var response = await axios.get(`ruta del back${score}`)
+            var response = await axios.get(`http://localhost:3001/books?score=${score}`)
             return dispatch({type: FILTER_SCORE, payload: response.data})
         }
         catch(e){
