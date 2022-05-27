@@ -4,6 +4,7 @@ import NavBar from '../NavBar/NavBar'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getBooks } from '../../redux/actions';
+import styles from "./styles.css"
 
 export default function Home() {
 
@@ -18,7 +19,12 @@ export default function Home() {
     return (
         <div>
             <NavBar />
-            <ShowBooks books={books} />
+            {books.length ?
+                <ShowBooks books={books} />
+                :
+                <div className='loading'>
+                </div>
+            }
         </div>
     )
 }

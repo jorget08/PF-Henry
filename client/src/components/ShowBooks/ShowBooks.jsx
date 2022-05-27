@@ -26,13 +26,6 @@ export default function ShowBooks({ books }) {
     // pageControl realiza el control del paginado, recibe la información del evento y renderiza mediante el componente Paginated.
     // setea las páginas segun el botón clickeado.
 
-    var pageControl = (e) => {
-        if (e.target.name === "first") setPage(1)
-        if (e.target.name === "previous") setPage(page - 1)
-        if (e.target.name === "next") setPage(page + 1)
-        if (e.target.name === "last") setPage(limitPage)
-    }
-
     const paginat = (e, pageNumber) => {
         for (let i = 1; i <= limitPage; i++) {
             let page = document.getElementById(i);
@@ -63,18 +56,17 @@ export default function ShowBooks({ books }) {
             <div className='catalogue'>
                 {
                     currentBooks
-                        ? currentBooks.map(b => {
-                            return (
+                    && currentBooks.map(b => {
+                        return (
 
-                                <Link to={`book/${b.id}`}>
+                            <Link to={`book/${b.id}`} key={b.id}>
 
-                                    <BookCard title={b.title} img={b.image} author={b.author} price={b.price} score={b.score} ></BookCard>
-                                </Link>
-                            )
-                        })
-                        : <h2>Loading...</h2>}
+                                <BookCard title={b.title} img={b.image} author={b.author} price={b.price} score={b.score} ></BookCard>
+                            </Link>
+                        )
+                    })}
             </div>
-            <Paginated pageControl={pageControl} paginat={paginat} limitPage={limitPage} firstPrevControl={firstPrevControl} nextLastControl={nextLastControl}></Paginated>
+            <Paginated paginat={paginat} limitPage={limitPage} firstPrevControl={firstPrevControl} nextLastControl={nextLastControl}></Paginated>
         </div>
     )
 }
