@@ -104,16 +104,7 @@ export function filterScore(score){
     }
 }
 
-export function filterPrice(rango1, rango2){
-    return async function (dispatch){
-        try{
-            var response = await axios.get(`/books?rango1=${rango1}0&rango2=${rango2}`)
-            return dispatch({type: FILTER_PRICE, payload: response.data})
-        }
-        catch(e){
-            console.log(e)
-        }
-    }
+
 export function addToCar(id) {
 	return { type: ADD_TO_CART, payload: id };
 }
