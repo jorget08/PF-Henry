@@ -1,7 +1,6 @@
 import React from 'react'
 import ShowBooks from '../ShowBooks/ShowBooks'
 import NavBar from '../NavBar/NavBar'
-import Filters from '../Filters/Filters';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getBooks, getCategories } from '../../redux/actions';
@@ -25,7 +24,6 @@ export default function Home() {
     return (
         <div>
             <NavBar />
-            <Filters books={books} categories={categories}/>
             {books.length ?
                 <ShowBooks books={books} />
                 :
