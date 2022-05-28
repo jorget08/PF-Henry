@@ -5,22 +5,24 @@ import { filterCategory, filterScore, filterPrice, ordenTitle } from "../../redu
 import { IoSearchCircleOutline } from 'react-icons/io5'
 import './styles.css'
 
-export default function Filters({ books, categories }) {
+export default function Filters({ books, categories, func }) {
 
     const dispatch = useDispatch();
     const puntajes = [1, 2, 3, 4, 5]
     const [price1, setPrice1] = useState(1)
     const [price2, setPrice2] = useState(30)
-    const [orden, setOrden] = useState("")
 
     function handleFilterCategory(e) {
         e.preventDefault();
         dispatch(filterCategory(e.target.value))
+        func();
     }
 
     function handleFilterScore(e) {
         e.preventDefault();
         dispatch(filterScore(e.target.value))
+        func();
+
     }
 
     function handleChange1(e) {
@@ -35,12 +37,15 @@ export default function Filters({ books, categories }) {
     function handleClick(e) {
         e.preventDefault();
         dispatch(filterPrice(price1, price2))
+        func();
+
     }
 
     function handleOrdenTitle(e) {
         e.preventDefault();
         dispatch(ordenTitle(e.target.value))
-        setOrden(`Ordenado ${e.target.value}`)
+        func();
+
     }
 
     return (
