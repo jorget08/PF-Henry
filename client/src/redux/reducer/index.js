@@ -11,7 +11,8 @@ import {
 	REMOVE_ALL_FROM_CART,
 	REMOVE_ONE_FROM_CART,
 	GET_BOOKS,
-	GET_CATEGORIES
+	GET_CATEGORIES,
+	POST_BOOK
 } from '../actions/types';
 
 const initialState = {
@@ -110,6 +111,11 @@ export default function rootReducer(state = initialState, action) {
       return {
         cart: [],
       };
+
+	case POST_BOOK:
+	return {
+		...state,
+	};
 
     case REMOVE_ONE_FROM_CART:
       let bookToDelete = state.cart.find((book) => book.id === payload);
