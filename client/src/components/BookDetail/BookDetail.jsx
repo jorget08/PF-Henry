@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { getDetail, clearDetail, getBooks } from "../../redux/actions";
 import DetailCompra from '../DetailCompra/DetailCompra';
+import Stars from '../Stars/Stars';
 import NavBar from '../NavBar/NavBar'
-import { AiFillStar } from "react-icons/ai"
-import { AiOutlineStar } from "react-icons/ai"
+
 
 import "./styles.css"
 
@@ -37,12 +37,7 @@ export default function BookDetail() {
               <h1>{bookDet.title}</h1>
               {
                 bookDet.score &&
-                <div>
-                  {stars.forEach((e, i) => {
-                    if (i <= bookDet.score - 1) stars.splice(i, 1, true)
-                  })}
-                  {stars.map(e => e ? <AiFillStar /> : <AiOutlineStar />)}
-                </div>
+                <Stars score={bookDet.score} />
 
               }
 

@@ -9,6 +9,7 @@ export default function Filters({categories}) {
     const puntajes = [1,2,3,4,5]
     const [price1, setPrice1] = useState(0)
     const [price2, setPrice2] = useState(0)
+    const [orden, setOrden]= useState("")
 
     function handleFilterCategory(e){
         e.preventDefault();
@@ -38,6 +39,7 @@ export default function Filters({categories}) {
     function handleOrdenTitle(e){
         e.preventDefault();
         dispatch(ordenTitle(e.target.value))
+        setOrden(`Ordenado ${e.target.value}`)
     }
 
     return (
@@ -45,6 +47,7 @@ export default function Filters({categories}) {
         <div>
             <span>Show by category </span>
             <select onChange={e=>handleFilterCategory(e)}>
+                <option value="All">All</option>
                 {categories.map(genero=>{
                     return(<option value={genero.name} key={genero.id}>{genero.name}</option>)
                 })}

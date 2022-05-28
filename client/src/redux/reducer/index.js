@@ -12,7 +12,8 @@ import {
 	REMOVE_ONE_FROM_CART,
 	GET_BOOKS,
 	GET_CATEGORIES,
-	POST_BOOK
+	POST_BOOK,
+	GET_CART
 } from '../actions/types';
 
 const initialState = {
@@ -57,17 +58,17 @@ export default function rootReducer(state = initialState, action) {
 		case FILTER_CATEGORY:
 			return {
 				...state,
-				allBook: payload
+				books: payload
 			};
       case FILTER_SCORE:
       return{
         ...state,
-        allBook: payload
+        books: payload
       };
 		case FILTER_PRICE:
 			return {
 				...state,
-				allBook: payload
+				books: payload
 			};
 		case ORDEN_TITLE:
 			let sortBook = [];
@@ -97,17 +98,23 @@ export default function rootReducer(state = initialState, action) {
 			}
 			return {
 				...state,
-				allBook: sortBook
+				books: sortBook
 			};
 		case ADD_TO_CART:
 			let newbook = state.allBook?.find((book) => book?.id === payload);
-			console.log("SOY ALLBOOK", state.allBook)
-			console.log("SOY NEWBOOK", newbook)
+			let carrito=JSON.parse(localStorage.getItem("carrito"))
+			if(carrito){
+				carrito.push(newbook)
+				localStorage.setItem("carrito",JSON.stringify(carrito))
+			}else{
+				localStorage.setItem("carrito",JSON.stringify([newbook]))
+			}
 			return {
 				...state,
-				cart : [...state.cart, newbook]
+				cart :JSON.parse(localStorage.getItem("carrito"))
 			}
     case REMOVE_ALL_FROM_CART:
+		localStorage.removeItem("carrito")
       return {
         cart: [],
       };
@@ -118,21 +125,19 @@ export default function rootReducer(state = initialState, action) {
 	};
 
     case REMOVE_ONE_FROM_CART:
-      let bookToDelete = state.cart.find((book) => book.id === payload);
-      return bookToDelete.quantity > 1
-        ? {
+      let bookToDelete = JSON.parse(localStorage.getItem('carrito')).filter(book=>book.id !== payload)
+	  localStorage.setItem('carrito',JSON.stringify(bookToDelete))
+      
+    return{
             ...state,
-            cart: state.cart.map((book) =>
-              book.id === payload.id
-                ? { ...book, quantity: book.quantity - 1 }
-                : book
-            ),
-          }
-        : {
-            ...state,
-            cart: state.cart.filter((book) => book.id !== payload),
+            cart: bookToDelete
           };
 
+		  case GET_CART:
+			  return{
+				  ...state,
+				  cart:JSON.parse(localStorage.getItem('carrito'))
+			  }
     default:
       return state;
   }

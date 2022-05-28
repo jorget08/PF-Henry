@@ -11,7 +11,9 @@ import {
 	REMOVE_ONE_FROM_CART,
 	REMOVE_ALL_FROM_CART,
   GET_CATEGORIES,
-  POST_BOOK
+  POST_BOOK,
+  GET_CART
+
 } from './types';
 
 import axios from "axios";
@@ -63,14 +65,24 @@ export function clearDetail() {
 }
 
 export function filterCategory(category) {
-  return async function (dispatch) {
+  if(category==="All"){
+    return async function (dispatch) {
+      try {
+        var response = await axios.get(`http://localhost:3001/books`);
+        return dispatch({ type: FILTER_CATEGORY, payload: response.data });
+      } catch (e) {
+        console.log(e);
+      }
+    };
+  }
+  else {return async function (dispatch) {
     try {
       var response = await axios.get(`http://localhost:3001/books?category=${category}`);
       return dispatch({ type: FILTER_CATEGORY, payload: response.data });
     } catch (e) {
       console.log(e);
     }
-  };
+  };}
 }
 
 export function filterPrice(price1, price2) {
@@ -115,7 +127,6 @@ export function removeOneFromCart(id) {
   return { type: REMOVE_ONE_FROM_CART, payload: id };
 }
 
-
 export function postBook(data) {
   return dispatch => {
     axios
@@ -123,3 +134,8 @@ export function postBook(data) {
     .then(response => dispatch({ type: POST_BOOK }))
     .catch((e) => {console.log(e)})
 }}
+
+export function getCart(){
+  return{type: GET_CART}
+}
+

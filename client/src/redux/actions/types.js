@@ -11,4 +11,4 @@ export const REMOVE_ALL_FROM_CART= "REMOVE_ALL_FROM_CART";
 export const GET_BOOKS = "GET_BOOKS";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const POST_BOOK = "POST_BOOK";
-
+export const GET_CART= "GET_CART";

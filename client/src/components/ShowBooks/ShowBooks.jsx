@@ -52,7 +52,7 @@ export default function ShowBooks({ books }) {
 
 
     return (
-        <div>
+        <div className='homeContainer'>
             <div className='catalogue'>
                 {
                     currentBooks
