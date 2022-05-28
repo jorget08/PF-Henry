@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {filterCategory, filterScore, filterPrice, ordenTitle} from "../../redux/actions"
 
-export default function Filters({books, categories}) {
+export default function Filters({setPage, categories}) {
   
     const dispatch= useDispatch();
     const puntajes = [1,2,3,4,5]
@@ -40,6 +40,7 @@ export default function Filters({books, categories}) {
         e.preventDefault();
         dispatch(ordenTitle(e.target.value))
         setOrden(`Ordenado ${e.target.value}`)
+        setPage(1)
     }
 
     return (
@@ -72,7 +73,7 @@ export default function Filters({books, categories}) {
         <div>
             <span>Order by </span>
             <select onChange={e=>handleOrdenTitle(e)}>
-                <option value="">Alphabet</option>
+                <option value="rel">Relevance</option>
                 <option value="asc">A-Z</option>
                 <option value="desc">Z-A</option>
             </select>
