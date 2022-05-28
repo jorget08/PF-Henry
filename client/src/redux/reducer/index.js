@@ -84,7 +84,7 @@ export default function rootReducer(state = initialState, action) {
 					return 0;
 				});
 			}
-			else if (payload === 'desc') {
+			if (payload === 'desc') {
 				sortBook = state.books.sort(function(a, b) {
 					if (a.title < b.title) {
 						return 1;
@@ -95,8 +95,8 @@ export default function rootReducer(state = initialState, action) {
 					return 0;
 				});
 			} 
-			else{
-				sortBook= state.allBookBackup
+			if (payload ==="rel"){
+				sortBook= [...state.allBookBackup]
 			}
 			return {
 				...state,

@@ -22,7 +22,6 @@ export default function Filters({ books, categories, func }) {
         e.preventDefault();
         dispatch(filterScore(e.target.value))
         func();
-
     }
 
     function handleChange1(e) {
@@ -38,14 +37,12 @@ export default function Filters({ books, categories, func }) {
         e.preventDefault();
         dispatch(filterPrice(price1, price2))
         func();
-
     }
 
     function handleOrdenTitle(e) {
         e.preventDefault();
         dispatch(ordenTitle(e.target.value))
         func();
-
     }
 
     return (
@@ -86,6 +83,7 @@ export default function Filters({ books, categories, func }) {
                 <p>${price2}, 00</p>
                 <IoSearchCircleOutline className='icon' size={30} onClick={(e) => handleClick(e)} />
             </div>
+
         </div>
     )
 }
