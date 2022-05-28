@@ -72,7 +72,7 @@ export default function rootReducer(state = initialState, action) {
 		case ORDEN_TITLE:
 			let sortBook = [];
 			if (payload === 'asc') {
-				sortBook = state.allBook.sort(function(a, b) {
+				sortBook = state.books.sort(function(a, b) {
 					if (a.title > b.title) {
 						return 1;
 					}
@@ -82,8 +82,8 @@ export default function rootReducer(state = initialState, action) {
 					return 0;
 				});
 			}
-			if (payload === 'desc') {
-				sortBook = state.allBook.sort(function(a, b) {
+			else if (payload === 'desc') {
+				sortBook = state.books.sort(function(a, b) {
 					if (a.title < b.title) {
 						return 1;
 					}
@@ -92,8 +92,9 @@ export default function rootReducer(state = initialState, action) {
 					}
 					return 0;
 				});
-			} else {
-				sortBook = state.allBookBackup;
+			} 
+			else{
+				sortBook= state.allBookBackup
 			}
 			return {
 				...state,
