@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getBooks, getCategories } from '../../redux/actions';
 import styles from "./styles.css"
+import Filters from '../Filters/Filters';
 
 export default function Home() {
 

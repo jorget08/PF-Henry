@@ -4,7 +4,7 @@ import Paginated from '../Paginated/Paginated'
 import { Link } from 'react-router-dom'
 import styles from './styles.css'
 import { useSelector } from 'react-redux'
-import Filters from '../Filters/Filters';
+
 
 export default function ShowBooks({ books }) {
 
@@ -55,7 +55,7 @@ export default function ShowBooks({ books }) {
 
     return (
         <div className='homeContainer'>
-            <Filters setPage={setPage} categories={categories}/>
+
             <div className='catalogue'>
                 {
                     currentBooks
