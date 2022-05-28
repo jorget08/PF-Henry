@@ -9,7 +9,7 @@ export default function ShowBooks({ books }) {
 
     var [page, setPage] = useState(1)
 
-    const booksPerPage = 9
+    const booksPerPage = 9;
 
     var lastIndex = page * booksPerPage                     //indice incial para metodo slice 
     var firstIndex = lastIndex - booksPerPage               //indice final para metodo slice

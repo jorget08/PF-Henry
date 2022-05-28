@@ -25,7 +25,8 @@ export default function Home() {
     return (
         <div>
             <NavBar />
-            <Filters books={books} categories={categories}/>
+
+            <Filters books={books} categories={categories} />
             {books.length ?
                 <ShowBooks books={books} />
                 :
