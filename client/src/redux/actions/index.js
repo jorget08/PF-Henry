@@ -12,7 +12,8 @@ import {
 	REMOVE_ALL_FROM_CART,
   GET_CATEGORIES,
   POST_BOOK,
-  GET_CART
+  GET_CART,
+  PUT_BOOK
 
 } from './types';
 
@@ -132,6 +133,14 @@ export function postBook(data) {
     axios
     .post(`http://localhost:3001/books`, data)
     .then(response => dispatch({ type: POST_BOOK }))
+    .catch((e) => {console.log(e)})
+}}
+
+export function putBook(data, id) {
+  return dispatch => {
+    axios
+    .put(`http://localhost:3001/books/book/:${id}`, data)
+    .then(response => dispatch({ type: PUT_BOOK }))
     .catch((e) => {console.log(e)})
 }}
 
