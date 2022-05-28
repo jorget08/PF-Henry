@@ -55,6 +55,14 @@ export default function BookDetail() {
                 </ul>
 
               </div>
+              <Link to={{
+                pathname:'/createbook',
+                state: {
+                  detail: {...bookDet}
+                }
+                }}>
+                <span>Modify book</span>
+              </Link>
             </div>
 
           </div>

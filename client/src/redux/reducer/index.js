@@ -13,7 +13,8 @@ import {
 	GET_BOOKS,
 	GET_CATEGORIES,
 	POST_BOOK,
-	GET_CART
+	GET_CART,
+	PUT_BOOK
 } from '../actions/types';
 
 const initialState = {
@@ -121,6 +122,11 @@ export default function rootReducer(state = initialState, action) {
       };
 
 	case POST_BOOK:
+	return {
+		...state,
+	};
+
+	case PUT_BOOK:
 	return {
 		...state,
 	};

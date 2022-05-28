@@ -1,7 +1,7 @@
 import {React, useEffect, useState} from 'react'
 import {Formik, Form, Field, FieldArray} from "formik"
 import { useDispatch, useSelector } from 'react-redux'
-import { getCategories, postBook } from '../../redux/actions'
+import { getCategories, postBook, putBook } from '../../redux/actions'
 import { useLocation } from 'react-router-dom'
 
 export default function FormCreate() {
@@ -9,6 +9,35 @@ export default function FormCreate() {
     const dispatch = useDispatch()
     var [formSubmit, setFormSubmit] = useState(false)
     var [last, setLast] = useState("")
+    var [boolean, setBoolean] = useState(true)
+    
+    const location = useLocation()
+    
+    if (location.state === undefined) {
+        var detail = {
+            title: "", 
+            author: "",
+            categories: [],
+            price: 0,
+            stock: 0,
+            description: "",
+            image: ""
+        }
+    } else { 
+        var { detail } = location.state
+    }   
+
+    var catDetail = [...detail.categories.map(c => c.name)]
+
+    var [base, setBase] = useState({
+        title: detail.title,
+        author: detail.author,
+        categories: catDetail,
+        price: detail.price,
+        stock: detail.stock,
+        description: detail.description,
+        image: detail.image
+    })
     
     useEffect(() => {
         dispatch(getCategories)
@@ -17,18 +46,11 @@ export default function FormCreate() {
     var catego = useSelector(state => state.categories)
 
     return (
-        <>
+        <>  
+            {(detail.id !== undefined)? <h2>Modify the book!</h2> : <h2>Create a book!</h2>} 
             <Formik
 
-                initialValues={{
-                    title: "",
-                    author: "",
-                    categories: [],
-                    price: 0,
-                    stock: 0,
-                    description: "",
-                    image: ""
-                }}
+                initialValues={base}
                 
                 validate={(valores) => {
 
@@ -52,6 +74,10 @@ export default function FormCreate() {
                         errors.price = "The price cannot be lower than 0"
                     }
 
+                    if(valores.categories.length === 0) {
+                        errors.categories = "Must chose at least one category"
+                    }
+
                     if(valores.stock < 0) {
                         errors.stock = "The stock cannot be lower than 0"
                     }
@@ -65,15 +91,15 @@ export default function FormCreate() {
                 }}
 
                 onSubmit={(valores, {resetForm}) => {
-                    dispatch(postBook(valores))
+                    (detail.id !== undefined)? dispatch(putBook(valores, detail.id)) : dispatch(postBook(valores))
+                    console.log(valores) 
                     resetForm()
                     setFormSubmit(true)
-                    setTimeout(() => setFormSubmit(false), "3000")
+                    setTimeout(() => setFormSubmit(false), "4000")
                 }}
             >
                 {( {errors, touched} ) => (
                     <>
-                    <div>Create a book!</div>
                     <Form>
                         <div>
                             <label name="title">Title</label>
@@ -141,7 +167,7 @@ export default function FormCreate() {
                                                         if (element !== e.target.value) {extra.push(element)} 
                                                     }
                                                     values.categories = extra
-                                                    
+                                                    setBoolean(!boolean)
                                                 }
                                             
                                             }
@@ -151,6 +177,7 @@ export default function FormCreate() {
                                 )
                                 }}
                             </FieldArray>
+                            {errors.categories && <span>{errors.categories}</span>}
                         </div>
                         <div>
                             <label name="price">Precio</label>
@@ -187,8 +214,8 @@ export default function FormCreate() {
                             placeholder='URL'
                             />
                         </div>
-                        <button type="submit">Submit</button>
-                        {formSubmit && <span>El formulario ha sido enviado con éxito!</span>}
+                        {(detail.id !== undefined)? <button type="submit">Modify!</button> : <button type="submit">Create!</button>} 
+                        {formSubmit && <span>Action successfully complete!</span>}
                     </Form>
                     </>
                 )}

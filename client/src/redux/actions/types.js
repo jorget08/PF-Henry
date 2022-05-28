@@ -12,3 +12,4 @@ export const GET_BOOKS = "GET_BOOKS";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const POST_BOOK = "POST_BOOK";
 export const GET_CART= "GET_CART";
+export const PUT_BOOK = "PUT_BOOK";
