@@ -23,6 +23,7 @@
   color: #6e6e6e;
   padding: 10px;
   border-radius: 10px;
+  margin: 0;
 }
 .paginate ul li h5:hover {
   color: #f5b3b3;

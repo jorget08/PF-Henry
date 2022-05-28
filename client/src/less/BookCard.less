@@ -12,38 +12,45 @@ a {
     border-radius: 20px;
     box-shadow: 5px 5px 40px -2px black;
     font-family: @merri;
+    margin: 10px;
+    max-width: 400px;
+    margin: auto;
 
     img {
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
         max-width: 135px;
+        align-self: flex-start;
     }
 
     .info {
         display: flex;
         flex-direction: column;
-        margin: auto;
+        margin: 1px 20px 10px 13%;
+        justify-content: space-evenly;
         text-align: center;
+        align-items: center;
 
         h3,
         h4,
         h5 {
             color: black;
-
+            margin: 0;
+            text-align: center;
         }
 
         h3 {
-            font-size: 20px;
+            font-size: 18px;
             text-align: center;
         }
 
         h5 {
-            font-size: 16px;
+            font-size: 14px;
             text-align: center;
         }
 
         h4 {
-            font-size: 12px;
+            font-size: 10px;
         }
     }
 
@@ -60,15 +67,16 @@ a {
         align-items: center;
         color: black;
         justify-content: center;
+        flex-direction: column;
 
         .icon {
-            margin-right: 1rem;
+            margin-right: 5px;
 
         }
 
         span {
             font-size: 18px;
-            margin-left: 1rem;
+            margin-left: 5px;
         }
     }
 }
