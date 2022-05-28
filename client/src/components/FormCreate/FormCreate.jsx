@@ -1,21 +1,31 @@
-import {React, useState} from 'react'
-import {Formik, Form, Field} from "formik"
+import {React, useEffect, useState} from 'react'
+import {Formik, Form, Field, FieldArray} from "formik"
+import { useDispatch, useSelector } from 'react-redux'
+import { getCategories, postBook } from '../../redux/actions'
+import { useLocation } from 'react-router-dom'
 
 export default function FormCreate() {
     
+    const dispatch = useDispatch()
     var [formSubmit, setFormSubmit] = useState(false)
+    var [last, setLast] = useState("")
+    
+    useEffect(() => {
+        dispatch(getCategories)
+    }, [dispatch])
+
+    var catego = useSelector(state => state.categories)
 
     return (
         <>
             <Formik
 
-                // {title, author, description, stock, image, price, categories => array} = req.body
-
                 initialValues={{
                     title: "",
                     author: "",
                     categories: [],
-                    price: "",
+                    price: 0,
+                    stock: 0,
                     description: "",
                     image: ""
                 }}
@@ -25,31 +35,29 @@ export default function FormCreate() {
                     let errors = {}
 
                     if(!valores.title) {
-                        errors.title = "Por favor introduce un título"
+                        errors.title = "Please enter a title"
                     } else if(valores.title.length > 100) {
-                        errors.title = "El título no puede exceder los 100 caracteres"
+                        errors.title = "The title cannot exceed 100 characters"
                     }
 
                     if(!valores.author) {
-                        errors.author = "Por favor introduce un autor"
+                        errors.author = "Please enter an author"
                     } else if(valores.author.length > 50) {
-                        errors.author = "El nombre del autor no puede exceder los 100 caracteres"
-                    } else if((/\W/).test(valores.title)) {
-                        errors.author = "El nombre del autor no puede poseer caracteres especiales"
+                        errors.author = "The author cannot exceed 100 characters"
                     }
 
                     if(!valores.price) {
-                        errors.price = "Por favor introducir el precio"
+                        errors.price = "Please enter a price"
                     } else if(valores.price < 0) {
-                        errors.price = "El precio no puede ser inferior a 0 (cero)"
+                        errors.price = "The price cannot be lower than 0"
                     }
 
                     if(valores.stock < 0) {
-                        errors.stock = "El stock no puede ser negativo"
+                        errors.stock = "The stock cannot be lower than 0"
                     }
 
-                    if(valores.description.length > 1000) {
-                        errors.description = "La longitud de la descripción no puede superar los 1000 caracteres"
+                    if(valores.description.length > 5000) {
+                        errors.description = "Up to 5000 characters only"
                     }
 
                     return errors
@@ -57,23 +65,22 @@ export default function FormCreate() {
                 }}
 
                 onSubmit={(valores, {resetForm}) => {
+                    dispatch(postBook(valores))
                     resetForm()
-                    console.log("prueba")
-                    console.log(valores)
                     setFormSubmit(true)
                     setTimeout(() => setFormSubmit(false), "3000")
                 }}
             >
                 {( {errors, touched} ) => (
                     <>
-                    <div>Agrega un libro!</div>
+                    <div>Create a book!</div>
                     <Form>
                         <div>
-                            <label name="title">Título</label>
+                            <label name="title">Title</label>
                             <Field 
                             type="text" 
                             name="title" 
-                            placeholder='Título' 
+                            placeholder='Title' 
                             />
                             {touched.title && errors.title && <span>{errors.title}</span>}
                         </div>
@@ -82,25 +89,75 @@ export default function FormCreate() {
                             <Field
                             type="text" 
                             name="author" 
-                            placeholder='Autor' 
+                            placeholder='Author' 
                             />
                             {touched.author && errors.author && <span>{errors.author}</span>}
                         </div>
                         <div>
-                            <label name="categories">Categorías</label>
-                            <Field 
+                            <label name="categories">Category</label>
+                            <FieldArray
                             name="categories" 
-                            as="select">
-                                <option value="opcion">Opcion</option>
-                                <option value="opcion">Opcio</option>
-                            </Field>
+                            >
+                                {props => {
+                                    const {push, form} = props
+                                    const {values} = form
+
+                                return (
+                                    <select onClick={(e) => {
+                                        if(!values.categories.includes(e.target.value) && e.target.value !== "none" && e.target.value !== last) {
+                                            push(e.target.value);
+                                            setLast(e.target.value)
+                                        } else {
+                                            setLast("")
+                                        }
+                                    }
+                                    }>
+                                        <option value="none">Select category</option>
+                                        {catego? catego.map(c => {    
+                                        return (
+                                            <option value={c.name} name={c.name}>{c.name}</option>
+                                        )
+                                        }) : null}
+                                    </select>
+                                )
+                                }}
+                            </FieldArray>
+                        </div>
+                        <div>
+                            <label name="categories">Categories selected</label>
+                            <FieldArray
+                            name="categories" 
+                            >
+                                {props => {
+                                    const {form} = props
+                                    const {values} = form   
+                                return (                         
+                                    <div>
+                                        {(values.categories.length > 0)? values.categories.map(t => {
+                                            return <div><span value={t}>{t}</span><button type="button" value={t} onClick={(e) => 
+                                                {   
+                                                    let extra = [] 
+                                                    for (let element of values.categories) {
+                                                        if (element !== e.target.value) {extra.push(element)} 
+                                                    }
+                                                    values.categories = extra
+                                                    
+                                                }
+                                            
+                                            }
+                                            >x</button></div>
+                                        }) : null} 
+                                    </div>
+                                )
+                                }}
+                            </FieldArray>
                         </div>
                         <div>
                             <label name="price">Precio</label>
                             <Field
                             type="number" 
                             name="price" 
-                            placeholder='Indica el precio' 
+                            placeholder='Price' 
                             />
                             {touched.price && errors.price && <span>{errors.price}</span>}
                         </div>
@@ -109,7 +166,7 @@ export default function FormCreate() {
                             <Field
                             type="number" 
                             name="stock" 
-                            placeholder='Indica el precio' 
+                            placeholder='Stock' 
                             />
                             {touched.stock && errors.stock && <span>{errors.stock}</span>}
                         </div>
@@ -118,7 +175,7 @@ export default function FormCreate() {
                             <Field
                             type="text" 
                             name="description" 
-                            placeholder='Añádele alguna descripción'
+                            placeholder='Some description?'
                             />
                             {touched.description && errors.description && <span>{errors.description}</span>}
                         </div>

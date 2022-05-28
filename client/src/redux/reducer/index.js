@@ -12,6 +12,7 @@ import {
 	REMOVE_ONE_FROM_CART,
 	GET_BOOKS,
 	GET_CATEGORIES,
+	POST_BOOK,
 	GET_CART
 } from '../actions/types';
 
@@ -117,6 +118,11 @@ export default function rootReducer(state = initialState, action) {
       return {
         cart: [],
       };
+
+	case POST_BOOK:
+	return {
+		...state,
+	};
 
     case REMOVE_ONE_FROM_CART:
       let bookToDelete = JSON.parse(localStorage.getItem('carrito')).filter(book=>book.id !== payload)

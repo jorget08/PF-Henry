@@ -31,6 +31,9 @@ export default function NavBar() {
 
                         </div>
                     </Link>
+                    <Link to='/createbook'>
+                        <span>Create a book</span>
+                    </Link>
 
                 </div>
 

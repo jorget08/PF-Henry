@@ -11,7 +11,9 @@ import {
 	REMOVE_ONE_FROM_CART,
 	REMOVE_ALL_FROM_CART,
   GET_CATEGORIES,
+  POST_BOOK,
   GET_CART
+
 } from './types';
 
 import axios from "axios";
@@ -125,6 +127,15 @@ export function removeOneFromCart(id) {
   return { type: REMOVE_ONE_FROM_CART, payload: id };
 }
 
+export function postBook(data) {
+  return dispatch => {
+    axios
+    .post(`http://localhost:3001/books`, data)
+    .then(response => dispatch({ type: POST_BOOK }))
+    .catch((e) => {console.log(e)})
+}}
+
 export function getCart(){
   return{type: GET_CART}
 }
+
