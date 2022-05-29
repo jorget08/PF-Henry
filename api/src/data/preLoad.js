@@ -15,7 +15,7 @@ async function dataBaseLoad() {
         
         book = {
 
-            title: book.title.slice(0,book.title.indexOf(':')),
+            title:  book.title.includes(':') ? book.title.slice(0,book.title.indexOf(':')) : book.title,
             author: book.author,
             description: book.description,
             score: Math.round(book.score.slice(0,3)),

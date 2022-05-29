@@ -129,7 +129,7 @@ const book =  [
     },
     {
         id: 9,
-        title: "'The Maidens: The new thriller from the author of the global bestselling debut The Silent Patient'",
+        title: "The Maidens: The new thriller from the author of the global bestselling debut The Silent Patient",
         author: "Alex Michaelides",
         image: "https://images-na.ssl-images-amazon.com/images/I/41EANP48VAL._SX322_BO1,204,203,200_.jpg",
         price: "£7.00",
