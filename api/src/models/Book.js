@@ -26,10 +26,11 @@ module.exports = (sequelize) => {
     },
     stock:{
       type: DataTypes.DECIMAL,
-      defaultValue:1
+      defaultValue:10
     },
     image:{
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
+      defaultValue:'https://www.libreriacollino.com.ar/static/media/default-book.1d8c3114.png'
     },
     price:{
       type:DataTypes.INTEGER,
