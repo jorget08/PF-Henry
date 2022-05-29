@@ -9,10 +9,14 @@ export default function Item({ id, title, img, author, price, stock }) {
     const [cant, setCant] = useState(1);
     const dispatch = useDispatch()
 
-    function handlePrice(e) {
-        e.preventDefault();
-        let newCant = e.target.id === '+' ? cant + 1 : cant - 1
-        newCant <= stock ? setCant() : alert("No hay stock")
+    function handlePrice(e) {       
+        if (cant+1 > stock && e === "sum"){
+            alert('No hay stock')
+        } else if (cant-1 < 1 && e === "men") {
+            
+        } else {
+            e === 'sum' ? setCant(cant + 1) : setCant(cant - 1)            
+        }
     }
 
     function handleDelete(e) {
@@ -32,11 +36,11 @@ export default function Item({ id, title, img, author, price, stock }) {
             <div className='prices'>
                 <p>${price}, 00</p>
                 <div className='priceChange'>
-                    <button className='icon' id='-' onClick={handlePrice}>
+                    <button className='icon' id='men' onClick={e => handlePrice("men")}>
                         <AiOutlineMinus size={20} />
                     </button>
                     <input type="number" value={cant} readOnly id="" />
-                    <button className='icon' id='+' onClick={handlePrice}>
+                    <button className='icon' id='sum' onClick={e => handlePrice("sum")}>
                         <MdOutlineAdd size={20} />
                     </button>
                 </div>
