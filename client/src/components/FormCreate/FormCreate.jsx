@@ -11,6 +11,11 @@ export default function FormCreate() {
     var [last, setLast] = useState("")
     var [boolean, setBoolean] = useState(true)
 
+    var titleBooks = useSelector(state => state.books)
+    var contTitleBooks = titleBooks.map((b) => b.title)
+
+    console.log(contTitleBooks)
+
     const history = useHistory()
     
     const location = useLocation()
@@ -68,6 +73,10 @@ export default function FormCreate() {
 
                     if(!valores.title) {
                         errors.title = "Please enter a title"
+                    } else if(contTitleBooks.includes(valores.title)) {
+                        errors.title = "The title already exists"
+                    } else if(/^\s/.test(valores.title)) {
+                        errors.title = "Cant start whit an empty space"
                     } else if(valores.title.length > 100) {
                         errors.title = "The title cannot exceed 100 characters"
                     }
