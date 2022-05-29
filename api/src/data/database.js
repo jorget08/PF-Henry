@@ -507,18 +507,5 @@ const book =  [
             "History"
         ]
     },
-    {
-        id: 38,
-        title: "camilaaa",
-        author: "Code Quickly",
-        image: "https://images-na.ssl-images-amazon.com/images/I/41SVTBTm1oL._SX384_BO1,204,203,200_.jpg",
-        price: "£9.99",
-        score: "4.5 out of 5 stars",
-        description: "Do you want to develop a skill that will ensure you never go jobless again? ",
-        categories: [
-            "Academic"
-        ],
-        source: "www.amazon.co.uk"
-    },
 ]
 module.exports=book
