@@ -13,6 +13,9 @@ export default function Cart() {
 
     console.log("soy bookCarts", bookCarts)
 
+    let prices=[]
+    bookCarts?.map(e=>prices.push(e.price))
+    
 
     function handleDeleteAll(e) {
         e.preventDefault();
@@ -23,17 +26,17 @@ export default function Cart() {
 
     }, [dispatch])
 
-
+//<button onClick={handleDeleteAll}>Eliminar Todo del Carrito</button>
     return (
         <div className='cartContainer'>
             <NavBar />
-            <button onClick={handleDeleteAll}>Eliminar Todo del Carrito</button>
+            
             <div className='items'>
                 {bookCarts?.map(e => <Item id={e.id} price={"$" + e.price} img={e.image} title={e.title} stock={e.stock} author={e.author} />)}
             </div>
             <div>
                 <h3>Order Summary</h3>
-                subTotal
+                <h1>subTotal ${prices?prices.reduce((a, b) => a + b, 0):null}</h1>
             </div>
         </div>
     )
