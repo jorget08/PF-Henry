@@ -24,7 +24,7 @@ export default function NavBar() {
                     <Link to='/cart'>
                         <BsCart2 size={30} className="iconCart" />
                     </Link>
-                    <Link>
+                    <Link to='/logIn'>
                         <div className='log'>
                             <span>Log In</span>
                             <IoMdContact size={30} />

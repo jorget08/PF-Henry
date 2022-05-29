@@ -13,7 +13,8 @@ import {
   GET_CATEGORIES,
   POST_BOOK,
   GET_CART,
-  PUT_BOOK
+  PUT_BOOK,
+  DELETE_BOOK
 
 } from './types';
 
@@ -141,6 +142,14 @@ export function putBook(data, id) {
     axios
     .put(`http://localhost:3001/books/book/${id}`, data)
     .then(response => dispatch({ type: PUT_BOOK }))
+    .catch((e) => {console.log(e)})
+}}
+
+export function deleteBook(id) {
+  return dispatch => {
+    axios
+    .delete(`http://localhost:3001/books/delete/book/${id}`)
+    .then(response => dispatch({ type: DELETE_BOOK }))
     .catch((e) => {console.log(e)})
 }}
 

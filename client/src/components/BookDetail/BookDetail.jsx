@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { getDetail, clearDetail, getBooks } from "../../redux/actions";
+import { Link, useHistory, useParams } from 'react-router-dom';
+import { getDetail, clearDetail, deleteBook } from "../../redux/actions";
 import DetailCompra from '../DetailCompra/DetailCompra';
 import Stars from '../Stars/Stars';
 import NavBar from '../NavBar/NavBar'
@@ -11,6 +11,14 @@ import NavBar from '../NavBar/NavBar'
 import "./styles.css"
 
 export default function BookDetail() {
+
+  const history = useHistory()
+
+  console.log(history)
+
+    const redirect = () => {
+        history.push("/home")
+    }
 
   const dispatch = useDispatch()
   const { id } = useParams()
@@ -23,6 +31,16 @@ export default function BookDetail() {
 
   var bookDet = useSelector(state => state.detail)
   var stars = [false, false, false, false, false];
+
+  function delet (e) {
+    e.preventDefault();
+    if(window.confirm (`Are you sure you want to delete this book: ${bookDet.title}?`)){
+      dispatch(deleteBook(bookDet.id))
+      alert("The book has been deleted successfully!")
+      redirect()
+    }
+  }
+
   return (
     <div className='all'>
       <NavBar />
@@ -61,10 +79,10 @@ export default function BookDetail() {
                   detail: {...bookDet}
                 }
                 }}>
-                <span>Modify book</span>
+                <button type="button">Modify book</button>
               </Link>
-            </div>
-
+              <button type="button" onClick={(e) => delet(e)}>Delete Book</button>
+              </div>
           </div>
         </div>
 
