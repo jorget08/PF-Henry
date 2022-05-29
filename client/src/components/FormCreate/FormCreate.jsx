@@ -2,7 +2,7 @@ import {React, useEffect, useState} from 'react'
 import {Formik, Form, Field, FieldArray} from "formik"
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategories, postBook, putBook } from '../../redux/actions'
-import { useHistory, useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 
 export default function FormCreate() {
     
@@ -10,11 +10,6 @@ export default function FormCreate() {
     var [formSubmit, setFormSubmit] = useState(false)
     var [last, setLast] = useState("")
     var [boolean, setBoolean] = useState(true)
-
-    var titleBooks = useSelector(state => state.books)
-    var contTitleBooks = titleBooks.map((b) => b.title)
-
-    console.log(contTitleBooks)
 
     const history = useHistory()
     
@@ -53,9 +48,11 @@ export default function FormCreate() {
     const redirect = ({id}) => {
         if (id) {
             history.push(`/book/${id}`)
-        } else {
-            history.push(`/home`)
-        }
+        } 
+        // si se quiere que despues de creado un book vuelva solo a home despues de 2 segundos, descomentar las siguientes tres lineas.
+        // else {
+        //     history.push(`/home`)
+        // }
     }
 
     var catego = useSelector(state => state.categories)
@@ -63,6 +60,9 @@ export default function FormCreate() {
     return (
         <>  
             {(detail.id !== undefined)? <h2>Modify the book!</h2> : <h2>Create a book!</h2>} 
+            <Link to='/home'>
+                <button type="button">Back to Home</button>
+            </Link>
             <Formik
 
                 initialValues={base}
@@ -73,8 +73,6 @@ export default function FormCreate() {
 
                     if(!valores.title) {
                         errors.title = "Please enter a title"
-                    } else if(contTitleBooks.includes(valores.title)) {
-                        errors.title = "The title already exists"
                     } else if(/^\s/.test(valores.title)) {
                         errors.title = "Cant start whit an empty space"
                     } else if(valores.title.length > 100) {
@@ -93,7 +91,7 @@ export default function FormCreate() {
                         errors.price = "The price cannot be lower than 0"
                     }
 
-                    if(valores.categories.length === 0) {
+                    if(valores.categories.length === 0 && valores.title && valores.author) {
                         errors.categories = "Must chose at least one category"
                     }
 
@@ -114,7 +112,7 @@ export default function FormCreate() {
                     resetForm()
                     setFormSubmit(true)
                     setTimeout(() => setFormSubmit(false), "2000")
-                    setTimeout(() => redirect(detail), "2001")            
+                    setTimeout(() => redirect(detail), "2000")            
                 }}
             >
                 {( {errors, touched} ) => (
@@ -196,7 +194,7 @@ export default function FormCreate() {
                                 )
                                 }}
                             </FieldArray>
-                            {errors.categories && <span>{errors.categories}</span>}
+                            {touched.categories && errors.categories && <span>{errors.categories}</span>}
                         </div>
                         <div>
                             <label name="price">Precio</label>
