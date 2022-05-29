@@ -12,10 +12,6 @@ export default function FormCreate() {
     var [boolean, setBoolean] = useState(true)
 
     const history = useHistory()
-
-    const redirect = () => {
-        history.push("/home")
-    }
     
     const location = useLocation()
     
@@ -48,6 +44,14 @@ export default function FormCreate() {
     useEffect(() => {
         dispatch(getCategories)
     }, [dispatch])
+
+    const redirect = ({id}) => {
+        if (id) {
+            history.push(`/book/${id}`)
+        } else {
+            history.push(`/home`)
+        }
+    }
 
     var catego = useSelector(state => state.categories)
 
@@ -101,7 +105,7 @@ export default function FormCreate() {
                     resetForm()
                     setFormSubmit(true)
                     setTimeout(() => setFormSubmit(false), "2000")
-                    setTimeout(() => redirect(), "2001")            
+                    setTimeout(() => redirect(detail), "2001")            
                 }}
             >
                 {( {errors, touched} ) => (
