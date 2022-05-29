@@ -103,7 +103,17 @@ export function ordenTitle(payload) {
 }
 
 export function filterScore(score){
-    return async function (dispatch){
+  if(score==="All"){
+    return async function (dispatch) {
+      try {
+        var response = await axios.get(`http://localhost:3001/books`);
+        return dispatch({ type: FILTER_SCORE, payload: response.data });
+      } catch (e) {
+        console.log(e);
+      }
+    };
+  }
+  else {return async function (dispatch){
         try{
             var response = await axios.get(`http://localhost:3001/books?score=${score}`)
             return dispatch({type: FILTER_SCORE, payload: response.data})
@@ -112,7 +122,7 @@ export function filterScore(score){
             console.log(e)
         }
     }
-}
+}}
 
 
 
