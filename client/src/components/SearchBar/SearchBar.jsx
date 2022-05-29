@@ -22,12 +22,12 @@ export default function SearchBar() {
     }
     return (
         <div>
-            <div className="searchbar">
+            <form className="searchbar">
                 <input type="search" className="search" size={30} placeholder='Search a Book or an Author...' value={search} onChange={(e) => handleChange(e)} />
                 <button onClick={(e) => handleSubmit(e)}>
                     <FaSistrix size={25} className="glass" />
                 </button>
-            </div>
+            </form>
         </div>
     )
 }
