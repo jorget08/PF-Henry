@@ -2,7 +2,7 @@
   border-bottom: 1px solid #c4c4c4;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  margin: 0 2rem;
+  margin: 2rem;
   padding: 1rem;
 }
 .itemContainer .itemBook {
@@ -24,12 +24,12 @@
   align-items: center;
   justify-content: space-evenly;
 }
-.itemContainer .prices h5 {
+.itemContainer .prices p {
   font-size: 20px;
   font-family: 'Source Sans Pro', sans-serif;
 }
 .itemContainer .prices .priceChange {
-  border: 1px solid #7474d3;
+  border: 1px solid #141483;
   display: flex;
   align-items: center;
   border-radius: 10px;
@@ -38,7 +38,7 @@
 .itemContainer .prices button {
   background-color: white;
   text-align: center;
-  color: #9292ff;
+  color: #141483;
   font-size: 40px;
   outline: none;
   border: none;
@@ -53,4 +53,11 @@
   font-size: 15px;
   padding: 2px 0px 2px 12px;
   border: none;
+}
+.itemContainer .icon:hover {
+  cursor: pointer;
+  color: #9292ff;
+}
+.itemContainer .delete:hover {
+  color: #d12d2d;
 }

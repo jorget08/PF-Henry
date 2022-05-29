@@ -4,6 +4,7 @@ import Item from '../Item/Item'
 import NavBar from '../NavBar/NavBar'
 //import { useLocalStore } from '../Utils/useLocalStorage'
 import { removeAllFromCart, getCart } from '../../redux/actions';
+import { Link } from 'react-router-dom';
 import './styles.css'
 export default function Cart() {
 
@@ -13,9 +14,9 @@ export default function Cart() {
 
     console.log("soy bookCarts", bookCarts)
 
-    let prices=[]
-    bookCarts?.map(e=>prices.push(e.price))
-    
+    let prices = []
+    bookCarts?.map(e => prices.push(e.price))
+
 
     function handleDeleteAll(e) {
         e.preventDefault();
@@ -26,17 +27,38 @@ export default function Cart() {
 
     }, [dispatch])
 
-//<button onClick={handleDeleteAll}>Eliminar Todo del Carrito</button>
+    //<button onClick={handleDeleteAll}>Eliminar Todo del Carrito</button>
     return (
-        <div className='cartContainer'>
+        <div>
             <NavBar />
-            
-            <div className='items'>
-                {bookCarts?.map(e => <Item id={e.id} price={"$" + e.price} img={e.image} title={e.title} stock={e.stock} author={e.author} />)}
-            </div>
-            <div>
-                <h3>Order Summary</h3>
-                <h1>subTotal ${prices?prices.reduce((a, b) => a + b, 0):null}</h1>
+            <div className='cartContainer'>
+                <div className='cart'>
+                    {JSON.parse(localStorage.getItem('carrito'))?.length ?
+
+
+                        <div className='items'>
+                            {bookCarts?.map(e => <Item id={e.id} price={e.price} img={e.image} title={e.title} stock={e.stock} author={e.author} />)}
+                            <div className='subTotal'>
+                                <h3>subTotal <span>{`(${bookCarts?.length} items)`}</span></h3>
+                                <p>${prices ? prices.reduce((a, b) => a + b, 0) : null}, 00</p>
+                            </div>
+                            <div className='continue subTotal'>
+                                <Link to='/home'>
+                                    <p className='keep'>Keep Shopping</p>
+                                </Link>
+                                <p className='checkout'>Continue to Checkout</p>
+
+                            </div>
+                        </div>
+                        :
+                        <div className='empty'>
+                            <h1>Oops, Your Cart is Empty!</h1>
+                            <p>Looks like you haven't added anything to your cart yet</p>
+                            <img src='https://jersix.com/wp-content/uploads/2020/10/Empty-pana-uai-2000x1500.png' />
+                        </div>
+                    }
+                </div>
+
             </div>
         </div>
     )

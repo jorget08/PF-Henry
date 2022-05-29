@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { filterCategory, filterScore, filterPrice, ordenTitle } from "../../redux/actions"
 import { IoSearchCircleOutline } from 'react-icons/io5'
+import Stars from '../Stars/Stars';
 import './styles.css'
 
 export default function Filters({ books, categories, func }) {
 
     const dispatch = useDispatch();
-    const puntajes = [1, 2, 3, 4, 5]
+    const scores = [1, 2, 3, 4, 5]
     const [price1, setPrice1] = useState(1)
     const [price2, setPrice2] = useState(30)
 
@@ -61,8 +62,8 @@ export default function Filters({ books, categories, func }) {
                 <div className='filter'>
                     <select defaultValue={'default'} onChange={e => handleFilterScore(e)}>
                         <option value="default" hidden>Select a Score</option>
-                        {puntajes.map(puntaje => {
-                            return (<option value={puntaje} key={puntaje}>{puntaje}</option>)
+                        {scores.map(score => {
+                            return (<option value={score} key={score}>{score}</option>)
                         })}
                     </select>
                 </div>

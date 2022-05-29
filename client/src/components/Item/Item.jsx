@@ -30,17 +30,18 @@ export default function Item({ id, title, img, author, price, stock }) {
                 </div>
             </div>
             <div className='prices'>
-                <h5>{price}</h5>
+                <p>${price}, 00</p>
                 <div className='priceChange'>
-                    <button id='-' onClick={handlePrice}>
+                    <button className='icon' id='-' onClick={handlePrice}>
                         <AiOutlineMinus size={20} />
                     </button>
                     <input type="number" value={cant} readOnly id="" />
-                    <button id='+' onClick={handlePrice}>
+                    <button className='icon' id='+' onClick={handlePrice}>
                         <MdOutlineAdd size={20} />
                     </button>
                 </div>
-                <button onClick={handleDelete}>
+                <p>${price * (cant ? cant : 1)}, 00</p>
+                <button className='icon delete' onClick={handleDelete}>
                     <FaRegTrashAlt size={30} />
                 </button>
             </div>
