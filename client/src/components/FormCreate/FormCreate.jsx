@@ -2,7 +2,7 @@ import {React, useEffect, useState} from 'react'
 import {Formik, Form, Field, FieldArray} from "formik"
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategories, postBook, putBook } from '../../redux/actions'
-import { useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 export default function FormCreate() {
     
@@ -10,6 +10,12 @@ export default function FormCreate() {
     var [formSubmit, setFormSubmit] = useState(false)
     var [last, setLast] = useState("")
     var [boolean, setBoolean] = useState(true)
+
+    const history = useHistory()
+
+    const redirect = () => {
+        history.push("/home")
+    }
     
     const location = useLocation()
     
@@ -92,10 +98,10 @@ export default function FormCreate() {
 
                 onSubmit={(valores, {resetForm}) => {
                     (detail.id !== undefined)? dispatch(putBook(valores, detail.id)) : dispatch(postBook(valores))
-                    console.log(valores) 
                     resetForm()
                     setFormSubmit(true)
-                    setTimeout(() => setFormSubmit(false), "4000")
+                    setTimeout(() => setFormSubmit(false), "2000")
+                    setTimeout(() => redirect(), "2001")            
                 }}
             >
                 {( {errors, touched} ) => (

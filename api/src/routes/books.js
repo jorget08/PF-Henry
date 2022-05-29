@@ -183,16 +183,16 @@ router.put('/book/:id', async (req, res, next) => {
                 })
                 for (let i = 0; i < categories.length; i++) {
                     const cat = await Category.findOne({
-                        where: {name: cat[i]}
+                        where: {name: categories[i]}
                     })
                     arr.push(cat)
                 }
-                    await book.setCategory(arr[0])
-                    if(arr[1]){
-                        for (let i = 1; i < arr.length; i++) {
-                            await book.addCategory(arr[i])
-                        }
+                await book.setCategories(arr[0])
+                if(arr[1]){
+                    for (let i = 1; i < arr.length; i++) {
+                        await book.addCategories(arr[i])
                     }
+                }
             }
             res.send("Se actualizo")
         }
