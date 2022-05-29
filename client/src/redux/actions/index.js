@@ -139,7 +139,7 @@ export function postBook(data) {
 export function putBook(data, id) {
   return dispatch => {
     axios
-    .put(`http://localhost:3001/books/book/:${id}`, data)
+    .put(`http://localhost:3001/books/book/${id}`, data)
     .then(response => dispatch({ type: PUT_BOOK }))
     .catch((e) => {console.log(e)})
 }}
