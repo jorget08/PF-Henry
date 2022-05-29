@@ -1,8 +1,22 @@
+.navbar .search {
+  align-items: center;
+  display: flex;
+}
 .navbar .logoBar {
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: space-evenly;
   font-family: 'Source Sans Pro', sans-serif;
+}
+.navbar .logoBar .links {
+  display: flex;
+  justify-content: space-evenly;
+}
+@media (max-width: 800px) {
+  .navbar .logoBar {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }
 .navbar .logoBar a {
   text-decoration: none;

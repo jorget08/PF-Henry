@@ -11,29 +11,35 @@ export default function NavBar() {
         <div className="navbar">
             <nav>
                 <div className='logoBar'>
-                    <Link to='/home'>
-                        <h1>BookStore</h1>
-                    </Link>
-                    <SearchBar />
-                    <Link to='/home' className='link'>
-                        <IoHomeOutline size={30} />
-                    </Link>
-                    <Link to='/support' className='link'>
-                        <MdContactSupport size={32} />
-                    </Link>
-                    <Link to='/cart'>
-                        <BsCart2 size={30} className="iconCart" />
-                    </Link>
-                    <Link to='/logIn'>
-                        <div className='log'>
-                            <span>Log In</span>
-                            <IoMdContact size={30} />
+                    <div className='search'>
+                        <Link to='/home'>
+                            <h1>BookStore</h1>
+                        </Link>
+                        <SearchBar />
 
-                        </div>
-                    </Link>
-                    <Link to='/createbook'>
-                        <span>Create a book</span>
-                    </Link>
+                    </div>
+                    <div className='links'>
+                        <Link to='/home' className='link'>
+                            <IoHomeOutline size={30} />
+                        </Link>
+                        <Link to='/support' className='link'>
+                            <MdContactSupport size={32} />
+                        </Link>
+                        <Link to='/cart'>
+                            <BsCart2 size={30} className="iconCart" />
+                        </Link>
+                        <Link to='/logIn'>
+                            <div className='log'>
+                                <span>Log In</span>
+                                <IoMdContact size={30} />
+
+                            </div>
+                        </Link>
+                        <Link to='/createbook'>
+                            <span>Create a book</span>
+                        </Link>
+
+                    </div>
 
                 </div>
 

@@ -4,7 +4,7 @@
     border-bottom: 1px solid @borderColor;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    margin: 0 2rem;
+    margin: 2rem;
     padding: 1rem;
 
     .itemBook {
@@ -30,13 +30,13 @@
         align-items: center;
         justify-content: space-evenly;
 
-        h5 {
+        p {
             font-size: 20px;
             font-family: @Source;
         }
 
         .priceChange {
-            border: 1px solid rgb(116, 116, 211);
+            border: 1px solid rgb(20, 20, 131);
             display: flex;
             align-items: center;
             border-radius: 10px;
@@ -46,12 +46,14 @@
         button {
             background-color: white;
             text-align: center;
-            color: rgb(146, 146, 255);
+            color: rgb(20, 20, 131);
+
             font-size: 40px;
             outline: none;
             border: none;
             display: flex;
             align-items: center;
+
         }
 
         input[type="number"] {
@@ -63,5 +65,18 @@
             padding: 2px 0px 2px 12px;
             border: none;
         }
+    }
+
+    .icon {
+        &:hover {
+            cursor: pointer;
+            color: rgb(146, 146, 255);
+
+        }
+
+    }
+
+    .delete:hover {
+        color: #d12d2d;
     }
 }

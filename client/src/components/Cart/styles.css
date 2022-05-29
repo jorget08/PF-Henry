@@ -10,3 +10,68 @@
   border-left: 1px solid #c4c4c4;
   border-right: 1px solid #c4c4c4;
 }
+.cart {
+  padding: 2rem;
+  padding-bottom: 0;
+}
+.empty {
+  display: block;
+  margin: auto;
+  align-items: center;
+  text-align: center;
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 25px;
+}
+.empty h1 {
+  margin: 0;
+}
+.empty img {
+  width: 50%;
+  margin: auto;
+}
+.subTotal {
+  display: flex;
+  text-align: end;
+  justify-content: end;
+  font-family: 'Roboto Flex', sans-serif;
+  align-items: center;
+}
+.subTotal h3 {
+  font-size: 30px;
+  margin: 0 2rem 1rem 2rem;
+}
+.subTotal span {
+  font-size: 18px;
+}
+.subTotal p {
+  font-size: 25px;
+  margin: 0 2rem 1rem 2rem;
+}
+.continue {
+  justify-content: center;
+}
+.continue a {
+  text-decoration: none;
+}
+.continue p {
+  font-family: 'Merriweather', serif;
+  padding: 12px 10px;
+  margin-top: 1rem;
+  border-radius: 10px;
+  background-color: #d12d2d;
+  color: white;
+  font-size: 18px;
+}
+.continue .keep:hover {
+  background-color: #c91313;
+  cursor: pointer;
+  color: #ffb9b9;
+}
+.continue .checkout {
+  background-color: #1c1c9c;
+}
+.continue .checkout:hover {
+  background-color: #5151fa;
+  cursor: pointer;
+  color: #cbbfff;
+}
