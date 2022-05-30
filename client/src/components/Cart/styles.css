@@ -62,6 +62,11 @@
   color: white;
   font-size: 18px;
 }
+@media (max-width: 900px) {
+  .continue {
+    flex-direction: column;
+  }
+}
 .continue .keep:hover {
   background-color: #c91313;
   cursor: pointer;

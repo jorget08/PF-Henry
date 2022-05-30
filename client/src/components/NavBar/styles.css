@@ -12,7 +12,18 @@
   display: flex;
   justify-content: space-evenly;
 }
-@media (max-width: 800px) {
+.navbar .logoBar .links p {
+  background-color: #6c8eff;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  margin-top: -20px;
+  margin-left: 30px;
+  margin-right: -30px;
+  padding: 1px 0 2px 0;
+  width: 20px;
+}
+@media (max-width: 900px) {
   .navbar .logoBar {
     display: flex;
     flex-direction: column-reverse;

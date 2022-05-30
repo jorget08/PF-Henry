@@ -29,7 +29,7 @@ export default function NavBar() {
                         </Link>
                         <Link to='/cart'>
                             <BsCart2 size={30} className="iconCart" />
-                            {bookCarts?.length}
+                            <p> {bookCarts?.length}</p>
                         </Link>
                         <Link to='/logIn'>
                             <div className='log'>
