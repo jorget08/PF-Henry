@@ -5,24 +5,28 @@ import { AiOutlineMinus } from 'react-icons/ai'
 import { MdOutlineAdd } from 'react-icons/md'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import './styles.css'
-export default function Item({ id, title, img, author, price, stock }) {
+export default function Item({ id, title, img, author, price, stock, handleItem, newDel }) {
     const [cant, setCant] = useState(1);
     const dispatch = useDispatch()
 
-    function handlePrice(e) {       
-        if (cant+1 > stock && e === "sum"){
+    function handlePrice(e, op) {
+        if (cant + 1 > stock && op === "sum") {
             alert('No hay stock')
-        } else if (cant-1 < 1 && e === "men") {
-            
+        } else if (cant - 1 < 1 && op === "men") {
+
         } else {
-            e === 'sum' ? setCant(cant + 1) : setCant(cant - 1)            
+            let newCant = op === 'sum' ? cant + 1 : cant - 1;
+            setCant(newCant)
+            handleItem(title, price, newCant)
         }
     }
 
     function handleDelete(e) {
         e.preventDefault()
         dispatch(removeOneFromCart(id))
+        newDel()
     }
+
     return (
         <div className='itemContainer'>
             <div className='itemBook'>
@@ -36,11 +40,11 @@ export default function Item({ id, title, img, author, price, stock }) {
             <div className='prices'>
                 <p>${price}, 00</p>
                 <div className='priceChange'>
-                    <button className='icon' id='men' onClick={e => handlePrice("men")}>
+                    <button className='icon' id='men' onClick={e => handlePrice(e, "men")}>
                         <AiOutlineMinus size={20} />
                     </button>
                     <input type="number" value={cant} readOnly id="" />
-                    <button className='icon' id='sum' onClick={e => handlePrice("sum")}>
+                    <button className='icon' id={price} onClick={e => handlePrice(e, "sum")}>
                         <MdOutlineAdd size={20} />
                     </button>
                 </div>
