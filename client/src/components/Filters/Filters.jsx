@@ -49,7 +49,7 @@ export default function Filters({ books, categories, func }) {
     return (
         <div className='filters'>
             <div className='selects'>
-            <button onClick={()=>dispatch (filterCategory("All"))}> Show all Books</button>
+                <button className='showAll' onClick={() => dispatch(filterCategory("All"))}> Show all Books</button>
                 <div className='filter'>
                     <select defaultValue={'default'} onChange={e => handleFilterCategory(e)}>
                         <option value="default" hidden>Select a Category</option>
