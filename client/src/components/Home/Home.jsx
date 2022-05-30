@@ -3,7 +3,7 @@ import ShowBooks from '../ShowBooks/ShowBooks'
 import NavBar from '../NavBar/NavBar'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getBooks, getCategories } from '../../redux/actions';
+import { getBooks, getCategories,getCart } from '../../redux/actions';
 import styles from "./styles.css"
 import Filters from '../Filters/Filters';
 
@@ -14,6 +14,7 @@ export default function Home() {
     useEffect(() => {
         dispatch(getBooks)
         dispatch(getCategories)
+        dispatch(getCart())
     }, [dispatch])
 
     var books = useSelector(state => state.books)

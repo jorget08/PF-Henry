@@ -12,7 +12,6 @@ export default function Cart() {
     const bookCarts = useSelector(state => state.cart)
     const [cart, setCart] = useState([])
 
-    console.log("soy bookCarts", bookCarts)
 
     let prices = []
     bookCarts?.map(e => prices.push(e.price))
