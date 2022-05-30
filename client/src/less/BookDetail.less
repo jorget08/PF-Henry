@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: center;
     padding: 5rem 0;
+
 }
 
 .container__info {
@@ -20,7 +21,23 @@
     font-weight: 400;
     margin: 0 2rem;
 
+    @media (max-width: 800px) {
+        flex-direction: column;
+
+        .image {
+            border: none;
+            align-items: flex-start;
+        }
+    }
+
     .image {
+        @media (max-width: 800px) {
+            flex-direction: row;
+            border: none;
+            align-items: center;
+            padding: 10px;
+        }
+
         display: flex;
         align-items: flex-end;
         flex-direction: column;

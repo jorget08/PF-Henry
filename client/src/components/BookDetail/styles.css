@@ -17,12 +17,29 @@
   font-weight: 400;
   margin: 0 2rem;
 }
+@media (max-width: 800px) {
+  .container__info {
+    flex-direction: column;
+  }
+  .container__info .image {
+    border: none;
+    align-items: flex-start;
+  }
+}
 .container__info .image {
   display: flex;
   align-items: flex-end;
   flex-direction: column;
   padding-right: 1rem;
   border-right: 1px solid #c4c4c4;
+}
+@media (max-width: 800px) {
+  .container__info .image {
+    flex-direction: row;
+    border: none;
+    align-items: center;
+    padding: 10px;
+  }
 }
 .container__info .image img {
   max-width: 15rem;
