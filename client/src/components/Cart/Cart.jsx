@@ -10,10 +10,12 @@ export default function Cart() {
 
     const dispatch = useDispatch()
     const bookCarts = useSelector(state => state.cart)
+
     const [items, setItems] = useState(bookCarts);
     const [del, setDel] = useState(true);
     const [add, setAdd] = useState(false);
     console.log("soy bookCarts", bookCarts)
+
 
     let prices = []
     bookCarts?.map(e => prices.push(e.price))

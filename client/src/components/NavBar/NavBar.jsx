@@ -5,8 +5,10 @@ import { BsCart2 } from 'react-icons/bs';
 import { IoMdContact } from 'react-icons/io';
 import { IoHomeOutline } from 'react-icons/io5';
 import { MdContactSupport } from 'react-icons/md';
+import { useSelector } from 'react-redux';
 import "./styles.css"
 export default function NavBar() {
+    const bookCarts = useSelector(state => state.cart)
     return (
         <div className="navbar">
             <nav>
@@ -27,6 +29,7 @@ export default function NavBar() {
                         </Link>
                         <Link to='/cart'>
                             <BsCart2 size={30} className="iconCart" />
+                            {bookCarts?.length}
                         </Link>
                         <Link to='/logIn'>
                             <div className='log'>
