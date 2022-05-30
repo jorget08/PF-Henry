@@ -10,21 +10,56 @@ export default function Cart() {
 
     const dispatch = useDispatch()
     const bookCarts = useSelector(state => state.cart)
-    const [cart, setCart] = useState([])
-
+    const [items, setItems] = useState(bookCarts);
+    const [del, setDel] = useState(true);
+    const [add, setAdd] = useState(false);
     console.log("soy bookCarts", bookCarts)
 
     let prices = []
     bookCarts?.map(e => prices.push(e.price))
 
-
-    function handleDeleteAll(e) {
-        e.preventDefault();
-        dispatch(removeAllFromCart())
+    function newDel() {
+        setItems(bookCarts)
+        setDel(del ? false : true)
     }
-    useEffect(() => {
-        dispatch(getCart())
+    function handleItem(title, price, cant) {
 
+        let newBooks = bookCarts.map(e => {
+            if (e.title === title) {
+                e.cant = cant;
+                e.total = cant * price;
+            } else {
+                if (!e.total) e.total = e.price
+            }
+            return e
+        })
+        console.log(newBooks)
+        setItems(newBooks)
+        let total = 0;
+        newBooks.forEach(e => {
+            total += e.price * e.cant;
+        })
+        setAdd(true)
+        return total;
+    }
+    function handleAddItems() {
+        let newItems = bookCarts?.map(e => e?.total)
+        let firstItems = bookCarts?.map(e => e.price)
+        console.log(firstItems)
+        console.log(newItems)
+        if (add) {
+            return newItems.reduce(function (a, b) { return a + b }, 0)
+        } else {
+            return firstItems.reduce(function (a, b) { return a + b }, 0)
+        }
+    }
+    function handleSubItems() {
+        let newItems = bookCarts?.map(e => e.cant)
+        return newItems.reduce(function (a, b) { return a + b }, 0)
+    }
+
+    useEffect(() => {
+        dispatch(getCart());
     }, [dispatch])
 
     //<button onClick={handleDeleteAll}>Eliminar Todo del Carrito</button>
@@ -34,13 +69,11 @@ export default function Cart() {
             <div className='cartContainer'>
                 <div className='cart'>
                     {JSON.parse(localStorage.getItem('carrito'))?.length ?
-
-
                         <div className='items'>
-                            {bookCarts?.map(e => <Item id={e.id} price={e.price} img={e.image} title={e.title} stock={e.stock} author={e.author} />)}
+                            {bookCarts?.map(e => <Item id={e.id} price={e.price} img={e.image} title={e.title} stock={e.stock} author={e.author} handleItem={handleItem} newDel={newDel} />)}
                             <div className='subTotal'>
-                                <h3>subTotal <span>{`(${bookCarts?.length} items)`}</span></h3>
-                                <p>${prices ? prices.reduce((a, b) => a + b, 0) : null}, 00</p>
+                                <h3>subTotal <span>{`(${handleSubItems()} items)`}</span></h3>
+                                <p>${handleAddItems()}, 00</p>
                             </div>
                             <div className='continue subTotal'>
                                 <Link to='/home'>
