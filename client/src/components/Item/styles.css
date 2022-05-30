@@ -5,6 +5,12 @@
   margin: 2rem;
   padding: 1rem;
 }
+@media (max-width: 900px) {
+  .itemContainer {
+    grid-template-columns: repeat(1, 1fr);
+    align-items: center;
+  }
+}
 .itemContainer .itemBook {
   font-family: 'Source Sans Pro', sans-serif;
   display: flex;
