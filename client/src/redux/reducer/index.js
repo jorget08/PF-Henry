@@ -26,7 +26,9 @@ const initialState = {
   detail: [],
   cart: [],
   categories: [],
-  user: {}
+  user: {},
+  relevants:[]
+
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -68,6 +70,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         books: payload,
+        relevants:payload
       };
     case FILTER_PRICE:
       return {

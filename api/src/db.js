@@ -48,8 +48,9 @@ Shop.belongsToMany(Book, { through:'bookxshop' })
 Book.hasMany(Review)
 Review.belongsTo(Book)
 
-User.hasOne(Rol)
-Rol.belongsTo(User)
+//? usuario tiene muchos rol
+User.belongsToMany(Rol, { through: 'userxrol' })
+Rol.belongsToMany(User, { through: 'userxrol' })
 
 User.hasOne(Shop)
 Shop.belongsTo(User)
