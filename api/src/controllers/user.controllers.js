@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer')
 
 const createUser = async (req, res) => {
     //? agregar usuario  //? phone
-    const { name, lastName, email, password } = req.body;
+    const { name, lastName, email, password, imgProfile = 'https://res.cloudinary.com/dzqbzqgqy/image/upload/v1598418856/default_profile_img_zqbzqgqy.png'} = req.body;
     try {
         //? validar nickname !importante y email
         const existEmail = await Users.findOne({ where: { email } });
@@ -25,7 +25,7 @@ const createUser = async (req, res) => {
             lastName,
             email,
             password: passEncript,
-            imgProfile: 'https://res.cloudinary.com/dzqbzqgqy/image/upload/v1598418856/default_profile_img_zqbzqgqy.png',
+            imgProfile,
             favoritos: [],
             roleIdRole: roles.idRole            
         });  

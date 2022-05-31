@@ -21,7 +21,6 @@ const generateJwt = (id) => {
             }
         );
     })
-
 }
 //? export the function
 module.exports = { generateJwt };
