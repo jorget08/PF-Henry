@@ -79,7 +79,7 @@ router.get('/', async (req, res, next) => {
                 return res.json(allfoundResult)
             } else return res.status(400).json({ msg: 'Book with this title or author does not exist' })
         }
-        const books = await Book.findAll()
+        const books = await Book.findAll({ include: Category })
 
         return res.json(books)
     } catch (error) {

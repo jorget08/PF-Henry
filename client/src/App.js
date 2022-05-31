@@ -5,10 +5,14 @@ import Home from './components/Home/Home';
 import BookDetail from "./components/BookDetail/BookDetail"
 import FormCreate from './components/FormCreate/FormCreate';
 import Cart from './components/Cart/Cart';
+import LandingPage from './components/LandingPage/LandingPage';
+
 
 function App() {
+  
   return (
     <>
+      <Route exact path={'/'}component={LandingPage}/>
       <Route path={"/Home"} component={Home}/>
       <Route path={"/book/:id"} component={BookDetail}/>
       <Route path={"/createBook"} component={FormCreate}/>
