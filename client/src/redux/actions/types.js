@@ -14,3 +14,6 @@ export const POST_BOOK = "POST_BOOK";
 export const GET_CART= "GET_CART";
 export const PUT_BOOK = "PUT_BOOK";
 export const DELETE_BOOK = "DELETE_BOOK";
+export const CREATE_USER = "CREATE_USER";
+export const LOG_USER = "LOG_USER";
+export const UNLOG_USER = "UNLOG_USER"
