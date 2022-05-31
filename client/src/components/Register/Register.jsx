@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
+import { postUser } from '../../redux/actions';
 
 export default function Register() {
-    const dispatch = useDispatch
+    const dispatch = useDispatch()
 
   const [newUser, setNewUser]=useState({
     name:"",
-    lastname:"",
+    lastName:"",
     password:"",
     email:"",
-    image:""
+    imgProfile: ""   
   })
 
   function handleChange(e){
@@ -24,12 +25,13 @@ function handleSubmit(e){
     e.preventDefault();
     dispatch(postUser(newUser))
     alert("Te has registrado")
+    console.log("SOY EL USER PAPA", newUser)
     setNewUser({
         name:"",
-        lastname:"",
+        lastName:"",
         password:"",
         email:"",
-        image:""
+        imgProfile: ""        
     })
 }
   
@@ -42,7 +44,7 @@ function handleSubmit(e){
         </div>
         <div>
             <label>Last name: </label>
-            <input type="text" value={newUser.lastname} name="lastname" onChange={(e)=>handleChange(e)}/>
+            <input type="text" value={newUser.lastName} name="lastName" onChange={(e)=>handleChange(e)}/>
         </div>
         <div>
             <label>E mail: </label>

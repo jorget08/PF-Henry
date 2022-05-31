@@ -17,8 +17,8 @@ import {
   DELETE_BOOK,
   CREATE_USER,
   LOG_USER,
-  UNLOG_USER
-
+  UNLOG_USER,
+  LOG_WITH_GOOGLE
 } from './types';
 
 import axios from "axios";
@@ -173,7 +173,8 @@ export function getCart(){
 export function postUser(payload){
   return async function () {
     try {
-      var response = await axios.post(``, payload);
+      let response = await axios.post(`http://localhost:3001/user/`, payload);
+      console.log("DALEGATO",response)
       return response;
     } catch (e) {
       console.log(e);
@@ -184,8 +185,10 @@ export function postUser(payload){
 export function logUser(payload){
   return async function () {
     try {
-      var response = await axios.get(``, payload);
-      return dispatch({ type: LOG_USER, payload: response.data });
+      var response = await axios.post(`http://localhost:3001/auth/`, payload);
+      let TKN = response.data.token
+      localStorage.setItem("token", JSON.stringify(TKN));
+      return ({ type: LOG_USER, payload: response.data });
     } catch (e) {
       console.log(e);
     }
@@ -194,4 +197,18 @@ export function logUser(payload){
 
 export function unlogUser(){
   return { type: UNLOG_USER };
+}
+
+export function logWithGoogle(payload){
+  return async function (){ 
+  try {
+    const res = await axios.post('http://localhost:3001/auth/google', payload)
+    let TKN = res.data.token
+    console.log('res', res.data)    
+    localStorage.setItem("token", JSON.stringify(TKN));
+    return ({type: LOG_WITH_GOOGLE, payload: res.data})
+  } catch (error) {
+    console.log('error', error)
+  }
+  }
 }

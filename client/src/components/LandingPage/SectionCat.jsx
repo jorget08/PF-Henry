@@ -3,7 +3,7 @@ import { useSelector,useDispatch } from "react-redux";
 import AliceCarousel from 'react-alice-carousel';
 import { filterCategory, filterScore } from "../../redux/actions";
 import BookCard from "../BookCard/BookCard";
-import 'react-alice-carousel/lib/alice-carousel.css';
+// import 'react-alice-carousel/lib/alice-carousel.css';
 export default function SectionCat() {
     const dispatch=useDispatch()
     const booksRelevants=useSelector(state=>state.relevants)

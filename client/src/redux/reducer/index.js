@@ -16,7 +16,8 @@ import {
   PUT_BOOK,
   CREATE_USER,
   LOG_USER,
-  UNLOG_USER
+  UNLOG_USER,
+  LOG_WITH_GOOGLE
 } from "../actions/types";
 
 const initialState = {
@@ -161,6 +162,7 @@ export default function rootReducer(state = initialState, action) {
       }
 
     case LOG_USER:
+      
       return {
         ...state,
         user: payload
