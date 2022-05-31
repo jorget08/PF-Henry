@@ -14,7 +14,10 @@ import {
   POST_BOOK,
   GET_CART,
   PUT_BOOK,
-  DELETE_BOOK
+  DELETE_BOOK,
+  CREATE_USER,
+  LOG_USER,
+  UNLOG_USER
 
 } from './types';
 
@@ -167,3 +170,28 @@ export function getCart(){
   return{type: GET_CART}
 }
 
+export function postUser(payload){
+  return async function () {
+    try {
+      var response = await axios.post(``, payload);
+      return response;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+
+export function logUser(payload){
+  return async function () {
+    try {
+      var response = await axios.get(``, payload);
+      return dispatch({ type: LOG_USER, payload: response.data });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+
+export function unlogUser(){
+  return { type: UNLOG_USER };
+}

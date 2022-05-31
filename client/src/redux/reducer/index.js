@@ -14,6 +14,9 @@ import {
   POST_BOOK,
   GET_CART,
   PUT_BOOK,
+  CREATE_USER,
+  LOG_USER,
+  UNLOG_USER
 } from "../actions/types";
 
 const initialState = {
@@ -23,6 +26,7 @@ const initialState = {
   detail: [],
   cart: [],
   categories: [],
+  user: {}
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -147,6 +151,24 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         cart: JSON.parse(localStorage.getItem("carrito")),
       };
+
+    case CREATE_USER:
+      return {
+        ...state,
+      }
+
+    case LOG_USER:
+      return {
+        ...state,
+        user: payload
+      }
+
+    case UNLOG_USER:
+      return {
+        ...state,
+        user: {}
+      }
+
     default:
       return state;
   }
