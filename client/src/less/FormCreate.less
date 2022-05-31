@@ -1,0 +1,126 @@
+@import './variables.less';
+
+.containerCreate {
+    display: block;
+
+}
+
+h2 {
+    text-align: center;
+    font-family: @Source;
+}
+
+.formContainer {
+    background: @background;
+    background: @gradient;
+    display: block;
+    padding: 2rem 0;
+}
+
+
+.formInfo {
+    border: 1px solid @borderColor;
+    box-shadow: 5px 5px 20px -2px black;
+    border-radius: 20px;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-family: @merri;
+    font-size: 20px;
+    text-align: justify;
+    align-items: flex-start;
+    min-width: 400px;
+    max-width: 600px;
+    margin: auto;
+    background-color: white;
+
+    @media (max-width: 700px) {
+        min-width: 300px;
+        max-width: 400px;
+    }
+
+    .field {
+        margin: 5px auto;
+        max-width: 20rem;
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            margin: auto;
+            background-color: rgb(255, 104, 104);
+            outline: none;
+            padding: 2px 0.7rem 3px 0.7rem;
+            border-radius: 10px;
+            font-size: 18px;
+            font-family: @Source;
+            border: 1px solid @borderColor;
+            font-weight: 400;
+
+            &:hover {
+                background-color: rgb(212, 24, 24);
+                color: white;
+                cursor: pointer;
+            }
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        input {
+            outline: none;
+            border: none;
+            border-bottom: 1px solid @borderColor;
+            margin-left: 5px;
+        }
+    }
+
+    .description {
+        display: block;
+        margin: 10px auto;
+        text-align: center;
+
+        textarea {
+            text-align: left;
+            font-size: @Source;
+            height: 200px;
+            width: 300px;
+            margin: 10px;
+            font-size: 14px;
+            line-height: 15px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+    }
+
+    button {
+        margin: auto;
+        background-color: rgb(152, 255, 152);
+        outline: none;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 18px;
+        font-family: @Source;
+        border: 1px solid @borderColor;
+        font-weight: 400;
+
+        &:hover {
+            background-color: rgb(101, 179, 101);
+            color: white;
+            cursor: pointer;
+        }
+    }
+}
+
+.pastInfo {
+    background: @background;
+    background: @gradient;
+    display: block;
+    padding: 2rem 0;
+
+    h1 {
+        text-align: center;
+        font-family: @Source;
+    }
+}

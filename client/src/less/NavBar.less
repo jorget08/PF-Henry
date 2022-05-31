@@ -1,0 +1,54 @@
+@import './variables.less';
+
+.navbar {
+
+
+    .search {
+        align-items: center;
+        display: flex;
+    }
+
+    .logoBar {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        font-family: @Source;
+
+        .links {
+            display: flex;
+            justify-content: space-evenly;
+
+            p {
+                background-color: rgb(108, 142, 255);
+                border-radius: 50%;
+                color: white;
+                text-align: center;
+                margin-top: -20px;
+                margin-left: 30px;
+                margin-right: -30px;
+                padding: 1px 0 2px 0;
+                width: 20px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(0, 16, 68);
+
+        }
+
+        .log {
+            display: flex;
+            align-items: center;
+
+            span {
+                margin: 5px;
+            }
+        }
+    }
+}

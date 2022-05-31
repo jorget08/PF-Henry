@@ -1,10 +1,10 @@
 //? create role
-const { Roles } = require("../db");
+const { Rol } = require("../db");
 
 const createRole = async (req, res) => {
     const { name, description } = req.body;
     try {
-        const role = await Roles.create({
+        const role = await Rol.create({
             name,
             description
         });

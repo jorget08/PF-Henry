@@ -1,0 +1,88 @@
+@import './variables.less';
+
+.itemContainer {
+    border-bottom: 1px solid @borderColor;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 2rem;
+    padding: 1rem;
+
+    @media (max-width: 900px) {
+        grid-template-columns: repeat(1, 1fr);
+        align-items: center;
+    }
+
+    .itemBook {
+        font-family: @Source;
+        display: flex;
+        text-align: start;
+        align-items: center;
+
+
+        h4,
+        p {
+            font-size: 16px;
+            margin: 10px 2rem;
+        }
+
+        img {
+            width: 8rem;
+        }
+
+    }
+
+    .prices {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        p {
+            font-size: 20px;
+            font-family: @Source;
+        }
+
+        .priceChange {
+            border: 1px solid rgb(20, 20, 131);
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        button {
+            background-color: white;
+            text-align: center;
+            color: rgb(20, 20, 131);
+
+            font-size: 40px;
+            outline: none;
+            border: none;
+            display: flex;
+            align-items: center;
+
+        }
+
+        input[type="number"] {
+            outline: none;
+            width: 2rem;
+            text-align: center;
+            align-items: center;
+            font-size: 15px;
+            padding: 2px 0px 2px 12px;
+            border: none;
+        }
+    }
+
+    .icon {
+        &:hover {
+            cursor: pointer;
+            color: rgb(146, 146, 255);
+
+        }
+
+    }
+
+    .delete:hover {
+        color: #d12d2d;
+    }
+}

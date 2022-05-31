@@ -30,15 +30,36 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Book, Category, Users, Roles } = sequelize.models;
+
+const { Book, Rol, Category, User, Shop, Review, Order } = sequelize.models;
+
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-Book.belongsToMany(Category,{through: 'bookXCategory'});
-Category.belongsToMany(Book,{through: 'bookXCategory'});
-//? users tiene un unico rol, pero un rol puede tener varios usuarios
-Users.belongsTo(Roles);
-Roles.hasMany(Users);
 
+Book.belongsToMany(User, { through:'bookxuser' })
+User.belongsToMany(Book, { through:'bookxuser' })
+
+Book.belongsToMany(Category, { through:'bookxcategory' })
+Category.belongsToMany(Book, { through:'bookxcategory' })
+
+Book.belongsToMany(Shop, { through:'bookxshop' })
+Shop.belongsToMany(Book, { through:'bookxshop' })
+
+Book.hasMany(Review)
+Review.belongsTo(Book)
+
+//? usuario tiene muchos rol
+User.belongsToMany(Rol, { through: 'userxrol' })
+Rol.belongsToMany(User, { through: 'userxrol' })
+
+User.hasOne(Shop)
+Shop.belongsTo(User)
+
+User.hasMany(Order)
+Order.belongsTo(User)
+
+Order.hasOne(Shop)
+Shop.belongsTo(Order)
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

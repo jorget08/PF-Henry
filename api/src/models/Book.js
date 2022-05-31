@@ -19,20 +19,21 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     description:{
-      type: DataTypes.STRING(10000),
+      type: DataTypes.TEXT,
     },
     score:{
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
-    // stock:{
-    //   type: DataTypes.INTEGER,
-    // },
+    stock:{
+      type: DataTypes.DECIMAL,
+      defaultValue:10
+    },
     image:{
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
+      defaultValue:'https://www.libreriacollino.com.ar/static/media/default-book.1d8c3114.png'
     },
     price:{
-      type:DataTypes.STRING,
-    }
+      type:DataTypes.INTEGER,
+    },
   });
 };
-

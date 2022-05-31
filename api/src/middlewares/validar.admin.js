@@ -1,13 +1,13 @@
-const { Users, Roles } = require("../db");
+const { User, Rol } = require("../db");
 
 const validarAdminRole = async (req, res, next) => {
     const uid = req.uid;
     try {
-        const user = await Users.findOne({
+        const user = await User.findOne({
             where: { idUser: uid },
             attributes: { exclude: ['createdAt', 'updatedAt'] },
             include: {
-                model: Roles,
+                model: Rol,
                 attributes: ['name']
             }
         });
@@ -17,7 +17,7 @@ const validarAdminRole = async (req, res, next) => {
                 msg: 'Usuario no existe, verifica el email'
             });
         }
-        if (user.role.name !== 'admin') {
+        if (user.rols.name !== 'admin') {
             return res.status(400).json({
                 ok: false,
                 msg: 'No tienes permisos para realizar esta acción'
@@ -36,11 +36,11 @@ const validarAdminOmio = async (req, res, next) => {
     const uid = req.uid;
     const id = req.params.id;
     try {
-        const user = await Users.findOne({
+        const user = await User.findOne({
             where: { idUser: uid },
             attributes: { exclude: ['createdAt', 'updatedAt'] },
             include: {
-                model: Roles,
+                model: Rol,
                 attributes: ['name']
             }
         });
@@ -50,7 +50,7 @@ const validarAdminOmio = async (req, res, next) => {
                 msg: 'Usuario no existe, verifica el email'
             });
         }
-        if (user.role.name !== 'admin' && user.idUser !== id) {
+        if (user.rols.name !== 'admin' && user.idUser !== id) {
             return res.status(400).json({
                 ok: false,
                 msg: 'No tienes permisos para realizar esta acción'

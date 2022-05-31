@@ -1,0 +1,7 @@
+.loading {
+  background-image: url("https://i.pinimg.com/originals/b4/3d/43/b43d438638e2ed51d1f19dad2a4eb24d.gif");
+  width: 400px;
+  height: 300px;
+  border-radius: 300px;
+  margin: 5rem auto;
+}

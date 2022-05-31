@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getBySearch } from "../../redux/actions";
+import { FaSistrix } from "react-icons/fa"
+import styles from './styles.css'
+
 export default function SearchBar() {
 
     const dispatch = useDispatch()
@@ -19,12 +22,12 @@ export default function SearchBar() {
     }
     return (
         <div>
-            <div className="searchBar">
-                <input type="search" placeholder='Name of a Book or an Author...' value={search} onChange={(e) => handleChange(e)} />
-                <input type="button" value="Search" onClick={(e) => handleSubmit(e)} />
-            </div>
-
-
+            <form className="searchbar">
+                <input type="search" className="search" size={30} placeholder='Search a Book or an Author...' value={search} onChange={(e) => handleChange(e)} />
+                <button onClick={(e) => handleSubmit(e)}>
+                    <FaSistrix size={25} className="glass" />
+                </button>
+            </form>
         </div>
     )
 }

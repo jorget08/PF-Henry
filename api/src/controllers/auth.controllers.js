@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { Users, Roles } = require("../db");
+const { User, Rol } = require("../db");
 const { generateJwt } = require('../helpers/generateJwt');
 const { googleVerify } = require('../helpers/googleVerify');
 
@@ -7,11 +7,11 @@ const login = async (req, res) => {
     const { email, password } = req.body;
     try {
         //? no enviar password ni updateAt ni createAt
-        const user = await Users.findOne({
+        const user = await User.findOne({
             where: { email },
             attributes: { exclude: ['createdAt', 'updatedAt'] },
             include: {
-                model: Roles,
+                model: Rol,
                 attributes: ['name']
             }
         });
@@ -47,11 +47,11 @@ const renewToken = async (req, res) => {
     const uid = req.uid;
     try {
         //? buscar usuario por id
-        const user = await Users.findOne({
+        const user = await User.findOne({
             where: { idUser: uid },
             attributes: { exclude: ['createdAt', 'updatedAt'] },
             include: {
-                model: Roles,
+                model: Rol,
                 attributes: ['name']
             }
         });
@@ -83,7 +83,7 @@ const googleSignIn = async (req, res) => {
     const { givenName, familyName } = req.body;
     try {
         const { name, email, picture } = await googleVerify(googleToken);
-        const user = await Users.findOne({
+        const user = await User.findOne({
             where: { email }
         });
         if (user) {
@@ -96,16 +96,17 @@ const googleSignIn = async (req, res) => {
                 token
             });
         } else {
-            const roles = await Roles.findOne({ where: { name: 'user' } });
-            const newUser = await Users.create({
+            const roles = await Rol.findOne({ where: { name: 'user' } });
+            const newUser = await User.create({
                 name: givenName,
                 lastName: familyName,
                 email,
                 password: ':)',
                 imgProfile: picture,
-                favoritos: [],
-                roleIdRole: roles.idRole
+                favoritos: []
             });
+            await newUser.addRols(roles);
+
             const token = await generateJwt(newUser.idUser);
             //? no enviar password
             newUser.password = undefined;

@@ -4,6 +4,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('category', {
+
     id:{
         type:DataTypes.UUID,
         primaryKey:true,
@@ -16,3 +17,4 @@ module.exports = (sequelize) => {
     }
   });
 };
+

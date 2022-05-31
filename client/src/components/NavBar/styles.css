@@ -1,0 +1,42 @@
+.navbar .search {
+  align-items: center;
+  display: flex;
+}
+.navbar .logoBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+.navbar .logoBar .links {
+  display: flex;
+  justify-content: space-evenly;
+}
+.navbar .logoBar .links p {
+  background-color: #6c8eff;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  margin-top: -20px;
+  margin-left: 30px;
+  margin-right: -30px;
+  padding: 1px 0 2px 0;
+  width: 20px;
+}
+@media (max-width: 900px) {
+  .navbar .logoBar {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+.navbar .logoBar a {
+  text-decoration: none;
+  color: #001044;
+}
+.navbar .logoBar .log {
+  display: flex;
+  align-items: center;
+}
+.navbar .logoBar .log span {
+  margin: 5px;
+}

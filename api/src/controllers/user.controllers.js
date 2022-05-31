@@ -1,14 +1,14 @@
 const bcrypt = require('bcrypt');
-const { Users, Roles } = require("../db");
+const { User, Rol } = require("../db");
 const { generateJwt } = require('../helpers/generateJwt');
 const nodemailer = require('nodemailer')
 
 const createUser = async (req, res) => {
     //? agregar usuario  //? phone
-    const { name, lastName, email, password, imgProfile = 'https://res.cloudinary.com/dzqbzqgqy/image/upload/v1598418856/default_profile_img_zqbzqgqy.png'} = req.body;
+    const { name, lastName, email, password, imgProfile = 'https://res.cloudinary.com/dzqbzqgqy/image/upload/v1598418856/default_profile_img_zqbzqgqy.png' } = req.body;
     try {
         //? validar nickname !importante y email
-        const existEmail = await Users.findOne({ where: { email } });
+        const existEmail = await User.findOne({ where: { email } });
         if (existEmail) {
             return res.status(400).json({
                 ok: false,
@@ -19,16 +19,18 @@ const createUser = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const passEncript = bcrypt.hashSync(password, salt);
         //? crear usuario y asignar rol user por defecto 
-        const roles = await Roles.findOne({ where: { name: 'user' } });
-        const user = await Users.create({
+        const roles = await Rol.findOne({ where: { name: 'user' } });
+        const user = await User.create({
             name,
             lastName,
             email,
             password: passEncript,
             imgProfile,
-            favoritos: [],
-            roleIdRole: roles.idRole            
+            favoritos: [],        
         });  
+        //? asignar rol a userxrol 
+        await user.addRols(roles);
+
         user.password = undefined;
         //? enviar email de confirmacion de registro
         // const transporter = nodemailer.createTransport({
@@ -83,17 +85,19 @@ const getUsers = async (req, res) => {
         const start = (page - 1) * limit;
         const end = page * limit;
         //? contar usuarios
-        const count = await Users.count();
+        const count = await User.count();
         //? obtener usuarios
-        const users = await Users.findAll({
+        //? no enviar userxrol
+        const users = await User.findAll({
             attributes: { exclude: ['password'] },
             include: {
-                model: Roles,
+                model: Rol,
                 attributes: ['name']
             },
             offset: start,
             limit: end
         });
+
         res.json({
             ok: true,
             users,
@@ -110,7 +114,7 @@ const getUsers = async (req, res) => {
 const updateUser = async (req, res) => {
     const { id } = req.params;
     try {
-        const userExist = await Users.findOne({ where: { idUser: id } });
+        const userExist = await User.findOne({ where: { idUser: id } });
         if (!userExist) {
             return res.status(400).json({
                 ok: false,
@@ -121,14 +125,14 @@ const updateUser = async (req, res) => {
         if (req.body.email) {
             delete req.body.email;
         }
-        await Users.update(req.body, {
+        await User.update(req.body, {
             where: { idUser: id }
         });
-        const userUp = await Users.findOne({
+        const userUp = await User.findOne({
             where: { idUser: id },
             attributes: { exclude: ['createdAt', 'updatedAt'] },
             include: {
-                model: Roles,
+                model: Rol,
                 attributes: ['name']
             }
         });
@@ -148,14 +152,14 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     const { id } = req.params;
     try {
-        const userExist = await Users.findOne({ where: { idUser: id } });
+        const userExist = await User.findOne({ where: { idUser: id } });
         if (!userExist) {
             return res.status(400).json({
                 ok: false,
                 msg: 'El usuario no existe'
             });
         }
-        await Users.destroy({ where: { idUser: id } });
+        await User.destroy({ where: { idUser: id } });
         res.json({
             ok: true,
             msg: 'Usuario eliminado'

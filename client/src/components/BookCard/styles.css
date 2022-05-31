@@ -1,40 +1,68 @@
 a {
   text-decoration: none;
+  margin: 1rem;
 }
 .card {
   display: flex;
   background-color: aliceblue;
-  height: 13rem;
-  margin: 1rem;
+  height: 206px;
   border-radius: 20px;
   box-shadow: 5px 5px 40px -2px black;
+  font-family: 'Merriweather', serif;
+  margin: 10px;
+  max-width: 400px;
+  margin: auto;
   transition: transform 0.5s;
 }
 .card img {
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  max-width: max-content;
-  max-height: max-content;
+  max-width: 135px;
+  align-self: flex-start;
+  height: 206px;
 }
 .card .info {
-  display: block;
-  margin: auto 10px;
-  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  margin: 1px 20px 10px 13%;
+  justify-content: space-evenly;
+  text-align: center;
+  align-items: center;
 }
 .card .info h3,
 .card .info h4,
 .card .info h5 {
   color: black;
+  margin: 0;
+  text-align: center;
 }
 .card .info h3 {
-  font-size: 20px;
+  font-size: 18px;
+  text-align: center;
 }
 .card .info h5 {
-  font-size: 16px;
+  font-size: 14px;
+  text-align: center;
 }
 .card .info h4 {
-  font-size: 12px;
+  font-size: 10px;
 }
 .card:hover {
   transform: scale(1.1);
+}
+.card .price {
+  font-family: 'Merriweather', serif;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: black;
+  justify-content: center;
+  flex-direction: column;
+}
+.card .price .icon {
+  margin-right: 5px;
+}
+.card .price span {
+  font-size: 18px;
+  margin-left: 5px;
 }
