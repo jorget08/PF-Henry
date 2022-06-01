@@ -18,7 +18,8 @@ import {
   CREATE_USER,
   LOG_USER,
   UNLOG_USER,
-  LOG_WITH_GOOGLE
+  LOG_WITH_GOOGLE,
+  PAYMENT_PAYPAL
 } from './types';
 
 import axios from "axios";
@@ -211,4 +212,17 @@ export function logWithGoogle(payload){
     console.log('error', error)
   }
   }
+}
+
+export function paymentPaypal(payload){
+  return async function(){
+    try{
+      const pay= await axios.post('http://localhost:3001/paypal',payload)
+      return{type:PAYMENT_PAYPAL,payload:pay}
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
+
 }

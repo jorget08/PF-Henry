@@ -18,3 +18,4 @@ export const CREATE_USER = "CREATE_USER";
 export const LOG_USER = "LOG_USER";
 export const UNLOG_USER = "UNLOG_USER"
 export const LOG_WITH_GOOGLE = "LOG_WITH_GOOGLE"
+export const PAYMENT_PAYPAL="PAYMENT_PAYPAL"

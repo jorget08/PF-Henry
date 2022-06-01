@@ -81,7 +81,9 @@ export default function Cart() {
                                 <Link to='/home'>
                                     <p className='keep'>Keep Shopping</p>
                                 </Link>
+                                <Link to='/checkout'>
                                 <p className='checkout'>Continue to Checkout</p>
+                                </Link>
 
                             </div>
                         </div>
