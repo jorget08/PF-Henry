@@ -5,12 +5,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import './Carousel.css';
 export default function LandingCarousel() {
-    const books = useSelector(state => state.allBook);
+    const categories = useSelector(state => state.categories);
     function renderImages() {
         let images = [];
         for (let i = 0; i <= 10; i++) {
-            images.push({ img: books[i].image, title: books[i].title, author: books[i].author, categories: books[i].categories })
-        }
+            if (categories[i].img)
+                images.push({ img: categories[i].img, name: categories[i].name })
+        } console.log(images)
         return images
     }
     const dispatch = useDispatch();
@@ -20,20 +21,21 @@ export default function LandingCarousel() {
 
     }, [dispatch])
     return (
-        <Carousel>
+        <Carousel className='carousel' showThumbs={false} transitionTime={1000} autoPlay={true} infiniteLoop={true} interval={2800} emulateTouch={true} showArrows={true}>
 
-            {books.length &&
-                renderImages().map(e =>
-                    e ?
-                        <div className='newSlide'>
-                            {console.log(books)}
-                            <img src={e.img} />
-                            <p className="legend">By {e.author}... {e.categories}</p>
-                        </div>
-                        : <p></p>
-                )
+            {categories.length &&
+                renderImages()
+                    .map(e =>
+                        e ?
+                            <div className='newSlide' key={e.name}>
+                                {/* {console.log(books)} */}
+                                <img src={e.img} alt={e.name} />
+                                <p className="legend">Discover all About {e.name}</p>
+                            </div >
+                            : <p></p>
+                    )
             }
 
-        </Carousel>
+        </Carousel >
     )
 }
