@@ -4,11 +4,17 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('user', {
+    idUser: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lastname:{
+    lastName:{
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -20,11 +26,18 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    date:{
-      type: DataTypes.DATEONLY,
+    Date:{
+      type: DataTypes.DATE,
+      allowNull: true,
     },
-    image:{
+    imgProfile: {
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    favoritos: {
+        type: DataTypes.ARRAY(DataTypes.INTEGER),
+        allowNull: true,
     },
   });
 };
+

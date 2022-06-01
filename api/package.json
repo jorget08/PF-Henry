@@ -34,7 +34,9 @@
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "postgre": "^0.1.8",
-    "sequelize": "^6.19.0"
+    "request": "^2.88.2",
+    "sequelize": "^6.19.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",

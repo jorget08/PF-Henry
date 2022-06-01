@@ -15,7 +15,11 @@ import {
   GET_CART,
   PUT_BOOK,
   GET_LANDING_TOP,
-  GET_LANDING_TOP_CAT
+  GET_LANDING_TOP_CAT,
+  CREATE_USER,
+  LOG_USER,
+  UNLOG_USER,
+  LOG_WITH_GOOGLE
 } from "../actions/types";
 
 const initialState = {
@@ -26,8 +30,9 @@ const initialState = {
   cart: [],
   categories: [],
   score: [],
-  categoriesLand: {}
-
+  categoriesLand: {},
+  user: {},
+  relevants:[]
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -163,6 +168,25 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         categoriesLand: payload
       };
+
+    case CREATE_USER:
+      return {
+        ...state,
+      }
+
+    case LOG_USER:
+      
+      return {
+        ...state,
+        user: payload
+      }
+
+    case UNLOG_USER:
+      return {
+        ...state,
+        user: {}
+      }
+
     default:
       return state;
   }

@@ -16,7 +16,11 @@ import {
   PUT_BOOK,
   DELETE_BOOK,
   GET_LANDING_TOP,
-  GET_LANDING_TOP_CAT
+  GET_LANDING_TOP_CAT,
+  CREATE_USER,
+  LOG_USER,
+  UNLOG_USER,
+  LOG_WITH_GOOGLE
 
 } from './types';
 
@@ -191,3 +195,45 @@ export function getLandingTopCat() {
   }
 }
 
+export function postUser(payload){
+  return async function () {
+    try {
+      let response = await axios.post(`http://localhost:3001/user/`, payload);
+      console.log("DALEGATO",response)
+      return response;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+
+export function logUser(payload){
+  return async function () {
+    try {
+      var response = await axios.post(`http://localhost:3001/auth/`, payload);
+      let TKN = response.data.token
+      localStorage.setItem("token", JSON.stringify(TKN));
+      return ({ type: LOG_USER, payload: response.data });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+
+export function unlogUser(){
+  return { type: UNLOG_USER };
+}
+
+export function logWithGoogle(payload){
+  return async function (){ 
+  try {
+    const res = await axios.post('http://localhost:3001/auth/google', payload)
+    let TKN = res.data.token
+    console.log('res', res.data)    
+    localStorage.setItem("token", JSON.stringify(TKN));
+    return ({type: LOG_WITH_GOOGLE, payload: res.data})
+  } catch (error) {
+    console.log('error', error)
+  }
+  }
+}

@@ -7,16 +7,24 @@ import { IoHomeOutline } from 'react-icons/io5';
 import { MdContactSupport } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import "./styles.css"
+import { useModals } from '../Utils/useModals';
+import Modal from '../Modal/Modal';
+import Login from '../Login/Login';
 export default function NavBar() {
     const bookCarts = useSelector(state => state.cart)
+    const [isOpenModal, openModal, closeModal] = useModals(false)
     return (
         <div className="navbar">
             <nav>
                 <div className='logoBar'>
                     <div className='search'>
-                        <Link to='/home'>
-                            <h1>BookStore</h1>
-                        </Link>
+                        <div className='logo'>
+                            <Link to='/home'>
+                                <img src="https://www.freeiconspng.com/thumbs/book-icon/book-stack-icon--icon-search-engine-16.png" alt="logo" />
+                                <span>BookStore</span>
+                            </Link>
+
+                        </div>
                         <SearchBar />
 
                     </div>
@@ -31,13 +39,18 @@ export default function NavBar() {
                             <BsCart2 size={30} className="iconCart" />
                             <p> {bookCarts?.length}</p>
                         </Link>
-                        <Link to='/logIn'>
-                            <div className='log'>
+                        {/*<Link to='/logIn'>
+                             <div className='log'>
                                 <span>Log In</span>
-                                <IoMdContact size={30} />
-
-                            </div>
-                        </Link>
+                                <IoMdContact size={30} />                                
+                                </div> 
+                            </Link>*/}
+                        <div className='log' >
+                            <IoMdContact size={33} onClick={openModal} />
+                            <Modal isOpen={isOpenModal} closeModal={closeModal}>
+                                <Login />
+                            </Modal>
+                        </div>
                         <Link to='/createbook'>
                             <span>Create a book</span>
                         </Link>
