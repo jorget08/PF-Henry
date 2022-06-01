@@ -24,3 +24,50 @@
   cursor: pointer;
   background-color: #fa9191;
 }
+
+.containerSearch {
+  background-color: white;
+  position: absolute;
+  flex-direction: column;
+  overflow-y: scroll;
+  scroll-behavior:smooth;
+  max-width: 340px;
+  margin-top: 3px;
+  height: auto;
+  max-height: 405px;
+}
+
+.itemS {
+  display: inline-flex;
+  background-color:rgb(228, 228, 238);
+  height: 75px;
+  border-radius: 8px;
+  font-family: 'Merriweather', serif;
+  margin: 5px;
+  width: 310px;
+  text-align: left;
+  
+}
+
+.itemS .info {
+  display: flex;
+  margin: 1px 1px 1px 2%;
+  text-align: left;
+  align-items: center;
+  width: 300px;
+}
+
+.itemS img {
+  display: flex;
+  border-radius: 3px;
+  width: 60px;
+  height: 75px;
+  margin-right: 5px;
+  right: 5px;
+}
+
+
+.itemS:hover {
+  cursor: pointer;
+  background-color: white;
+}
