@@ -10,8 +10,6 @@ import "./styles.css"
 import { useModals } from '../Utils/useModals';
 import Modal from '../Modal/Modal';
 import Login from '../Login/Login';
-
-
 export default function NavBar() {
     const bookCarts = useSelector(state => state.cart)
     const [isOpenModal, openModal, closeModal] = useModals(false)
@@ -20,9 +18,13 @@ export default function NavBar() {
             <nav>
                 <div className='logoBar'>
                     <div className='search'>
-                        <Link to='/home'>
-                            <h1>BookStore</h1>
-                        </Link>
+                        <div className='logo'>
+                            <Link to='/home'>
+                                <img src="https://www.freeiconspng.com/thumbs/book-icon/book-stack-icon--icon-search-engine-16.png" alt="logo" />
+                                <span>BookStore</span>
+                            </Link>
+
+                        </div>
                         <SearchBar />
 
                     </div>

@@ -4,8 +4,28 @@
 
 
     .search {
-        align-items: center;
+        align-items: flex-start;
         display: flex;
+
+        .logo {
+
+            img {
+                max-width: 2rem;
+                max-height: 2rem;
+                padding-right: 5px;
+                border-right: 1px solid @borderColor;
+                padding: 0 5px 15px auto;
+            }
+
+            span {
+                font-size: 28px;
+                font-family: @merri;
+                text-align: center;
+                font-weight: 600;
+                color: rgb(63, 84, 151);
+                margin: -20px 6px 10px 6px;
+            }
+        }
     }
 
     .logoBar {
