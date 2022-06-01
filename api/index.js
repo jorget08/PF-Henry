@@ -20,13 +20,40 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const {dataBaseLoad,dataBaseLoadCategories}= require('./src/data/preLoad.js')
+const { Rol, User } = require("./src/db");
+
+const createRole = async () => {
+    const [admin, user] = await Rol.bulkCreate([
+        {
+            name: 'admin',
+            description: 'Administrador'
+        },
+        { 
+            name: 'user',
+            description: 'Usuario'
+        }
+    ]);
+    console.log(`Roles creados: ${admin.name}, ${user.name}`);      
+    //? create admin default 
+    const adminUser = await User.create({
+        name: 'admin',
+        lastName: 'admin',
+        email: 'admin@mail.com',
+        password: 'admin',
+        imgProfile: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
+    });
+    // assign role admin to user
+    await adminUser.addRols(admin);
+}
+
+
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
     dataBaseLoadCategories()
     console.log('categories cargads')
     dataBaseLoad()
-
+    createRole();
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });
