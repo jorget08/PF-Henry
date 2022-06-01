@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Item from '../Item/Item'
 import NavBar from '../NavBar/NavBar'
 //import { useLocalStore } from '../Utils/useLocalStorage'
-import { removeAllFromCart, getCart } from '../../redux/actions';
+import { removeAllFromCart, getCart,totalPrice,infoBooks } from '../../redux/actions';
 import { Link } from 'react-router-dom';
 import './styles.css'
 export default function Cart() {
@@ -47,12 +47,19 @@ export default function Cart() {
     function handleAddItems() {
         let newItems = bookCarts?.map(e => e?.total)
         let firstItems = bookCarts?.map(e => e.price)
-        console.log(firstItems)
-        console.log(newItems)
+        //console.log(firstItems)
+        //console.log(newItems)
         if (add) {
-            return newItems.reduce(function (a, b) { return a + b }, 0)
+            let totalPrices=newItems.reduce(function (a, b) { return a + b }, 0)
+            let bookInfo=bookCarts
+            console.log("soy bookinfo",bookInfo)
+            dispatch(totalPrice(totalPrices))
+            dispatch(infoBooks(bookInfo))
+            return totalPrices
         } else {
-            return firstItems.reduce(function (a, b) { return a + b }, 0)
+            let totalPrices=firstItems.reduce(function (a, b) { return a + b }, 0)
+            dispatch(totalPrice(totalPrices))
+            return totalPrices
         }
     }
     function handleSubItems() {

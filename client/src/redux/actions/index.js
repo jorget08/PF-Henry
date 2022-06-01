@@ -19,7 +19,9 @@ import {
   LOG_USER,
   UNLOG_USER,
   LOG_WITH_GOOGLE,
-  PAYMENT_PAYPAL
+  PAYMENT_PAYPAL,
+  TOTAL_PRICE,
+  CHECKOUT_BOOKS
 } from './types';
 
 import axios from "axios";
@@ -224,5 +226,13 @@ export function paymentPaypal(payload){
       console.log(err)
     }
   }
+
+}
+export function totalPrice(payload){
+  return{type:TOTAL_PRICE,payload}
+}
+
+export function infoBooks(payload){
+  return {type:CHECKOUT_BOOKS ,payload}
 
 }

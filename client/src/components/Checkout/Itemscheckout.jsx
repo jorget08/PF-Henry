@@ -2,7 +2,7 @@ import React from 'react'
 
 
 
-export default function Itemscheckout({title, img, author, price}){
+export default function Itemscheckout({title, img, author, price,cant}){
 
     
 
@@ -14,6 +14,7 @@ return(
                 <div>
                     <h4>{title}</h4>
                     <p>{author}</p>
+                    <p>Quantity:{cant}</p>
 
                 </div>
             </div>

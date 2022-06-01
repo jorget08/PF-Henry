@@ -1,3 +1,4 @@
+import { infoBooks, totalPrice } from "../actions";
 import {
   GET_BY_SEARCH,
   GET_DETAIL,
@@ -17,7 +18,9 @@ import {
   CREATE_USER,
   LOG_USER,
   UNLOG_USER,
-  LOG_WITH_GOOGLE
+  LOG_WITH_GOOGLE,
+  TOTAL_PRICE,
+  CHECKOUT_BOOKS
 } from "../actions/types";
 
 const initialState = {
@@ -28,7 +31,9 @@ const initialState = {
   cart: [],
   categories: [],
   user: {},
-  relevants:[]
+  relevants:[],
+  totalPrice:0,
+  infoBooks:[]
 
 };
 
@@ -173,6 +178,17 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         user: {}
       }
+      case TOTAL_PRICE:
+        return{
+            ...state,
+            totalPrice:payload
+          }
+          case CHECKOUT_BOOKS:
+            return{
+              ...state,
+              infoBooks:payload
+
+          }
 
     default:
       return state;
