@@ -20,6 +20,7 @@ const createUser = async (req, res) => {
         const passEncript = bcrypt.hashSync(password, salt);
         //? crear usuario y asignar rol user por defecto 
         const roles = await Rol.findOne({ where: { name: 'user' } });
+        
         const user = await User.create({
             name,
             lastName,
