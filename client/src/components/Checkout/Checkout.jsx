@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import NavBar from '../NavBar/NavBar'
 import Itemscheckout from './Itemscheckout';
-import { getCart,infoBooks } from "../../redux/actions";
+import { getCart,infoBooks,infoSoldBooks } from "../../redux/actions";
 
 
 
@@ -40,8 +40,10 @@ export default function Checkout(){
     });
   }
   const onApprove=(data, actions)=>{
+    let totalInfo=[data,TotalPrice,infoBook]
+    console.log("soy total info",totalInfo)
     dispatch(infoBooks(infoBook))
-    console.log("soydata",data)
+    dispatch(infoSoldBooks(totalInfo))
     return actions.order.capture();
   }
   

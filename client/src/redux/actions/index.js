@@ -21,7 +21,8 @@ import {
   LOG_WITH_GOOGLE,
   PAYMENT_PAYPAL,
   TOTAL_PRICE,
-  CHECKOUT_BOOKS
+  CHECKOUT_BOOKS,
+ 
 } from './types';
 
 import axios from "axios";
@@ -235,4 +236,15 @@ export function totalPrice(payload){
 export function infoBooks(payload){
   return {type:CHECKOUT_BOOKS ,payload}
 
+}
+
+export function infoSoldBooks(payload){
+  return async function (){ 
+  try {
+    const res = await axios.post('http://localhost:3001/rutaback', payload)
+    return res
+  } catch (error) {
+    console.log('error', error)
+  }
+  }
 }

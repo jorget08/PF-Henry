@@ -58,7 +58,9 @@ export default function Cart() {
             return totalPrices
         } else {
             let totalPrices=firstItems.reduce(function (a, b) { return a + b }, 0)
+            let bookInfo=bookCarts
             dispatch(totalPrice(totalPrices))
+            dispatch(infoBooks(bookInfo))
             return totalPrices
         }
     }
