@@ -1,3 +1,15 @@
-.newSlide img {
-  max-height: 500px;
+.carousel {
+  max-width: 1300px;
+  margin: 10px auto;
+}
+.carousel:hover {
+  cursor: pointer;
+}
+.carousel .newSlide img {
+  height: 450px;
+}
+@media (max-width: 650px) {
+  .carousel .newSlide img {
+    max-height: 250px;
+  }
 }
