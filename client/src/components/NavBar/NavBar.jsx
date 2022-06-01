@@ -43,11 +43,10 @@ export default function NavBar() {
                                 <IoMdContact size={30} />                                
                                 </div> 
                             </Link>*/}
-                        <div className='log'>
-                            <span onClick={openModal} >Log In</span>
-                            <IoMdContact size={30} onClick={openModal} />
+                        <div className='log' >
+                            <IoMdContact size={33} onClick={openModal} />
                             <Modal isOpen={isOpenModal} closeModal={closeModal}>
-                                <Login/>
+                                <Login />
                             </Modal>
                         </div>
                         <Link to='/createbook'>

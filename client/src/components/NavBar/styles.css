@@ -34,8 +34,12 @@
   color: #001044;
 }
 .navbar .logoBar .log {
-  display: flex;
+  color: #001044;
+  margin: 18px 20px 0 30px;
   align-items: center;
+}
+.navbar .logoBar .log:hover {
+  cursor: pointer;
 }
 .navbar .logoBar .log span {
   margin: 5px;

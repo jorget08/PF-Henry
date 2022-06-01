@@ -16,22 +16,22 @@ export default function SearchBar() {
     let history = useHistory()
 
     const table = useSelector(state => state.books)
-    const titles = table.map(e => ({tit: e.title, aut: e.author, img: e.image, id: e.id}))
+    const titles = table.map(e => ({ tit: e.title, aut: e.author, img: e.image, id: e.id }))
 
     function handleChange(e) {
         e.preventDefault()
         setSearch(e.target.value)
         if (e.target.value !== "") {
-        var matches = titles.filter(r => { 
-            if (r.tit.toLowerCase().includes(e.target.value.toLowerCase()) 
-            || r.aut.toLowerCase().includes(e.target.value.toLowerCase()) 
-            
-            ) {
-                return r        
-            }
-        })
-        setResults([...matches])
-        if (matches.length === 0) {setResults([{tit: "No matches", aut: "try again...", img: "https://e7.pngegg.com/pngimages/598/31/png-clipart-orange-x-sign-computer-icons-x-mark-red-x-mark-miscellaneous-angle.png"}])}
+            var matches = titles.filter(r => {
+                if (r.tit.toLowerCase().includes(e.target.value.toLowerCase())
+                    || r.aut.toLowerCase().includes(e.target.value.toLowerCase())
+
+                ) {
+                    return r
+                }
+            })
+            setResults([...matches])
+            if (matches.length === 0) { setResults([{ tit: "No matches", aut: "try again...", img: "https://e7.pngegg.com/pngimages/598/31/png-clipart-orange-x-sign-computer-icons-x-mark-red-x-mark-miscellaneous-angle.png" }]) }
             setBoolean(!boolean)
         } else {
             setResults([])
@@ -53,32 +53,32 @@ export default function SearchBar() {
 
     return (
         <>
-        <div>
-            <form className="searchbar">
-                <input type="search" className="search" size={30} placeholder='Search a Book or an Author...' value={search} onChange={(e) => handleChange(e)} />
-                <button onClick={(e) => handleSubmit(e)}>
-                    <FaSistrix size={25} className="glass" />
-                </button>
-            </form>
-            <ul className="containerSearch">
-            {results.length > 0 ?
-            results.map(r => {
-                   return (
-                    <div className="itemS" >
-                        <li className="info" value={r.tit} 
-                        height="120px" 
-                        width="300px" 
-                        onClick={(e) => {
-                                                        handleSearch(r.id)
-                                                    }}>{`${r.tit.toUpperCase()}; ${r.aut}`}
-                        </li>
-                        <img src={r.img}></img>
-                    </div>
-                    )
-            }) 
-            : null}
-            </ul>
-        </div>
+            <div>
+                <form className="searchbar">
+                    <input type="search" className="search" size={30} placeholder='Search a Book or an Author...' value={search} onChange={(e) => handleChange(e)} />
+                    <button onClick={(e) => handleSubmit(e)}>
+                        <FaSistrix size={25} className="glass" />
+                    </button>
+                </form>
+                <ul className="containerSearch">
+                    {results.length > 0 ?
+                        results.map((r, i) => {
+                            return (
+                                <div className='itemS' id={i === 0 ? 'first' : ''} >
+                                    <li className="info" value={r.tit}
+                                        height="120px"
+                                        width="300px"
+                                        onClick={(e) => {
+                                            handleSearch(r.id)
+                                        }}>{`${r.tit.toUpperCase()}: ${r.aut}`}
+                                    </li>
+                                    <img src={r.img}></img>
+                                </div>
+                            )
+                        })
+                        : null}
+                </ul>
+            </div>
 
         </>
     )
