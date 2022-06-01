@@ -14,6 +14,8 @@ import {
   POST_BOOK,
   GET_CART,
   PUT_BOOK,
+  GET_LANDING_TOP,
+  GET_LANDING_TOP_CAT
 } from "../actions/types";
 
 const initialState = {
@@ -23,7 +25,8 @@ const initialState = {
   detail: [],
   cart: [],
   categories: [],
-  relevants:[]
+  score: [],
+  categoriesLand: {}
 
 };
 
@@ -66,7 +69,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         books: payload,
-        relevants:payload
+        relevants: payload
       };
     case FILTER_PRICE:
       return {
@@ -149,6 +152,16 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         cart: JSON.parse(localStorage.getItem("carrito")),
+      };
+    case GET_LANDING_TOP:
+      return {
+        ...state,
+        score: payload
+      };
+    case GET_LANDING_TOP_CAT:
+      return {
+        ...state,
+        categoriesLand: payload
       };
     default:
       return state;

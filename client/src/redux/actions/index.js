@@ -1,20 +1,22 @@
 import {
-	GET_BOOKS,
-	GET_BY_SEARCH,
-	GET_DETAIL,
-	CLEAR_DETAIL,
-	FILTER_CATEGORY,
-	FILTER_SCORE,
-	FILTER_PRICE,
-	ORDEN_TITLE,
-	ADD_TO_CART,
-	REMOVE_ONE_FROM_CART,
-	REMOVE_ALL_FROM_CART,
+  GET_BOOKS,
+  GET_BY_SEARCH,
+  GET_DETAIL,
+  CLEAR_DETAIL,
+  FILTER_CATEGORY,
+  FILTER_SCORE,
+  FILTER_PRICE,
+  ORDEN_TITLE,
+  ADD_TO_CART,
+  REMOVE_ONE_FROM_CART,
+  REMOVE_ALL_FROM_CART,
   GET_CATEGORIES,
   POST_BOOK,
   GET_CART,
   PUT_BOOK,
-  DELETE_BOOK
+  DELETE_BOOK,
+  GET_LANDING_TOP,
+  GET_LANDING_TOP_CAT
 
 } from './types';
 
@@ -67,7 +69,7 @@ export function clearDetail() {
 }
 
 export function filterCategory(category) {
-  if(category==="All"){
+  if (category === "All") {
     return async function (dispatch) {
       try {
         var response = await axios.get(`http://localhost:3001/books`);
@@ -77,14 +79,16 @@ export function filterCategory(category) {
       }
     };
   }
-  else {return async function (dispatch) {
-    try {
-      var response = await axios.get(`http://localhost:3001/books?category=${category}`);
-      return dispatch({ type: FILTER_CATEGORY, payload: response.data });
-    } catch (e) {
-      console.log(e);
-    }
-  };}
+  else {
+    return async function (dispatch) {
+      try {
+        var response = await axios.get(`http://localhost:3001/books?category=${category}`);
+        return dispatch({ type: FILTER_CATEGORY, payload: response.data });
+      } catch (e) {
+        console.log(e);
+      }
+    };
+  }
 }
 
 export function filterPrice(price1, price2) {
@@ -102,8 +106,8 @@ export function ordenTitle(payload) {
   return { type: ORDEN_TITLE, payload };
 }
 
-export function filterScore(score){
-  if(score==="All"){
+export function filterScore(score) {
+  if (score === "All") {
     return async function (dispatch) {
       try {
         var response = await axios.get(`http://localhost:3001/books`);
@@ -113,21 +117,23 @@ export function filterScore(score){
       }
     };
   }
-  else {return async function (dispatch){
-        try{
-            var response = await axios.get(`http://localhost:3001/books?score=${score}`)
-            return dispatch({type: FILTER_SCORE, payload: response.data})
-        }
-        catch(e){
-            console.log(e)
-        }
+  else {
+    return async function (dispatch) {
+      try {
+        var response = await axios.get(`http://localhost:3001/books?score=${score}`)
+        return dispatch({ type: FILTER_SCORE, payload: response.data })
+      }
+      catch (e) {
+        console.log(e)
+      }
     }
-}}
+  }
+}
 
 
 
-export function addToCart(id) {  
-	return { type: ADD_TO_CART, payload: id };
+export function addToCart(id) {
+  return { type: ADD_TO_CART, payload: id };
 }
 
 export function removeAllFromCart() {
@@ -142,28 +148,46 @@ export function removeOneFromCart(id) {
 export function postBook(data) {
   return dispatch => {
     axios
-    .post(`http://localhost:3001/books`, data)
-    .then(response => dispatch({ type: POST_BOOK }))
-    .catch((e) => {console.log(e)})
-}}
+      .post(`http://localhost:3001/books`, data)
+      .then(response => dispatch({ type: POST_BOOK }))
+      .catch((e) => { console.log(e) })
+  }
+}
 
 export function putBook(data, id) {
   return dispatch => {
     axios
-    .put(`http://localhost:3001/books/book/${id}`, data)
-    .then(response => dispatch({ type: PUT_BOOK }))
-    .catch((e) => {console.log(e)})
-}}
+      .put(`http://localhost:3001/books/book/${id}`, data)
+      .then(response => dispatch({ type: PUT_BOOK }))
+      .catch((e) => { console.log(e) })
+  }
+}
 
 export function deleteBook(id) {
   return dispatch => {
     axios
-    .delete(`http://localhost:3001/books/delete/book/${id}`)
-    .then(response => dispatch({ type: DELETE_BOOK }))
-    .catch((e) => {console.log(e)})
-}}
+      .delete(`http://localhost:3001/books/delete/book/${id}`)
+      .then(response => dispatch({ type: DELETE_BOOK }))
+      .catch((e) => { console.log(e) })
+  }
+}
 
-export function getCart(){
-  return{type: GET_CART}
+export function getCart() {
+  return { type: GET_CART }
+}
+export function getLandingTop() {
+  return dispatch => {
+    axios.get(`http://localhost:3001/books/land/filter?score=5`)
+      .then(res => dispatch({ type: GET_LANDING_TOP, payload: res.data }))
+      .catch(err => console.log(err))
+  }
+}
+export function getLandingTopCat() {
+  
+  return dispatch => {
+    axios.get(`http://localhost:3001/books/landing/Adventures/Thriller/Academic`, )
+      .then(res => dispatch({ type: GET_LANDING_TOP_CAT, payload: res.data }))
+      .catch(err => console.log(err))
+  }
 }
 
