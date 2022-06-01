@@ -2,22 +2,20 @@ const { Router } = require("express");
 const router = Router();
 const axios = require('axios')
 const request = require('request')
-
-const CLIENT = 'AedHqcqiFSOl1dsb7J7dZchQ0he5lHdaixdvexVbMj4nh7U9d_pS89GrsOZQLvC97-bz4bHLRDEv-Ig6'
-const SECRET = 'EO_245Otxykbgwqzv415XRZZNVYPkkgjeLx6M7omblEeVN94_Anp45LwxMOe8mwh28hfOAByv7KPAiAj'
-const PAYPAL_API = 'https://api-m.sandbox.paypal.com'
-
+const {CLIENT, SECRET, PAYPAL_API} = process.env
 const auth = {user: CLIENT, pass: SECRET}
 
 const createPayment = async (req, res, next) => {
     
     try{
+        console.log(PAYPAL_API)
+        //const {value} = req.body
         const body = {
             intent: 'CAPTURE',
             purchase_units: [{
                 amount: {
                     currency_code: 'USD', //https://developer.paypal.com/docs/api/reference/currency-codes/
-                    value: '115'
+                    value: '200'
                 },
                 description: "purchase of books"
             }],
@@ -29,7 +27,7 @@ const createPayment = async (req, res, next) => {
                 cancel_url: `http://localhost:3001/cancel-payment` // Url despues de realizar el pago
             }
         }
-        request.post(`${PAYPAL_API}/v2/checkout/orders`, {
+        request.post(`https://${PAYPAL_API}/v2/checkout/orders`, {
             auth,
             body,
             json: true
@@ -47,7 +45,7 @@ const executePayment = async (req, res) => {
     const { token } = req.query;
     
     try {
-        request.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {
+        request.post(`https://${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {
             auth,
             body: {},
             json: true
