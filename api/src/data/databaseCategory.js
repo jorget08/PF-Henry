@@ -1,12 +1,12 @@
 const categories = [
   {
     name: "Adventures",
-    img: "https://wallpaper-house.com/data/out/4/wallpaper2you_34099.jpg",
+    img: "https://ddx5i92cqts4o.cloudfront.net/images/1esinfa7f_60e54742a1cd9c9001a669af8148b332.jpg",
   },
   { name: "Sci-Fi", img: "https://wallpaperaccess.com/full/243628.jpg" },
   {
     name: "Crime Fiction",
-    img: "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb382da5-9eee-400a-ae8f-94f65acf23bd_4256x2832.jpeg",
+    img: "https://static.filmin.es/images/media/6726/2/still_4_3_1360x765.png",
   },
   {
     name: "Horror and Mystery",
@@ -23,7 +23,7 @@ const categories = [
   },
   {
     name: "Thriller",
-    img: "https://www.rmf.fm/_files/Upload/Images/shutterstock_16367419151.jpg",
+    img: "https://cutewallpaper.org/21/horror-wallpapers-free/Ghost-Hand-Smoke-horror-wallpapers-Freshwallpapers.jpg",
   },
   {
     name: "Drama",

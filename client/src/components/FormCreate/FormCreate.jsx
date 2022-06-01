@@ -59,10 +59,6 @@ export default function FormCreate() {
         if (id) {
             history.push(`/book/${id}`)
         }
-        // si se quiere que despues de creado un book vuelva solo a home despues de 2 segundos, descomentar las siguientes tres lineas.
-        // else {
-        //     history.push(`/home`)
-        // }
     }
 
     var catego = useSelector(state => state.categories)
@@ -91,7 +87,7 @@ export default function FormCreate() {
                     if (!valores.author) {
                         errors.author = "Please enter an author"
                     } else if (valores.author.length > 50) {
-                        errors.author = "The author cannot exceed 100 characters"
+                        errors.author = "The author cannot exceed 50 characters"
                     }
 
                     if (!valores.price) {

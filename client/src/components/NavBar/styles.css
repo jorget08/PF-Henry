@@ -1,6 +1,21 @@
 .navbar .search {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
+}
+.navbar .search .logo img {
+  max-width: 2rem;
+  max-height: 2rem;
+  padding-right: 5px;
+  border-right: 1px solid #c4c4c4;
+  padding: 0 5px 15px auto;
+}
+.navbar .search .logo span {
+  font-size: 28px;
+  font-family: 'Merriweather', serif;
+  text-align: center;
+  font-weight: 600;
+  color: #3f5497;
+  margin: -20px 6px 10px 6px;
 }
 .navbar .logoBar {
   display: flex;
@@ -34,8 +49,12 @@
   color: #001044;
 }
 .navbar .logoBar .log {
-  display: flex;
+  color: #001044;
+  margin: 18px 20px 0 30px;
   align-items: center;
+}
+.navbar .logoBar .log:hover {
+  cursor: pointer;
 }
 .navbar .logoBar .log span {
   margin: 5px;
