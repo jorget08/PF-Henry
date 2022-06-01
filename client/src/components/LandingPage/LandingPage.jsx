@@ -22,7 +22,7 @@ export default function LandingPage() {
     return (
         <>
 
-            {console.log('soy bookCategorie', bookCategories)}
+           
             <NavBar />
             {bookScore.length &&
                 <SectionCat books={bookScore} title={'Relevance'} />}
