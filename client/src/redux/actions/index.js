@@ -183,12 +183,12 @@ export function postUser(payload){
 }
 
 export function logUser(payload){
-  return async function () {
+  return async function (dispatch) {
     try {
       var response = await axios.post(`http://localhost:3001/auth/`, payload);
       let TKN = response.data.token
       localStorage.setItem("token", JSON.stringify(TKN));
-      return ({ type: LOG_USER, payload: response.data });
+      return dispatch({type: LOG_USER, payload: response.data.user });
     } catch (e) {
       console.log(e);
     }
@@ -200,13 +200,13 @@ export function unlogUser(){
 }
 
 export function logWithGoogle(payload){
-  return async function (){ 
+  return async function (dispatch){ 
   try {
     const res = await axios.post('http://localhost:3001/auth/google', payload)
     let TKN = res.data.token
     console.log('res', res.data)    
     localStorage.setItem("token", JSON.stringify(TKN));
-    return ({type: LOG_WITH_GOOGLE, payload: res.data})
+    return dispatch ({type: LOG_WITH_GOOGLE, payload: res.data})
   } catch (error) {
     console.log('error', error)
   }

@@ -162,14 +162,14 @@ export default function rootReducer(state = initialState, action) {
       }
 
     case LOG_USER:
-      
       return {
         ...state,
-        user: payload
+        user: {...payload}
       }
 
     case UNLOG_USER:
-      return {
+      localStorage.removeItem("token")  
+    return {
         ...state,
         user: {}
       }
