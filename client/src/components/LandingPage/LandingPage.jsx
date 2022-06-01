@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import NavBar from "../NavBar/NavBar";
 import SectionCat from "./SectionCat";
 import { getLandingTop, getLandingTopCat } from "../../redux/actions";
-
+import LandingCarousel from "./LandingCarousel";
 export default function LandingPage() {
     const dispatch = useDispatch()
     const bookCategories = useSelector(state => state.categoriesLand)
@@ -24,6 +24,7 @@ export default function LandingPage() {
 
            
             <NavBar />
+            <LandingCarousel />
             {bookScore.length &&
                 <SectionCat books={bookScore} title={'Relevance'} />}
             { }
