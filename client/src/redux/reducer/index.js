@@ -22,7 +22,9 @@ import {
   UNLOG_USER,
   LOG_WITH_GOOGLE,
   TOTAL_PRICE,
-  CHECKOUT_BOOKS
+  CHECKOUT_BOOKS,
+  EDIT_PROFILE,
+  GET_USER
 } from "../actions/types";
 
 const initialState = {
@@ -193,17 +195,26 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         user: {}
       }
-      case TOTAL_PRICE:
-        return{
-            ...state,
-            totalPrice:payload
-          }
-          case CHECKOUT_BOOKS:
-            return{
-              ...state,
-              infoBooks:payload
-
-          }
+    case TOTAL_PRICE:
+      return{
+        ...state,
+        totalPrice:payload
+      }
+    case CHECKOUT_BOOKS:
+      return{
+        ...state,
+        infoBooks:payload
+      }
+    case EDIT_PROFILE:
+      return{
+        ...state,
+        user:payload
+      }
+    case GET_USER:
+      return{
+        ...state,
+        user:payload
+      }
 
     default:
       return state;
