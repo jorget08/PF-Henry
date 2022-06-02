@@ -4,6 +4,8 @@ const axios = require('axios')
 const request = require('request')
 const {CLIENT, SECRET, PAYPAL_API} = process.env
 const auth = {user: CLIENT, pass: SECRET}
+const { Payment, Book, Paymentbook } = require("../db");
+
 
 const createPayment = async (req, res, next) => {
     
@@ -63,7 +65,57 @@ const cancelPayment = (req, res) => {
     };
     
     
-router.post("/", createPayment)
+router.post("/paypal/back", createPayment)
 router.get("/execute-payment", executePayment)
+
+router.post("/",  async (req, res, next) => {
+    try {
+        const {data, totalPrice, infoBook} = req.body
+        const {orderID, payerID, paymentSource} = data
+
+        let books = infoBook.map(e => {return{
+            title: e.title,
+            author: e.author,
+            image: e.image,
+            price: e.price,
+            total: e.total,
+            cant: e.cant
+        }})
+        let paymentBooks = await Paymentbook.bulkCreate(books)
+
+        const paymentCreated = await Payment.create({
+            orderID,
+            payerID,
+            paymentSource,
+            totalPrice
+        })
+
+        for (let i = 0; i < paymentBooks.length; i++) {
+            const book = await Paymentbook.findOne({
+                where: {
+                    id: paymentBooks[i].id
+                }
+            })
+            paymentCreated.addPaymentbook(book)
+        }
+
+
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.get("/payments", async (req, res, next) => {
+    try {
+        const payments = await Payment.findAll({
+            include:{
+                model: Paymentbook
+            }
+        })
+        res.json(payments)
+    } catch (error) {
+        next(error)
+    }
+})
 
 module.exports = router;
