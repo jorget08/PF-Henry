@@ -40,7 +40,7 @@ export default function Checkout(){
     });
   }
   const onApprove=(data, actions)=>{
-    let totalInfo=[data,TotalPrice,infoBook]
+    let totalInfo={data:data,totalPrice:TotalPrice,infoBook:infoBook}
     console.log("soy total info",totalInfo)
     dispatch(infoBooks(infoBook))
     dispatch(infoSoldBooks(totalInfo))

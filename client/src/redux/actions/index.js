@@ -241,7 +241,7 @@ export function infoBooks(payload){
 export function infoSoldBooks(payload){
   return async function (){ 
   try {
-    const res = await axios.post('http://localhost:3001/rutaback', payload)
+    const res = await axios.post('http://localhost:3001/paypal', payload)
     return res
   } catch (error) {
     console.log('error', error)
