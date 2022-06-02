@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 import { BsCart2 } from 'react-icons/bs';
@@ -21,21 +21,21 @@ export default function NavBar() {
     const token = localStorage.getItem("token")
     const [isLogged, setIsLogged] = useState(false)
 
-    function handleLogOut(e){
+    function handleLogOut(e) {
         e.preventDefault()
         setIsLogged(false)
         dispatch(unlogUser())
     }
 
     useEffect(() => {
-      if(token){
-          setIsLogged(true)
-      }
-      else{
-          setIsLogged(false)
-      }
+        if (token) {
+            setIsLogged(true)
+        }
+        else {
+            setIsLogged(false)
+        }
     }, [token, isLogged])
-    
+
     return (
         <div className="navbar">
             <nav>
@@ -69,15 +69,14 @@ export default function NavBar() {
                                 </div> 
                             </Link>*/}
 
-                        {isLogged?<div><Link to="userProfile"><button>View profile</button></Link><button onClick={(e)=>handleLogOut(e)}>Log out</button></div>:
+                        {isLogged ? <div><Link to="userProfile"><button>View profile</button></Link><button onClick={(e) => handleLogOut(e)}>Log out</button></div> :
                             <div className='log'>
-                            <span onClick={openModal} >Log In</span>
-                            <IoMdContact size={30} onClick={openModal} />
+                                <IoMdContact size={33} onClick={openModal} />
 
-                            <Modal isOpen={isOpenModal} closeModal={closeModal}>
-                                <Login />
-                            </Modal>
-                        </div>}
+                                <Modal isOpen={isOpenModal} closeModal={closeModal}>
+                                    <Login />
+                                </Modal>
+                            </div>}
                         <Link to='/createbook'>
                             <span>Create a book</span>
                         </Link>
