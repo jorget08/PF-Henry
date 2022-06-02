@@ -14,9 +14,13 @@ export default function Checkout() {
   const TotalPrice = useSelector((state) => state.totalPrice);
   const infoBook = useSelector((state) => state.infoBooks);
   const checkoutinfo = JSON.parse(localStorage.getItem("carrito"));
-  console.log("gasdfasdfasf", checkoutinfo);
 
-  console.log("soy infoBook", infoBook);
+  let precio = checkoutinfo.map((e) => e.cant * e.price);
+  let preciototal = precio.reduce(function (a, b) {
+    return a + b;
+  }, 0);
+  console.log("soy precio",precio);
+  console.log("soy precio total",preciototal)
 
   useEffect(() => {
     dispatch(getCart());
@@ -27,7 +31,7 @@ export default function Checkout() {
       purchase_units: [
         {
           amount: {
-            value: TotalPrice,
+            value: preciototal,
           },
         },
       ],
@@ -53,7 +57,7 @@ export default function Checkout() {
           cant={e.cant}
         />
       ))}
-      <h1>Monto a Pagar:{TotalPrice}</h1>
+      <h1>Monto a Pagar:{preciototal}</h1>
       <PayPalButton
         createOrder={(data, actions) => createOrder(data, actions)}
         onApprove={(data, actions) => onApprove(data, actions)}

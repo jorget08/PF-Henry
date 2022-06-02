@@ -27,6 +27,12 @@ export default function Item({ id, title, img, author, price, stock, handleItem,
         newDel()
     }
 
+    let book=JSON.parse(localStorage.getItem("carrito")).filter(e=>e.id===id)
+    let cantidad= book.map(e=>e.cant)
+  
+
+
+
     return (
         <div className='itemContainer'>
             <div className='itemBook'>
@@ -43,12 +49,12 @@ export default function Item({ id, title, img, author, price, stock, handleItem,
                     <button className='icon' id='men' onClick={e => handlePrice(e, "men")}>
                         <AiOutlineMinus size={20} />
                     </button>
-                    <input type="number" value={cant} readOnly id="" />
+                    <input type="number" value={cantidad} readOnly id="" />
                     <button className='icon' id={price} onClick={e => handlePrice(e, "sum")}>
                         <MdOutlineAdd size={20} />
                     </button>
                 </div>
-                <p>${price * (cant ? cant : 1)}, 00</p>
+                <p>${price * (cantidad ? cantidad : 1)}, 00</p>
                 <button className='icon delete' onClick={handleDelete}>
                     <FaRegTrashAlt size={30} />
                 </button>

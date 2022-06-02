@@ -61,8 +61,8 @@ Order.belongsTo(User)
 Order.hasOne(Shop)
 Shop.belongsTo(Order)
 
-User.hasMany(Payment)
-Payment.hasOne(User)
+//User.hasMany(Payment)
+//Payment.hasOne(User)
 
 Payment.hasMany(Paymentbook,)
 Paymentbook.hasOne(Payment, {foreginKey: "id"})
