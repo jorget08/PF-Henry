@@ -1,3 +1,39 @@
+@import './variables.less';
+
 .landing {
     background-color: rgb(219, 219, 219);
+}
+
+.landInfo {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: white;
+    margin: 1rem 3rem;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+
+    .eachLandInfo {
+        display: flex;
+        align-items: center;
+
+        .textInfo {
+            font-size: 16px;
+            font-family: @Source;
+
+            p {
+                margin: 10px 10px 2px 10px;
+            }
+
+            span {
+                margin: 2px 10px 10px 10px;
+                font-weight: 300;
+            }
+        }
+
+        .icon {
+            color: @mainColor;
+            margin-right: 10px;
+        }
+    }
 }
