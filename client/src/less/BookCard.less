@@ -5,7 +5,8 @@ a {
     margin: 1rem;
 }
 
-.card {
+.card,
+#nonBox {
     display: flex;
     background-color: aliceblue;
     height: 206px;
@@ -80,4 +81,9 @@ a {
             margin-left: 5px;
         }
     }
+}
+
+#nonBox {
+    box-shadow: none !important;
+    border: 1px solid @borderColor;
 }
