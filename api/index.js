@@ -21,10 +21,7 @@ const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const {dataBaseLoad,dataBaseLoadCategories}= require('./src/data/preLoad.js')
 const { Rol, User } = require("./src/db");
-<<<<<<< HEAD
 const bcrypt = require('bcrypt');
-=======
->>>>>>> master
 
 const createRole = async () => {
     const [admin, user] = await Rol.bulkCreate([
