@@ -49,33 +49,41 @@ export default function Cart() {
   function handleAddItems() {
     let newItems =localstorage?.map((e) => e?.total);
     let firstItems =localstorage?.map((e) => e.price);
-    //console.log(firstItems)
-    //console.log(newItems)
-    if (add) {
-      let totalPrices = newItems.reduce(function (a, b) {
+    console.log("first item",firstItems)
+    console.log("new item",newItems)
+    
+    if (firstItems.length) {
+      let totalPrices = firstItems?.reduce(function (a, b) {
         return a + b;
       }, 0);
       let bookInfo =localstorage;
-      console.log("soy bookinfo", bookInfo);
       dispatch(totalPrice(totalPrices));
       dispatch(infoBooks(bookInfo));
-      return totalPrices;
+      
     } else {
-      let totalPrices = firstItems.reduce(function (a, b) {
+      let totalPrices = newItems?.reduce(function (a, b) {
         return a + b;
       }, 0);
       let bookInfo =localstorage;
       dispatch(totalPrice(totalPrices));
       dispatch(infoBooks(bookInfo));
-      return totalPrices;
+      
     }
+    let precio = localstorage.map((e) => e.cant * e.price);
+  let preciototal = precio.reduce(function (a, b) {
+    return a + b;
+  }, 0);
+  return preciototal
   }
+  
   function handleSubItems() {
     let newItems =localstorage?.map((e) => e.cant);
     return newItems.reduce(function (a, b) {
       return a + b;
     }, 0);
   }
+
+
 
   useEffect(() => {
     dispatch(getCart());

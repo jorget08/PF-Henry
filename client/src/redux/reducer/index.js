@@ -134,7 +134,7 @@ export default function rootReducer(state = initialState, action) {
         cart: JSON.parse(localStorage.getItem("carrito")),
       };
     case REMOVE_ALL_FROM_CART:
-      localStorage.removeItem("carrito");
+      localStorage.setItem("carrito",JSON.stringify([]));
       return {
         cart: [],
       };

@@ -4,7 +4,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../NavBar/NavBar";
 import Itemscheckout from "./Itemscheckout";
-import { getCart, infoBooks, infoSoldBooks } from "../../redux/actions";
+import { getCart, infoBooks, infoSoldBooks, removeAllFromCart} from "../../redux/actions";
+import {useHistory} from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
@@ -14,13 +16,11 @@ export default function Checkout() {
   const TotalPrice = useSelector((state) => state.totalPrice);
   const infoBook = useSelector((state) => state.infoBooks);
   const checkoutinfo = JSON.parse(localStorage.getItem("carrito"));
-
   let precio = checkoutinfo.map((e) => e.cant * e.price);
   let preciototal = precio.reduce(function (a, b) {
     return a + b;
   }, 0);
-  console.log("soy precio",precio);
-  console.log("soy precio total",preciototal)
+  const history = useHistory()
 
   useEffect(() => {
     dispatch(getCart());
@@ -42,6 +42,31 @@ export default function Checkout() {
     console.log("soy total info", totalInfo);
     dispatch(infoBooks(infoBook));
     dispatch(infoSoldBooks(totalInfo));
+  
+    let timerInterval
+Swal.fire({
+  title: 'Your payment was successful',
+  timer: 5000,
+  timerProgressBar: true,
+  didOpen: (success) => {
+    Swal.getIcon(success)
+    const b = Swal.getHtmlContainer().querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval);
+    
+    
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('I was closed by the timer')
+  }
+})
+
     return actions.order.capture();
   };
 

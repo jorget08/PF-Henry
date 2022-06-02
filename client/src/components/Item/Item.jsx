@@ -6,8 +6,12 @@ import { MdOutlineAdd } from 'react-icons/md'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import './styles.css'
 export default function Item({ id, title, img, author, price, stock, handleItem, newDel }) {
-    const [cant, setCant] = useState(1);
     const dispatch = useDispatch()
+    let book=JSON.parse(localStorage.getItem("carrito")).filter(e=>e.id===id)
+    let cantidad= book[0].cant
+    const [cant, setCant] = useState(cantidad);
+    console.log(cantidad)
+    console.log(stock)
 
     function handlePrice(e, op) {
         if (cant + 1 > stock && op === "sum") {
@@ -27,9 +31,7 @@ export default function Item({ id, title, img, author, price, stock, handleItem,
         newDel()
     }
 
-    let book=JSON.parse(localStorage.getItem("carrito")).filter(e=>e.id===id)
-    let cantidad= book.map(e=>e.cant)
-  
+   
 
 
 

@@ -60,7 +60,7 @@ export default function NavBar() {
                         </Link>
                         <Link to='/cart'>
                             <BsCart2 size={30} className="iconCart" />
-                            <p> {bookCarts?.length}</p>
+                            <p> {JSON.parse(localStorage.getItem("carrito"))?.length}</p>
                         </Link>
                         {/*<Link to='/logIn'>
                              <div className='log'>
