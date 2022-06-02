@@ -74,7 +74,8 @@ export default function BookDetail() {
                 </ul>
 
               </div>
-                 
+               {user.rols?.name === "admin" ?  
+               <>
               <Link to={{
                 pathname:'/createbook',
                 state: {
@@ -84,7 +85,8 @@ export default function BookDetail() {
                 <button type="button">Modify book</button>
               </Link> 
               <button type="button" onClick={(e) => delet(e)}>Delete Book</button>
-              
+              </>
+              : ""}
               </div>
           </div>
         </div>
