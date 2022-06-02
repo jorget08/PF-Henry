@@ -62,6 +62,8 @@ const createUser = async (req, res) => {
         // });
         //? generar jwt
         const token = await generateJwt(user.idUser);
+
+
         //? respuesta
         res.json({
             ok: true,
@@ -88,7 +90,6 @@ const getUsers = async (req, res) => {
         //? contar usuarios
         const count = await User.count();
         //? obtener usuarios
-        //? no enviar userxrol
         const users = await User.findAll({
             attributes: { exclude: ['password'] },
             include: {
@@ -96,9 +97,11 @@ const getUsers = async (req, res) => {
                 attributes: ['name']
             },
             offset: start,
-            limit: end
+            limit: end,
+            raw:true, // <----- HERE
+            nest:true
         });
-
+        
         res.json({
             ok: true,
             users,
@@ -135,8 +138,13 @@ const updateUser = async (req, res) => {
             include: {
                 model: Rol,
                 attributes: ['name']
-            }
+            },
+            raw:true, // <----- HERE
+            nest:true
+            
         });
+        //? no mandar array
+        
         //? respuesta
         res.json({
             ok: true,
