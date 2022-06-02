@@ -1,8 +1,17 @@
 const { Router } = require("express");
 const { Book, Category } = require("../db");
 const router = Router();
-const { Op } = require("sequelize");
+const { Op, Sequelize } = require("sequelize");
 
+
+router.get("/maxnum", async (req, res, next) => {
+  try {
+    const maxFound= await Book.findAll({attributes: [[Sequelize.fn('max', Sequelize.col('price')), 'max']]})
+    res.json(maxFound[0])
+  } catch (error) {
+    next(error)
+  }
+})
 router.get("/", async (req, res, next) => {
   try {
     const { titleOrAuthor, score, rango1, rango2, category } = req.query;
@@ -90,6 +99,7 @@ router.get("/:id", async (req, res, next) => {
     next(error);
   }
 });
+
 
 router.post("/", async (req, res, next) => {
   try {
@@ -223,5 +233,64 @@ router.delete("/delete/book/:id", async (req, res, next) => {
 });
 
 // FIlterss
+router.get('/land/filter', async (req, res, next) => {
+  try {
+    const { score } = req.query
+
+    const books = await Book.findAll({
+      where: {
+        score: score,
+      },
+      limit: 10
+    });
+    return res.json(books);
+
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.get('/landing/:adv/:th/:cf', async (req, res, next) => {
+  try {
+
+    const { adv, th, cf } = req.params
+
+    let obj = {}
+
+    const book1 = await Book.findAll({
+      include: {
+        model: Category,
+        where: {
+          name: adv,
+        },
+      },
+    })
+    obj = { ...obj, [adv]: book1 }
+    const book2 = await Book.findAll({
+      include: {
+        model: Category,
+        where: {
+          name: th,
+        },
+      },
+    })
+    obj = { ...obj, [th]: book2 }
+    const book3 = await Book.findAll({
+      include: {
+        model: Category,
+        where: {
+          name: cf,
+        },
+      },
+    })
+    obj = { ...obj, [cf]: book3 }
+
+    res.json(obj)
+
+
+  } catch (error) {
+    next(error)
+  }
+})
 
 module.exports = router;

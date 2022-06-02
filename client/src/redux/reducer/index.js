@@ -15,6 +15,8 @@ import {
   POST_BOOK,
   GET_CART,
   PUT_BOOK,
+  GET_LANDING_TOP,
+  GET_LANDING_TOP_CAT,
   CREATE_USER,
   LOG_USER,
   UNLOG_USER,
@@ -30,10 +32,13 @@ const initialState = {
   detail: [],
   cart: [],
   categories: [],
+  score: [],
+  categoriesLand: {},
   user: {},
   relevants:[],
   totalPrice:0,
   infoBooks:[]
+
 
 };
 
@@ -76,7 +81,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         books: payload,
-        relevants:payload
+        relevants: payload
       };
     case FILTER_PRICE:
       return {
@@ -160,6 +165,16 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         cart: JSON.parse(localStorage.getItem("carrito")),
       };
+    case GET_LANDING_TOP:
+      return {
+        ...state,
+        score: payload
+      };
+    case GET_LANDING_TOP_CAT:
+      return {
+        ...state,
+        categoriesLand: payload
+      };
 
     case CREATE_USER:
       return {
@@ -167,14 +182,14 @@ export default function rootReducer(state = initialState, action) {
       }
 
     case LOG_USER:
-      
       return {
         ...state,
-        user: payload
+        user: {...payload}
       }
 
     case UNLOG_USER:
-      return {
+      localStorage.removeItem("token")  
+    return {
         ...state,
         user: {}
       }

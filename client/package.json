@@ -9,6 +9,7 @@
     "axios": "^0.26.1",
     "formik": "^2.2.9",
     "less": "^4.1.2",
+    "nuka-carousel": "^5.0.16",
     "react": "^17.0.1",
     "react-alice-carousel": "^2.6.1",
     "react-dom": "^17.0.1",

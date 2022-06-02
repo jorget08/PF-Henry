@@ -36,8 +36,8 @@ const { Book, Rol, Category, User, Shop, Review, Order, Payment, Paymentbook } =
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Book.belongsToMany(User, { through:'bookxuser' })
-User.belongsToMany(Book, { through:'bookxuser' })
+Book.belongsToMany(User, { through:'favourites' })
+User.belongsToMany(Book, { through:'favourites' })
 
 Book.belongsToMany(Category, { through:'bookxcategory' })
 Category.belongsToMany(Book, { through:'bookxcategory' })
