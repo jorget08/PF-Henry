@@ -10,6 +10,7 @@ export default function Itemscheckout({ title, img, author, price, cant }) {
             <h4>{title}</h4>
             <p>{author}</p>
             <p>Quantity:{cant}</p>
+            <p>Price:{price/cant}</p>
           </div>
         </div>
         <div className="prices">
