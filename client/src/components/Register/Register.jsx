@@ -59,11 +59,11 @@ const redirect = ()=>{
             if (!valores.name){
                 errors.name = "Name required"
             }else if (/^\s/.test(valores.name)) {
-                errors.title = "Cant start whit an empty space"}
+                errors.name = "Cant start whit an empty space"}
             if (!valores.lastName){
                 errors.lastName = "Last name required"
             }else if (/^\s/.test(valores.lastName)) {
-                errors.title = "Cant start whit an empty space"}
+                errors.lastName = "Cant start whit an empty space"}
             if (!valores.email) {
               errors.email = 'E-mail required';
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(valores.email)) {
