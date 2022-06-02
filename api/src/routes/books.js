@@ -1,9 +1,17 @@
 const { Router } = require("express");
 const { Book, Category } = require("../db");
 const router = Router();
-const { Op } = require("sequelize");
-const e = require("express");
+const { Op, Sequelize } = require("sequelize");
 
+
+router.get("/maxnum", async (req, res, next) => {
+  try {
+    const maxFound= await Book.findAll({attributes: [[Sequelize.fn('max', Sequelize.col('price')), 'max']]})
+    res.json(maxFound[0])
+  } catch (error) {
+    next(error)
+  }
+})
 router.get("/", async (req, res, next) => {
   try {
     const { titleOrAuthor, score, rango1, rango2, category } = req.query;
@@ -91,6 +99,7 @@ router.get("/:id", async (req, res, next) => {
     next(error);
   }
 });
+
 
 router.post("/", async (req, res, next) => {
   try {
@@ -240,6 +249,7 @@ router.get('/land/filter', async (req, res, next) => {
     next(error)
   }
 })
+
 router.get('/landing/:adv/:th/:cf', async (req, res, next) => {
   try {
 
