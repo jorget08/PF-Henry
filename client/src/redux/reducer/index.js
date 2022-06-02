@@ -175,6 +175,7 @@ export default function rootReducer(state = initialState, action) {
       }
 
     case LOG_USER:
+      console.log("SOY EL PAYLOAD",payload)
       return {
         ...state,
         user: {...payload}
