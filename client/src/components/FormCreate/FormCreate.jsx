@@ -5,6 +5,7 @@ import { getCategories, postBook, putBook } from '../../redux/actions'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import NavBar from '../NavBar/NavBar'
 import './styles.css'
+import Sidebar from '../AdminDashboard/Sidebar'
 export default function FormCreate() {
 
     const dispatch = useDispatch()
@@ -62,10 +63,11 @@ export default function FormCreate() {
     }
 
     var catego = useSelector(state => state.categories)
-
+    
     return (
         <div className='containerCreate'>
-            <NavBar />
+            {/* <NavBar /> */}
+            <Sidebar/>
             {(detail.id !== undefined) ? <h2>Modify the book!</h2> : <h2>Create a book!</h2>}
 
             <Formik
