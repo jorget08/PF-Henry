@@ -19,5 +19,19 @@ const createRole = async (req, res) => {
         });
     }
 };
+const getRoles = async (req, res) => {
+    try {
+        const roles = await Rol.findAll();
+        res.json({
+            ok: true,
+            roles
+        });
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener los roles'
+        });
+    }
+}
 
-module.exports = { createRole };
+module.exports = { createRole, getRoles };

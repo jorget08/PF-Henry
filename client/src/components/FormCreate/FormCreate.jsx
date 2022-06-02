@@ -5,6 +5,7 @@ import { getCategories, postBook, putBook } from '../../redux/actions'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import NavBar from '../NavBar/NavBar'
 import './styles.css'
+import Sidebar from '../AdminDashboard/Sidebar'
 export default function FormCreate() {
 
     const dispatch = useDispatch()
@@ -59,17 +60,14 @@ export default function FormCreate() {
         if (id) {
             history.push(`/book/${id}`)
         }
-        // si se quiere que despues de creado un book vuelva solo a home despues de 2 segundos, descomentar las siguientes tres lineas.
-        // else {
-        //     history.push(`/home`)
-        // }
     }
 
     var catego = useSelector(state => state.categories)
-
+    
     return (
         <div className='containerCreate'>
-            <NavBar />
+            {/* <NavBar /> */}
+            <Sidebar/>
             {(detail.id !== undefined) ? <h2>Modify the book!</h2> : <h2>Create a book!</h2>}
 
             <Formik
@@ -91,7 +89,7 @@ export default function FormCreate() {
                     if (!valores.author) {
                         errors.author = "Please enter an author"
                     } else if (valores.author.length > 50) {
-                        errors.author = "The author cannot exceed 100 characters"
+                        errors.author = "The author cannot exceed 50 characters"
                     }
 
                     if (!valores.price) {
@@ -144,6 +142,7 @@ export default function FormCreate() {
                                         type="text"
                                         name="author"
                                         placeholder='Author'
+                                        
                                     />
                                     {touched.author && errors.author && <span>{errors.author}</span>}
                                 </div>
@@ -212,6 +211,7 @@ export default function FormCreate() {
                                         type="number"
                                         name="price"
                                         placeholder='Price'
+                                        min="1"
 
                                     />
                                     {touched.price && errors.price && <span>{errors.price}</span>}
@@ -222,6 +222,7 @@ export default function FormCreate() {
                                         type="number"
                                         name="stock"
                                         placeholder='Stock'
+                                        min="1"
 
                                     />
                                     {touched.stock && errors.stock && <span>{errors.stock}</span>}

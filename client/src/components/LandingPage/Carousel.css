@@ -1,0 +1,11 @@
+.carousel:hover {
+  cursor: pointer;
+}
+.carousel .newSlide img {
+  height: 450px;
+}
+@media (max-width: 650px) {
+  .carousel .newSlide img {
+    max-height: 250px;
+  }
+}

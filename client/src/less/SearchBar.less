@@ -3,29 +3,97 @@
 .searchbar {
     display: flex;
     justify-content: center;
+}
 
-    .search {
-        border-bottom-left-radius: 10px;
-        border-top-left-radius: 10px;
-        font-size: 20px;
-        padding: 10px;
-        border: 1px solid @borderColor;
-        border-right: none;
-        outline: none;
+.searchbar .search {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    font-size: 20px;
+    padding: 10px;
+    border: 1px solid @borderColor;
+    border-right: none;
+    outline: none;
+}
+
+.searchbar button {
+    background-color: #d85353;
+    border: none;
+    outline: none;
+    padding: 0 1rem;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    color: white;
+}
+
+.searchbar button:hover {
+    cursor: pointer;
+    background-color: #fa9191;
+}
+
+.containerSearch {
+    background-color: white;
+    position: absolute;
+    flex-direction: column;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    max-width: 380px;
+    margin: 0;
+    height: auto;
+    max-height: 405px;
+    padding: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 2px 0 20px -2px black;
+    background-color: rgb(228, 228, 238);
+    z-index: 100;
+
+    .itemS {
+        align-items: center;
+        margin-left: 2rem;
     }
 
-    button {
-        background-color: rgb(216, 83, 83);
-        border: none;
-        outline: none;
-        padding: 0 1rem;
-        border-bottom-right-radius: 10px;
-        border-top-right-radius: 10px;
-        color: white;
-
-        &:hover {
-            cursor: pointer;
-            background-color: rgb(250, 145, 145);
-        }
+    #first {
+        margin-top: 15px;
     }
+}
+
+.itemS {
+    display: inline-flex;
+    background-color: rgb(255, 255, 255);
+    height: 75px;
+    border-radius: 8px;
+    font-family: @Source;
+    margin: 5px;
+    width: 310px;
+    text-align: left;
+    padding: 4px 2px;
+    transition: transform 0.5s;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.itemS .info {
+    display: flex;
+    margin: 1px 1px 1px 2%;
+    text-align: left;
+    align-items: center;
+    width: 300px;
+}
+
+.itemS img {
+    display: flex;
+    border-radius: 3px;
+    width: 60px;
+    height: 75px;
+    margin-right: 5px;
+    right: 5px;
+}
+
+
+.itemS:hover {
+    cursor: pointer;
+    background-color: #914343;
+    color: white;
 }

@@ -4,7 +4,8 @@ const dataCategories = require('./databaseCategory')
 function dataBaseLoadCategories() {
     categoriesApi = dataCategories.map(category => {
         return category = {
-            name: category.name
+            name: category.name,
+            img:category.img
         }
     })
     Category.bulkCreate(categoriesApi)

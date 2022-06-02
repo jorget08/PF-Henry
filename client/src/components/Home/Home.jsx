@@ -20,8 +20,7 @@ export default function Home() {
     var books = useSelector(state => state.books)
     var categories = useSelector(state => state.categories)
 
-    console.log(books)
-    console.log(categories)
+   
     function renderBooks() {
         setNewBooks(newBooks ? false : true)
     }

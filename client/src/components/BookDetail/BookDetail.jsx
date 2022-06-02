@@ -14,7 +14,7 @@ export default function BookDetail() {
 
   const history = useHistory()
 
-  console.log(history)
+  
 
     const redirect = () => {
         history.push("/home")
