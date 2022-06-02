@@ -8,7 +8,7 @@ export default function SectionCat({ books, title }) {
     const buttonStyles = { backgroundColor: "white", color: "black", borderRadius: "50%", padding: "20px", fontSize: "20px", border: "1px solid gray" }
     return (
         <>
-            <h2>Top 10: {title}</h2>
+            <h2>{title ? `Recommended ${title} Books` : 'Top 10 Relevance'}</h2>
             <Carousel
                 wrapAround={true}
                 slidesToShow={3}
