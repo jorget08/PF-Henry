@@ -105,4 +105,17 @@ router.post("/",  async (req, res, next) => {
     }
 })
 
+router.get("/payments", async (req, res, next) => {
+    try {
+        const payments = await Payment.findAll({
+            include:{
+                model: Paymentbook
+            }
+        })
+        res.json(payments)
+    } catch (error) {
+        next(error)
+    }
+})
+
 module.exports = router;
