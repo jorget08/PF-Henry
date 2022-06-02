@@ -36,8 +36,8 @@ const { Book, Rol, Category, User, Shop, Review, Order, Payment, Paymentbook } =
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Book.belongsToMany(User, { through:'favourites' })
-User.belongsToMany(Book, { through:'favourites' })
+Book.belongsToMany(User, { through:'bookxuser' })
+User.belongsToMany(Book, { through:'bookxuser' })
 
 Book.belongsToMany(Category, { through:'bookxcategory' })
 Category.belongsToMany(Book, { through:'bookxcategory' })
@@ -61,10 +61,10 @@ Order.belongsTo(User)
 Order.hasOne(Shop)
 Shop.belongsTo(Order)
 
-User.hasMany(Payment)
-Payment.hasOne(User)
+// User.hasMany(Payment)
+// Payment.hasOne(User)
 
-Payment.hasMany(Paymentbook,)
+Payment.hasMany(Paymentbook)
 Paymentbook.hasOne(Payment, {foreginKey: "id"})
 
 module.exports = {
