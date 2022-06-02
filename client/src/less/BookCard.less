@@ -17,6 +17,25 @@ a {
     max-width: 400px;
     margin: auto;
 
+    @media (max-width: 870px) {
+        flex-direction: column;
+        justify-content: center;
+        min-height: 300px;
+        max-width: 300px;
+
+        img {
+            max-height: 140px;
+            max-width: 50px;
+            margin: auto;
+            border-radius: 20px;
+        }
+
+        .info {
+            border-top: 1px solid @borderColor;
+            padding-top: 10px;
+        }
+    }
+
     img {
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
