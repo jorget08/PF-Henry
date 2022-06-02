@@ -20,8 +20,10 @@ import {
   CREATE_USER,
   LOG_USER,
   UNLOG_USER,
-  LOG_WITH_GOOGLE
-
+  LOG_WITH_GOOGLE,
+  PAYMENT_PAYPAL,
+  TOTAL_PRICE,
+  CHECKOUT_BOOKS,
 } from './types';
 
 import axios from "axios";
@@ -232,6 +234,38 @@ export function logWithGoogle(payload){
     console.log('res', res.data)    
     localStorage.setItem("token", JSON.stringify(TKN));
     return dispatch ({type: LOG_WITH_GOOGLE, payload: res.data})
+  } catch (error) {
+    console.log('error', error)
+  }
+  }
+}
+
+export function paymentPaypal(payload){
+  return async function(){
+    try{
+      const pay= await axios.post('http://localhost:3001/paypal',payload)
+      return{type:PAYMENT_PAYPAL,payload:pay}
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
+
+}
+export function totalPrice(payload){
+  return{type:TOTAL_PRICE,payload}
+}
+
+export function infoBooks(payload){
+  return {type:CHECKOUT_BOOKS ,payload}
+
+}
+
+export function infoSoldBooks(payload){
+  return async function (){ 
+  try {
+    const res = await axios.post('http://localhost:3001/paypal', payload)
+    return res
   } catch (error) {
     console.log('error', error)
   }

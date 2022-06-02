@@ -18,6 +18,9 @@ export const GET_LANDING_TOP= 'GET_LANDING_TOP';
 export const GET_LANDING_TOP_CAT= 'GET_LANDING_TOP_CAT';
 export const CREATE_USER = "CREATE_USER";
 export const LOG_USER = "LOG_USER";
-export const UNLOG_USER = "UNLOG_USER";
-export const LOG_WITH_GOOGLE = "LOG_WITH_GOOGLE";
+export const UNLOG_USER = "UNLOG_USER"
+export const LOG_WITH_GOOGLE = "LOG_WITH_GOOGLE"
+export const PAYMENT_PAYPAL="PAYMENT_PAYPAL"
+export const TOTAL_PRICE="TOTAL_PRICE"
+export const CHECKOUT_BOOKS="CHECKOUT_BOOKS"
 

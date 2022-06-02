@@ -2,7 +2,8 @@ a {
   text-decoration: none;
   margin: 1rem;
 }
-.card {
+.card,
+#nonBox {
   display: flex;
   background-color: aliceblue;
   height: 206px;
@@ -14,14 +15,37 @@ a {
   margin: auto;
   transition: transform 0.5s;
 }
-.card img {
+@media (max-width: 870px) {
+  .card,
+  #nonBox {
+    flex-direction: column;
+    justify-content: center;
+    min-height: 300px;
+    max-width: 300px;
+  }
+  .card img,
+  #nonBox img {
+    max-height: 140px;
+    max-width: 50px;
+    margin: auto;
+    border-radius: 20px;
+  }
+  .card .info,
+  #nonBox .info {
+    border-top: 1px solid #c4c4c4;
+    padding-top: 10px;
+  }
+}
+.card img,
+#nonBox img {
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   max-width: 135px;
   align-self: flex-start;
   height: 206px;
 }
-.card .info {
+.card .info,
+#nonBox .info {
   display: flex;
   flex-direction: column;
   margin: 1px 20px 10px 13%;
@@ -30,27 +54,35 @@ a {
   align-items: center;
 }
 .card .info h3,
+#nonBox .info h3,
 .card .info h4,
-.card .info h5 {
+#nonBox .info h4,
+.card .info h5,
+#nonBox .info h5 {
   color: black;
   margin: 0;
   text-align: center;
 }
-.card .info h3 {
+.card .info h3,
+#nonBox .info h3 {
   font-size: 18px;
   text-align: center;
 }
-.card .info h5 {
+.card .info h5,
+#nonBox .info h5 {
   font-size: 14px;
   text-align: center;
 }
-.card .info h4 {
+.card .info h4,
+#nonBox .info h4 {
   font-size: 10px;
 }
-.card:hover {
+.card:hover,
+#nonBox:hover {
   transform: scale(1.1);
 }
-.card .price {
+.card .price,
+#nonBox .price {
   font-family: 'Merriweather', serif;
   text-align: center;
   display: flex;
@@ -59,10 +91,16 @@ a {
   justify-content: center;
   flex-direction: column;
 }
-.card .price .icon {
+.card .price .icon,
+#nonBox .price .icon {
   margin-right: 5px;
 }
-.card .price span {
+.card .price span,
+#nonBox .price span {
   font-size: 18px;
   margin-left: 5px;
+}
+#nonBox {
+  box-shadow: none !important;
+  border: 1px solid #c4c4c4;
 }

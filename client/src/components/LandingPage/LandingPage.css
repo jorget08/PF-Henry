@@ -1,0 +1,31 @@
+.landing {
+  background-color: #dbdbdb;
+}
+.landInfo {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: white;
+  margin: 1rem 3rem;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+.landInfo .eachLandInfo {
+  display: flex;
+  align-items: center;
+}
+.landInfo .eachLandInfo .textInfo {
+  font-size: 16px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+.landInfo .eachLandInfo .textInfo p {
+  margin: 10px 10px 2px 10px;
+}
+.landInfo .eachLandInfo .textInfo span {
+  margin: 2px 10px 10px 10px;
+  font-weight: 300;
+}
+.landInfo .eachLandInfo .icon {
+  color: #d85353;
+  margin-right: 10px;
+}

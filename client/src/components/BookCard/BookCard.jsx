@@ -2,10 +2,9 @@ import React from 'react'
 import './styles.css'
 import Stars from '../Stars/Stars';
 
-export default function BookCard({ title, author, img, price, score }) {
-    title = title.split(':')[0];
+export default function BookCard({ land, title, author, img, price, score }) {
     return (
-        <div className='card'>
+        <div className='card' id={land ? 'nonBox' : ''}>
 
             <img src={img} alt={title} />
             <div className='info'>
