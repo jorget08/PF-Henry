@@ -6,15 +6,26 @@ import { useSelector } from 'react-redux';
 import { BsCartPlus } from 'react-icons/bs'
 import { BsCartCheckFill } from 'react-icons/bs'
 import './styles.css'
+import Swal from 'sweetalert2'
 
 export default function Compra({ title, author, price, categories, id }) {
 
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart)
   const [cartIcon, setCartIcon] = useState(<BsCartPlus size={25} onClick={handleClick} className="icon" />)
+  let bookinCart=JSON.parse(localStorage.getItem("carrito"))?.filter(e=>e.id===id)
+  
   function handleClick() {
+    if(!bookinCart?.length){
     dispatch(addToCart(id))
-    setCartIcon(<BsCartCheckFill size={25} className="done" />)
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: `Added "${title}" to cart`,
+      showConfirmButton: false,
+      timer: 1500
+    })
+    setCartIcon(<BsCartCheckFill size={25} className="done" />)}
   }
 
   return (
@@ -23,7 +34,7 @@ export default function Compra({ title, author, price, categories, id }) {
       <div className='addTo'>
         <p>Add to Cart</p>
         <button>
-          {cartIcon}
+          {bookinCart?.length?<BsCartCheckFill size={25} className="done" />:cartIcon}
         </button>
 
       </div>

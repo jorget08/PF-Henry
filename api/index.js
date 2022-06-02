@@ -21,6 +21,7 @@ const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const {dataBaseLoad,dataBaseLoadCategories}= require('./src/data/preLoad.js')
 const { Rol, User } = require("./src/db");
+const bcrypt = require('bcrypt');
 
 const createRole = async () => {
     const [admin, user] = await Rol.bulkCreate([
@@ -35,11 +36,15 @@ const createRole = async () => {
     ]);
     console.log(`Roles creados: ${admin.name}, ${user.name}`);      
     //? create admin default 
+    const pass = 'admin'
+    const salt = await bcrypt.genSalt(10);
+    const passEncript = bcrypt.hashSync(pass, salt);
+
     const adminUser = await User.create({
         name: 'admin',
         lastName: 'admin',
         email: 'admin@mail.com',
-        password: 'admin',
+        password: passEncript,
         imgProfile: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
     });
     // assign role admin to user

@@ -1,0 +1,17 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+.Home{
+    display: flex;
+    background-color: lightblue;
+    bottom: 50px;
+    
+}
+
+.Container{
+    background-color: lightcoral;
+    width: 87.2%;
+    display: flex;
+    justify-content: center;
+}

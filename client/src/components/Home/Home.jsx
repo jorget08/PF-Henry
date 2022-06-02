@@ -28,7 +28,7 @@ export default function Home() {
         <div>
             <NavBar />
             <Filters books={books} func={renderBooks} categories={categories} />
-            {books.length ?
+            {books?.length ?
                 <ShowBooks books={books} />
                 :
                 <div className='loading'>

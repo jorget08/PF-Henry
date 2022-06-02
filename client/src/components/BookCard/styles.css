@@ -15,6 +15,27 @@ a {
   margin: auto;
   transition: transform 0.5s;
 }
+@media (max-width: 870px) {
+  .card,
+  #nonBox {
+    flex-direction: column;
+    justify-content: center;
+    min-height: 300px;
+    max-width: 300px;
+  }
+  .card img,
+  #nonBox img {
+    max-height: 140px;
+    max-width: 50px;
+    margin: auto;
+    border-radius: 20px;
+  }
+  .card .info,
+  #nonBox .info {
+    border-top: 1px solid #c4c4c4;
+    padding-top: 10px;
+  }
+}
 .card img,
 #nonBox img {
   border-top-left-radius: 20px;

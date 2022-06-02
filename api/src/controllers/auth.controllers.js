@@ -12,8 +12,10 @@ const login = async (req, res) => {
             attributes: { exclude: ['createdAt', 'updatedAt'] },
             include: {
                 model: Rol,
-                attributes: ['name']
-            }
+                attributes: ['name'],
+            },
+            raw:true, // <----- HERE
+            nest:true
         });
         if (!user) {
             return res.status(400).json({
@@ -31,6 +33,9 @@ const login = async (req, res) => {
         const token = await generateJwt(user.idUser);
         //? no enviar password 
         user.password = undefined;
+        //? destructurar todo user menos rol
+    
+        console.log(user.role);
         res.json({
             ok: true,
             user,
@@ -53,7 +58,9 @@ const renewToken = async (req, res) => {
             include: {
                 model: Rol,
                 attributes: ['name']
-            }
+            },
+            raw:true, // <----- HERE
+            nest:true
         });
         if (!user) {
             return res.status(400).json({
