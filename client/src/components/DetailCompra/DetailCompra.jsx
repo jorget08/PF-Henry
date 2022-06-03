@@ -18,12 +18,21 @@ export default function Compra({ title, author, price, categories, id }) {
   function handleClick() {
     if(!bookinCart?.length){
     dispatch(addToCart(id))
-    Swal.fire({
+    const Toast = Swal.mixin({
+      toast: true,
       position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
       icon: 'success',
       title: `Added "${title}" to cart`,
-      showConfirmButton: false,
-      timer: 1500
     })
     setCartIcon(<BsCartCheckFill size={25} className="done" />)}
   }
