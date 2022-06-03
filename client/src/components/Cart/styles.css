@@ -62,6 +62,10 @@
   color: white;
   font-size: 18px;
 }
+.continue a {
+  max-width: 60%;
+  margin: auto;
+}
 @media (max-width: 900px) {
   .continue {
     flex-direction: column;

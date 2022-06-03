@@ -12,11 +12,11 @@ export default function Login() {
   const clientId = '796413127660-tgktohi6gqfm0n183g1kqp6lqehl6ncq.apps.googleusercontent.com';
   const dispatch = useDispatch()
 
-  const onSuccess = async(response) => { 
+  const onSuccess = async (response) => {
     const objGoogle = {
-        ...response.profileObj,
-        tokenId: response.tokenId
-      }
+      ...response.profileObj,
+      tokenId: response.tokenId
+    }
     dispatch(logWithGoogle(objGoogle))
   }
 
@@ -25,67 +25,65 @@ export default function Login() {
   }
 
   return (
-      <div>
-          <Formik
-          initialValues={{
-            email : '',
-            password : ''
-          }}
-          validate={(valores) => {
-            let errors = {};
+    <div>
+      <Formik
+        initialValues={{
+          email: '',
+          password: ''
+        }}
+        validate={(valores) => {
+          let errors = {};
 
-            if (!valores.email) {
-              errors.email = 'Email has been required!';
-            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(valores.email)) {
-              errors.email = 'Invalid email address';
-            }
-            if(!valores.password){
-              errors.password = 'Password has been required!'
-            }
-            return errors;
-          }}
-          onSubmit={(valores, {resetForm}) => {
-            dispatch(logUser(valores))
-            console.log("valores", valores)
-            
-            resetForm()
-          }}>
-              {({touched, errors}) => (
-              <Form className="LoginForm"> 
+          if (!valores.email) {
+            errors.email = 'Email has been required!';
+          } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(valores.email)) {
+            errors.email = 'Invalid email address';
+          }
+          if (!valores.password) {
+            errors.password = 'Password has been required!'
+          }
+          return errors;
+        }}
+        onSubmit={(valores, { resetForm }) => {
+          dispatch(logUser(valores))
+          console.log("valores", valores)
 
-                  <label>User</label>                  
-                  <Field type="text" name="email" placeholder="Email"/>
-                  {touched.email && errors.email && <span>{errors.email}</span>}
+          resetForm()
+        }}>
+        {({ touched, errors }) => (
+          <Form className="LoginForm">
+            <div className='fieldLog'>
+              <label>User</label>
+              <Field type="text" name="email" placeholder="Email" />
+              {touched.email && errors.email && <span>{errors.email}</span>}
+            </div>
+            <div className='fieldLog'>
+              <label>Password</label>
+              <Field type="password" name="password" placeholder="Password" />
+              {touched.password && errors.password && <span>{errors.password}</span>}
+            </div>
 
-                  <label>Password</label>                  
-                  <Field type="password" name="password" placeholder="Password"/>
-                  {touched.password && errors.password && <span>{errors.password}</span>}
+            <button type="submit">Log in</button>
 
-                  <button type="submit">Login</button>
+          </Form>
+        )}
+      </Formik>
+      <div className='register'>
 
-              </Form>
-              )}
-          </Formik>
-            <hr />
-            <br />
-            <p>ó</p>
-            <Link to='/register'>
-                <button>Register</button>
-            </Link>
-
-            <hr />
-            <br />
-            <p>ó</p>
-
-            <GoogleLogin
-              clientId={clientId}
-              onSuccess={onSuccess}
-              onFailure={onFailure}
-              cookiePolicy={'single_host_origin'}
-              isSignedIn={true}
-              buttonText="Login with Google!"
-              style={{ margin: '0 auto', display: 'block' }}
-            />
+        <Link to='/register' className='signUp'>
+          <button>Sign Up</button>
+        </Link>
+        <GoogleLogin
+          clientId={clientId}
+          onSuccess={onSuccess}
+          onFailure={onFailure}
+          cookiePolicy={'single_host_origin'}
+          isSignedIn={true}
+          buttonText="Sign Up with Google!"
+          style={{ margin: '0 auto', display: 'block' }}
+          className="googleLog"
+        />
+      </div>
     </div>
   )
 }
