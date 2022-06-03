@@ -6,15 +6,16 @@ import { getDetail, clearDetail, deleteBook } from "../../redux/actions";
 import DetailCompra from '../DetailCompra/DetailCompra';
 import Stars from '../Stars/Stars';
 import NavBar from '../NavBar/NavBar'
-
-
 import "./styles.css"
 
 export default function BookDetail() {
 
+  const [isAdmin, setIsAdmin] = useState(false)
+  const user = useSelector(state => state.user)
+  console.log("SOY EL USERRRR", user)
   const history = useHistory()
 
-  
+  console.log("hystory",history)
 
     const redirect = () => {
         history.push("/home")
@@ -73,6 +74,8 @@ export default function BookDetail() {
                 </ul>
 
               </div>
+               {user.rols?.name === "admin" ?  
+               <>
               <Link to={{
                 pathname:'/createbook',
                 state: {
@@ -80,8 +83,10 @@ export default function BookDetail() {
                 }
                 }}>
                 <button type="button">Modify book</button>
-              </Link>
+              </Link> 
               <button type="button" onClick={(e) => delet(e)}>Delete Book</button>
+              </>
+              : ""}
               </div>
           </div>
         </div>

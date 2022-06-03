@@ -39,7 +39,6 @@ const createRole = async () => {
     const pass = 'admin'
     const salt = await bcrypt.genSalt(10);
     const passEncript = bcrypt.hashSync(pass, salt);
-
     const adminUser = await User.create({
         name: 'admin',
         lastName: 'admin',

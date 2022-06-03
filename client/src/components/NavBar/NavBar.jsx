@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
+import Modal from '../Modal/Modal';
+import Login from '../Login/Login';
 import { BsCart2 } from 'react-icons/bs';
 import { IoMdContact } from 'react-icons/io';
 import { IoHomeOutline } from 'react-icons/io5';
 import { MdContactSupport } from 'react-icons/md';
-import { useSelector, useDispatch } from 'react-redux';
-import "./styles.css"
 import { useModals } from '../Utils/useModals';
-import Modal from '../Modal/Modal';
-import Login from '../Login/Login';
 import { unlogUser } from '../../redux/actions';
+import "./styles.css"
 
 
 
@@ -62,13 +62,6 @@ export default function NavBar() {
                             <BsCart2 size={30} className="iconCart" />
                             <p> {JSON.parse(localStorage.getItem("carrito"))?.length}</p>
                         </Link>
-                        {/*<Link to='/logIn'>
-                             <div className='log'>
-                                <span>Log In</span>
-                                <IoMdContact size={30} />                                
-                                </div> 
-                            </Link>*/}
-
                         {isLogged ? <div><Link to="userProfile"><button>View profile</button></Link><button onClick={(e) => handleLogOut(e)}>Log out</button></div> :
                             <div className='log'>
                                 <IoMdContact size={33} onClick={openModal} />
@@ -77,10 +70,6 @@ export default function NavBar() {
                                     <Login />
                                 </Modal>
                             </div>}
-                        <Link to='/createbook'>
-                            <span>Create a book</span>
-                        </Link>
-
                     </div>
 
                 </div>
