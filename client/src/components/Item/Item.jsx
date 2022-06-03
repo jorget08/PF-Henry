@@ -5,6 +5,8 @@ import { AiOutlineMinus } from 'react-icons/ai'
 import { MdOutlineAdd } from 'react-icons/md'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import './styles.css'
+import Swal from 'sweetalert2'
+
 export default function Item({ id, title, img, author, price, stock, handleItem, newDel }) {
     const dispatch = useDispatch()
     let book = JSON.parse(localStorage.getItem("carrito")).filter(e => e.id === id)
@@ -15,7 +17,24 @@ export default function Item({ id, title, img, author, price, stock, handleItem,
 
     function handlePrice(e, op) {
         if (cant + 1 > stock && op === "sum") {
-            alert('No hay stock')
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              
+              Toast.fire({
+                icon: 'error',
+                title: `No more stock available!
+                         "${title}"`,
+              })
+        
         } else if (cant - 1 < 1 && op === "men") {
 
         } else {
