@@ -60,7 +60,7 @@ export default function NavBar() {
                         </Link>
                         <Link to='/cart'>
                             <BsCart2 size={30} className="iconCart" />
-                            <p> {bookCarts?.length}</p>
+                            <p> {JSON.parse(localStorage.getItem("carrito"))?.length}</p>
                         </Link>
                         {isLogged ? <div><Link to="userProfile"><button>View profile</button></Link><button onClick={(e) => handleLogOut(e)}>Log out</button></div> :
                             <div className='log'>

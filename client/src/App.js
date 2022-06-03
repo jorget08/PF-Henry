@@ -19,6 +19,8 @@ import Sidebar from "./components/AdminDashboard/Sidebar";
 import Stock from "./components/AdminDashboard/Stock";
 import Support from "./components/Support/Support";
 import Users from "./components/AdminDashboard/Users";
+import EditProfile from "./components/EditProfile/EditProfile"
+
 
 function App() {
   return (
@@ -38,6 +40,7 @@ function App() {
       <Route path={"/checkout"} component={Checkout}/>
       <Route path={"/userProfile"} component={UserProfile}/>
       <Route path={"/support"} component={Support}/>
+      <Route path={"/editProfile"} component={EditProfile}/>
 
     </>
   );

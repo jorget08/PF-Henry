@@ -24,7 +24,9 @@ import {
   PAYMENT_PAYPAL,
   TOTAL_PRICE,
   CHECKOUT_BOOKS,
-  GET_USERS
+  GET_USERS,
+  EDIT_PROFILE,
+  GET_USER
 } from './types';
 
 import axios from "axios";
@@ -273,6 +275,7 @@ export function infoSoldBooks(payload){
   }
 }
 
+
 export function getUsers(payload){
   return async function (dispatch){
     try {
@@ -284,3 +287,32 @@ export function getUsers(payload){
     }
   }
 }
+
+export function editProfile(payload, id){
+  return async function (dispatch) {
+    try {
+      var response = await axios.put(`http://localhost:3001/user/${id}`, payload, {headers: {
+        Authorization: JSON.parse(localStorage.getItem("token"))}
+    });
+      return dispatch({type: EDIT_PROFILE, payload:response.data.userUp });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+
+export function getUser(){
+  return async function (dispatch) {
+    try {
+      var response = await axios.get(`http://localhost:3001/auth/renew`, {headers: {
+        Authorization: JSON.parse(localStorage.getItem("token"))}
+    });
+    console.log("response", response)
+    localStorage.setItem("token", JSON.stringify(response.data.token))
+      return dispatch({type: GET_USER, payload:response.data.user });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+

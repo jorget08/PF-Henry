@@ -35,21 +35,21 @@ export default function LandingPage() {
                 <div className="landInfo">
                     <div className="eachLandInfo">
                         <IoLocationOutline size={45} className="icon" />
-                        <div className="textInfo">
+                        <div className="landInfoText">
                             <p>Find books Arround the World</p>
                             <span> Recieve it at your place</span>
                         </div>
                     </div>
                     <div className="eachLandInfo">
                         <MdOutlineLocalShipping size={50} className="icon" />
-                        <div className="textInfo">
+                        <div className="landInfoText">
                             <p>Free Shipping</p>
                             <span>For your purchases above $50</span>
                         </div>
                     </div>
                     <div className="eachLandInfo">
                         <BsCashCoin size={45} className="icon" />
-                        <div className="textInfo">
+                        <div className="landInfoText">
                             <p>Look Out our Payments Method</p>
                             <span>All credit cards and Crypto</span>
                         </div>

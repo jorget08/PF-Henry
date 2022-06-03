@@ -14,21 +14,20 @@ import "./styles.css";
 export default function Cart() {
   const dispatch = useDispatch();
   const bookCarts = useSelector((state) => state.cart);
-
-  const [items, setItems] = useState(bookCarts);
+  let localstorage=JSON.parse(localStorage.getItem("carrito"))
+  const [items, setItems] = useState(JSON.parse(localStorage.getItem("carrito")));
   const [del, setDel] = useState(true);
   const [add, setAdd] = useState(false);
-  console.log("soy bookCarts", bookCarts);
-
-  let prices = [];
-  bookCarts?.map((e) => prices.push(e.price));
-
+ 
+  
+ console.log("soy local storage",localstorage)
+  
   function newDel() {
-    setItems(bookCarts);
+    setItems(localstorage);
     setDel(del ? false : true);
   }
   function handleItem(title, price, cant) {
-    let newBooks = bookCarts.map((e) => {
+    let newBooks =localstorage?.map((e) => {
       if (e.title === title) {
         e.cant = cant;
         e.total = cant * price;
@@ -37,6 +36,7 @@ export default function Cart() {
       }
       return e;
     });
+    localStorage.setItem("carrito", JSON.stringify(newBooks))
     console.log(newBooks);
     setItems(newBooks);
     let total = 0;
@@ -47,35 +47,43 @@ export default function Cart() {
     return total;
   }
   function handleAddItems() {
-    let newItems = bookCarts?.map((e) => e?.total);
-    let firstItems = bookCarts?.map((e) => e.price);
-    //console.log(firstItems)
-    //console.log(newItems)
-    if (add) {
-      let totalPrices = newItems.reduce(function (a, b) {
+    let newItems =localstorage?.map((e) => e?.total);
+    let firstItems =localstorage?.map((e) => e.price);
+    console.log("first item",firstItems)
+    console.log("new item",newItems)
+    
+    if (firstItems.length) {
+      let totalPrices = firstItems?.reduce(function (a, b) {
         return a + b;
       }, 0);
-      let bookInfo = bookCarts;
-      console.log("soy bookinfo", bookInfo);
+      let bookInfo =localstorage;
       dispatch(totalPrice(totalPrices));
       dispatch(infoBooks(bookInfo));
-      return totalPrices;
+      
     } else {
-      let totalPrices = firstItems.reduce(function (a, b) {
+      let totalPrices = newItems?.reduce(function (a, b) {
         return a + b;
       }, 0);
-      let bookInfo = bookCarts;
+      let bookInfo =localstorage;
       dispatch(totalPrice(totalPrices));
       dispatch(infoBooks(bookInfo));
-      return totalPrices;
+      
     }
+    let precio = localstorage.map((e) => e.cant * e.price);
+  let preciototal = precio.reduce(function (a, b) {
+    return a + b;
+  }, 0);
+  return preciototal
   }
+  
   function handleSubItems() {
-    let newItems = bookCarts?.map((e) => e.cant);
+    let newItems =localstorage?.map((e) => e.cant);
     return newItems.reduce(function (a, b) {
       return a + b;
     }, 0);
   }
+
+
 
   useEffect(() => {
     dispatch(getCart());

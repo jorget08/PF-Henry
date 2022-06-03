@@ -23,7 +23,10 @@ import {
   LOG_WITH_GOOGLE,
   TOTAL_PRICE,
   CHECKOUT_BOOKS,
-  GET_USERS
+  GET_USERS,
+  EDIT_PROFILE,
+  GET_USER,
+
 } from "../actions/types";
 
 const initialState = {
@@ -134,7 +137,7 @@ export default function rootReducer(state = initialState, action) {
         cart: JSON.parse(localStorage.getItem("carrito")),
       };
     case REMOVE_ALL_FROM_CART:
-      localStorage.removeItem("carrito");
+      localStorage.setItem("carrito",JSON.stringify([]));
       return {
         cart: [],
       };
@@ -193,6 +196,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         user: {}
       }
+
       case TOTAL_PRICE:
         return{
             ...state,
@@ -210,6 +214,28 @@ export default function rootReducer(state = initialState, action) {
           ...state,
           users: payload
         }
+
+    case TOTAL_PRICE:
+      return{
+        ...state,
+        totalPrice:payload
+      }
+    case CHECKOUT_BOOKS:
+      return{
+        ...state,
+        infoBooks:payload
+      }
+    case EDIT_PROFILE:
+      return{
+        ...state,
+        user:payload
+      }
+    case GET_USER:
+      return{
+        ...state,
+        user:payload
+      }
+
 
     default:
       return state;

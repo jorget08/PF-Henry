@@ -1,6 +1,7 @@
 import React from 'react'
 import { AiFillStar } from "react-icons/ai"
 import { AiOutlineStar } from "react-icons/ai"
+import "./styles.css"
 export default function Stars({ score }) {
     var stars = [false, false, false, false, false];
 
@@ -9,7 +10,7 @@ export default function Stars({ score }) {
             {stars.forEach((e, i) => {
                 if (i <= score - 1) stars.splice(i, 1, true)
             })}
-            {stars.map((e, i) => e ? <AiFillStar key={i} /> : <AiOutlineStar key={i} />)}
+            {stars.map((e, i) => e ? <AiFillStar key={i} className="stars" /> : <AiOutlineStar key={i} />)}
         </div>
     )
 }
