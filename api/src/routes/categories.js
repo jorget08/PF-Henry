@@ -6,7 +6,7 @@ const { Op } = require('sequelize')
 router.get('/', async (req,res,next)=>{
     try {
         const categories= await Category.findAll()
-        console.log(categories)
+
         res.json(categories)
     } catch (error) {
         next(error)
