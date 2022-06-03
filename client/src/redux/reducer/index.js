@@ -189,7 +189,13 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         user: {...payload}
       }
-
+    case LOG_WITH_GOOGLE:
+      localStorage.setItem("token", JSON.stringify(payload.token))
+      console.log(payload)
+      return{
+        ...state,
+        user: {...payload.user}
+      }
     case UNLOG_USER:
       localStorage.removeItem("token")  
     return {
