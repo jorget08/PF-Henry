@@ -12,8 +12,10 @@ import Cart from "./components/Cart/Cart";
 import LandingCarousel from "./components/LandingPage/LandingCarousel";
 import LandingPage from './components/LandingPage/LandingPage';
 import Register from './components/Register/Register';
+import Checkout from "./components/Checkout/Checkout";
 import UserProfile from "./components/UserProfile/UserProfile";
 import Support from "./components/Support/Support";
+
 function App() {
   return (
     <>
@@ -24,6 +26,7 @@ function App() {
       <Route path={"/createBook"} component={FormCreate} />
       <Route path={"/cart"} component={Cart} />
       <Route path={"/register"} component={Register}/>
+      <Route path={"/checkout"} component={Checkout}/>
       <Route path={"/userProfile"} component={UserProfile}/>
       <Route path={"/support"} component={Support}/>
     </>

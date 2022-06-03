@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import "./LandingPage.css"
 import NavBar from "../NavBar/NavBar";
 import SectionCat from "./SectionCat";
 import { getLandingTop, getLandingTopCat } from "../../redux/actions";
@@ -20,22 +20,25 @@ export default function LandingPage() {
 
 
     return (
-        <>
+        <div>
 
-           
+
             <NavBar />
-            <LandingCarousel />
-            {bookScore.length &&
-                <SectionCat books={bookScore} title={'Relevance'} />}
-            { }
-            {bookCategories.Adventures &&
-                <SectionCat books={bookCategories.Adventures} title={'Adventure'} />}
-            {bookCategories.Thriller &&
-                <SectionCat books={bookCategories.Thriller} title={'Thriller'} />}
-            {bookCategories.Academic &&
-                <SectionCat books={bookCategories.Academic} title={'Academic'} />}
+            <div className="landing">
+
+                <LandingCarousel />
+                {bookScore.length &&
+                    <SectionCat books={bookScore} title={'Relevance'} />}
+                { }
+                {bookCategories.Adventures &&
+                    <SectionCat books={bookCategories.Adventures} title={'Adventure'} />}
+                {bookCategories.Thriller &&
+                    <SectionCat books={bookCategories.Thriller} title={'Thriller'} />}
+                {bookCategories.Academic &&
+                    <SectionCat books={bookCategories.Academic} title={'Academic'} />}
 
 
-        </>
+            </div>
+        </div>
     )
 }

@@ -140,6 +140,7 @@ export default function FormCreate() {
                                         type="text"
                                         name="author"
                                         placeholder='Author'
+                                        
                                     />
                                     {touched.author && errors.author && <span>{errors.author}</span>}
                                 </div>
@@ -208,6 +209,7 @@ export default function FormCreate() {
                                         type="number"
                                         name="price"
                                         placeholder='Price'
+                                        min="1"
 
                                     />
                                     {touched.price && errors.price && <span>{errors.price}</span>}
@@ -218,6 +220,7 @@ export default function FormCreate() {
                                         type="number"
                                         name="stock"
                                         placeholder='Stock'
+                                        min="1"
 
                                     />
                                     {touched.stock && errors.stock && <span>{errors.stock}</span>}

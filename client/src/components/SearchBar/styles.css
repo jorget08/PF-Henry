@@ -39,6 +39,7 @@
   border-bottom-right-radius: 10px;
   box-shadow: 2px 0 20px -2px black;
   background-color: #e4e4ee;
+  z-index: 100;
 }
 .containerSearch .itemS {
   align-items: center;
