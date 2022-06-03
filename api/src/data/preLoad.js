@@ -1,6 +1,7 @@
 const { Book, Category } = require('../db.js')
 const data = require('./database')
 const dataCategories = require('./databaseCategory')
+
 function dataBaseLoadCategories() {
     categoriesApi = dataCategories.map(category => {
         return category = {
