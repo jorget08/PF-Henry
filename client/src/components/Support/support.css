@@ -4,51 +4,41 @@
   display: block;
   padding: 2rem 0;
 }
-
-.options {
-  border: solid;
-  background-color: #914343;
-}
-
-h1 {
-  text-align: center;
-  font-family: 'Source Sans Pro', sans-serif;
-}
-
-.minitag {
-  font-family: 'Source Sans Pro', sans-serif;
-  color: white;
-}
-
-.minitag:hover {
-  cursor: pointer;
-  transform: scale(1.02);
-}
-
-h1:hover {
+.formContainer h1:hover {
   cursor: pointer;
   transform: scale(1.05);
 }
-
-p {
+.formContainer p {
   text-align: center;
   width: 700px;
   font-family: 'Source Sans Pro', sans-serif;
 }
-
+.formContainer h1 {
+  text-align: center;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+.options {
+  border: solid;
+  background-color: #914343;
+}
+.minitag {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: white;
+}
+.minitag:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
 .conttext {
   text-align: center;
 }
-
 .descriptionS {
   text-align: center;
 }
- 
 .text {
   margin: 0px auto;
   font-size: larger;
 }
-
 .formInfo {
   border: 1px solid #c4c4c4;
   box-shadow: 5px 5px 20px -2px black;
@@ -78,7 +68,6 @@ p {
   display: flex;
   justify-content: space-between;
 }
-
 .minimize {
   margin: auto;
   background-color: #98ff98;
