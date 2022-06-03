@@ -226,6 +226,7 @@ export function logUser(payload){
 }
 
 export function unlogUser(){
+  localStorage.removeItem("token")  
   return { type: UNLOG_USER };
 }
 
@@ -235,7 +236,6 @@ export function logWithGoogle(payload){
     const res = await axios.post('http://localhost:3001/auth/google', payload)
     let TKN = res.data.token
     console.log('res', res.data)    
-    localStorage.setItem("token", JSON.stringify(TKN));
     return dispatch ({type: LOG_WITH_GOOGLE, payload: res.data})
   } catch (error) {
     console.log('error', error)

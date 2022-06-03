@@ -10,6 +10,7 @@ import { IoHomeOutline } from 'react-icons/io5';
 import { MdContactSupport } from 'react-icons/md';
 import { useModals } from '../Utils/useModals';
 import { unlogUser } from '../../redux/actions';
+import { GoogleLogout } from 'react-google-login';
 import "./styles.css"
 
 
@@ -20,9 +21,9 @@ export default function NavBar() {
     const dispatch = useDispatch()
     const token = localStorage.getItem("token")
     const [isLogged, setIsLogged] = useState(false)
+    const clientId = `796413127660-tgktohi6gqfm0n183g1kqp6lqehl6ncq.apps.googleusercontent.com`
 
-    function handleLogOut(e) {
-        e.preventDefault()
+    function handleLogOut() {
         setIsLogged(false)
         dispatch(unlogUser())
     }
@@ -62,7 +63,12 @@ export default function NavBar() {
                             <BsCart2 size={30} className="iconCart" />
                             <p> {JSON.parse(localStorage.getItem("carrito"))?.length}</p>
                         </Link>
-                        {isLogged ? <div><Link to="userProfile"><button>View profile</button></Link><button onClick={(e) => handleLogOut(e)}>Log out</button></div> :
+                        {isLogged ? <div><Link to="userProfile"><button>View profile</button></Link> <GoogleLogout
+                clientId={clientId}
+                buttonText="Logout"
+                onLogoutSuccess={handleLogOut}
+                style={{margin: '0 auto', display: 'block'}}
+            />{/* <button onClick={(e) => handleLogOut(e)}>Log out</button> */}</div> :
                             <div className='log'>
                                 <IoMdContact size={33} onClick={openModal} />
 
