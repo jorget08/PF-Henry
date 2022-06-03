@@ -44,7 +44,7 @@ export default function Register() {
     }
 
     return (
-        <div>
+        <div className='containerRegister'>
             <Formik
                 initialValues={{
                     name: "",
@@ -86,38 +86,38 @@ export default function Register() {
                     setTimeout(() => redirect(), "2000")
                 }}>
                 {({ touched, errors }) => (
-                    <Form classname="RegisterForm">
-                        <h1>Complete the register form</h1>
-                        <div>
+                    <Form classname="registerForm">
+                        <h1>Complete the Register Form</h1>
+                        <div className='fieldReg'>
                             <label>Name: </label>
                             <Field type="text" name="name" placeholder="Name" />
                             {touched.name && errors.name && <span>{errors.name}</span>}
                         </div>
-                        <div>
+                        <div className='fieldReg'>
                             <label>Last name: </label>
                             <Field type="text" name="lastName" placeholder="Last name" />
                             {touched.lastName && errors.lastName && <span>{errors.lastName}</span>}
                         </div>
-                        <div>
+                        <div className='fieldReg'>
                             <label>E mail: </label>
                             <Field type="text" name="email" placeholder="E-mail" />
                             {touched.email && errors.email && <span>{errors.email}</span>}
                         </div>
-                        <div>
+                        <div className='fieldReg'>
                             <label>Password: </label>
                             <Field type="password" name="password" placeholder="Password" />
                             {touched.password && errors.password && <span>{errors.password}</span>}
                         </div>
-                        <div>
+                        <div className='fieldReg'>
                             <label>Repeat Password: </label>
                             <Field type="password" name="password2" placeholder="Repeat password" />
                             {touched.password2 && errors.password2 && <span>{errors.password2}</span>}
                         </div>
-                        <div>
+                        <div className='fieldReg'>
                             <label>Profile picture (optional): </label>
                             <Field type="text" name="imgProfile" placeholder="Profile picture" />
                         </div>
-                        <div>
+                        <div className='fieldReg'>
                             <button type="submit">Register</button>
                         </div>
                     </Form>
