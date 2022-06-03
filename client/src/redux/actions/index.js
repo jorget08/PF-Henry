@@ -24,6 +24,7 @@ import {
   PAYMENT_PAYPAL,
   TOTAL_PRICE,
   CHECKOUT_BOOKS,
+  GET_USERS
 } from './types';
 
 import axios from "axios";
@@ -269,5 +270,17 @@ export function infoSoldBooks(payload){
   } catch (error) {
     console.log('error', error)
   }
+  }
+}
+
+export function getUsers(payload){
+  return async function (dispatch){
+    try {
+      const res = await axios.get('http://localhost:3001/user', payload)
+      console.log("soy res", res.data.users)
+      return dispatch ({type:GET_USERS, payload:res.data.users})
+    } catch (err) {
+      console.log(err)
+    }
   }
 }

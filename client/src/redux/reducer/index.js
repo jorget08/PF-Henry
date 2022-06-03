@@ -22,7 +22,8 @@ import {
   UNLOG_USER,
   LOG_WITH_GOOGLE,
   TOTAL_PRICE,
-  CHECKOUT_BOOKS
+  CHECKOUT_BOOKS,
+  GET_USERS
 } from "../actions/types";
 
 const initialState = {
@@ -37,9 +38,8 @@ const initialState = {
   user: {},
   relevants:[],
   totalPrice:0,
-  infoBooks:[]
-
-
+  infoBooks:[],
+  users: []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -181,8 +181,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
       }
 
-    case LOG_USER:
-      console.log("SOY EL PAYLOAD",payload)
+    case LOG_USER:     
       return {
         ...state,
         user: {...payload}
@@ -205,6 +204,12 @@ export default function rootReducer(state = initialState, action) {
               infoBooks:payload
 
           }
+      case GET_USERS:
+        console.log("SOY EL PAYLOAD CARAJO", payload)
+        return{
+          ...state,
+          users: payload
+        }
 
     default:
       return state;

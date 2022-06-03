@@ -17,8 +17,8 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import Sidebar from "./components/AdminDashboard/Sidebar";
 import Stock from "./components/AdminDashboard/Stock";
-
 import Support from "./components/Support/Support";
+import Users from "./components/AdminDashboard/Users";
 
 function App() {
   return (
@@ -34,6 +34,7 @@ function App() {
       <Route path={"/admin"} component={Sidebar}/>
       <Route exact path={"/admin/newbook"} component={FormCreate}/>
       <Route exact path={"/admin/stock"} component={Stock}/>
+      <Route exact path={"/admin/users"} component={Users}/>
       <Route path={"/checkout"} component={Checkout}/>
       <Route path={"/userProfile"} component={UserProfile}/>
       <Route path={"/support"} component={Support}/>
