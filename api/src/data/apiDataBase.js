@@ -49,11 +49,11 @@ async function datos() {
                 image: e.volumeInfo.imageLinks.thumbnail,
                 price: e.saleInfo.listPrice ? Math.ceil((e.saleInfo.listPrice.amount) / 125) : Math.ceil(Math.floor(Math.random() * 200) + 1),
                 categories: e.volumeInfo.categories
-            }
+            }})
 
 
     return alaBd;
-  } catch (error) {
+   }catch (error) {
     console.log(error);
   }
 }
