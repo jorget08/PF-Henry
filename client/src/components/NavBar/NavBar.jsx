@@ -60,13 +60,13 @@ export default function NavBar() {
                         </Link>
                         {isLogged ?
                             <div>
-                                <Link to="userProfile"><button>View profile</button></Link>
+                                <Link to="/userProfile"><button>View profile</button></Link>
                                 <GoogleLogout
                                     clientId={clientId}
                                     buttonText="Logout"
                                     onLogoutSuccess={handleLogOut}
                                     style={{ margin: '0 auto', display: 'block' }}
-                                />{/* <button onClick={(e) => handleLogOut(e)}>Log out</button> */}</div> :
+                             /></div> :
                             <div className='log'>
                                 <IoMdContact size={33} onClick={openModal} />
 
