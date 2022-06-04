@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Item from "../Item/Item";
 import NavBar from "../NavBar/NavBar";
+import Modal from '../Modal/Modal';
+import { useModals } from '../Utils/useModals';
+import Login from '../Login/Login';
 //import { useLocalStore } from '../Utils/useLocalStorage'
 import {
   removeAllFromCart,
@@ -18,6 +21,8 @@ export default function Cart() {
   const [items, setItems] = useState(JSON.parse(localStorage.getItem("carrito")));
   const [del, setDel] = useState(true);
   const [add, setAdd] = useState(false);
+  const token = localStorage.getItem("token")
+  const [isOpenModal, openModal, closeModal] = useModals(false)
  
   
  console.log("soy local storage",localstorage)
@@ -119,9 +124,15 @@ export default function Cart() {
                 <Link to="/home">
                   <p className="keep">Keep Shopping</p>
                 </Link>
-                <Link to="/checkout">
+                {token?<Link to="/checkout">
                   <p className="checkout">Continue to Checkout</p>
-                </Link>
+                </Link>:
+                <div>
+                <p className="checkout"onClick={openModal}>Log in first before going to checkout</p>
+                <Modal isOpen={isOpenModal} closeModal={closeModal}>
+                    <Login />
+                </Modal>
+                </div>}
               </div>
             </div>
           ) : (

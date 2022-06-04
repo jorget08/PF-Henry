@@ -15,6 +15,7 @@ export default function Compra({ title, author, price, categories, id }) {
   const [cartIcon, setCartIcon] = useState(<BsCartPlus size={25} onClick={handleClick} className="icon" />)
   let bookinCart=JSON.parse(localStorage.getItem("carrito"))?.filter(e=>e.id===id)
   
+  
   function handleClick() {
     if(!bookinCart?.length){
     dispatch(addToCart(id))
