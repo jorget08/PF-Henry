@@ -25,11 +25,12 @@ async function datos() {
         let alaBd = nuevo.map((e) => {
             return {
                 title: e.volumeInfo.title,
-                author: e.volumeInfo.authors[0],
+                author: e.volumeInfo.authors.toString(),
                 description: e.volumeInfo.description,
                 score: e.volumeInfo.averageRating ? Math.ceil(e.volumeInfo.averageRating) : Math.floor(Math.random() * 5) + 1,
+                stock: Math.floor(Math.random() * 10) + 1,
                 image: e.volumeInfo.imageLinks.thumbnail,
-                price: e.saleInfo.listPrice ? Math.ceil((e.saleInfo.listPrice.amount) / 125) : Math.ceil((Math.floor(Math.random() * 10000) + 1) / 125),
+                price: e.saleInfo.listPrice ? Math.ceil((e.saleInfo.listPrice.amount) / 125) : Math.ceil(Math.floor(Math.random() * 200) + 1),
                 categories: e.volumeInfo.categories
             }
 

@@ -54,6 +54,7 @@ async function dataBaseLoad() {
             author: book.author,
             description: book.description,
             score: Math.round(book.score.slice(0, 3)),
+            stock:Math.floor(Math.random() * 10) + 1,
             image: book.image,
             price: parseInt(book.price.slice(1), 10),
             categories: book.categories
