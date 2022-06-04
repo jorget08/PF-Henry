@@ -29,12 +29,7 @@ export default function NavBar() {
     }
 
     useEffect(() => {
-        if (token) {
-            setIsLogged(true)
-        }
-        else {
-            setIsLogged(false)
-        }
+        token ? setIsLogged(true) : setIsLogged(false);
     }, [token, isLogged])
 
     return (
@@ -63,12 +58,15 @@ export default function NavBar() {
                             <BsCart2 size={30} className="iconCart" />
                             <p> {JSON.parse(localStorage.getItem("carrito"))?.length}</p>
                         </Link>
-                        {isLogged ? <div><Link to="userProfile"><button>View profile</button></Link> <GoogleLogout
-                            clientId={clientId}
-                            buttonText="Logout"
-                            onLogoutSuccess={handleLogOut}
-                            style={{ margin: '0 auto', display: 'block' }}
-                        />{/* <button onClick={(e) => handleLogOut(e)}>Log out</button> */}</div> :
+                        {isLogged ?
+                            <div>
+                                <Link to="userProfile"><button>View profile</button></Link>
+                                <GoogleLogout
+                                    clientId={clientId}
+                                    buttonText="Logout"
+                                    onLogoutSuccess={handleLogOut}
+                                    style={{ margin: '0 auto', display: 'block' }}
+                                />{/* <button onClick={(e) => handleLogOut(e)}>Log out</button> */}</div> :
                             <div className='log'>
                                 <IoMdContact size={33} onClick={openModal} />
 
