@@ -26,7 +26,8 @@ import {
   CHECKOUT_BOOKS,
   GET_USERS,
   EDIT_PROFILE,
-  GET_USER
+  GET_USER,
+  SEND_EMAIL
 } from './types';
 
 import axios from "axios";
@@ -307,7 +308,6 @@ export function getUser(){
       var response = await axios.get(`http://localhost:3001/auth/renew`, {headers: {
         Authorization: JSON.parse(localStorage.getItem("token"))}
     });
-    console.log("response", response)
     localStorage.setItem("token", JSON.stringify(response.data.token))
       return dispatch({type: GET_USER, payload:response.data.user });
     } catch (e) {
@@ -315,4 +315,14 @@ export function getUser(){
     }
   };
 }
-
+ export function sendEmail(payload){
+   return async function(){
+    try{
+      const sendEmail= await axios.post('http://localhost:3001/email',payload)
+      return{type:SEND_EMAIL,payload:sendEmail}
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
+ }
