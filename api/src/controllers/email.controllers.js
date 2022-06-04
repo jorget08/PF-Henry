@@ -7,8 +7,8 @@ const sendEmail = async (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'nachoburgos1995@gmail.com',
-            pass: 'mtlsdatewtbcwhbf'
+            user: 'bookstore1511@gmail.com',
+            pass: 'qyrvkdsvuzwgotne'
         }
     });
     const mailOptions = {
@@ -18,7 +18,7 @@ const sendEmail = async (req, res) => {
         text: 'Hello ' + name + ' ' + lastName + '\n\n' +
             'Thank you for purchase on BookStore.\n' +
             'Thank you,\n' +
-            `${payment.map(item=>{
+            `${payment?.map(item=>{
                 return `${item.title} - ${item.price}`
             })}`
     };

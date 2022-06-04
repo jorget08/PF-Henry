@@ -26,5 +26,6 @@ export const CHECKOUT_BOOKS="CHECKOUT_BOOKS"
 export const GET_USERS = "GET_USERS"
 export const EDIT_PROFILE = "EDIT_PROFILE"
 export const GET_USER = "GET_USER"
+export const SEND_EMAIL="SEND_EMAIL"
 
 
