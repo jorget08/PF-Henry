@@ -7,12 +7,14 @@ const authRouter = require('./auth.routes');
 const paypal = require('./paypal')
 const reviews= require('./reviews')
 const favourites= require('./favourites')
+const email = require('./email.routes')
 const router = Router();
 
 router.use('/books', books)
 router.use('/categories', categories)
 
 // Configurar los routers
+router.use('/email', email)
 router.use('/user', userRouter);
 router.use('/role', roleRouter);
 router.use('/auth', authRouter);
