@@ -14,7 +14,7 @@ function dataBaseLoadCategories() {
 }
 async function dataBaseLoad() {
   const datasApi = await dataApi();
-
+ // arreglo
   //-------------Carga categories Api-----------
   let categoriesApi = await Promise.all(
     datasApi.map(async (e) => {
