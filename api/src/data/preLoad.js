@@ -26,7 +26,18 @@ async function dataBaseLoad() {
 
   categoriesApi = categoriesApi.flat(1);
 
+
+            title: book.title.includes(':') ? book.title.slice(0, book.title.indexOf(':')) : book.title,
+            author: book.author,
+            description: book.description,
+            score: Math.round(book.score.slice(0, 3)),
+            stock:Math.floor(Math.random() * 10) + 1,
+            image: book.image,
+            price: parseInt(book.price.slice(1), 10),
+            categories: book.categories
+
   let unicos = [...new Set(categoriesApi)];
+
 
   unicos = unicos.map((e) => {
     return { name: e };
@@ -55,6 +66,7 @@ async function dataBaseLoad() {
       author: book.author,
       description: book.description,
       score: Math.round(book.score.slice(0, 3)),
+      stock:Math.floor(Math.random() * 10) + 1,
       image: book.image,
       price: parseInt(book.price.slice(1), 10),
       categories: book.categories,

@@ -29,34 +29,28 @@ async function datos() {
       arr.push(result.data.items);
     }
 
-    let concatened = [].concat.apply([], arr);
-    let filtrados = concatened.map((e) => {
-      if (
-        e.volumeInfo.title &&
-        e.volumeInfo.authors &&
-        e.volumeInfo.description &&
-        e.volumeInfo.imageLinks &&
-        e.volumeInfo.categories
-      ) {
-        return e;
-      }
-    });
-    let nuevo = filtrados.filter((e) => e);
-    let alaBd = nuevo.map((e) => {
-      return {
-        title: e.volumeInfo.title,
-        author: e.volumeInfo.authors[0],
-        description: e.volumeInfo.description,
-        score: e.volumeInfo.averageRating
-          ? Math.ceil(e.volumeInfo.averageRating)
-          : Math.floor(Math.random() * 5) + 1,
-        image: e.volumeInfo.imageLinks.thumbnail,
-        price: e.saleInfo.listPrice
-          ? Math.ceil(e.saleInfo.listPrice.amount / 125)
-          : Math.ceil((Math.floor(Math.random() * 10000) + 1) / 125),
-        categories: e.volumeInfo.categories,
-      };
-    });
+        let concatened = [].concat.apply([], arr)
+        let filtrados = concatened.map((e) => {
+            if (e.volumeInfo.title &&
+                e.volumeInfo.authors &&
+                e.volumeInfo.description &&
+                e.volumeInfo.imageLinks &&
+                e.volumeInfo.categories
+            ) { return e }
+        })
+        let nuevo = filtrados.filter((e) => e)
+        let alaBd = nuevo.map((e) => {
+            return {
+                title: e.volumeInfo.title,
+                author: e.volumeInfo.authors.toString(),
+                description: e.volumeInfo.description,
+                score: e.volumeInfo.averageRating ? Math.ceil(e.volumeInfo.averageRating) : Math.floor(Math.random() * 5) + 1,
+                stock: Math.floor(Math.random() * 10) + 1,
+                image: e.volumeInfo.imageLinks.thumbnail,
+                price: e.saleInfo.listPrice ? Math.ceil((e.saleInfo.listPrice.amount) / 125) : Math.ceil(Math.floor(Math.random() * 200) + 1),
+                categories: e.volumeInfo.categories
+            }
+
 
     return alaBd;
   } catch (error) {
