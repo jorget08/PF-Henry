@@ -63,12 +63,11 @@ export default function NavBar() {
                             <BsCart2 size={30} className="iconCart" />
                             <p> {JSON.parse(localStorage.getItem("carrito"))?.length}</p>
                         </Link>
-                        {isLogged ? <div><Link to="userProfile"><button>View profile</button></Link> <GoogleLogout
+                        {isLogged ? <div><Link to="/userProfile"><button>View profile</button></Link> <GoogleLogout
                 clientId={clientId}
                 buttonText="Logout"
                 onLogoutSuccess={handleLogOut}
-                style={{margin: '0 auto', display: 'block'}}
-            />{/* <button onClick={(e) => handleLogOut(e)}>Log out</button> */}</div> :
+                style={{margin: '0 auto', display: 'block'}}/></div> :
                             <div className='log'>
                                 <IoMdContact size={33} onClick={openModal} />
 
