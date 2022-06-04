@@ -5,7 +5,7 @@ const userRouter = require('./user.routes');
 const roleRouter = require('./role.routes');
 const authRouter = require('./auth.routes');
 const paypal = require('./paypal')
-
+const reviews= require('./reviews')
 const favourites= require('./favourites')
 const router = Router();
 
@@ -18,6 +18,7 @@ router.use('/role', roleRouter);
 router.use('/auth', authRouter);
 router.use('/paypal', paypal)
 router.use('/favourites', favourites)
+router.use('/reviews', reviews)
 
 
 module.exports = router;

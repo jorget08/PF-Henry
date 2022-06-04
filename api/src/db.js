@@ -53,8 +53,13 @@ Category.belongsToMany(Book, { through: "bookxcategory" });
 Book.belongsToMany(Shop, { through: "bookxshop" });
 Shop.belongsToMany(Book, { through: "bookxshop" });
 
+User.hasMany(Review);
+Review.belongsTo(User);
+
 Book.hasMany(Review);
 Review.belongsTo(Book);
+
+
 
 //? usuario tiene muchos rol
 User.belongsToMany(Rol, { through: "userxrol" });
