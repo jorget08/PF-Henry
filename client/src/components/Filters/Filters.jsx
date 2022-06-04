@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { filterCategory, filterScore, filterPrice, ordenTitle } from "../../redux/actions"
 import { IoSearchCircleOutline } from 'react-icons/io5'
 import Stars from '../Stars/Stars';
-import helpCall from '../../helCall';
+import { helpCall } from '../../helCall';
 import './styles.css'
 
 export default function Filters({ categories, func, category, isCategory }) {
@@ -13,7 +13,7 @@ export default function Filters({ categories, func, category, isCategory }) {
     const scores = [1, 2, 3, 4, 5]
     const [price1, setPrice1] = useState(1)
     const [price2, setPrice2] = useState()
-    const [maxnum, setMaxnum] = useState()
+    const [maxnum, setMaxnum] = useState(100000000)
 
 
     useEffect(() => {
@@ -94,6 +94,7 @@ export default function Filters({ categories, func, category, isCategory }) {
                 <input type="range" defaultValue={1} min="1" max={maxnum} onChange={(e) => handleChange1(e)} />
                 <p>${price1}, 00</p>
                 <p>Max Price </p>
+                {console.log(maxnum)}
                 <input type="range" defaultValue={maxnum} min={"1"} max={maxnum} onChange={(e) => handleChange2(e)} />
                 <p>${price2}, 00</p>
                 <IoSearchCircleOutline className='icon' size={30} onClick={(e) => handleClick(e)} />
