@@ -62,7 +62,7 @@ export default function ShowBooks({ books }) {
                     && currentBooks.map(b => {
                         return (
 
-                            <Link to={`book/${b.id}`} key={b.id}>
+                            <Link to={`/book/${b.id}`} key={b.id}>
 
                                 <BookCard title={b.title} img={b.image} author={b.author} price={b.price} score={b.score} ></BookCard>
                             </Link>

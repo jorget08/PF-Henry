@@ -1,16 +1,33 @@
 const axios = require("axios");
-const {API_KEY} = process.env;
+const { API_KEY } = process.env;
 async function datos() {
-    const alphabet = ["la", "el", "lo", "ca", "va", "de", "son", "the", "harry", "star", "star wars", "game of", "señor de lo anillos"];
-    
-    let arr = []
+  const alphabet = [
+    "house",
+    "forest",
+    "spider",
+    "star trek",
+    "the",
+    "harry",
+    "star",
+    "star wars",
+    "game of",
+    "ring",
+    "off",
+    "tree",
+    "last",
+    "fast",
+    "crypto",
+  ];
 
+  let arr = [];
 
-    try {
-        for (const leter of alphabet) {
-            let result = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${leter}&maxResults=40&printType=books&key=${API_KEY}`);
-            arr.push(result.data.items)
-        }
+  try {
+    for (const leter of alphabet) {
+      let result = await axios.get(
+        `https://www.googleapis.com/books/v1/volumes?q=${leter}&maxResults=40&printType=books&key=${API_KEY}`
+      );
+      arr.push(result.data.items);
+    }
 
         let concatened = [].concat.apply([], arr)
         let filtrados = concatened.map((e) => {
@@ -34,12 +51,11 @@ async function datos() {
                 categories: e.volumeInfo.categories
             }
 
-        })
-        
-        return alaBd
-    } catch (error) {
-        console.log(error)
-    }
+
+    return alaBd;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-module.exports=datos
+module.exports = datos;
