@@ -4,10 +4,10 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../NavBar/NavBar";
 import Itemscheckout from "./Itemscheckout";
-import { getCart, infoBooks, infoSoldBooks, removeAllFromCart} from "../../redux/actions";
-import {useHistory} from 'react-router-dom'
+import { getCart, infoBooks, infoSoldBooks, removeAllFromCart } from "../../redux/actions";
+import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
-
+import './styles.css'
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 export default function Checkout() {
@@ -42,36 +42,36 @@ export default function Checkout() {
     console.log("soy total info", totalInfo);
     dispatch(infoBooks(infoBook));
     dispatch(infoSoldBooks(totalInfo));
-  
+
     let timerInterval
-Swal.fire({
-  title: 'Your payment was successful',
-  timer: 5000,
-  timerProgressBar: true,
-  didOpen: (success) => {
-    Swal.getIcon(success)
-    const b = Swal.getHtmlContainer().querySelector('b')
-    timerInterval = setInterval(() => {
-      b.textContent = Swal.getTimerLeft()
-    }, 100)
-  },
-  willClose: () => {
-    clearInterval(timerInterval);
-    
-    
-  }
-}).then((result) => {
-  /* Read more about handling dismissals below */
-  if (result.dismiss === Swal.DismissReason.timer) {
-    console.log('I was closed by the timer')
-  }
-})
+    Swal.fire({
+      title: 'Your payment was successful',
+      timer: 5000,
+      timerProgressBar: true,
+      didOpen: (success) => {
+        Swal.getIcon(success)
+        const b = Swal.getHtmlContainer().querySelector('b')
+        timerInterval = setInterval(() => {
+          b.textContent = Swal.getTimerLeft()
+        }, 100)
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+
+
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
 
     return actions.order.capture();
   };
 
   return (
-    <>
+    <div className="checkout">
       <NavBar></NavBar>
       {checkoutinfo?.map((e) => (
         <Itemscheckout
@@ -82,12 +82,14 @@ Swal.fire({
           cant={e.cant}
         />
       ))}
-      <h1>Monto a Pagar:{preciototal}</h1>
-      <PayPalButton
-        createOrder={(data, actions) => createOrder(data, actions)}
-        onApprove={(data, actions) => onApprove(data, actions)}
-      />
-      ;
-    </>
+      <h1>Order Total: ${preciototal}</h1>
+      <div className="paypal">
+
+        <PayPalButton
+          createOrder={(data, actions) => createOrder(data, actions)}
+          onApprove={(data, actions) => onApprove(data, actions)}
+        />
+      </div>
+    </div>
   );
 }

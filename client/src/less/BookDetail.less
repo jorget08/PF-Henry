@@ -36,6 +36,14 @@
             border: none;
             align-items: center;
             padding: 10px;
+
+            img {
+                max-width: 10rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            flex-direction: column;
         }
 
         display: flex;
@@ -45,7 +53,7 @@
         border-right: 1px solid @borderColor;
 
         img {
-            max-width: 15rem;
+            width: 15rem;
             border-radius: 10px;
         }
     }

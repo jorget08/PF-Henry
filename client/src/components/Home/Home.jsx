@@ -3,33 +3,43 @@ import ShowBooks from '../ShowBooks/ShowBooks'
 import NavBar from '../NavBar/NavBar'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getBooks, getCategories,getCart } from '../../redux/actions';
+import { getBooks, getCategories, getCart } from '../../redux/actions';
 import styles from "./styles.css"
 import Filters from '../Filters/Filters';
+import { useParams } from 'react-router-dom';
 
 export default function Home() {
-
+    const { search } = useParams()
+    console.log(search)
     const dispatch = useDispatch()
     const [newBooks, setNewBooks] = useState(false)
+    var books = useSelector(state => state.books)
+    var categories = useSelector(state => state.categories)
     useEffect(() => {
-        dispatch(getBooks)
+        if (!books.length) dispatch(getBooks)
         dispatch(getCategories)
         dispatch(getCart())
     }, [dispatch])
 
-    var books = useSelector(state => state.books)
-    var categories = useSelector(state => state.categories)
 
-   
+    let searchCat = categories.filter(e => e.name === search);
+    console.log(searchCat)
     function renderBooks() {
         setNewBooks(newBooks ? false : true)
     }
     return (
         <div>
             <NavBar />
-            <Filters books={books} func={renderBooks} categories={categories} />
+            {books.length && categories.length ?
+                <div>
+
+                    <Filters books={books} func={renderBooks} categories={categories} isCategory={searchCat.length} category={search} />
+                </div>
+                :
+                ''
+            }
             {books?.length ?
-                <ShowBooks books={books} />
+                <ShowBooks books={books} search={searchCat.length} />
                 :
                 <div className='loading'>
                 </div>
