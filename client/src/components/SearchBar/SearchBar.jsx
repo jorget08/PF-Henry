@@ -5,7 +5,7 @@ import { FaSistrix } from "react-icons/fa"
 import styles from './styles.css'
 import { useHistory } from "react-router-dom";
 
-export default function SearchBar() {
+export default function SearchBar({ categories }) {
 
     const dispatch = useDispatch()
 
@@ -43,6 +43,7 @@ export default function SearchBar() {
         dispatch(getBySearch(search));
         setSearch("");
         setResults([])
+        history.push(`/Home/`)
     }
 
     function handleSearch(id) {

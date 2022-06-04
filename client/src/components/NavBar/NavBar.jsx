@@ -29,12 +29,7 @@ export default function NavBar() {
     }
 
     useEffect(() => {
-        if (token) {
-            setIsLogged(true)
-        }
-        else {
-            setIsLogged(false)
-        }
+        token ? setIsLogged(true) : setIsLogged(false);
     }, [token, isLogged])
 
     return (
@@ -43,7 +38,7 @@ export default function NavBar() {
                 <div className='logoBar'>
                     <div className='search'>
                         <div className='logo'>
-                            <Link to='/home'>
+                            <Link to='/'>
                                 <img src="https://www.freeiconspng.com/thumbs/book-icon/book-stack-icon--icon-search-engine-16.png" alt="logo" />
                                 <span>BookStore</span>
                             </Link>
@@ -53,7 +48,7 @@ export default function NavBar() {
 
                     </div>
                     <div className='links'>
-                        <Link to='/home' className='link'>
+                        <Link to='/' className='link'>
                             <IoHomeOutline size={30} />
                         </Link>
                         <Link to='/support' className='link'>
@@ -63,11 +58,15 @@ export default function NavBar() {
                             <BsCart2 size={30} className="iconCart" />
                             <p> {JSON.parse(localStorage.getItem("carrito"))?.length}</p>
                         </Link>
-                        {isLogged ? <div><Link to="/userProfile"><button>View profile</button></Link> <GoogleLogout
-                clientId={clientId}
-                buttonText="Logout"
-                onLogoutSuccess={handleLogOut}
-                style={{margin: '0 auto', display: 'block'}}/></div> :
+                        {isLogged ?
+                            <div>
+                                <Link to="/userProfile"><button>View profile</button></Link>
+                                <GoogleLogout
+                                    clientId={clientId}
+                                    buttonText="Logout"
+                                    onLogoutSuccess={handleLogOut}
+                                    style={{ margin: '0 auto', display: 'block' }}
+                             /></div> :
                             <div className='log'>
                                 <IoMdContact size={33} onClick={openModal} />
 

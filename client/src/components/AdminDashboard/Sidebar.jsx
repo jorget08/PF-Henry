@@ -21,7 +21,7 @@ export default function Sidebar() {
             <Link to="">Edit a book</Link>
           </li>
           <li>
-            <Link to="">Users</Link>
+            <Link to="/admin/users">Users</Link>
           </li>
           <li>
             <Link to="/admin/stock">Localstrike</Link>

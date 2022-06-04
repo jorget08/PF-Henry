@@ -1,0 +1,25 @@
+.checkout h1 {
+  font-size: 30px;
+  font-family: 'Roboto Flex', sans-serif;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.checkout .paypal {
+  margin-left: 20%;
+}
+@media (max-width: 1125px) {
+  .checkout .paypal {
+    margin-left: 15%;
+  }
+}
+@media (max-width: 1070px) {
+  .checkout .paypal {
+    margin-left: 10%;
+  }
+}
+@media (max-width: 900px) {
+  .checkout .paypal {
+    margin: 0 5%;
+  }
+}

@@ -1,0 +1,75 @@
+@import './variables.less';
+
+.button() {
+    border-radius: 10px;
+    border: none;
+    padding: 0.5rem;
+    outline: none;
+    margin: auto;
+    margin: 10px 0;
+    font-size: 18px;
+    font-family: @Source;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.containerRegister {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        font-family: @Source;
+        margin: 10px;
+    }
+
+    button {
+        .button();
+        color: white;
+        width: 50%;
+        background-color: @mainColor;
+
+        &:hover {
+            background-color: rgb(255, 35, 35);
+            color: rgb(255, 255, 255);
+        }
+    }
+
+    .fieldReg {
+        margin: 10px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+
+        input {
+            font-family: @Source;
+            font-size: 18px;
+            border: none;
+            border-bottom: 2px solid rgb(79, 184, 184);
+            background-color: unset;
+            outline: none;
+            margin: 10px;
+
+            &:focus {
+                border-bottom: 2px solid rgb(55, 53, 189);
+
+            }
+        }
+
+        label {
+            font-family: @merri;
+            font-size: 20px;
+
+        }
+
+    }
+
+
+}
