@@ -1,6 +1,13 @@
 import axios from "axios";
 
-export default async  function helpCall(url) {
-   return  axios.get(`http://localhost:3001${url}`)
-   .then(res=>{return res.data})
+export async function helpCall(url) {
+  return axios.get(`http://localhost:3001${url}`).then((res) => {
+    return res.data;
+  });
+}
+
+export async function helpCallPut(url, obj) {
+  return axios.put(`http://localhost:3001${url}`, obj).then((res) => {
+    return res.data;
+  });
 }
