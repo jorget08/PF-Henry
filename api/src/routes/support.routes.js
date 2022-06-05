@@ -9,7 +9,7 @@ const { createSupport, getSupports, updateSupport, deleteSupport, responseSuppor
 
 router.post('/', 
     [
-        validarJwt,
+        // validarJwt,
         check('comment', 'El comentario es obligatorio').not().isEmpty(),
         validarCampos
     ],

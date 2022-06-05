@@ -8,10 +8,10 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV4,
             allowNull: false,
         },
-        // idUser: {
-        //     type: DataTypes.UUID,
-        //     allowNull: false,
-        // },
+        emailGuess: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         //? idAdmin es el id del admin que responde al support 
         idAdmin: {
             type: DataTypes.UUID,

@@ -2,15 +2,23 @@ const { User, Rol, Support } = require("../db");
 
 //? support comments 
 const createSupport = async (req, res) => {
-    const uid = req.uid;
-    const { comment } = req.body;
+    // const uid = req.uid;
+    const { name, email, comment } = req.body;
     try {
-        const userExist = await User.findOne({ where: { idUser: uid } });
+        const userExist = await User.findOne({ where: { email } });
         if (!userExist) {
-            return res.status(400).json({
-                ok: false,
-                msg: 'User does not exist'
+            //? 
+            const support = await Support.create({
+                emailGuess: email,
+                comment,
+                date: new Date(),
+                status: 0
             });
+            return res.status(200).json({
+                ok: true,
+                msg: 'Support created',
+                support
+            });1
         }
         const support = await Support.create({
             comment,
