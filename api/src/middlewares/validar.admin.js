@@ -50,7 +50,7 @@ const validarAdminOmio = async (req, res, next) => {
                 msg: 'Usuario no existe, verifica el email'
             });
         }
-        if (user.rols.name !== 'admin' && user.idUser !== id) {
+        if (user.rols.name !== 'admin' || user.idUser !== id) {
             return res.status(400).json({
                 ok: false,
                 msg: 'No tienes permisos para realizar esta acción'
