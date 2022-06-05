@@ -29,29 +29,26 @@ export default function ShowBooks({ books }) {
     // setea las páginas segun el botón clickeado.
 
     const paginat = (e, pageNumber) => {
-        for (let i = 1; i <= limitPage; i++) {
-            let page = document.getElementById(i);
-            page.classList.remove("currentPage");
-        }
+        // for (let i = 1; i <= limitPage; i++) {
+        //     let current = document.getElementById(i);
+        //     current.classList.remove("currentPage");
+        // }
         if (pageNumber === "next" && page + 1 <= limitPage) {
-            console.log("page + 1 =", page + 1)
             setPage(page + 1)
-            console.log(page)
-            let current = document.getElementById(page + 1);
-            current.classList.add("currentPage")
+            // let current = document.getElementById(page);
+            // current.classList.add("currentPage")
         } else if (pageNumber === "prev" && page - 1 >= 1) {
             setPage(page - 1)
-            let current = document.getElementById(page - 1);
-            current.classList.add("currentPage")
+            // let current = document.getElementById(page);
+            // current.classList.add("currentPage")
         } else {
             setPage(pageNumber)
-            let current = document.getElementById(pageNumber);
-            current.classList.add("currentPage")
+            // let current = document.getElementById(page);
+            // current.classList.add("currentPage")
         }
 
 
     }
-
 
     return (
         <div className='homeContainer'>
@@ -69,7 +66,7 @@ export default function ShowBooks({ books }) {
                         )
                     })}
             </div>
-            <Paginated paginat={paginat} limitPage={limitPage} firstPrevControl={firstPrevControl} nextLastControl={nextLastControl}></Paginated>
+            <Paginated page={page} paginat={paginat} limitPage={limitPage} firstPrevControl={firstPrevControl} nextLastControl={nextLastControl}></Paginated>
         </div >
     )
 }

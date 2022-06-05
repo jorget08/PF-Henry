@@ -28,3 +28,4 @@ export const EDIT_PROFILE = "EDIT_PROFILE";
 export const GET_USER = "GET_USER";
 export const SEND_EMAIL = "SEND_EMAIL";
 export const GET_FAV = "GET_FAV";
+export const POST_SUPPORT = "POST_SUPPORT";

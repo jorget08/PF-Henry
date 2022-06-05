@@ -27,6 +27,7 @@ import {
   EDIT_PROFILE,
   GET_USER,
   GET_FAV,
+  POST_SUPPORT,
 } from "../actions/types";
 
 const initialState = {
@@ -247,7 +248,14 @@ export default function rootReducer(state = initialState, action) {
         favs: payload,
       };
 
-    default:
+    case POST_SUPPORT:
+      return {
+        ...state,
+      };
+  
+      default:
       return state;
+
+    
   }
 }

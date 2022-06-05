@@ -4,8 +4,12 @@ import NavBar from '../NavBar/NavBar';
 import { Formik, Form, Field } from 'formik'
 import './support.css'
 import { scrollToTop } from 'react-scroll/modules/mixins/animate-scroll';
+import { postSupport } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
 
 export default function Support() {
+
+    const dispatch = useDispatch()
 
     const scroll0 = useRef()
     const scroll1 = useRef()
@@ -133,6 +137,7 @@ export default function Support() {
                                 initialValues={{
                                     name: "",
                                     email: "",
+                                    content: ""
                                 }}
                                 validate={(valores) => {
 
@@ -151,10 +156,12 @@ export default function Support() {
                                         errors.content = 'At least your question must be longer than 100 characters!'
                                     }
                                     return errors;
+
                                 }}
 
                                 onSubmit={(valores, { resetForm }) => {
-                                    console.log("valores", valores)
+                                    dispatch(postSupport(valores))
+                                    alert("Query sent!")
                                     resetForm()
                                 }}>
 

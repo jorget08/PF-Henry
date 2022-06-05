@@ -355,3 +355,14 @@ export function getFavs() {
     }
   };
 }
+
+export function postSupport(payload) {
+  return async function () {
+    try {
+      let response = await axios.post(`http://localhost:3001/support`, payload);
+      return response;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
