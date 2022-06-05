@@ -368,6 +368,7 @@ export function postSupport(payload) {
       console.log(e);
     }
   };
+}
 
 export function addComment(payload){
   return async function (dispatch) {
@@ -391,4 +392,5 @@ export function showComments(id){
       console.log(e);
     }
   };
+}
 
