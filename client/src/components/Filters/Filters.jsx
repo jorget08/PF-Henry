@@ -7,7 +7,7 @@ import Stars from '../Stars/Stars';
 import { helpCall } from '../../helCall';
 import './styles.css'
 
-export default function Filters({ categories, func, category, isCategory }) {
+export default function Filters({ categories, func, category, isCategory, setPage }) {
 
     const dispatch = useDispatch();
     const scores = [1, 2, 3, 4, 5]
@@ -30,12 +30,14 @@ export default function Filters({ categories, func, category, isCategory }) {
         e.preventDefault();
         dispatch(filterCategory(e.target.value))
         func();
+        setPage(1);
     }
 
     function handleFilterScore(e) {
         e.preventDefault();
         dispatch(filterScore(e.target.value))
         func();
+        setPage(1);
     }
 
     function handleChange1(e) {
@@ -51,12 +53,14 @@ export default function Filters({ categories, func, category, isCategory }) {
         e.preventDefault();
         dispatch(filterPrice(price1, price2))
         func();
+        setPage(1);
     }
 
     function handleOrdenTitle(e) {
         e.preventDefault();
         dispatch(ordenTitle(e.target.value))
         func();
+        setPage(1);
     }
 
     return (
