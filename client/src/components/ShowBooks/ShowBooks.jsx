@@ -64,7 +64,7 @@ export default function ShowBooks({ books }) {
 
                             <Link to={`/book/${b.id}`} key={b.id}>
 
-                                <BookCard title={b.title} img={b.image} author={b.author} price={b.price} score={b.score} id={b.id} ></BookCard>
+                                <BookCard title={b.title} img={b.image} author={b.author} price={b.price} score={b.score} id={b.id}></BookCard>
                             </Link>
                         )
                     })}
