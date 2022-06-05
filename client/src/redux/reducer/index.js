@@ -26,7 +26,9 @@ import {
   GET_USERS,
   EDIT_PROFILE,
   GET_USER,
-
+  GET_FAV,
+  ADD_COMMENT,
+  GET_COMMENTS
 } from "../actions/types";
 
 const initialState = {
@@ -39,10 +41,12 @@ const initialState = {
   score: [],
   categoriesLand: {},
   user: {},
-  relevants:[],
-  totalPrice:0,
-  infoBooks:[],
-  users: []
+  relevants: [],
+  totalPrice: 0,
+  infoBooks: [],
+  users: [],
+  favs: [],
+  comments: []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -84,7 +88,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         books: payload,
-        relevants: payload
+        relevants: payload,
       };
     case FILTER_PRICE:
       return {
@@ -137,7 +141,7 @@ export default function rootReducer(state = initialState, action) {
         cart: JSON.parse(localStorage.getItem("carrito")),
       };
     case REMOVE_ALL_FROM_CART:
-      localStorage.setItem("carrito",JSON.stringify([]));
+      localStorage.setItem("carrito", JSON.stringify([]));
       return {
         cart: [],
       };
@@ -171,77 +175,89 @@ export default function rootReducer(state = initialState, action) {
     case GET_LANDING_TOP:
       return {
         ...state,
-        score: payload
+        score: payload,
       };
     case GET_LANDING_TOP_CAT:
       return {
         ...state,
-        categoriesLand: payload
+        categoriesLand: payload,
       };
 
     case CREATE_USER:
       return {
         ...state,
-      }
+      };
 
-    case LOG_USER:     
+    case LOG_USER:
       return {
         ...state,
-        user: {...payload}
-      }
+        user: { ...payload },
+      };
     case LOG_WITH_GOOGLE:
-      localStorage.setItem("token", JSON.stringify(payload.token))
-      console.log(payload)
-      return{
+      localStorage.setItem("token", JSON.stringify(payload.token));
+      console.log(payload);
+      return {
         ...state,
-        user: {...payload.user}
-      }
+        user: { ...payload.user },
+      };
     case UNLOG_USER:
-      localStorage.removeItem("token")  
-    return {
+      localStorage.removeItem("token");
+      return {
         ...state,
-        user: {}
-      }
-
-      case TOTAL_PRICE:
-        return{
-            ...state,
-            totalPrice:payload
-          }
-          case CHECKOUT_BOOKS:
-            return{
-              ...state,
-              infoBooks:payload
-
-          }
-      case GET_USERS:
-        console.log("SOY EL PAYLOAD CARAJO", payload)
-        return{
-          ...state,
-          users: payload
-        }
+        user: {},
+      };
 
     case TOTAL_PRICE:
-      return{
+      return {
         ...state,
-        totalPrice:payload
-      }
+        totalPrice: payload,
+      };
     case CHECKOUT_BOOKS:
-      return{
+      return {
         ...state,
-        infoBooks:payload
-      }
-    case EDIT_PROFILE:
-      return{
+        infoBooks: payload,
+      };
+    case GET_USERS:
+      console.log("SOY EL PAYLOAD CARAJO", payload);
+      return {
         ...state,
-        user:payload
-      }
-    case GET_USER:
-      return{
-        ...state,
-        user:payload
-      }
+        users: payload,
+      };
 
+    case TOTAL_PRICE:
+      return {
+        ...state,
+        totalPrice: payload,
+      };
+    case CHECKOUT_BOOKS:
+      return {
+        ...state,
+        infoBooks: payload,
+      };
+    case EDIT_PROFILE:
+      return {
+        ...state,
+        user: payload,
+      };
+    case GET_USER:
+      return {
+        ...state,
+        user: payload,
+      };
+    case GET_FAV:
+      return {
+        ...state,
+        favs: payload,
+      };
+    case ADD_COMMENT:
+      return{
+        ...state
+      }
+    case GET_COMMENTS:
+      return{
+        ...state,
+        coments: payload
+      }
 
     default:
       return state;

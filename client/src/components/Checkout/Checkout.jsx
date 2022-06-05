@@ -39,9 +39,11 @@ export default function Checkout() {
 
   console.log("soy user id", user.idUser);
 
-  useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]);
+
+// useEffect(() => {
+//   dispatch(getUser())
+  
+// }, [dispatch])
 
   console.log(user);
 

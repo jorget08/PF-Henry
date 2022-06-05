@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { getDetail, clearDetail, deleteBook } from "../../redux/actions";
+import { getDetail, clearDetail, deleteBook, addComment, showComments } from "../../redux/actions";
 import DetailCompra from '../DetailCompra/DetailCompra';
 import Stars from '../Stars/Stars';
 import NavBar from '../NavBar/NavBar'
@@ -14,6 +14,8 @@ export default function BookDetail() {
   const user = useSelector(state => state.user)
   console.log("SOY EL USERRRR", user)
   const history = useHistory()
+  const token = localStorage.getItem("token")
+  const [comment, setComment] = useState("")
 
   console.log("hystory",history)
 
@@ -24,13 +26,14 @@ export default function BookDetail() {
   const dispatch = useDispatch()
   const { id } = useParams()
   useEffect(() => {
-    dispatch(getDetail(id))
+    dispatch(getDetail(id),showComments(id))
     return () => {
       dispatch(clearDetail())
     }
   }, [dispatch, id])
 
   var bookDet = useSelector(state => state.detail)
+  var comments = useSelector(state => state.comments)
   var stars = [false, false, false, false, false];
 
   function delet (e) {
@@ -40,6 +43,17 @@ export default function BookDetail() {
       alert("The book has been deleted successfully!")
       redirect()
     }
+  }
+
+  function handleChange(e){
+    e.preventDefault();
+    setComment(e.target.value)
+  }
+
+  function handleClick(e){
+    e.preventDefault();
+    dispatch(addComment(comment))
+    setComment("")
   }
 
   return (
@@ -92,6 +106,20 @@ export default function BookDetail() {
         </div>
 
       }
+      <div>
+        <h3>Comments:</h3>
+        {comments.length?comments.map(e => {
+                    return (
+                      <p>{e.name}</p>
+                    )
+                  }):
+                  <p>Be the first to comment this book</p>}
+      </div>
+      {token?<div>
+        <h3>Add a comment:</h3>
+        <input type="text" onChange={e=>handleChange(e)}></input>
+        <button onClick={e=>handleClick(e)}>Send</button>
+      </div>:""}
     </div>
   )
 }
