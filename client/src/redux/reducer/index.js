@@ -27,6 +27,8 @@ import {
   EDIT_PROFILE,
   GET_USER,
   GET_FAV,
+  ADD_COMMENT,
+  GET_COMMENTS
 } from "../actions/types";
 
 const initialState = {
@@ -44,6 +46,7 @@ const initialState = {
   infoBooks: [],
   users: [],
   favs: [],
+  comments: []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -246,6 +249,15 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         favs: payload,
       };
+    case ADD_COMMENT:
+      return{
+        ...state
+      }
+    case GET_COMMENTS:
+      return{
+        ...state,
+        coments: payload
+      }
 
     default:
       return state;
