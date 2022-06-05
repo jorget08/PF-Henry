@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
     },
     stock:{
       type: DataTypes.DECIMAL,
-      defaultValue:10
+      defaultValue:Math.floor(Math.random() * 10) + 1
     },
     image:{
       type: DataTypes.TEXT,

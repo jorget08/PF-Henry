@@ -8,6 +8,8 @@ const paypal = require('./paypal')
 const reviews= require('./reviews')
 const favourites= require('./favourites')
 const email = require('./email.routes')
+const support = require('./support.routes')
+
 const router = Router();
 
 router.use('/books', books)
@@ -21,6 +23,6 @@ router.use('/auth', authRouter);
 router.use('/paypal', paypal)
 router.use('/favourites', favourites)
 router.use('/reviews', reviews)
-
+router.use('/support', support)
 
 module.exports = router;
