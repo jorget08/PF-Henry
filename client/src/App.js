@@ -17,9 +17,10 @@ import Stock from "./components/AdminDashboard/Stock";
 import Support from "./components/Support/Support";
 import Users from "./components/AdminDashboard/Users";
 import EditProfile from "./components/EditProfile/EditProfile";
+import Container from "./components/AdminDashboard/Container";
 
 function App() {
-  return (
+  return ( 
     <>
       <Route exact path={"/carousel"} component={LandingCarousel} />
       <Route exact path={"/"} component={LandingPage} />
@@ -31,9 +32,10 @@ function App() {
       <Route path={"/register"} component={Register} />
       <Route path={"/userProfile"} component={UserProfile} />
       <Route path={"/admin"} component={Sidebar} />
+      <Route exact path={"/admin"} component={Container}/>
       <Route exact path={"/admin/newbook"} component={FormCreate} />
       <Route exact path={"/admin/stock"} component={Stock} />
-      <Route exact path={"/admin/users"} component={Users} />
+      <Route exact path={"/admin/users"} component={Users}/>
       <Route path={"/checkout"} component={Checkout} />
       <Route path={"/support"} component={Support} />
       <Route path={"/editProfile"} component={EditProfile} />
