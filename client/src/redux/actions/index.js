@@ -29,6 +29,8 @@ import {
   GET_USER,
   SEND_EMAIL,
   GET_FAV,
+  ADD_COMMENT,
+  GET_COMMENTS
 } from "./types";
 
 import axios from "axios";
@@ -365,4 +367,25 @@ export function postSupport(payload) {
       console.log(e);
     }
   };
+
+export function addComment(payload, id){
+  return async function (dispatch) {
+    try {
+      var response = await axios.post(`${id}`,payload,);
+      return dispatch({ type: ADD_COMMENT });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 }
+
+export function showComments(id){
+  return async function () {
+    try {
+      let response = await axios.get(`${id}`);
+      return response;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
