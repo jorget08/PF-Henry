@@ -2,7 +2,7 @@ import { React, useState } from 'react'
 import BookCard from '../BookCard/BookCard'
 import Paginated from '../Paginated/Paginated'
 import { Link } from 'react-router-dom'
-import styles from './styles.css'
+import  './styles.css'
 import { useSelector } from 'react-redux'
 
 
@@ -62,10 +62,10 @@ export default function ShowBooks({ books }) {
                     && currentBooks.map(b => {
                         return (
 
-                            <Link to={`/book/${b.id}`} key={b.id}>
+                          
 
                                 <BookCard title={b.title} img={b.image} author={b.author} price={b.price} score={b.score} id={b.id}></BookCard>
-                            </Link>
+                          
                         )
                     })}
             </div>
