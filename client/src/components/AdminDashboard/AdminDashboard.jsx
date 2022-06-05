@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react'
 import Sidebar from './Sidebar'
 import s from './AdminDashBoard.module.css'
-import {BrowserRouter, Route } from 'react-router-dom'
+import Container from './Container'
+import { useDispatch } from 'react-redux'
+import { getBooks, getUsers } from '../../redux/actions'
+
 
 export default function AdminDashboard() {
+
 
 
   return (
@@ -11,7 +15,7 @@ export default function AdminDashboard() {
         <Sidebar/>
 
       <div className={s.Container}>
-          <h1>HOLA</h1>
+          <Container/>
       </div>  
     </div>
   )

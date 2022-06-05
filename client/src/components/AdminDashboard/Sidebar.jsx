@@ -18,13 +18,7 @@ export default function Sidebar() {
             <Link to="/admin/stock">Stock</Link>
           </li>
           <li>
-            <Link to="">Edit a book</Link>
-          </li>
-          <li>
             <Link to="/admin/users">Users</Link>
-          </li>
-          <li>
-            <Link to="/admin/stock">Localstrike</Link>
           </li>
         </ul>
     </div>
