@@ -358,6 +358,7 @@ export function getFavs() {
   };
 }
 
+
 export function postSupport(payload) {
   return async function () {
     try {
@@ -368,10 +369,11 @@ export function postSupport(payload) {
     }
   };
 
-export function addComment(payload, id){
+export function addComment(payload){
   return async function (dispatch) {
     try {
-      var response = await axios.post(`${id}`,payload,);
+      console.log("add comment", payload)
+      var response = await axios.post(`http://localhost:3001/reviews`,payload);
       return dispatch({ type: ADD_COMMENT });
     } catch (e) {
       console.log(e);
@@ -380,10 +382,11 @@ export function addComment(payload, id){
 }
 
 export function showComments(id){
-  return async function () {
+  return async function (dispatch) {
     try {
-      let response = await axios.get(`${id}`);
-      return response;
+      let response = await axios.get(`http://localhost:3001/reviews/allReviews?book=${id}`);
+      console.log("comentarios",response)
+      return dispatch ({type:GET_COMMENTS, payload: response.data})
     } catch (e) {
       console.log(e);
     }

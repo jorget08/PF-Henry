@@ -257,7 +257,7 @@ export default function rootReducer(state = initialState, action) {
     case GET_COMMENTS:
       return{
         ...state,
-        coments: payload
+        comments: payload
       }
 
     case POST_SUPPORT:

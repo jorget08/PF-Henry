@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { getDetail, clearDetail, deleteBook, addComment, showComments } from "../../redux/actions";
 import DetailCompra from '../DetailCompra/DetailCompra';
+import { Formik, Form, Field } from 'formik'
 import Stars from '../Stars/Stars';
 import NavBar from '../NavBar/NavBar'
 import "./styles.css"
@@ -25,15 +26,16 @@ export default function BookDetail() {
 
   const dispatch = useDispatch()
   const { id } = useParams()
+  var comments = useSelector(state => state.comments)
   useEffect(() => {
-    dispatch(getDetail(id),showComments(id))
+    dispatch(getDetail(id))
+    dispatch(showComments(id))
     return () => {
       dispatch(clearDetail())
     }
   }, [dispatch, id])
 
   var bookDet = useSelector(state => state.detail)
-  var comments = useSelector(state => state.comments)
   var stars = [false, false, false, false, false];
 
   function delet (e) {
@@ -43,17 +45,6 @@ export default function BookDetail() {
       alert("The book has been deleted successfully!")
       redirect()
     }
-  }
-
-  function handleChange(e){
-    e.preventDefault();
-    setComment(e.target.value)
-  }
-
-  function handleClick(e){
-    e.preventDefault();
-    dispatch(addComment(comment))
-    setComment("")
   }
 
   return (
@@ -109,17 +100,60 @@ export default function BookDetail() {
       <div>
         <h3>Comments:</h3>
         {comments.length?comments.map(e => {
-                    return (
-                      <p>{e.name}</p>
+                    return (<div>
+                      <h4>{e.title}</h4>
+                      <p>{e.description}</p>
+                      </div>
                     )
                   }):
                   <p>Be the first to comment this book</p>}
       </div>
       {token?<div>
         <h3>Add a comment:</h3>
-        <input type="text" onChange={e=>handleChange(e)}></input>
-        <button onClick={e=>handleClick(e)}>Send</button>
-      </div>:""}
+        <Formik
+        initialValues={{
+          title:"",
+          description:""
+        }}
+        validate={(valores)=>{
+          let errors ={};
+          if(valores.title>50){
+            errors.title="The title of the review cannot have more than 50 characters";
+          }
+          if(valores.description>1000){
+            errors.description="The review cannot have more than 1000 characters";
+          }
+          return errors;
+        }}
+        onSubmit={(valores, {resetForm})=>{
+          var rev={
+            review:{
+              title:valores.title,
+              description:valores.description
+            },
+            book: bookDet.id,
+            user: user.idUser
+          }
+          dispatch(addComment(rev))
+          resetForm()
+        }}>
+          {({touched, errors})=>(
+            <Form>
+              <div>
+                <label>Title</label>
+                <Field type="text" name="title" placeholder="Title"/>
+                {touched.title && errors.title && <span>{errors.title}</span>}
+              </div>
+              <div>
+                <label>Review</label>
+                <Field type="text" name="description" placeholder="Review"/>
+                {touched.review && errors.review && <span>{errors.review}</span>}
+              </div>
+              <button type="submit">Send review</button>
+            </Form>
+          )}
+        </Formik>
+      </div>:<p>Log in to comment</p>}
     </div>
   )
 }
