@@ -4,9 +4,10 @@ import Paginated from '../Paginated/Paginated'
 import { Link } from 'react-router-dom'
 import  './styles.css'
 import { useSelector } from 'react-redux'
+import Filters from '../Filters/Filters';
 
 
-export default function ShowBooks({ books }) {
+export default function ShowBooks({ books, categories, func, category, isCategory }) {
 
     var [page, setPage] = useState(1)
     var categories = useSelector(state => state.categories)
@@ -52,6 +53,14 @@ export default function ShowBooks({ books }) {
 
     return (
         <div className='homeContainer'>
+            {books.length && categories.length ?
+                <div className="filters">
+
+                    <Filters books={books} func={func} categories={categories} isCategory={isCategory} category={category} setPage={setPage} />
+                </div>
+                :
+                ''
+            }
 
             <div className='catalogue'>
                 {
