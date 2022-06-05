@@ -27,6 +27,7 @@ import {
   EDIT_PROFILE,
   GET_USER,
   GET_FAV,
+  POST_SUPPORT,
   ADD_COMMENT,
   GET_COMMENTS
 } from "../actions/types";
@@ -259,7 +260,14 @@ export default function rootReducer(state = initialState, action) {
         coments: payload
       }
 
-    default:
+    case POST_SUPPORT:
+      return {
+        ...state,
+      };
+  
+      default:
       return state;
+
+    
   }
 }
