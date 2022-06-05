@@ -32,10 +32,10 @@ let payment=checkoutinfo
 
 console.log(payment)
 
-useEffect(() => {
-  dispatch(getUser())
+// useEffect(() => {
+//   dispatch(getUser())
   
-}, [dispatch])
+// }, [dispatch])
 
 console.log(user)
 
