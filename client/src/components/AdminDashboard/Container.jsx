@@ -12,8 +12,8 @@ export default function Container() {
   const allUsers = useSelector(state => state.users) 
 
   useEffect(()=> {
+    dispatch(getUsers())       
     dispatch(getBooks)
-    dispatch(getUsers)       
   },[dispatch])
     
   return (
