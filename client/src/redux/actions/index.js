@@ -28,7 +28,6 @@ import {
   EDIT_PROFILE,
   GET_USER,
   SEND_EMAIL,
-  GET_FAV,
   ADD_COMMENT,
   GET_COMMENTS,
   GET_SUPPORT
@@ -348,16 +347,7 @@ export function sendEmail(payload) {
   };
 }
 
-export function getFavs(data) {
-  return async function (dispatch) {
-    try {
-      const favs = await axios.get(`http://localhost:3001/favourites?user=${data}`);
-      return dispatch({ type: GET_FAV, payload: favs.data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
+
 
 
 export function postSupport(payload) {

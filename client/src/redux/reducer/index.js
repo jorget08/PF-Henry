@@ -26,7 +26,6 @@ import {
   GET_USERS,
   EDIT_PROFILE,
   GET_USER,
-  GET_FAV,
   POST_SUPPORT,
   ADD_COMMENT,
   GET_COMMENTS,
@@ -195,6 +194,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         user: { ...payload },
+        
       };
     case LOG_WITH_GOOGLE:
       localStorage.setItem("token", JSON.stringify(payload.token));
@@ -202,12 +202,14 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         user: { ...payload.user },
+       
       };
     case UNLOG_USER:
       localStorage.removeItem("token");
       return {
         ...state,
         user: {},
+        
       };
 
     case TOTAL_PRICE:
@@ -247,11 +249,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         user: payload,
       };
-    case GET_FAV:
-      return {
-        ...state,
-        favs: payload,
-      };
+
     case ADD_COMMENT:
       return{
         ...state
