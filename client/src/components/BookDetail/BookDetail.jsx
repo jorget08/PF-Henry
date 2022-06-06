@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { getDetail, clearDetail, deleteBook, addComment, showComments } from "../../redux/actions";
+import { getDetail, clearDetail, deleteBook, addComment, showComments, getBooks } from "../../redux/actions";
 import DetailCompra from '../DetailCompra/DetailCompra';
 import { Formik, Form, Field } from 'formik'
 import Stars from '../Stars/Stars';
@@ -42,6 +42,7 @@ export default function BookDetail() {
     if (window.confirm(`Are you sure you want to delete this book: ${bookDet.title}?`)) {
       dispatch(deleteBook(bookDet.id))
       alert("The book has been deleted successfully!")
+      dispatch(getBooks)
       redirect()
     }
   }
