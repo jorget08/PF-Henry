@@ -26,8 +26,11 @@ export default function NavBar() {
     function handleLogOut() {
         setIsLogged(false)
         dispatch(unlogUser())
+        reload()
     }
-
+    function reload ()  {
+        window.location.reload(true);
+    }
     useEffect(() => {
         token ? setIsLogged(true) : setIsLogged(false);
     }, [token, isLogged])

@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 import { helpCallPut, helpCall, helpCallDelete } from '../../helCall';
-
 
 import { AiOutlineHeart } from 'react-icons/ai'
 import { AiFillHeart } from 'react-icons/ai'
@@ -12,9 +10,12 @@ import Stars from '../Stars/Stars';
 
 export default function BookCard({ land, title, author, img, price, score, id }) {
     const styles = { alignSelf: "flex-end", padding: "10px", color: "#bf3030" };
+  
     const user = useSelector(state => state.user);
+
     const [logueado, setLogueado] = useState(false)
     const [isFav, setIsFav] = useState(false)
+
 
     const obj = {
         user: user.idUser,
@@ -22,20 +23,18 @@ export default function BookCard({ land, title, author, img, price, score, id })
 
     }
 
-    useEffect(() => {
-
+    useEffect(() => { 
         if (Object.keys(user).length !== 0) {
             setLogueado(true)
-
+            
             helpCall(`/favourites/fav?book=${id}&user=${user.idUser}`)
-                .then(res => {
-                    console.log('soy resposee', res)
-                    return res
-                })
                 .then(res => setIsFav(res))
 
         }
-    }, [user, id])
+        if(Object.keys(user).length === 0) return setLogueado(false)
+    }, [ id,user])
+   
+    
 
     function handleFav() {
         if (isFav == false) {
@@ -46,7 +45,7 @@ export default function BookCard({ land, title, author, img, price, score, id })
             } else alert('logueate pliss')
         }
         if (isFav == true) {
-            console.log('soy el obj', obj)
+            
 
             helpCallDelete(`/favourites?user=${user.idUser}&favs=${id}`)
                 .then(res => setIsFav(false))
