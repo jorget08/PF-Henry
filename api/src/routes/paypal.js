@@ -4,7 +4,7 @@ const axios = require('axios')
 const request = require('request')
 const {CLIENT, SECRET, PAYPAL_API} = process.env
 const auth = {user: CLIENT, pass: SECRET}
-const { Payment, Book, Paymentbook } = require("../db");
+const { Payment, Book, Paymentbook, User } = require("../db");
 
 
 const createPayment = async (req, res, next) => {
@@ -68,11 +68,23 @@ const cancelPayment = (req, res) => {
 router.post("/paypal/back", createPayment)
 router.get("/execute-payment", executePayment)
 
-router.post("/",  async (req, res, next) => {
+router.post("/", async (req, res, next) => {
     try {
-        const {data, totalPrice, infoBook} = req.body
+        const {data, totalPrice, infoBook, userId} = req.body
         const {orderID, payerID, paymentSource} = data
+        console.log(userId)
+        for (let i = 0; i < infoBook.length; i++) {
+            let b = await Book.findOne({
+                where: {
+                    id: infoBook[i].id
+                }
+            })
+            await b.update({
+                stock: b.stock - infoBook[i].cant
+            })
+        }
 
+        
         let books = infoBook.map(e => {return{
             title: e.title,
             author: e.author,
@@ -82,13 +94,20 @@ router.post("/",  async (req, res, next) => {
             cant: e.cant
         }})
         let paymentBooks = await Paymentbook.bulkCreate(books)
-
+        
         const paymentCreated = await Payment.create({
             orderID,
             payerID,
             paymentSource,
             totalPrice
         })
+        
+        const user = await User.findOne({
+            where: {
+                idUser: userId
+            }
+        })
+        user.addPayment(paymentCreated)
 
         for (let i = 0; i < paymentBooks.length; i++) {
             const book = await Paymentbook.findOne({
@@ -107,12 +126,17 @@ router.post("/",  async (req, res, next) => {
 
 router.get("/payments", async (req, res, next) => {
     try {
-        const payments = await Payment.findAll({
+        const {id} = req.paramns
+        const user = await User.findOne({
+            where : {
+                idUser: id
+            },
             include:{
-                model: Paymentbook
+                model: Payment
             }
         })
-        res.json(payments)
+
+        res.json(user)
     } catch (error) {
         next(error)
     }
