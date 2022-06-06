@@ -39,6 +39,7 @@ export default function Home() {
                 <ShowBooks books={books} search={searchCat.length} func={renderBooks} categories={categories} isCategory={searchCat.length} category={search}/>
                 :
                 <div className='loading'>
+                    <h2>There are no books that match your search</h2>
                 </div>
             }
         </div>
