@@ -409,6 +409,8 @@ export function getFavs(user) {
       return dispatch({ type: GET_FAVS, payload: response.data });
     } catch (error) {
       console.log(error);
+    }
+  }}
 
 export function getShoppingHistory(id) {
   return async function (dispatch) {
@@ -438,6 +440,12 @@ export function postFavs(obj) {
     try {
       const response = await axios.post(`http://localhost:3001/favourites`,obj);
       return dispatch({ type: POST_FAVS, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+    }
+  }
+
 
 export function setPage(num) {
   return async function (dispatch) {
