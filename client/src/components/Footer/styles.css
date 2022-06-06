@@ -1,0 +1,18 @@
+.footContainer {
+  display: flex;
+  background-color: #914343;
+}
+
+.foot {
+  display: block;
+  margin: auto;
+  margin-top: 1px;
+  margin-bottom: 50px;
+  align-items: left;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: white;
+}
+
+.titleFoot {
+  font-family: 'Source Sans Pro', sans-serif;
+}

@@ -31,7 +31,8 @@ import {
   ADD_COMMENT,
   GET_COMMENTS,
   GET_SUPPORT,
-  GET_SHOPPING_HISTORY
+  GET_SHOPPING_HISTORY,
+  SET_PAGE
 } from "../actions/types";
 
 const initialState = {
@@ -51,7 +52,8 @@ const initialState = {
   favs: [],
   comments: [],
   support: [],
-  ShoppingHistory:[]
+  ShoppingHistory:[],
+  page: 1
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -273,14 +275,21 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         support: payload
       }
-      case GET_SHOPPING_HISTORY:
+
+    case GET_SHOPPING_HISTORY:
+      return{
+        ...state,
+        ShoppingHistory:payload
+      }
+
+    case SET_PAGE:
         return{
           ...state,
-          ShoppingHistory:payload
-        }
-  
-      default:
-      return state;
+          page: payload
+      }
+
+    default:
+    return state;
 
     
   }

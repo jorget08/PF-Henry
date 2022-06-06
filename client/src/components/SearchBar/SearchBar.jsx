@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBooks, getBySearch } from "../../redux/actions";
+import { getBooks, getBySearch, setPage } from "../../redux/actions";
 import { FaSistrix } from "react-icons/fa"
 import styles from './styles.css'
 import { useHistory } from "react-router-dom";
@@ -8,6 +8,8 @@ import { useHistory } from "react-router-dom";
 export default function SearchBar({ categories }) {
 
     const dispatch = useDispatch()
+    
+    var page = useSelector(state => state.page)
 
     const [search, setSearch] = useState("");
     const [results, setResults] = useState([]);
@@ -41,6 +43,7 @@ export default function SearchBar({ categories }) {
     function handleSubmit(e) {
         e.preventDefault();
         dispatch(getBySearch(search));
+        dispatch(setPage(1));
         setSearch("");
         setResults([])
         history.push(`/Home/`)

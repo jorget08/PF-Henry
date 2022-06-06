@@ -14,6 +14,7 @@ import {
 } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import "./styles.css";
+import Footer from "../Footer/Footer";
 export default function Cart() {
   const dispatch = useDispatch();
   const bookCarts = useSelector((state) => state.cart);
@@ -144,6 +145,7 @@ export default function Cart() {
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

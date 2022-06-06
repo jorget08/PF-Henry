@@ -3,12 +3,15 @@ import BookCard from '../BookCard/BookCard'
 import Paginated from '../Paginated/Paginated'
 import { Link } from 'react-router-dom'
 import  './styles.css'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Filters from '../Filters/Filters';
+import { setPage } from '../../redux/actions'
 
 export default function ShowBooks({ books, categories, func, category, isCategory }) {
 
-    var [page, setPage] = useState(1)
+    const dispatch = useDispatch()
+    
+    var page = useSelector(state => state.page)
     var categories = useSelector(state => state.categories)
 
     const booksPerPage = 9;
@@ -30,11 +33,11 @@ export default function ShowBooks({ books, categories, func, category, isCategor
 
     const paginat = (e, pageNumber) => {
         if (pageNumber === "next" && page + 1 <= limitPage) {
-            setPage(page + 1)
+            dispatch(setPage(page + 1))
         } else if (pageNumber === "prev" && page - 1 >= 1) {
-            setPage(page - 1)
+            dispatch(setPage(page + 1))
         } else {
-            setPage(pageNumber)
+            dispatch(setPage(pageNumber))
         }
     }
 
