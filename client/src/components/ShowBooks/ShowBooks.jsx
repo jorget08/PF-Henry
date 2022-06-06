@@ -6,7 +6,6 @@ import  './styles.css'
 import { useSelector } from 'react-redux'
 import Filters from '../Filters/Filters';
 
-
 export default function ShowBooks({ books, categories, func, category, isCategory }) {
 
     var [page, setPage] = useState(1)
@@ -30,25 +29,13 @@ export default function ShowBooks({ books, categories, func, category, isCategor
     // setea las páginas segun el botón clickeado.
 
     const paginat = (e, pageNumber) => {
-        // for (let i = 1; i <= limitPage; i++) {
-        //     let current = document.getElementById(i);
-        //     current.classList.remove("currentPage");
-        // }
         if (pageNumber === "next" && page + 1 <= limitPage) {
             setPage(page + 1)
-            // let current = document.getElementById(page);
-            // current.classList.add("currentPage")
         } else if (pageNumber === "prev" && page - 1 >= 1) {
             setPage(page - 1)
-            // let current = document.getElementById(page);
-            // current.classList.add("currentPage")
         } else {
             setPage(pageNumber)
-            // let current = document.getElementById(page);
-            // current.classList.add("currentPage")
         }
-
-
     }
 
     return (
@@ -67,8 +54,6 @@ export default function ShowBooks({ books, categories, func, category, isCategor
                     currentBooks
                     && currentBooks.map(b => {
                         return (
-
-                          
 
                                 <BookCard title={b.title} img={b.image} author={b.author} price={b.price} score={b.score} id={b.id}></BookCard>
                           
