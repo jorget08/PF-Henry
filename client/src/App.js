@@ -18,6 +18,7 @@ import SupportAdmin from "./components/AdminDashboard/SupportAdmin";
 import Support from "./components/Support/Support";
 import Users from "./components/AdminDashboard/Users";
 import EditProfile from "./components/EditProfile/EditProfile";
+import Container from "./components/AdminDashboard/Container";
 import { AuthContext } from "./auth/authContext";
 import { getUser } from './redux/actions/index';
 import { useDispatch, useSelector } from "react-redux";
@@ -39,6 +40,7 @@ function App() {
       token,
       user
     }}>
+
     <>
       <Route exact path={"/carousel"} component={LandingCarousel} />
       <Route exact path={"/"} component={LandingPage} />
@@ -50,6 +52,7 @@ function App() {
       <Route path={"/register"} component={Register} />
       <Route path={"/userProfile"} component={UserProfile} />
       <Route path={"/admin"} component={Sidebar} />
+      <Route exact path={"/admin"} component={Container}/>
       <Route exact path={"/admin/newbook"} component={FormCreate} />
       <Route exact path={"/admin/stock"} component={Stock} />
       <Route exact path={"/admin/users"} component={Users} />

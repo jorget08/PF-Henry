@@ -68,8 +68,8 @@ export default function FormCreate() {
         <div className='containerCreate'>
             {/* <NavBar /> */}
             <Sidebar/>
-            {(detail.id !== undefined) ? <h2>Modify the book!</h2> : <h2>Create a book!</h2>}
 
+            <h2 style={{textAlign:"center", fontWeight:"800"}}>{(detail.id !== undefined ? "Modify the book" : "Create a book")}</h2>
             <Formik
 
                 initialValues={base}
