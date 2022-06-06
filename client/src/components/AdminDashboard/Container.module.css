@@ -1,8 +1,13 @@
-.Container{    
+*{
+    
+}
+.Container{
+    background-color: white;    
     display: grid;    
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 15px;
-    padding-left: 250px; 
+    padding-left: 250px;
+    height: 100vh; 
 }

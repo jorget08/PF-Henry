@@ -2,19 +2,14 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBooks, getUsers } from '../../redux/actions'
 import Card from './Card'
+import CardU from './CardU'
 import s from './Container.module.css'
 
 export default function Container() {
   
   const dispatch = useDispatch()
   const allBooks = useSelector(state => state.books)
-  const allUsers = useSelector(state => state.users)
-  const Array = []
-  Array.push(allBooks && allBooks.length)
-  Array.push(allUsers && allUsers.length)
-  
-
-  
+  const allUsers = useSelector(state => state.users) 
 
   useEffect(()=> {
     dispatch(getBooks)
@@ -24,7 +19,7 @@ export default function Container() {
   return (
     <div className={s.Container}>
           <Card books={allBooks}/>
-          <Card users={allUsers}/>
+          <CardU users={allUsers}/>
     </div>
   )
 }
