@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getBooks, getCategories, getCart } from '../../redux/actions';
 import styles from "./styles.css"
+import Filters from '../Filters/Filters';
 import { useParams } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 
@@ -12,6 +13,7 @@ export default function Home() {
     const { search } = useParams()
     console.log(search)
     const dispatch = useDispatch()
+    const [page, setPage] = useState(0)
     const [newBooks, setNewBooks] = useState(false)
     var books = useSelector(state => state.books)
     var categories = useSelector(state => state.categories)
@@ -30,6 +32,10 @@ export default function Home() {
     return (
         <div>
             <NavBar />
+            {!books.length?<div className="filters">
+
+            <Filters books={books} func={renderBooks} categories={categories} isCategory={searchCat.length} category={search} setPage={setPage}/>
+            </div>:""}
             {books?.length ?
                 <ShowBooks books={books} search={searchCat.length} func={renderBooks} categories={categories} isCategory={searchCat.length} category={search}/>
                 :

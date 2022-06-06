@@ -1,7 +1,6 @@
 import { React, useState } from 'react'
 import BookCard from '../BookCard/BookCard'
 import Paginated from '../Paginated/Paginated'
-import { Link } from 'react-router-dom'
 import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
 import Filters from '../Filters/Filters';
