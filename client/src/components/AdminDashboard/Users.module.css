@@ -6,9 +6,10 @@
     font-family: 'Rubik', sans-serif;
     padding-bottom: 20px;
     margin-right: '20px';
+    background-color: #566573;
 }
 
-.rdt_Table {
-        
-        padding-right: '100px'
-    }
+.rdt_Table {        
+        padding-left: 155px; 
+        background-color: #566573;       
+}

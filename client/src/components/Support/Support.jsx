@@ -4,8 +4,12 @@ import NavBar from '../NavBar/NavBar';
 import { Formik, Form, Field } from 'formik'
 import './support.css'
 import { scrollToTop } from 'react-scroll/modules/mixins/animate-scroll';
+import { postSupport } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
 
 export default function Support() {
+
+    const dispatch = useDispatch()
 
     const scroll0 = useRef()
     const scroll1 = useRef()
@@ -133,6 +137,7 @@ export default function Support() {
                                 initialValues={{
                                     name: "",
                                     email: "",
+                                    comment: ""
                                 }}
                                 validate={(valores) => {
 
@@ -147,14 +152,16 @@ export default function Support() {
                                         errors.password = 'Name has been required!'
                                     }
 
-                                    if (!valores.content) {
-                                        errors.content = 'At least your question must be longer than 100 characters!'
+                                    if (!valores.comment) {
+                                        errors.comment = 'At least your question must be longer than 100 characters!'
                                     }
                                     return errors;
+
                                 }}
 
                                 onSubmit={(valores, { resetForm }) => {
-                                    console.log("valores", valores)
+                                    dispatch(postSupport(valores))
+                                    alert("Query sent!")
                                     resetForm()
                                 }}>
 
@@ -174,8 +181,8 @@ export default function Support() {
                                                 </div>
                                                 <div className='description'>
                                                     <label>What you want to tell us?</label>
-                                                    <Field type="text" name="content" className="description" as="textarea" placeholder="Write your question here!" />
-                                                    {touched.content && errors.content && <span>{errors.content}</span>}
+                                                    <Field type="text" name="comment" className="description" as="textarea" placeholder="Write your question here!" />
+                                                    {touched.comment && errors.comment && <span>{errors.comment}</span>}
                                                 </div>
                                                 <button type="submit">Send!</button>
 
@@ -183,7 +190,6 @@ export default function Support() {
                                         </Form>
                                     </div>
                                 )}
-
                             </Formik>
                         </div>
                     }

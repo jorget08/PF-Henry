@@ -15,7 +15,7 @@ export default function SearchBar({ categories }) {
 
     let history = useHistory()
 
-    const table = useSelector(state => state.books)
+    const table = useSelector(state => state.allBookBackup)
     const titles = table.map(e => ({ tit: e.title, aut: e.author, img: e.image, id: e.id }))
 
     function handleChange(e) {
@@ -67,11 +67,11 @@ export default function SearchBar({ categories }) {
                             return (
                                 <div className='itemS' id={i === 0 ? 'first' : ''} >
                                     <li className="info" value={r.tit}
-                                        height="120px"
+                                        height="300px"
                                         width="300px"
                                         onClick={(e) => {
                                             handleSearch(r.id)
-                                        }}>{`${r.tit.toUpperCase()}: ${r.aut}`}
+                                        }}>{`${(r.tit.length>50)? (r.tit.toUpperCase().slice(0,50) + "...") : r.tit.toUpperCase()}: ${r.aut}`}
                                     </li>
                                     <img src={r.img}></img>
                                 </div>

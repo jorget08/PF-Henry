@@ -3,9 +3,11 @@
 .navbar {
 
 
+
     .search {
         align-items: flex-start;
         display: flex;
+        padding: 10px;
 
         .logo {
 
@@ -30,13 +32,29 @@
 
     .logoBar {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-evenly;
         font-family: @Source;
+
+        .sideBar {
+            display: flex;
+            margin-bottom: -200px;
+            align-items: flex-start;
+
+            .menu {
+                padding: 1rem;
+
+            }
+        }
 
         .links {
             display: flex;
             justify-content: space-evenly;
+
+
+            .loggedUser {
+                margin: 10px 1rem;
+            }
 
             p {
                 background-color: rgb(108, 142, 255);

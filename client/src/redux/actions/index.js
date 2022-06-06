@@ -28,9 +28,10 @@ import {
   EDIT_PROFILE,
   GET_USER,
   SEND_EMAIL,
-  GET_FAV,
   ADD_COMMENT,
-  GET_COMMENTS
+  GET_COMMENTS,
+  GET_SUPPORT,
+  GET_SHOPPING_HISTORY
 } from "./types";
 
 import axios from "axios";
@@ -347,21 +348,25 @@ export function sendEmail(payload) {
   };
 }
 
-export function getFavs() {
-  return async function (dispatch) {
+
+
+
+export function postSupport(payload) {
+  return async function () {
     try {
-      const favs = await axios.get("http://localhost:3001/favourites");
-      return dispatch({ type: GET_FAV, payload: favs.data });
-    } catch (error) {
-      console.log(error);
+      let response = await axios.post(`http://localhost:3001/support`, payload);
+      return response;
+    } catch (e) {
+      console.log(e);
     }
   };
 }
 
-export function addComment(payload, id){
+export function addComment(payload){
   return async function (dispatch) {
     try {
-      var response = await axios.post(`${id}`,payload,);
+      console.log("add comment", payload)
+      var response = await axios.post(`http://localhost:3001/reviews`,payload);
       return dispatch({ type: ADD_COMMENT });
     } catch (e) {
       console.log(e);
@@ -370,10 +375,33 @@ export function addComment(payload, id){
 }
 
 export function showComments(id){
-  return async function () {
+  return async function (dispatch) {
     try {
-      let response = await axios.get(`${id}`);
-      return response;
+      let response = await axios.get(`http://localhost:3001/reviews/allReviews?book=${id}`);
+      console.log("comentarios",response)
+      return dispatch ({type:GET_COMMENTS, payload: response.data})
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+
+export function getSupport() {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get("http://localhost:3001/support");
+      return dispatch({ type: GET_SUPPORT, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getShoppingHistory(id) {
+  return async function (dispatch) {
+    try {
+      var response = await axios.get(`http://localhost:3001/paypal/payments/${id}`);
+      return dispatch({ type: GET_SHOPPING_HISTORY, payload: response.data });
     } catch (e) {
       console.log(e);
     }

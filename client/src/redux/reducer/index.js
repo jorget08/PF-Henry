@@ -1,3 +1,4 @@
+import ShoppingHistory from "../../components/ShoppingHistory/ShoppingHistory";
 import { infoBooks, totalPrice } from "../actions";
 import {
   GET_BY_SEARCH,
@@ -26,9 +27,11 @@ import {
   GET_USERS,
   EDIT_PROFILE,
   GET_USER,
-  GET_FAV,
+  POST_SUPPORT,
   ADD_COMMENT,
-  GET_COMMENTS
+  GET_COMMENTS,
+  GET_SUPPORT,
+  GET_SHOPPING_HISTORY
 } from "../actions/types";
 
 const initialState = {
@@ -46,7 +49,9 @@ const initialState = {
   infoBooks: [],
   users: [],
   favs: [],
-  comments: []
+  comments: [],
+  support: [],
+  ShoppingHistory:[]
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -192,6 +197,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         user: { ...payload },
+        
       };
     case LOG_WITH_GOOGLE:
       localStorage.setItem("token", JSON.stringify(payload.token));
@@ -199,12 +205,14 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         user: { ...payload.user },
+       
       };
     case UNLOG_USER:
       localStorage.removeItem("token");
       return {
         ...state,
         user: {},
+        
       };
 
     case TOTAL_PRICE:
@@ -244,11 +252,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         user: payload,
       };
-    case GET_FAV:
-      return {
-        ...state,
-        favs: payload,
-      };
+
     case ADD_COMMENT:
       return{
         ...state
@@ -256,10 +260,28 @@ export default function rootReducer(state = initialState, action) {
     case GET_COMMENTS:
       return{
         ...state,
-        coments: payload
+        comments: payload
       }
 
-    default:
+    case POST_SUPPORT:
+      return {
+        ...state,
+      };
+
+    case GET_SUPPORT:
+      return{
+        ...state,
+        support: payload
+      }
+      case GET_SHOPPING_HISTORY:
+        return{
+          ...state,
+          ShoppingHistory:payload
+        }
+  
+      default:
       return state;
+
+    
   }
 }

@@ -1,12 +1,13 @@
 .homeContainer {
-  background: #ffe8f2;
-  background: linear-gradient(148deg, #ffe8f2 0%, #d8fffb 31%, #ffffff 58%, #ffe8f2 83%);
+  background-color: #dbdbdb;
 }
 .catalogue {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   padding: 1rem;
   border-radius: 10px;
+  row-gap: 5rem;
+  column-gap: 3rem;
 }
 @media (max-width: 1224px) {
   .catalogue {
