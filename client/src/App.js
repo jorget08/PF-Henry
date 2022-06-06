@@ -21,11 +21,13 @@ import Container from "./components/AdminDashboard/Container";
 import { AuthContext } from "./auth/authContext";
 import { getUser } from "./redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import ShoppingHistory from './components/ShoppingHistory/ShoppingHistory'
 
 function App() {
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  let id = user.idUser
   //? if token is not null, get user
   useEffect(() => {
     if (token) {
@@ -57,6 +59,7 @@ function App() {
         <Route path={"/checkout"} component={Checkout} />
         <Route path={"/support"} component={Support} />
         <Route path={"/editProfile"} component={EditProfile} />
+        <Route path={`/ShoppingHistory/${id}`} component={ShoppingHistory} />
       </>
 
     </AuthContext.Provider>
