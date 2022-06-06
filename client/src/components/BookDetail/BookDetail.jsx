@@ -7,6 +7,7 @@ import DetailCompra from '../DetailCompra/DetailCompra';
 import { Formik, Form, Field } from 'formik'
 import Stars from '../Stars/Stars';
 import NavBar from '../NavBar/NavBar'
+import Footer from '../Footer/Footer';
 import "./styles.css"
 
 export default function BookDetail() {
@@ -154,6 +155,7 @@ export default function BookDetail() {
           )}
         </Formik>
       </div> : <p>Log in to comment</p>}
+      <Footer />
     </div>
   )
 }
