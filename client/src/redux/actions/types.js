@@ -31,6 +31,11 @@ export const POST_SUPPORT = "POST_SUPPORT";
 export const GET_COMMENTS = "GET_COMMENTS"
 export const ADD_COMMENT = "ADD_COMMENT"
 export const GET_SUPPORT = "GET_SUPPORT";
+export const GET_FAVS = "GET_FAVS";
+export const CHANGE_FAVS = "CHANGE_FAVS";
+export const DELETE_FAVS = "DELETE_FAVS";
+export const POST_FAVS = "POST_FAVS";
 export const GET_SHOPPING_HISTORY="GET_SHOPPING_HISTORY"
 export const SET_PAGE="SET_PAGE"
+
 

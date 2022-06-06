@@ -4,20 +4,23 @@
     background-color: #1C2833;    
     width: 150px;
     height: 100%;
+    margin: auto;
     position:fixed;    
     font-family: 'Rubik', sans-serif;
     padding-top: 50px;
     border-right: 2px solid grey;
-    padding-bottom: 10px;
+    padding-bottom: 10px;    
 }
 
 .li{
     text-decoration: none;
-    list-style: none;
+    list-style: none;    
 }
 
 .Li{
     
     text-decoration: none;
     color: white;
+    display: flex;
+    justify-content: center;
 }

@@ -33,7 +33,7 @@ const redirect = ()=>{
             dispatch(editProfile(valores, user.idUser))
             alert("Your profile has been updated")
             resetForm()
-            setTimeout(() => redirect(), "1500")
+            setTimeout(() => redirect(), "1000")
         }}>
         {({touched, errors}) => (
         <Form classname="RegisterForm">
