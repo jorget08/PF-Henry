@@ -30,7 +30,6 @@ export default function Footer() {
                     <br />
                     <ul>
                         <li><FaPaypal /><span style={{ marginLeft: "5px" }}>PayPal</span></li>
-                        <li><MdOutlineAttachMoney /><span style={{ marginLeft: "5px" }}>Mercado Pago</span></li>
                         <li><FaBitcoin /><span style={{ marginLeft: "5px" }}>Cryptocurrency (soon)</span></li>
                     </ul>
                 </div>
