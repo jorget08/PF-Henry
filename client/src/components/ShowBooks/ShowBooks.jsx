@@ -1,8 +1,7 @@
 import { React, useState } from 'react'
 import BookCard from '../BookCard/BookCard'
 import Paginated from '../Paginated/Paginated'
-
-import  './styles.css'
+import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
 import Filters from '../Filters/Filters';
 import { setPage } from '../../redux/actions'
@@ -10,7 +9,7 @@ import { setPage } from '../../redux/actions'
 export default function ShowBooks({ books, categories, func, category, isCategory }) {
 
     const dispatch = useDispatch()
-    
+
     var page = useSelector(state => state.page)
     var categories = useSelector(state => state.categories)
 
@@ -35,7 +34,7 @@ export default function ShowBooks({ books, categories, func, category, isCategor
         if (pageNumber === "next" && page + 1 <= limitPage) {
             dispatch(setPage(page + 1))
         } else if (pageNumber === "prev" && page - 1 >= 1) {
-            dispatch(setPage(page + 1))
+            dispatch(setPage(page - 1))
         } else {
             dispatch(setPage(pageNumber))
         }
@@ -43,13 +42,11 @@ export default function ShowBooks({ books, categories, func, category, isCategor
 
     return (
         <div className='homeContainer'>
-            {books.length && categories.length ?
+            {books.length && categories.length &&
                 <div className="filters">
 
                     <Filters books={books} func={func} categories={categories} isCategory={isCategory} category={category} setPage={setPage} />
                 </div>
-                :
-                ''
             }
 
             <div className='catalogue'>
@@ -58,8 +55,8 @@ export default function ShowBooks({ books, categories, func, category, isCategor
                     && currentBooks.map(b => {
                         return (
 
-                                <BookCard title={b.title} img={b.image} author={b.author} price={b.price} score={b.score} id={b.id}></BookCard>
-                          
+                            <BookCard title={b.title} img={b.image} author={b.author} price={b.price} score={b.score} id={b.id}></BookCard>
+
                         )
                     })}
             </div>
