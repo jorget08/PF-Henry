@@ -1,11 +1,48 @@
+@import './variables.less';
+
 .carousel {
+    background-color: white;
+
+    &:hover {
+        .newSlide {
+
+            img {
+
+                opacity: 1;
+            }
+        }
+
+        .titles {
+            color: white;
+        }
+    }
 
     &:hover {
         cursor: pointer;
     }
 
+    .titles {
+        font-size: 30px;
+        z-index: 10;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        padding-top: 100px;
+        font-family: @merri;
+        color: rgba(255, 255, 255, 0.774);
+        background-color: rgba(0, 0, 0, 0.24);
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+
     .newSlide {
+
+
         align-items: flex-start;
+
 
         img {
             height: 450px;

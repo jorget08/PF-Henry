@@ -17,8 +17,11 @@ export default function SectionCat({ books, title }) {
             >
                 {
                     books.map((b) => {
-                        return (    
+                        return (
+                            <div style={{ padding: '10px' }}>
+
                                 <BookCard land={true} title={b.title} img={b.image} author={b.author} price={b.price} score={b.score} id={b.id}></BookCard>
+                            </div>
                         )
                     })
                 }
