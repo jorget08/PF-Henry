@@ -47,6 +47,8 @@ export default function NavBar() {
     }, [token, isLogged])
 
     const user = useSelector(state => state.user)
+    let id=user.idUser
+    
 
     return (
         <div className="navbar">
@@ -97,7 +99,7 @@ export default function NavBar() {
                                 <Menu iconShape="square">
                                     <MenuItem icon={<CgProfile />}>Your Profile<Link to="/userProfile" /></MenuItem>
                                     <MenuItem icon={<BsFillBookmarkHeartFill />}>Liked</MenuItem>
-                                    <MenuItem icon={<FaShoppingBag />}>Shopping History</MenuItem>
+                                    <MenuItem icon={<FaShoppingBag />}>Shopping History<Link to={`/ShoppingHistory/${id}`}></Link></MenuItem>
                                     {user.rols?.name === "admin" &&
                                         <MenuItem icon={<RiAdminFill />}>Dashboard<Link to="/admin" /></MenuItem>
                                     }

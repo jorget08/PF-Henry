@@ -1,3 +1,4 @@
+import ShoppingHistory from "../../components/ShoppingHistory/ShoppingHistory";
 import { infoBooks, totalPrice } from "../actions";
 import {
   GET_BY_SEARCH,
@@ -29,7 +30,8 @@ import {
   POST_SUPPORT,
   ADD_COMMENT,
   GET_COMMENTS,
-  GET_SUPPORT
+  GET_SUPPORT,
+  GET_SHOPPING_HISTORY
 } from "../actions/types";
 
 const initialState = {
@@ -48,7 +50,8 @@ const initialState = {
   users: [],
   favs: [],
   comments: [],
-  support: []
+  support: [],
+  ShoppingHistory:[]
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -270,6 +273,11 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         support: payload
       }
+      case GET_SHOPPING_HISTORY:
+        return{
+          ...state,
+          ShoppingHistory:payload
+        }
   
       default:
       return state;

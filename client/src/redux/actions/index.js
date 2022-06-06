@@ -30,7 +30,8 @@ import {
   SEND_EMAIL,
   ADD_COMMENT,
   GET_COMMENTS,
-  GET_SUPPORT
+  GET_SUPPORT,
+  GET_SHOPPING_HISTORY
 } from "./types";
 
 import axios from "axios";
@@ -392,6 +393,17 @@ export function getSupport() {
       return dispatch({ type: GET_SUPPORT, payload: response.data });
     } catch (error) {
       console.log(error);
+    }
+  };
+}
+
+export function getShoppingHistory(id) {
+  return async function (dispatch) {
+    try {
+      var response = await axios.get(`http://localhost:3001/paypal/payments/${id}`);
+      return dispatch({ type: GET_SHOPPING_HISTORY, payload: response.data });
+    } catch (e) {
+      console.log(e);
     }
   };
 }
