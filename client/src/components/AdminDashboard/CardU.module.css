@@ -6,9 +6,14 @@
     border-radius: 15px;
     width: 15rem;
     height: 10rem;
-    box-shadow: -1px 3px 52px 18px rgba(0,0,0,0.62);
-    -webkit-box-shadow: -1px 3px 52px 18px rgba(0,0,0,0.62);
-    -moz-box-shadow: -1px 3px 52px 18px rgba(0,0,0,0.62);
+    box-shadow: 10px 10px 19px 0px rgba(0,0,0,0.97);
+    -webkit-box-shadow: 10px 10px 19px 0px rgba(0,0,0,0.97);
+    -moz-box-shadow: 10px 10px 19px 0px rgba(0,0,0,0.97);
+    transition: transform 1,9s;
+}
+
+.Card:hover{
+    transform:scale(1.1);
 }
 
 .h5{
