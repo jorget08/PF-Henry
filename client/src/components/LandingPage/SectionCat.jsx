@@ -14,14 +14,12 @@ export default function SectionCat({ books, title }) {
                 slidesToShow={3}
                 className='slidesBooks'
                 defaultControlsConfig={{ nextButtonText: ">>", prevButtonText: "<<", nextButtonStyle: buttonStyles, prevButtonStyle: buttonStyles, pagingDotsStyle: { display: "none" } }}
-
             >
                 {
                     books.map((b) => {
-                        return (
-                            <Link to={`book/${b.id}`} key={b.id}>
+                        return (    
                                 <BookCard land={true} title={b.title} img={b.image} author={b.author} price={b.price} score={b.score} id={b.id}></BookCard>
-                            </Link>)
+                        )
                     })
                 }
             </Carousel>
