@@ -32,6 +32,8 @@ import {
   GET_SUPPORT,
   GET_FAVS,
   CHANGE_FAVS,
+  DELETE_FAVS,
+  POST_FAVS
 } from "../actions/types";
 
 const initialState = {
@@ -283,7 +285,16 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         changed: payload
       }
-  
+      case DELETE_FAVS:
+      return{
+        ...state,
+        favs:payload
+      };
+      case POST_FAVS:
+      return{
+        ...state,
+        favs:payload
+      }
       default:
       return state;
 

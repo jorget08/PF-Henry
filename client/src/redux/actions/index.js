@@ -32,7 +32,7 @@ import {
   GET_COMMENTS,
   GET_SUPPORT,
   GET_FAVS,
-  CHANGE_FAVS
+  CHANGE_FAVS,DELETE_FAVS, POST_FAVS
 } from "./types";
 
 import axios from "axios";
@@ -408,6 +408,28 @@ export function getFavs(user) {
     }
   };
 }
+
+export function deleteFavs(user,book) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`http://localhost:3001/favourites?user=${user}&favs=${book}`);
+      return dispatch({ type: DELETE_FAVS, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function postFavs(obj) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`http://localhost:3001/favourites`,obj);
+      return dispatch({ type: POST_FAVS, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 export function changeFavs(payload) {
   return { type: CHANGE_FAVS, payload };
 }

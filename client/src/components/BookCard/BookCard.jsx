@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 
-import { helpCallPut, helpCall, helpCallDelete } from '../../helCall';
-import { changeFavs } from '../../redux/actions';
+import {  helpCall, } from '../../helCall';
+import { deleteFavs, postFavs } from '../../redux/actions';
 import { AiOutlineHeart } from 'react-icons/ai'
 import { AiFillHeart } from 'react-icons/ai'
 import './styles.css'
@@ -23,34 +23,42 @@ export default function BookCard({ land, title, author, img, price, score, id })
 
     }
 
+
     useEffect(() => { 
         if (Object.keys(user).length !== 0) {
             setLogueado(true)
-            
+
             helpCall(`/favourites/fav?book=${id}&user=${user.idUser}`)
                 .then(res => setIsFav(res))
+            
 
         }
         if(Object.keys(user).length === 0) return setLogueado(false)
     }, [ id,user])
+
+    
    
     
 
     function handleFav() {
         if (isFav == false) {
+            
+            
             if (logueado) {
-                helpCallPut('/favourites', obj)
-                    .then(res => setIsFav(true))
+                dispatch(postFavs(obj))
 
-            } else alert('logueate pliss')
+                setIsFav(true)
+
+                    
+
+            } else alert('Login for add favourites')
         }
         if (isFav == true) {
             
-            dispatch(changeFavs(true))
 
-            
-            helpCallDelete(`/favourites?user=${user.idUser}&favs=${id}`)
-                .then(res => setIsFav(false))
+            dispatch(deleteFavs(user.idUser, id))
+            setIsFav(false)
+
         }
     }
 
