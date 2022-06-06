@@ -22,7 +22,7 @@ router.delete('/', async(req,res,next)=>{
   
   try {
     const userFound = await User.findByPk(user);
-    c
+    
     userFound.removeBook(favs)
     res.send(200)
 
