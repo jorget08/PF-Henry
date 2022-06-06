@@ -31,6 +31,10 @@ import {
   ADD_COMMENT,
   GET_COMMENTS,
   GET_SUPPORT,
+  GET_FAVS,
+  CHANGE_FAVS,
+  DELETE_FAVS,
+  POST_FAVS,
   GET_SHOPPING_HISTORY,
   SET_PAGE
 } from "../actions/types";
@@ -50,6 +54,7 @@ const initialState = {
   infoBooks: [],
   users: [],
   favs: [],
+  changed:false,
   comments: [],
   support: [],
   ShoppingHistory:[],
@@ -274,6 +279,26 @@ export default function rootReducer(state = initialState, action) {
       return{
         ...state,
         support: payload
+      };
+      case GET_FAVS:
+      return{
+        ...state,
+        favs: payload
+      }
+      case CHANGE_FAVS:
+      return{
+        ...state,
+        changed: payload
+      }
+      case DELETE_FAVS:
+      return{
+        ...state,
+        favs:payload
+      };
+      case POST_FAVS:
+      return{
+        ...state,
+        favs:payload
       }
 
     case GET_SHOPPING_HISTORY:
@@ -290,6 +315,7 @@ export default function rootReducer(state = initialState, action) {
 
     default:
     return state;
+
 
     
   }

@@ -11,8 +11,11 @@ router.post("/", async (req, res, next) => {
     
     const userFound = await User.findByPk(user);
     
-    userFound.addBook(favs);
-    return res.send(200);
+    await userFound.addBook(favs);
+
+    const final = await User.findByPk(user, { include: Book });
+
+    return res.json(final.books);
   } catch (error) {
     next(error);
   }
@@ -21,10 +24,11 @@ router.delete('/', async(req,res,next)=>{
   const { user, favs } = req.query;
   
   try {
-    const userFound = await User.findByPk(user);
     
-    userFound.removeBook(favs)
-    res.send(200)
+    const userFound = await User.findByPk(user, { include: Book });
+    await userFound.removeBook(favs)
+    const final = await User.findByPk(user, { include: Book });
+    return res.json(final.books);
 
   } catch (error) {
     next(error)

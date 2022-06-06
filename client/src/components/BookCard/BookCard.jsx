@@ -1,17 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { helpCallPut, helpCall, helpCallDelete } from '../../helCall';
+
+
+import {  helpCall, } from '../../helCall';
+import { deleteFavs, postFavs } from '../../redux/actions';
+
 import { AiOutlineHeart } from 'react-icons/ai'
 import { AiFillHeart } from 'react-icons/ai'
 import './styles.css'   
 import Stars from '../Stars/Stars';
 
+import { useSelector,useDispatch } from 'react-redux';
+
+
 export default function BookCard({ land, title, author, img, price, score, id }) {
     const styles = { alignSelf: "flex-end", padding: "10px", color: "#bf3030" };
   
     const user = useSelector(state => state.user);
-
+    const dispatch=useDispatch()
     const [logueado, setLogueado] = useState(false)
     const [isFav, setIsFav] = useState(false)
    
@@ -20,30 +26,41 @@ export default function BookCard({ land, title, author, img, price, score, id })
         favs: id
     }
 
+
     useEffect(() => { 
         if (Object.keys(user).length !== 0) {
             setLogueado(true)
-            
+
             helpCall(`/favourites/fav?book=${id}&user=${user.idUser}`)
                 .then(res => setIsFav(res))
+            
 
         }
         if(Object.keys(user).length === 0) return setLogueado(false)
     }, [ id,user])
 
+
     function handleFav() {
         if (isFav == false) {
+            
+            
             if (logueado) {
-                helpCallPut('/favourites', obj)
-                    .then(res => setIsFav(true))
+                dispatch(postFavs(obj))
+
+
+                setIsFav(true)
+
+                    
 
             } else alert('You must login first to do this!')
+
         }
         if (isFav == true) {
             
 
-            helpCallDelete(`/favourites?user=${user.idUser}&favs=${id}`)
-                .then(res => setIsFav(false))
+            dispatch(deleteFavs(user.idUser, id))
+            setIsFav(false)
+
         }
     }
 
