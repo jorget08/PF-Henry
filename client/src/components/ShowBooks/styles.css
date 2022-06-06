@@ -7,6 +7,10 @@
   grid-template-columns: repeat(3, 1fr);
   padding: 1rem;
   border-radius: 10px;
+  row-gap: 20px;
+}
+.filters{
+  background-color: white;
 }
 @media (max-width: 1224px) {
   .catalogue {

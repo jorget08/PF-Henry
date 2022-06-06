@@ -13,6 +13,7 @@ import UserProfile from "./components/UserProfile/UserProfile";
 // import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import Sidebar from "./components/SideBar/SideBar";
 import Stock from "./components/AdminDashboard/Stock";
+import SupportAdmin from "./components/AdminDashboard/SupportAdmin";
 import Support from "./components/Support/Support";
 import Users from "./components/AdminDashboard/Users";
 import EditProfile from "./components/EditProfile/EditProfile";
@@ -57,6 +58,7 @@ function App() {
         <Route path={"/support"} component={Support} />
         <Route path={"/editProfile"} component={EditProfile} />
       </>
+
     </AuthContext.Provider>
   );
 }

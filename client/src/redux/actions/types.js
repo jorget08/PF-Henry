@@ -31,4 +31,5 @@ export const GET_FAV = "GET_FAV";
 export const POST_SUPPORT = "POST_SUPPORT";
 export const GET_COMMENTS = "GET_COMMENTS"
 export const ADD_COMMENT = "ADD_COMMENT"
+export const GET_SUPPORT = "GET_SUPPORT";
 

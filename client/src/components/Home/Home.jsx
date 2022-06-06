@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getBooks, getCategories, getCart } from '../../redux/actions';
 import styles from "./styles.css"
-import Filters from '../Filters/Filters';
 import { useParams } from 'react-router-dom';
 
 export default function Home() {
@@ -30,16 +29,8 @@ export default function Home() {
     return (
         <div>
             <NavBar />
-            {books.length && categories.length ?
-                <div>
-
-                    <Filters books={books} func={renderBooks} categories={categories} isCategory={searchCat.length} category={search} />
-                </div>
-                :
-                ''
-            }
             {books?.length ?
-                <ShowBooks books={books} search={searchCat.length} />
+                <ShowBooks books={books} search={searchCat.length} func={renderBooks} categories={categories} isCategory={searchCat.length} category={search}/>
                 :
                 <div className='loading'>
                 </div>
