@@ -9,7 +9,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Register from "./components/Register/Register";
 import Checkout from "./components/Checkout/Checkout";
 import UserProfile from "./components/UserProfile/UserProfile";
-import Sidebar from "./components/SideBar/SideBar";
+import Sidebar from "./components/AdminDashboard/Sidebar";
 import Stock from "./components/AdminDashboard/Stock";
 import SupportAdmin from "./components/AdminDashboard/SupportAdmin";
 import Support from "./components/Support/Support";
