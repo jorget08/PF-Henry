@@ -31,7 +31,8 @@ import {
   ADD_COMMENT,
   GET_COMMENTS,
   GET_SUPPORT,
-  GET_SHOPPING_HISTORY
+  GET_SHOPPING_HISTORY,
+  SET_PAGE
 } from "./types";
 
 import axios from "axios";
@@ -404,6 +405,16 @@ export function getShoppingHistory(id) {
       return dispatch({ type: GET_SHOPPING_HISTORY, payload: response.data });
     } catch (e) {
       console.log(e);
+    }
+  };
+}
+
+export function setPage(num) {
+  return async function (dispatch) {
+    try {
+      return dispatch({ type: SET_PAGE, payload: num });
+    } catch (error) {
+      console.log(error);
     }
   };
 }

@@ -32,4 +32,5 @@ export const GET_COMMENTS = "GET_COMMENTS"
 export const ADD_COMMENT = "ADD_COMMENT"
 export const GET_SUPPORT = "GET_SUPPORT";
 export const GET_SHOPPING_HISTORY="GET_SHOPPING_HISTORY"
+export const SET_PAGE="SET_PAGE"
 

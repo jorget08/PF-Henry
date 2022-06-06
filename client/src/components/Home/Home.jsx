@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getBooks, getCategories, getCart } from '../../redux/actions';
 import styles from "./styles.css"
 import { useParams } from 'react-router-dom';
+import Footer from '../Footer/Footer';
 
 export default function Home() {
     const { search } = useParams()
@@ -35,6 +36,7 @@ export default function Home() {
                 <div className='loading'>
                 </div>
             }
+            <Footer />
         </div>
     )
 }

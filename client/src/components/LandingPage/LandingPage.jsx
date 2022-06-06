@@ -9,6 +9,7 @@ import NavBar from "../NavBar/NavBar";
 import SectionCat from "./SectionCat";
 import { getLandingTop, getLandingTopCat } from "../../redux/actions";
 import LandingCarousel from "./LandingCarousel";
+import Footer from "../Footer/Footer";
 export default function LandingPage() {
     const dispatch = useDispatch()
     const bookCategories = useSelector(state => state.categoriesLand)
@@ -66,8 +67,10 @@ export default function LandingPage() {
                 {bookCategories.Academic &&
                     <SectionCat books={bookCategories.Academic} title={'Academic'} />}
 
-
+                <br/>
             </div>
+            
+            <Footer />
         </div>
     )
 }
