@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
 import { helpCallPut, helpCall, helpCallDelete } from '../../helCall';
-
 import { AiOutlineHeart } from 'react-icons/ai'
 import { AiFillHeart } from 'react-icons/ai'
-import './styles.css'
+import './styles.css'   
 import Stars from '../Stars/Stars';
-import { useSelector } from 'react-redux';
 
 export default function BookCard({ land, title, author, img, price, score, id }) {
     const styles = { alignSelf: "flex-end", padding: "10px", color: "#bf3030" };
@@ -21,7 +18,6 @@ export default function BookCard({ land, title, author, img, price, score, id })
     const obj = {
         user: user.idUser,
         favs: id
-
     }
 
     useEffect(() => { 
@@ -34,8 +30,6 @@ export default function BookCard({ land, title, author, img, price, score, id })
         }
         if(Object.keys(user).length === 0) return setLogueado(false)
     }, [ id,user])
-   
-    
 
     function handleFav() {
         if (isFav == false) {
