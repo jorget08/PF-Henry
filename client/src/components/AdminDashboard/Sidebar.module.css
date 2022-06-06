@@ -3,7 +3,7 @@
 .sidebar{
     background-color: #1C2833;    
     width: 150px;
-    height: 625px;
+    height: 100%;
     position:fixed;    
     font-family: 'Rubik', sans-serif;
     padding-top: 50px;
