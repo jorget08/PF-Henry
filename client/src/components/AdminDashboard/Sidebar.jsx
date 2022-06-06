@@ -26,6 +26,9 @@ export default function Sidebar() {
           <li>
             <Link to="/admin/stock">Localstrike</Link>
           </li>
+          <li>
+            <Link to="/admin/support">Support</Link>
+          </li>
         </ul>
     </div>
     </>

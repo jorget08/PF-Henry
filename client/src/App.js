@@ -14,6 +14,7 @@ import UserProfile from "./components/UserProfile/UserProfile";
 // import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import Sidebar from "./components/AdminDashboard/Sidebar";
 import Stock from "./components/AdminDashboard/Stock";
+import SupportAdmin from "./components/AdminDashboard/SupportAdmin";
 import Support from "./components/Support/Support";
 import Users from "./components/AdminDashboard/Users";
 import EditProfile from "./components/EditProfile/EditProfile";
@@ -52,6 +53,7 @@ function App() {
       <Route exact path={"/admin/newbook"} component={FormCreate} />
       <Route exact path={"/admin/stock"} component={Stock} />
       <Route exact path={"/admin/users"} component={Users} />
+      <Route exact path={"/admin/support"} component={SupportAdmin} />
       <Route path={"/checkout"} component={Checkout} />
       <Route path={"/support"} component={Support} />
       <Route path={"/editProfile"} component={EditProfile} />
