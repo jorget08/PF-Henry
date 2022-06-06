@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import s from './Sidebar.module.css'
-import { RiHome2Line } from 'react-icons/ri';
 
 export default function Sidebar() {
     
@@ -10,9 +9,8 @@ export default function Sidebar() {
     <div className={s.sidebar}>
         <ul>
           <hr/>
-          <li className={s.Li}>
-            <span>{RiHome2Line}</span>
-            <Link to="/admin/" className={s.Li}>  Home ▶ </Link>
+          <li className={s.Li}>           
+            <Link to="/admin/" className={s.Li}>Home ▶</Link>
           </li>
           <hr />
           <li>

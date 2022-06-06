@@ -11,7 +11,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Register from "./components/Register/Register";
 import Checkout from "./components/Checkout/Checkout";
 import UserProfile from "./components/UserProfile/UserProfile";
-// import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
+import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import Sidebar from "./components/AdminDashboard/Sidebar";
 import Stock from "./components/AdminDashboard/Stock";
 import Support from "./components/Support/Support";
@@ -49,7 +49,7 @@ function App() {
       <Route path={"/createBook"} component={FormCreate} />
       <Route path={"/cart"} component={Cart} />
       <Route path={"/register"} component={Register} />
-      <Route path={"/userProfile"} component={UserProfile} />
+      <Route path={"/userProfile"} component={UserProfile} />      
       <Route path={"/admin"} component={Sidebar} />
       <Route exact path={"/admin"} component={Container}/>
       <Route exact path={"/admin/newbook"} component={FormCreate} />
