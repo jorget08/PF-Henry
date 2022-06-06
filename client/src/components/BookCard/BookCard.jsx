@@ -37,7 +37,7 @@ export default function BookCard({ land, title, author, img, price, score, id })
                 helpCallPut('/favourites', obj)
                     .then(res => setIsFav(true))
 
-            } else alert('logueate pliss')
+            } else alert('You must login first to do this!')
         }
         if (isFav == true) {
             
