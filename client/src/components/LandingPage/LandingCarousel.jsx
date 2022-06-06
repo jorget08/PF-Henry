@@ -12,7 +12,7 @@ export default function LandingCarousel() {
         for (let i = 0; i <= 10; i++) {
             if (categories[i].img)
                 images.push({ img: categories[i].img, name: categories[i].name })
-        } console.log(images)
+        }
         return images
     }
     const dispatch = useDispatch();

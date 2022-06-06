@@ -111,13 +111,9 @@ export default function NavBar() {
                     </div>
                     {isLogged &&
                         <div className='sideBar'>
-                            {user.imgProfile ?
 
-                                <img src={user.imgProfile} className="menu" alt="" onClick={showSideBar} style={{ maxWidth: '3rem', borderRadius: '50%', cursor: 'pointer' }} />
-                                :
-                                <AiOutlineMenu onClick={showSideBar} size={30} className="menu" />
-                            }
-                            <ProSidebar collapsed={sideBar} width={210} collapsedWidth={"0px"} >
+                            <AiOutlineMenu onClick={showSideBar} style={{ cursor: 'pointer' }} size={30} className="menu" />
+                            <ProSidebar collapsed={sideBar} width={210} collapsedWidth={"0px"} onClick={showSideBar} >
                                 <Menu iconShape="square">
                                     <MenuItem icon={<CgProfile />}>Your Profile<Link to="/userProfile" /></MenuItem>
                                     <MenuItem icon={<BsFillBookmarkHeartFill />}>Liked</MenuItem>
