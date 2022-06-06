@@ -9,6 +9,8 @@ export default function Sidebar() {
   return (
     <>
     <div className={s.sidebar}>
+
+        <Link to='/'><img className={s.Logo} src="https://cdn-icons-png.flaticon.com/512/695/695896.png"/></Link>
         <ul>
           <hr/>
           <li className={s.Li}>            
