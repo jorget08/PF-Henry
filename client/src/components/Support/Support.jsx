@@ -137,7 +137,7 @@ export default function Support() {
                                 initialValues={{
                                     name: "",
                                     email: "",
-                                    content: ""
+                                    comment: ""
                                 }}
                                 validate={(valores) => {
 
@@ -152,8 +152,8 @@ export default function Support() {
                                         errors.password = 'Name has been required!'
                                     }
 
-                                    if (!valores.content) {
-                                        errors.content = 'At least your question must be longer than 100 characters!'
+                                    if (!valores.comment) {
+                                        errors.comment = 'At least your question must be longer than 100 characters!'
                                     }
                                     return errors;
 
@@ -181,8 +181,8 @@ export default function Support() {
                                                 </div>
                                                 <div className='description'>
                                                     <label>What you want to tell us?</label>
-                                                    <Field type="text" name="content" className="description" as="textarea" placeholder="Write your question here!" />
-                                                    {touched.content && errors.content && <span>{errors.content}</span>}
+                                                    <Field type="text" name="comment" className="description" as="textarea" placeholder="Write your question here!" />
+                                                    {touched.comment && errors.comment && <span>{errors.comment}</span>}
                                                 </div>
                                                 <button type="submit">Send!</button>
 

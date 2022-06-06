@@ -74,8 +74,8 @@ Order.belongsTo(User);
 Order.hasOne(Shop);
 Shop.belongsTo(Order);
 
-//User.hasMany(Payment)
-//Payment.hasOne(User)
+User.belongsToMany(Payment, { through: "userxpayment" })
+Payment.belongsToMany(User, { through: "userxpayment" })
 
 Payment.hasMany(Paymentbook);
 Paymentbook.hasOne(Payment, { foreginKey: "id" });

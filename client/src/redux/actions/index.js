@@ -28,9 +28,10 @@ import {
   EDIT_PROFILE,
   GET_USER,
   SEND_EMAIL,
-  GET_FAV,
   ADD_COMMENT,
-  GET_COMMENTS
+  GET_COMMENTS,
+  GET_SUPPORT,
+  GET_SHOPPING_HISTORY
 } from "./types";
 
 import axios from "axios";
@@ -347,16 +348,7 @@ export function sendEmail(payload) {
   };
 }
 
-export function getFavs() {
-  return async function (dispatch) {
-    try {
-      const favs = await axios.get("http://localhost:3001/favourites");
-      return dispatch({ type: GET_FAV, payload: favs.data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
+
 
 
 export function postSupport(payload) {
@@ -394,3 +386,24 @@ export function showComments(id){
   };
 }
 
+export function getSupport() {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get("http://localhost:3001/support");
+      return dispatch({ type: GET_SUPPORT, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getShoppingHistory(id) {
+  return async function (dispatch) {
+    try {
+      var response = await axios.get(`http://localhost:3001/paypal/payments/${id}`);
+      return dispatch({ type: GET_SHOPPING_HISTORY, payload: response.data });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}

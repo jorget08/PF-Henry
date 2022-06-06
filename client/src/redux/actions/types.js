@@ -27,8 +27,9 @@ export const GET_USERS = "GET_USERS";
 export const EDIT_PROFILE = "EDIT_PROFILE";
 export const GET_USER = "GET_USER";
 export const SEND_EMAIL = "SEND_EMAIL";
-export const GET_FAV = "GET_FAV";
 export const POST_SUPPORT = "POST_SUPPORT";
 export const GET_COMMENTS = "GET_COMMENTS"
 export const ADD_COMMENT = "ADD_COMMENT"
+export const GET_SUPPORT = "GET_SUPPORT";
+export const GET_SHOPPING_HISTORY="GET_SHOPPING_HISTORY"
 

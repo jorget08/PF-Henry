@@ -2,15 +2,29 @@ a {
   text-decoration: none;
   margin: 1rem;
 }
+.linkCard{ 
+  display: flex;
+  background-color: aliceblue;
+  height: 206px;
+  border-radius: 20px;
+ 
+  font-family: 'Merriweather', serif;
+  margin: 0;
+  max-width: 400px;
+
+}
+
 .card,
 #nonBox {
+
   display: flex;
+  justify-content: space-between;
   background-color: aliceblue;
   height: 206px;
   border-radius: 20px;
   box-shadow: 5px 5px 40px -2px black;
   font-family: 'Merriweather', serif;
-  margin: 10px;
+  margin: 20px;
   max-width: 400px;
   margin: auto;
   transition: transform 0.5s;
