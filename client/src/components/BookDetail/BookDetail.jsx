@@ -13,16 +13,15 @@ export default function BookDetail() {
 
   const [isAdmin, setIsAdmin] = useState(false)
   const user = useSelector(state => state.user)
-  console.log("SOY EL USERRRR", user)
   const history = useHistory()
   const token = localStorage.getItem("token")
   const [comment, setComment] = useState("")
 
-  console.log("hystory",history)
+  console.log("hystory", history)
 
-    const redirect = () => {
-        history.push("/home")
-    }
+  const redirect = () => {
+    history.push("/home")
+  }
 
   const dispatch = useDispatch()
   const { id } = useParams()
@@ -38,9 +37,9 @@ export default function BookDetail() {
   var bookDet = useSelector(state => state.detail)
   var stars = [false, false, false, false, false];
 
-  function delet (e) {
+  function delet(e) {
     e.preventDefault();
-    if(window.confirm (`Are you sure you want to delete this book: ${bookDet.title}?`)){
+    if (window.confirm(`Are you sure you want to delete this book: ${bookDet.title}?`)) {
       dispatch(deleteBook(bookDet.id))
       alert("The book has been deleted successfully!")
       redirect()
@@ -79,81 +78,81 @@ export default function BookDetail() {
                 </ul>
 
               </div>
-               {user.rols?.name === "admin" ?  
-               <>
-              <Link to={{
-                pathname:'/createbook',
-                state: {
-                  detail: {...bookDet}
-                }
-                }}>
-                <button type="button">Modify book</button>
-              </Link> 
-              <button type="button" onClick={(e) => delet(e)}>Delete Book</button>
-              </>
-              : ""}
-              </div>
+              {user.rols?.name === "admin" ?
+                <>
+                  <Link to={{
+                    pathname: '/createbook',
+                    state: {
+                      detail: { ...bookDet }
+                    }
+                  }}>
+                    <button type="button">Modify book</button>
+                  </Link>
+                  <button type="button" onClick={(e) => delet(e)}>Delete Book</button>
+                </>
+                : ""}
+            </div>
           </div>
         </div>
 
       }
       <div>
         <h3>Comments:</h3>
-        {comments.length?comments.map(e => {
-                    return (<div>
-                      <h4>{e.title}</h4>
-                      <p>{e.description}</p>
-                      </div>
-                    )
-                  }):
-                  <p>Be the first to comment this book</p>}
+        {comments.length ? comments.map(e => {
+          return (<div>
+            <h4>{e.title}</h4>
+            <p>{e.description}</p>
+          </div>
+          )
+        }) :
+          <p>Be the first to comment this book</p>}
       </div>
-      {token?<div>
+      {token ? <div>
         <h3>Add a comment:</h3>
         <Formik
-        initialValues={{
-          title:"",
-          description:""
-        }}
-        validate={(valores)=>{
-          let errors ={};
-          if(valores.title>50){
-            errors.title="The title of the review cannot have more than 50 characters";
-          }
-          if(valores.description>1000){
-            errors.description="The review cannot have more than 1000 characters";
-          }
-          return errors;
-        }}
-        onSubmit={(valores, {resetForm})=>{
-          var rev={
-            review:{
-              title:valores.title,
-              description:valores.description
-            },
-            book: bookDet.id,
-            user: user.idUser
-          }
-          dispatch(addComment(rev))
-          resetForm()
-        }}>
-          {({touched, errors})=>(
+          initialValues={{
+            title: "",
+            description: ""
+          }}
+          validate={(valores) => {
+            let errors = {};
+            if (valores.title > 50) {
+              errors.title = "The title of the review cannot have more than 50 characters";
+            }
+            if (valores.description > 1000) {
+              errors.description = "The review cannot have more than 1000 characters";
+            }
+            return errors;
+          }}
+          onSubmit={(valores, { resetForm }) => {
+            var rev = {
+              review: {
+                title: valores.title,
+                description: valores.description
+              },
+              book: bookDet.id,
+              user: user.idUser
+            }
+            dispatch(addComment(rev))
+            resetForm()
+          }}>
+          {({ touched, errors }) => (
             <Form>
               <div>
                 <label>Title</label>
-                <Field type="text" name="title" placeholder="Title"/>
+                <Field type="text" name="title" placeholder="Title" />
                 {touched.title && errors.title && <span>{errors.title}</span>}
               </div>
               <div>
                 <label>Review</label>
-                <Field type="text" name="description" placeholder="Review"/>
+                <Field type="text" name="description" placeholder="Review" />
                 {touched.review && errors.review && <span>{errors.review}</span>}
               </div>
               <button type="submit">Send review</button>
             </Form>
           )}
         </Formik>
-      </div>:<p>Log in to comment</p>}
+      </div> : <p>Log in to comment</p>}
     </div>
   )
 }
