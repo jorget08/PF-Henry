@@ -6,6 +6,7 @@ import './support.css'
 import { scrollToTop } from 'react-scroll/modules/mixins/animate-scroll';
 import { postSupport } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
+import Footer from '../Footer/Footer';
 
 export default function Support() {
 
@@ -190,7 +191,6 @@ export default function Support() {
                                         </Form>
                                     </div>
                                 )}
-
                             </Formik>
                         </div>
                     }
@@ -199,6 +199,7 @@ export default function Support() {
                     <button type="button" className="minimize" onClick={(e) => { handleMinimize(e) }}>Minimize all tags</button>
                 </div>
             </div>
+            <Footer />
         </>
     )
 }

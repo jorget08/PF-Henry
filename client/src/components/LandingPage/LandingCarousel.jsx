@@ -20,22 +20,29 @@ export default function LandingCarousel() {
         dispatch(getBooks)
         dispatch(getCategories)
 
-    }, [dispatch])
+    }, [dispatch]);
+
+    const legends = ['See Our Collection of the Best Adventures Books', "Are you Ready to Watch The world Like you've never Seen it?", "Catch Me if You can... Best Crime Fiction Books", "What was that?! Want to be Afraid of something?", 'At some point, we all Have to Learn Something!', 'Remember to Breath While Reading this books...']
+
     return (
         <Carousel className='carousel' showThumbs={false} transitionTime={1000} autoPlay={true} infiniteLoop={true} interval={2800} emulateTouch={true} showArrows={true}>
-
             {categories.length &&
                 renderImages()
-                    .map(e =>
-                        e ?
-                            <Link to={`Home/${e.name}`}>
+                    .map((e, i) =>
+                        e &&
+                        <Link to={`Home/${e.name}`}>
+                            <div>
+
                                 <div className='newSlide' key={e.name}>
                                     {/* {console.log(books)} */}
                                     <img src={e.img} alt={e.name} />
-                                    <p className="legend">Discover all About {e.name}</p>
+                                    <p className="legend" style={{ fontSize: '20px' }}>Discover all About {e.name}</p>
                                 </div >
-                            </Link>
-                            : <p></p>
+                                <div className="titles">
+                                    <h1 >{legends[i]}</h1>
+                                </div>
+                            </div>
+                        </Link>
                     )
             }
 

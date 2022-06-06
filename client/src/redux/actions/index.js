@@ -32,7 +32,10 @@ import {
   GET_COMMENTS,
   GET_SUPPORT,
   GET_FAVS,
-  CHANGE_FAVS,DELETE_FAVS, POST_FAVS
+  CHANGE_FAVS,DELETE_FAVS, POST_FAVS,
+  GET_SHOPPING_HISTORY,
+  SET_PAGE
+
 } from "./types";
 
 import axios from "axios";
@@ -398,6 +401,7 @@ export function getSupport() {
   };
 }
 
+
 export function getFavs(user) {
   return async function (dispatch) {
     try {
@@ -405,9 +409,19 @@ export function getFavs(user) {
       return dispatch({ type: GET_FAVS, payload: response.data });
     } catch (error) {
       console.log(error);
+
+export function getShoppingHistory(id) {
+  return async function (dispatch) {
+    try {
+      var response = await axios.get(`http://localhost:3001/paypal/payments/${id}`);
+      return dispatch({ type: GET_SHOPPING_HISTORY, payload: response.data });
+    } catch (e) {
+      console.log(e);
+
     }
   };
 }
+
 
 export function deleteFavs(user,book) {
   return async function (dispatch) {
@@ -424,12 +438,22 @@ export function postFavs(obj) {
     try {
       const response = await axios.post(`http://localhost:3001/favourites`,obj);
       return dispatch({ type: POST_FAVS, payload: response.data });
+
+export function setPage(num) {
+  return async function (dispatch) {
+    try {
+      return dispatch({ type: SET_PAGE, payload: num });
+
     } catch (error) {
       console.log(error);
     }
   };
+
 }
 
 export function changeFavs(payload) {
   return { type: CHANGE_FAVS, payload };
 }
+
+
+

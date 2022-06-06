@@ -19,6 +19,7 @@ import { CgProfile } from 'react-icons/cg'
 import { FaShoppingBag } from 'react-icons/fa'
 import { RiAdminFill } from "react-icons/ri"
 import { ImBooks } from 'react-icons/im'
+import Swal from "sweetalert2";
 import "./styles.css"
 
 
@@ -35,11 +36,32 @@ export default function NavBar() {
 
 
     function handleLogOut() {
-        setIsLogged(false)
-        dispatch(unlogUser())
-        reload()
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: true
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Log out',
+            text: "Do You Want To Log Out?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Log out',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setIsLogged(false)
+                dispatch(unlogUser())
+                reload()
+            }
+        })
     }
-    function reload ()  {
+    function reload() {
         window.location.reload(true);
     }
     useEffect(() => {
@@ -47,6 +69,8 @@ export default function NavBar() {
     }, [token, isLogged])
 
     const user = useSelector(state => state.user)
+    let id = user.idUser
+
 
     return (
         <div className="navbar">
@@ -96,9 +120,11 @@ export default function NavBar() {
                             <ProSidebar collapsed={sideBar} width={210} collapsedWidth={"0px"} >
                                 <Menu iconShape="square">
                                     <MenuItem icon={<CgProfile />}>Your Profile<Link to="/userProfile" /></MenuItem>
+
                                     <MenuItem icon={<BsFillBookmarkHeartFill />}>Liked<Link to="/favourites"/></MenuItem>
-                                    
-                                    <MenuItem icon={<FaShoppingBag />}>Shopping History</MenuItem>
+                                  
+                                  
+                                    <MenuItem icon={<FaShoppingBag />}>Shopping History<Link to={`/ShoppingHistory/${id}`}></Link></MenuItem>
                                     {user.rols?.name === "admin" &&
                                         <MenuItem icon={<RiAdminFill />}>Dashboard<Link to="/admin" /></MenuItem>
                                     }

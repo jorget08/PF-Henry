@@ -1,13 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 
+
 import {  helpCall, } from '../../helCall';
 import { deleteFavs, postFavs } from '../../redux/actions';
+
 import { AiOutlineHeart } from 'react-icons/ai'
 import { AiFillHeart } from 'react-icons/ai'
-import './styles.css'
+import './styles.css'   
 import Stars from '../Stars/Stars';
+
 import { useSelector,useDispatch } from 'react-redux';
+
 
 export default function BookCard({ land, title, author, img, price, score, id }) {
     const styles = { alignSelf: "flex-end", padding: "10px", color: "#bf3030" };
@@ -20,7 +24,6 @@ export default function BookCard({ land, title, author, img, price, score, id })
     const obj = {
         user: user.idUser,
         favs: id
-
     }
 
 
@@ -36,9 +39,6 @@ export default function BookCard({ land, title, author, img, price, score, id })
         if(Object.keys(user).length === 0) return setLogueado(false)
     }, [ id,user])
 
-    
-   
-    
 
     function handleFav() {
         if (isFav == false) {
@@ -47,11 +47,13 @@ export default function BookCard({ land, title, author, img, price, score, id })
             if (logueado) {
                 dispatch(postFavs(obj))
 
+
                 setIsFav(true)
 
                     
 
-            } else alert('Login for add favourites')
+            } else alert('You must login first to do this!')
+
         }
         if (isFav == true) {
             
@@ -69,9 +71,9 @@ export default function BookCard({ land, title, author, img, price, score, id })
             
                 <div className='info'>
 
-                    <h3>{title}</h3>
+                    <h3>{(title.length>60)? (title.slice(0,60) + "...") : title}</h3>
 
-                    <h5>Author: {author}</h5>
+                    <h5>Author: {(author.length>30)? (author.slice(0,30) + "...") : author}</h5>
                     <div className='price'>
                         <Stars score={score} className="icon" />
                         <span>${price}, 00</span>

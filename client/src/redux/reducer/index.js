@@ -1,3 +1,4 @@
+import ShoppingHistory from "../../components/ShoppingHistory/ShoppingHistory";
 import { infoBooks, totalPrice } from "../actions";
 import {
   GET_BY_SEARCH,
@@ -33,7 +34,9 @@ import {
   GET_FAVS,
   CHANGE_FAVS,
   DELETE_FAVS,
-  POST_FAVS
+  POST_FAVS,
+  GET_SHOPPING_HISTORY,
+  SET_PAGE
 } from "../actions/types";
 
 const initialState = {
@@ -53,7 +56,9 @@ const initialState = {
   favs: [],
   changed:false,
   comments: [],
-  support: []
+  support: [],
+  ShoppingHistory:[],
+  page: 1
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -295,8 +300,22 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         favs:payload
       }
-      default:
-      return state;
+
+    case GET_SHOPPING_HISTORY:
+      return{
+        ...state,
+        ShoppingHistory:payload
+      }
+
+    case SET_PAGE:
+        return{
+          ...state,
+          page: payload
+      }
+
+    default:
+    return state;
+
 
     
   }
