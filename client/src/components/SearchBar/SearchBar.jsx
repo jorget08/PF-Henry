@@ -15,7 +15,7 @@ export default function SearchBar({ categories }) {
 
     let history = useHistory()
 
-    const table = useSelector(state => state.books)
+    const table = useSelector(state => state.allBookBackup)
     const titles = table.map(e => ({ tit: e.title, aut: e.author, img: e.image, id: e.id }))
 
     function handleChange(e) {

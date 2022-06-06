@@ -1,17 +1,22 @@
 import React from 'react'
 import styles from './styles.css'
-export default function Paginated({ paginat, limitPage, pageControl, firstPrevControl, nextLastControl }) {
+export default function Paginated({ page, paginat, limitPage, pageControl, firstPrevControl, nextLastControl }) {
 
-    // trae las pags, el limite, el controlador de los botones sobre el estado de las paginas
-    // y las validaciones de los botones, para que no se puedan oprimir en casos imposibles
-    // ej: si estamos en la pagina 1, no poder hacer un firstPage o previousPage
+    var pages = {
+        prepre: 0,
+        pre: 0,
+        page: page,
+        next: 0,
+        nextnext: 0
+    } 
 
-    //se agrega información en un <h3> a modo de guía para indicar el alcance del paginado al usuario.
-    var numerPages = []
+    if (page - 2 < 0) {pages.prepre = 0} else {pages.prepre = page - 2}
+    if (page - 1 < 0) {pages.pre = 0} else {pages.pre = page - 1}
+    if (page + 1 > limitPage) {pages.next = 0} else {pages.next = page + 1}
+    if (page + 2 > limitPage) {pages.nextnext = 0} else {pages.nextnext = page + 2} 
+      
+    var numerPages = [pages.prepre, pages.pre, page, pages.next, pages.nextnext]
 
-    for (let i = 1; i <= limitPage; i++) {
-        numerPages.push(i)
-    }
     return (
         <div className='containerPag'>
             <ul>
@@ -22,9 +27,9 @@ export default function Paginated({ paginat, limitPage, pageControl, firstPrevCo
             <div className='paginate'>
                 <ul>
                     {numerPages.map(n => {
-                        return <li key={n} onClick={(e) => paginat(e, n)} id={n}>
+                        if (n > 0) {return <li className={(n === page)? "currentPage" : ""}key={n} onClick={(e) => paginat(e, n)} id={n}>
                             <h5>{n}</h5>
-                        </li>
+                        </li>}
                     })}
                 </ul>
             </div>

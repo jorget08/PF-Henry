@@ -11,7 +11,8 @@
 
 .Container{
     background-color: lightcoral;
-    width: 87.2%;
+    padding-left: 150px;        
     display: flex;
+    color: red;
     justify-content: center;
 }

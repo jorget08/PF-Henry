@@ -9,27 +9,7 @@ export default function Users () {
 
     const dispatch = useDispatch()
     const users = useSelector(state => state.users)
-    const customStyles = {
-        rows: {
-            style: {
 
-                minHeight: '50px',
-                paddingLeft: '90px'
-            },
-        },
-        headCells: {
-            style: {
-                paddingLeft: '90px', // override the cell padding for head cells
-                paddingRight: '8px',
-            },
-        },
-        cells: {
-            style: {
-                paddingLeft: '100px', // override the cell padding for data cells
-                paddingRight: '8px',
-            },
-        },
-    };
     const column = [
     {
         name : "Name",
@@ -63,8 +43,7 @@ export default function Users () {
       columns={column}
       data={users}
       tabla="Users"
-      pagination
-      customStyles={customStyles}
+      pagination    
       />
     </div>
   )
