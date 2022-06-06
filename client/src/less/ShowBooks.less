@@ -1,8 +1,8 @@
 @import "./variables.less";
 
 .homeContainer {
-    background: @background;
-    background: @gradient;
+    background-color: rgb(219, 219, 219);
+
 }
 
 .catalogue {
@@ -10,6 +10,8 @@
     grid-template-columns: repeat(3, 1fr);
     padding: 1rem;
     border-radius: 10px;
+    row-gap: 5rem;
+    column-gap: 3rem;
 
     @media (max-width: 1224px) {
         grid-template-columns: repeat(2, 1fr);
