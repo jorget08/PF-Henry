@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { postUser } from '../../redux/actions';
 import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
+import Swal from "sweetalert2";
 import './styles.css'
 export default function Register() {
     const dispatch = useDispatch()
@@ -81,7 +82,11 @@ export default function Register() {
                 }}
                 onSubmit={(valores, { resetForm }) => {
                     dispatch(postUser(valores))
-                    alert("You have been registered")
+                    Swal.fire(
+                        'You have been registered',
+                        'Welcome to bookstore c:',
+                        'success'
+                      )
                     resetForm()
                     setTimeout(() => redirect(), "1000")
                 }}>
