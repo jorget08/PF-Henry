@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { editProfile } from '../../redux/actions';
 import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
+import Swal from "sweetalert2";
 
 export default function Register() {
     const dispatch = useDispatch()
@@ -31,7 +32,11 @@ const redirect = ()=>{
         }}
         onSubmit={(valores, {resetForm}) => {
             dispatch(editProfile(valores, user.idUser))
-            alert("Your profile has been updated")
+            Swal.fire(
+                'Done!',
+                'Your profile has been updated',
+                'success'
+              )
             resetForm()
             setTimeout(() => redirect(), "1000")
         }}>
