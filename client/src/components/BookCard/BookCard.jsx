@@ -7,6 +7,7 @@ import { AiOutlineHeart } from 'react-icons/ai'
 import { AiFillHeart } from 'react-icons/ai'
 import './styles.css'
 import Stars from '../Stars/Stars';
+import { useSelector } from 'react-redux';
 
 export default function BookCard({ land, title, author, img, price, score, id }) {
     const styles = { alignSelf: "flex-end", padding: "10px", color: "#bf3030" };
@@ -15,8 +16,7 @@ export default function BookCard({ land, title, author, img, price, score, id })
 
     const [logueado, setLogueado] = useState(false)
     const [isFav, setIsFav] = useState(false)
-
-
+   
     const obj = {
         user: user.idUser,
         favs: id
