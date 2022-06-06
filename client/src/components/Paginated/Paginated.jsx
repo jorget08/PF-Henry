@@ -5,6 +5,7 @@ export default function Paginated({ page, paginat, limitPage, pageControl, first
     var pages = {
         prepre: 0,
         pre: 0,
+        page: page,
         next: 0,
         nextnext: 0
     } 
@@ -26,7 +27,7 @@ export default function Paginated({ page, paginat, limitPage, pageControl, first
             <div className='paginate'>
                 <ul>
                     {numerPages.map(n => {
-                        if (n > 0) {return <li key={n} onClick={(e) => paginat(e, n)} id={n}>
+                        if (n > 0) {return <li className={(n === page)? "currentPage" : ""}key={n} onClick={(e) => paginat(e, n)} id={n}>
                             <h5>{n}</h5>
                         </li>}
                     })}

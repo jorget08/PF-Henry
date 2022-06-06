@@ -25,6 +25,9 @@ export default function Sidebar() {
             <Link to="/admin/users" className={s.Li}>Users ▶</Link>
           </li>
           <hr />
+          <li>
+            <Link to="/admin/support">Support</Link>
+          </li>
         </ul>
     </div>
     </>

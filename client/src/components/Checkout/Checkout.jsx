@@ -20,8 +20,6 @@ const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 export default function Checkout() {
   const dispatch = useDispatch();
-  const bookCarts = useSelector((state) => state.cart);
-  const TotalPrice = useSelector((state) => state.totalPrice);
   const infoBook = useSelector((state) => state.infoBooks);
   const checkoutinfo = JSON.parse(localStorage.getItem("carrito"));
   let precio = checkoutinfo.map((e) => e.cant * e.price);
@@ -74,7 +72,7 @@ export default function Checkout() {
   const onApprove = (data, actions) => {
     let totalInfo = {
       data: data,
-      totalPrice: TotalPrice,
+      totalPrice: preciototal,
       infoBook: infoBook,
       userId: userId,
     };
