@@ -83,7 +83,7 @@ export default function Register() {
                     dispatch(postUser(valores))
                     alert("You have been registered")
                     resetForm()
-                    setTimeout(() => redirect(), "2000")
+                    setTimeout(() => redirect(), "1000")
                 }}>
                 {({ touched, errors }) => (
                     <Form classname="registerForm">
