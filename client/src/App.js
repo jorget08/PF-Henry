@@ -1,7 +1,6 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import { Route } from "react-router-dom";
-
 import Home from "./components/Home/Home";
 import BookDetail from "./components/BookDetail/BookDetail";
 import FormCreate from "./components/FormCreate/FormCreate";
@@ -10,7 +9,6 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Register from "./components/Register/Register";
 import Checkout from "./components/Checkout/Checkout";
 import UserProfile from "./components/UserProfile/UserProfile";
-// import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import Sidebar from "./components/SideBar/SideBar";
 import Stock from "./components/AdminDashboard/Stock";
 import SupportAdmin from "./components/AdminDashboard/SupportAdmin";
