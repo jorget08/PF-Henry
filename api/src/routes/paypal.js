@@ -124,15 +124,16 @@ router.post("/", async (req, res, next) => {
     }
 })
 
-router.get("/payments", async (req, res, next) => {
+router.get("/payments/:id", async (req, res, next) => {
     try {
-        const {id} = req.paramns
+        const {id} = req.params
         const user = await User.findOne({
             where : {
                 idUser: id
             },
             include:{
-                model: Payment
+                model: Payment,
+                include: Paymentbook
             }
         })
 
