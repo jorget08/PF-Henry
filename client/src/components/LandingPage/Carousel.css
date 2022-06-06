@@ -1,6 +1,9 @@
 .carousel:hover {
   cursor: pointer;
 }
+.carousel .newSlide {
+  align-items: flex-start;
+}
 .carousel .newSlide img {
   height: 450px;
 }

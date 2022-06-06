@@ -1,6 +1,7 @@
 .navbar .search {
   align-items: flex-start;
   display: flex;
+  padding: 10px;
 }
 .navbar .search .logo img {
   max-width: 2rem;
@@ -19,13 +20,24 @@
 }
 .navbar .logoBar {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-evenly;
   font-family: 'Source Sans Pro', sans-serif;
+}
+.navbar .logoBar .sideBar {
+  display: flex;
+  margin-bottom: -200px;
+  align-items: flex-start;
+}
+.navbar .logoBar .sideBar .menu {
+  padding: 1rem;
 }
 .navbar .logoBar .links {
   display: flex;
   justify-content: space-evenly;
+}
+.navbar .logoBar .links .loggedUser {
+  margin: 10px 1rem;
 }
 .navbar .logoBar .links p {
   background-color: #6c8eff;
