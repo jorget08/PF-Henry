@@ -2,18 +2,18 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 import { helpCallPut, helpCall, helpCallDelete } from '../../helCall';
-
+import { changeFavs } from '../../redux/actions';
 import { AiOutlineHeart } from 'react-icons/ai'
 import { AiFillHeart } from 'react-icons/ai'
 import './styles.css'
 import Stars from '../Stars/Stars';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 
 export default function BookCard({ land, title, author, img, price, score, id }) {
     const styles = { alignSelf: "flex-end", padding: "10px", color: "#bf3030" };
   
     const user = useSelector(state => state.user);
-
+    const dispatch=useDispatch()
     const [logueado, setLogueado] = useState(false)
     const [isFav, setIsFav] = useState(false)
    
@@ -46,7 +46,9 @@ export default function BookCard({ land, title, author, img, price, score, id })
         }
         if (isFav == true) {
             
+            dispatch(changeFavs(true))
 
+            
             helpCallDelete(`/favourites?user=${user.idUser}&favs=${id}`)
                 .then(res => setIsFav(false))
         }

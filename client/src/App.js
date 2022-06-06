@@ -14,6 +14,7 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import Sidebar from "./components/SideBar/SideBar";
 import Stock from "./components/AdminDashboard/Stock";
 import SupportAdmin from "./components/AdminDashboard/SupportAdmin";
+import { UserFavs } from "./components/User/UserFavs/UserFavs";
 import Support from "./components/Support/Support";
 import Users from "./components/AdminDashboard/Users";
 import EditProfile from "./components/EditProfile/EditProfile";
@@ -57,6 +58,7 @@ function App() {
         <Route path={"/checkout"} component={Checkout} />
         <Route path={"/support"} component={Support} />
         <Route path={"/editProfile"} component={EditProfile} />
+        <Route exact path={'/favourites'} component={UserFavs}/>
       </>
 
     </AuthContext.Provider>

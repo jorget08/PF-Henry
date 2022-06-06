@@ -96,7 +96,8 @@ export default function NavBar() {
                             <ProSidebar collapsed={sideBar} width={210} collapsedWidth={"0px"} >
                                 <Menu iconShape="square">
                                     <MenuItem icon={<CgProfile />}>Your Profile<Link to="/userProfile" /></MenuItem>
-                                    <MenuItem icon={<BsFillBookmarkHeartFill />}>Liked</MenuItem>
+                                    <MenuItem icon={<BsFillBookmarkHeartFill />}>Liked<Link to="/favourites"/></MenuItem>
+                                    
                                     <MenuItem icon={<FaShoppingBag />}>Shopping History</MenuItem>
                                     {user.rols?.name === "admin" &&
                                         <MenuItem icon={<RiAdminFill />}>Dashboard<Link to="/admin" /></MenuItem>

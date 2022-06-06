@@ -29,7 +29,9 @@ import {
   POST_SUPPORT,
   ADD_COMMENT,
   GET_COMMENTS,
-  GET_SUPPORT
+  GET_SUPPORT,
+  GET_FAVS,
+  CHANGE_FAVS,
 } from "../actions/types";
 
 const initialState = {
@@ -47,6 +49,7 @@ const initialState = {
   infoBooks: [],
   users: [],
   favs: [],
+  changed:false,
   comments: [],
   support: []
 };
@@ -269,6 +272,16 @@ export default function rootReducer(state = initialState, action) {
       return{
         ...state,
         support: payload
+      };
+      case GET_FAVS:
+      return{
+        ...state,
+        favs: payload
+      }
+      case CHANGE_FAVS:
+      return{
+        ...state,
+        changed: payload
       }
   
       default:

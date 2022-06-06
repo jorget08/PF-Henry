@@ -30,7 +30,9 @@ import {
   SEND_EMAIL,
   ADD_COMMENT,
   GET_COMMENTS,
-  GET_SUPPORT
+  GET_SUPPORT,
+  GET_FAVS,
+  CHANGE_FAVS
 } from "./types";
 
 import axios from "axios";
@@ -394,4 +396,18 @@ export function getSupport() {
       console.log(error);
     }
   };
+}
+
+export function getFavs(user) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`http://localhost:3001/favourites?user=${user}`);
+      return dispatch({ type: GET_FAVS, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function changeFavs(payload) {
+  return { type: CHANGE_FAVS, payload };
 }
