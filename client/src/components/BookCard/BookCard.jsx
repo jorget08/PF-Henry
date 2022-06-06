@@ -54,9 +54,9 @@ export default function BookCard({ land, title, author, img, price, score, id })
             
                 <div className='info'>
 
-                    <h3>{title}</h3>
+                    <h3>{(title.length>60)? (title.slice(0,60) + "...") : title}</h3>
 
-                    <h5>Author: {author}</h5>
+                    <h5>Author: {(author.length>30)? (author.slice(0,30) + "...") : author}</h5>
                     <div className='price'>
                         <Stars score={score} className="icon" />
                         <span>${price}, 00</span>

@@ -12,7 +12,7 @@ export default function Sidebar() {
           <hr/>
           <li className={s.Li}>
             <span>{RiHome2Line}</span>
-            <Link to="/admin/" className={s.Li}>  Home ▶ </Link>
+            <Link to="/admin/" className={s.Li}>Home ▶ </Link>
           </li>
           <hr />
           <li>
@@ -28,7 +28,7 @@ export default function Sidebar() {
           </li>
           <hr />
           <li>
-            <Link to="/admin/support">Support</Link>
+            <Link to="/admin/support" className={s.Li}>Support ▶</Link>
           </li>
         </ul>
     </div>
