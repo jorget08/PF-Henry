@@ -4,15 +4,12 @@
 }
 .Home{
     display: flex;
-    background-color: lightblue;
     bottom: 50px;
     
 }
 
-.Container{
-    background-color: lightcoral;
+.Container{    
     padding-left: 150px;        
-    display: flex;
-    color: red;
+    display: flex;    
     justify-content: center;
 }
