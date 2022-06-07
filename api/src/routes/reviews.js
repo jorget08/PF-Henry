@@ -51,6 +51,70 @@ router.post('/', async (req, res, next) => {
         next(error)
     }
 })
+router.delete('/',async(req,res,next)=>{
+    const {user,book,review}= req.query
+    
+    try {
+        const bookFound = await Book.findByPk(book)
+        const userFound= await User.findByPk(user)
+        await userFound.removeReview(review)
+        await bookFound.removeReview(review)
+        res.send(200)
+    } catch (error) {
+        next(error)
+    }
+})
+router.put('/',async(req,res,next)=>{
+    try {
+        const {review}= req.query
+        const {title, description}=req.body
+
+
+        if(title){
+            Review.update(
+                {
+                  title: title,
+                },
+                {
+                  where: { id: review },
+                }
+              );
+        }
+        if(description){
+            Review.update(
+                {
+                    description: description,
+                },
+                {
+                  where: { id: review },
+                }
+              );
+        }
+        return res.send('Updated!')
+
+    } catch (error) {
+        next(error)
+    }
+})
+router.put('/report/:id',async(req,res,next)=>{
+    const {id}=req.params
+    const {report}=req.body
+    try {
+        
+            Review.update(
+                {
+                    report: report,
+                },
+                {
+                  where: { id: id },
+                }
+              );
+                return res.send('Reported')
+
+    } catch (error) {
+        next(error)
+    }
+})
 
 
 module.exports = router
