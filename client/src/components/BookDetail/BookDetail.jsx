@@ -9,6 +9,8 @@ import Stars from '../Stars/Stars';
 import NavBar from '../NavBar/NavBar'
 import Footer from '../Footer/Footer';
 import "./styles.css"
+import { helpCallPut, helpCallUpdate } from '../../helCall';
+import Swal from 'sweetalert2'
 
 export default function BookDetail() {
 
@@ -16,9 +18,12 @@ export default function BookDetail() {
   const user = useSelector(state => state.user)
   const history = useHistory()
   const token = localStorage.getItem("token")
-  const [comment, setComment] = useState("")
+  const [comment, setComment] = useState({title:'',description:''})
+  const [bool,setBool]=useState(true)
 
   console.log("hystory", history)
+  var bookDet = useSelector(state => state.detail)
+  var stars = [false, false, false, false, false];
 
   const redirect = () => {
     history.push("/home")
@@ -35,8 +40,7 @@ export default function BookDetail() {
     }
   }, [dispatch, id])
 
-  var bookDet = useSelector(state => state.detail)
-  var stars = [false, false, false, false, false];
+  
 
   function delet(e) {
     e.preventDefault();
@@ -47,7 +51,46 @@ export default function BookDetail() {
       redirect()
     }
   }
+  async function reportComment(element) {
 
+    const { value: report } = await Swal.fire({
+      title: 'Why do you report this Comment',
+      input: 'select',
+      inputOptions: {
+
+        type1: 'Dice algo malo',
+        type2: 'no me gusta',
+        type3: 'xd',
+        type4: 'Ogatitoranges'
+
+      },
+      inputPlaceholder: 'Select why',
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return 'You need to choose something!'
+        }
+      }
+    })
+
+    if (report) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Se report xd',
+      })
+    }
+    const obj={
+      report:report
+    }
+    helpCallUpdate(`/reviews/report/${element.id}`, obj)
+  }
+  function editComment(element) {
+    setComment({
+      title:element.title,
+      description:element.description
+    })
+    setBool(!bool)
+  }
   return (
     <div className='all'>
       <NavBar />
@@ -101,10 +144,16 @@ export default function BookDetail() {
       <div>
         <h3>Comments:</h3>
         {comments.length ? comments.map(e => {
-          return (<div>
-            <h4>{e.title}</h4>
-            <p>{e.description}</p>
-          </div>
+          return (e.report == null &&
+            <div className='comments'>
+              <img src={e.user.imgProfile} alt="" width='30' height='30' />
+              
+              <h4>{e.user.name} {e.user.lastName}</h4>
+              <h5>{e.title}</h5>
+              <p>{e.description}</p>
+              <button onClick={() => reportComment(e)}>Report</button>
+              <button onClick={() => editComment(e)}>Edit</button>
+            </div>
           )
         }) :
           <p>Be the first to comment this book</p>}
@@ -112,10 +161,7 @@ export default function BookDetail() {
       {token ? <div>
         <h3>Add a comment:</h3>
         <Formik
-          initialValues={{
-            title: "",
-            description: ""
-          }}
+          initialValues={comment}
           validate={(valores) => {
             let errors = {};
             if (valores.title > 50) {

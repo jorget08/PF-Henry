@@ -1,3 +1,11 @@
+
+.comments{
+  border: solid black;
+  margin: 5px 0px 5px 0px;
+  padding: 5px;
+}
+
+
 .container {
   display: flex;
   align-items: center;
