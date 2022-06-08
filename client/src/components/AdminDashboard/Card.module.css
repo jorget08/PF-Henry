@@ -1,8 +1,8 @@
 .Card{
-        display: flex;
-        justify-content: space-around;
+        display:block;
+        align-items: center;
         margin-top: 30px;
-        background-color:green;
+        background-color: #d85353;
         border-radius: 15px;
         width: 15rem;
         height: 10rem;
@@ -18,12 +18,16 @@
 }
 
 .h5{
-        padding-top: 100px;
+       
         font-size: 15px;
         color: white;
+        padding-left: 26%;
+        padding-top: 15px;
 }
 
 .h1{
         font-size: 60px;
         color: white;
+        padding-left: 28%;
+        padding-top: 15px;
 }
