@@ -63,13 +63,12 @@ export default function FormCreate() {
     }
 
     var catego = useSelector(state => state.categories)
-    
+
     return (
         <div className='containerCreate'>
             {/* <NavBar /> */}
-            <Sidebar/>
+            <Sidebar />
 
-            <h2 style={{textAlign:"center", fontWeight:"800"}}>{(detail.id !== undefined ? "Modify the book" : "Create a book")}</h2>
             <Formik
 
                 initialValues={base}
@@ -126,6 +125,7 @@ export default function FormCreate() {
                     <div className='formContainer'>
                         <Form>
                             <div className='formInfo'>
+                                <h2 style={{ textAlign: "center", fontWeight: "800" }}>{(detail.id !== undefined ? "Modify the book" : "Create a book")}</h2>
 
                                 <div className='field'>
                                     <label name="title">Title</label>
@@ -134,7 +134,7 @@ export default function FormCreate() {
                                         name="title"
                                         placeholder='Title'
                                     />
-                                    {touched.title && errors.title && <span>{errors.title}</span>}
+                                    {touched.title && errors.title && <span className='errorMsg'>{errors.title}</span>}
                                 </div>
                                 <div className='field'>
                                     <label name="author">Author</label>
@@ -142,9 +142,9 @@ export default function FormCreate() {
                                         type="text"
                                         name="author"
                                         placeholder='Author'
-                                        
+
                                     />
-                                    {touched.author && errors.author && <span>{errors.author}</span>}
+                                    {touched.author && errors.author && <span className='errorMsg'>{errors.author}</span>}
                                 </div>
                                 <div className='field'>
                                     <label name="categories">Category</label>
@@ -165,19 +165,20 @@ export default function FormCreate() {
                                                     }
                                                 }
                                                 }>
+                                                    {touched.categories && errors.categories && <span className='errorMsg'>{errors.categories}</span>}
                                                     <option value="none">Select category</option>
-                                                    {catego ? catego.map(c => {
+                                                    {catego && catego.map(c => {
                                                         return (
                                                             <option value={c.name} name={c.name}>{c.name}</option>
                                                         )
-                                                    }) : null}
+                                                    })}
                                                 </select>
                                             )
                                         }}
                                     </FieldArray>
                                 </div>
                                 <div className='field'>
-                                    <label name="categories">Categories selected</label>
+                                    <label name="categories">Categories selected:</label>
                                     <FieldArray
                                         name="categories"
                                     >
@@ -203,7 +204,6 @@ export default function FormCreate() {
                                             )
                                         }}
                                     </FieldArray>
-                                    {touched.categories && errors.categories && <span>{errors.categories}</span>}
                                 </div>
                                 <div className='field'>
                                     <label name="price">Price</label>
@@ -214,7 +214,7 @@ export default function FormCreate() {
                                         min="1"
 
                                     />
-                                    {touched.price && errors.price && <span>{errors.price}</span>}
+                                    {touched.price && errors.price && <span className='errorMsg'>{errors.price}</span>}
                                 </div>
                                 <div className='field'>
                                     <label name="stock">Stock</label>
@@ -225,7 +225,7 @@ export default function FormCreate() {
                                         min="1"
 
                                     />
-                                    {touched.stock && errors.stock && <span>{errors.stock}</span>}
+                                    {touched.stock && errors.stock && <span className='errorMsg'>{errors.stock}</span>}
                                 </div>
                                 <div className='field'>
                                     <label name="iamge">Image URL</label>
@@ -245,7 +245,7 @@ export default function FormCreate() {
                                         as="textarea"
 
                                     />
-                                    {touched.description && errors.description && <span>{errors.description}</span>}
+                                    {touched.description && errors.description && <span className='errorMsg'>{errors.description}</span>}
                                 </div>
                                 {(detail.id !== undefined) ? <button type="submit">Modify!</button> : <button type="submit">Create!</button>}
                                 {formSubmit && <span>Action successfully complete!</span>}

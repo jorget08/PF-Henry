@@ -59,7 +59,7 @@ export default function Support() {
                     <h3 className='minitag'><Link id="Write" onClick={(e) => { scroll5.current.scrollIntoView({ behavior: "smooth" }); handleClick(e, true) }}>- Write us!</Link></h3>
                 </ul>
             </div>
-            <div className="formContainer">
+            <div className="contactContainer">
                 <div className="conttext">
                     <h1 ref={scroll0} id="Home" onClick={(e) => handleClick(e)}>What is BookStore?</h1>
                     {
@@ -168,11 +168,10 @@ export default function Support() {
                                 }}>
 
                                 {({ touched, errors }) => (
-                                    
-                                    <div className='formContainer'>
-                                        
+                                    <div className='contactContainer'>
                                         <Form>
-                                            <div className='formInfo'>
+                                            <div className='contactInfo'>
+
                                                 <h2 style={{marginLeft: "240px"}}>Write us!</h2>
                                                 <div className='description'>
                                                     <label>Name </label>
