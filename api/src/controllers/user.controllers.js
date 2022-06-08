@@ -48,7 +48,7 @@ const createUser = async (req, res) => {
             text: 'Hello ' + user.name + ' ' + user.lastName + '\n\n' +
                 'Thank you for registering on BookStore.\n' +
                 'To confirm your registration, please click on the following link:\n\n' +
-                'http://localhost:3000/confirmar/' + user.idUser + '\n\n' +
+                'http://localhost:3000/confirmation/' + user.idUser + '\n\n' +
                 "If it doesn't work, copy and paste the link into your browser.\n\n" +
                 'Thank you,\n' +
                 'BookStore'

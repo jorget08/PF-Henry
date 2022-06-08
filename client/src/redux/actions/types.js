@@ -36,6 +36,7 @@ export const CHANGE_FAVS = "CHANGE_FAVS";
 export const DELETE_FAVS = "DELETE_FAVS";
 export const POST_FAVS = "POST_FAVS";
 export const GET_SHOPPING_HISTORY="GET_SHOPPING_HISTORY"
-export const SET_PAGE="SET_PAGE"
+export const SET_PAGE="SET_PAGE";
+export const CONFIRMATION_MAIL="CONFIRMATION_MAIL"
 
 
