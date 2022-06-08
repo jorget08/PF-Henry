@@ -57,7 +57,7 @@ const initialState = {
   favs: [],
   changed:false,
   comments: [],
-  support: [],
+  support: ["empty"],
   ShoppingHistory:[],
   page: 1
 };

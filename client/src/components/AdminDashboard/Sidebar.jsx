@@ -30,7 +30,7 @@ export default function Sidebar() {
           </li>
           <hr />
           <li className={s.Li}>
-            <Link to="/admin/support" className={s.Li}> <BiSupport/> <span style={{marginLeft : "10px"}}> Support</span></Link>
+            <Link to="/admin/supportAdmin" className={s.Li}> <BiSupport/> <span style={{marginLeft : "10px"}}> Support</span></Link>
           </li>
           <hr />
         </ul>

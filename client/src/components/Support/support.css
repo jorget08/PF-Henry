@@ -1,18 +1,21 @@
 .contactContainer {
   display: block;
-
   padding: 2rem 0;
+  padding-left: 20px;
 }
 .contactContainer h1:hover {
   cursor: pointer;
 }
 .contactContainer p {
-  text-align: center;
+  text-align: left;
+  padding-top: 10px;
+  padding-left: 30px;
   width: 700px;
   font-family: 'Source Sans Pro', sans-serif;
 }
 .contactContainer h1 {
-  text-align: center;
+  padding-left: 30px;
+  text-align: left;
   font-family: 'Source Sans Pro', sans-serif;
 }
 .options {
@@ -35,6 +38,12 @@
 .descriptionS {
   text-align: left;
 }
+
+.descriptionArea{
+  height: 150px;
+  width: 450px;
+}
+
 .text {
   margin-left: 10px;
   font-size: larger;
@@ -43,14 +52,14 @@
   border: 1px solid #c4c4c4;
   box-shadow: 5px 5px 20px -2px black;
   border-radius: 20px;
-  /* padding: 2rem 0; */
-  /* display: flex;
+  padding: 10px;
+  display: flex;
   flex-direction: column;
-  justify-content: space-evenly; */
+  justify-content: space-evenly;
   font-family: 'Merriweather', serif;
   font-size: 20px;
   text-align: justify;
-  /* align-items: flex-start; */
+  align-items: flex-start;
   min-width: 400px;
   max-width: 600px;
   background-color: white;
@@ -65,10 +74,10 @@
   margin: 5px auto;
   max-width: 20rem;
   display: flex;
-/*   justify-content: space-between; */
+  justify-content: space-between;
 }
 .minimize {
-  /* margin: auto; */
+  margin: auto;
   background-color: #98ff98;
   outline: none;
   padding: 10px;
@@ -82,4 +91,8 @@
   background-color: #65b365;
   color: white;
   cursor: pointer;
+}
+
+.error {
+  color: red;
 }
