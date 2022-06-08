@@ -4,7 +4,7 @@ const axios = require('axios')
 const request = require('request')
 const {CLIENT, SECRET, PAYPAL_API} = process.env
 const auth = {user: CLIENT, pass: SECRET}
-const { Payment, Book, Paymentbook, User } = require("../db");
+const { Payment, Book, Paymentbook, User, Paymentcrypto } = require("../db");
 
 
 const createPayment = async (req, res, next) => {
@@ -71,8 +71,8 @@ router.get("/execute-payment", executePayment)
 router.post("/", async (req, res, next) => {
     try {
         const {data, totalPrice, infoBook, userId} = req.body
+        if(typeof data !== string){
         const {orderID, payerID, paymentSource} = data
-        console.log(userId)
         for (let i = 0; i < infoBook.length; i++) {
             let b = await Book.findOne({
                 where: {
@@ -117,7 +117,52 @@ router.post("/", async (req, res, next) => {
             })
             paymentCreated.addPaymentbook(book)
         }
+    }
+    else{
+        for (let i = 0; i < infoBook.length; i++) {
+            let b = await Book.findOne({
+                where: {
+                    id: infoBook[i].id
+                }
+            })
+            await b.update({
+                stock: b.stock - infoBook[i].cant
+            })
+        }
 
+        let books = infoBook.map(e => {return{
+            title: e.title,
+            author: e.author,
+            image: e.image,
+            price: e.price,
+            total: e.total,
+            cant: e.cant
+        }})
+
+        let paymentBooks = await Paymentbook.bulkCreate(books)
+
+        const paymentCryptoCreated = await Paymentcrypto.create({
+            hash:data,
+            paymentSource:"Ethereum",
+            totalPrice
+        })
+
+        const user = await User.findOne({
+            where: {
+                idUser: userId
+            }
+        })
+        user.addPaymentcrypto(paymentCryptoCreated)
+
+        for (let i = 0; i < paymentBooks.length; i++) {
+            const book = await Paymentbook.findOne({
+                where: {
+                    id: paymentBooks[i].id
+                }
+            })
+            paymentCryptoCreated.addPaymentbook(book)
+        }
+    }
 
     } catch (error) {
         next(error)
