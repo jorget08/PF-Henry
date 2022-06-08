@@ -98,7 +98,7 @@ export default function Support() {
                     {
                         render.Networks && <p className='text'>
                             Yes! You can follow us on Facebook (bookStore), Instagram (@bookstore) and LinkedIn (bookstore).
-                            Every day we upload content about our store, new books, new coleccions and more!
+                            Every day we upload content about our store, new books, new collection and more!
                             <br /><br />
                         </p>}
 
@@ -116,7 +116,7 @@ export default function Support() {
                     <h1 ref={scroll4} id="Advertising" onClick={(e) => handleClick(e)}>Do you sell advertising on your site?</h1>
                     {
                         render.Advertising && <p className='text'>
-                            By the moment we only focus on offers you the most complete coleccion of books! Maybe later. If you want to
+                            By the moment we only focus on offers you the most complete collection of books! Maybe later. If you want to
                             buy some space in our page to put your advertising there, you contact us at the end of this section, by sending
                             an email whit your offer. We will consider the option and we will contact you in case of accept it.
                             <br /><br />
@@ -133,7 +133,8 @@ export default function Support() {
                                 member of our community, we can follow all your request closer. If you are not register
                                 in our page yet, we recomends you to do it now clicking here.
                             </p>
-                            <h2>Write us!</h2>
+                            
+                            
                             <Formik
                                 initialValues={{
                                     name: "",
@@ -167,9 +168,12 @@ export default function Support() {
                                 }}>
 
                                 {({ touched, errors }) => (
+                                    
                                     <div className='formContainer'>
+                                        
                                         <Form>
                                             <div className='formInfo'>
+                                                <h2 style={{marginLeft: "240px"}}>Write us!</h2>
                                                 <div className='description'>
                                                     <label>Name </label>
                                                     <Field type="text" name="name" placeholder="Name" />
