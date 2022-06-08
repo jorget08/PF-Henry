@@ -61,8 +61,15 @@ router.post('/', async (req, res, next) => {
         await userFound.addReview(createReview)
         await bookFound.addReview(createReview)
 
+        const allReviews = await Review.findAll({
+            where:
+            {
+                bookId: book
+            },include:{model:User}
+        })
+        return res.status(200).json(allReviews)
 
-        res.send(200)
+  
     } catch (error) {
         next(error)
     }
@@ -114,10 +121,11 @@ router.put('/',async(req,res,next)=>{
 })
 router.put('/report/:id',async(req,res,next)=>{
     const {id}=req.params
+    const{ book}=req.query
     const {report}=req.body
     try {
         
-            Review.update(
+            await Review.update(
                 {
                     report: report,
                 },
@@ -125,7 +133,15 @@ router.put('/report/:id',async(req,res,next)=>{
                   where: { id: id },
                 }
               );
-                return res.send('Reported')
+              const allReviews = await Review.findAll({
+                where:
+                {
+                    bookId: book,
+                    report:null
+                },include:{model:User}
+            })
+            return res.status(200).json(allReviews)
+       
 
     } catch (error) {
         next(error)

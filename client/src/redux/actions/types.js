@@ -37,5 +37,9 @@ export const DELETE_FAVS = "DELETE_FAVS";
 export const POST_FAVS = "POST_FAVS";
 export const GET_SHOPPING_HISTORY="GET_SHOPPING_HISTORY"
 export const SET_PAGE="SET_PAGE"
+export const UPDATE_REVIEW='UPDATE_REVIEW'
+export const DELETE_REVIEW = 'DELETE_REVIEW'
+export const REPORT_REVIEW = 'REPORT_REVIEW'
+
 
 

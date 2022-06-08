@@ -36,7 +36,8 @@ import {
   DELETE_FAVS,
   POST_FAVS,
   GET_SHOPPING_HISTORY,
-  SET_PAGE
+  SET_PAGE,
+  REPORT_REVIEW
 } from "../actions/types";
 
 const initialState = {
@@ -262,7 +263,13 @@ export default function rootReducer(state = initialState, action) {
 
     case ADD_COMMENT:
       return{
-        ...state
+        ...state,
+        comments:payload
+      }
+      case REPORT_REVIEW:
+      return{
+        ...state,
+        comments:payload
       }
     case GET_COMMENTS:
       return{
