@@ -38,6 +38,11 @@ module.exports = (sequelize) => {
         type: DataTypes.ARRAY(DataTypes.INTEGER),
         allowNull: true,
     },
+    confirmation:{
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
+    }
   });
 };
 
