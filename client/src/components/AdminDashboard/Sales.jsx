@@ -18,21 +18,15 @@ export default function Stock() {
 
   const column = [
   {
-      name : "Title",
+      name : "User",
       selector: "title",
       sortable: true
 
   },
   {
-      name : "Author",
+      name : "Title",
       selector: "author",
       sortable: true
-
-  },
-  {
-    name : "Stock",
-    selector: "stock",
-    sortable: true
 
   },
   {
@@ -48,7 +42,7 @@ export default function Stock() {
       <DataTable
         columns={column}
         data={allBooks}
-        tabla="Book in stock"
+        table="Sales"
         pagination
       />
     </div>

@@ -10,7 +10,7 @@ import Register from "./components/Register/Register";
 import Checkout from "./components/Checkout/Checkout";
 import UserProfile from "./components/UserProfile/UserProfile";
 import Sidebar from "./components/AdminDashboard/Sidebar";
-import Stock from "./components/AdminDashboard/Stock";
+import Stock from "./components/AdminDashboard/Stock/Stock";
 import SupportAdmin from "./components/AdminDashboard/SupportAdmin";
 import { UserFavs } from "./components/User/UserFavs/UserFavs";
 import Support from "./components/Support/Support";

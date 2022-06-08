@@ -33,6 +33,7 @@ module.exports = (sequelize) => {
     imgProfile: {
       type: DataTypes.STRING,
       allowNull: true,
+      defaultValue:'https//www.softzone.es/app/uploads/2018/04/guest.png?x=480&quality=20'
     },
     favoritos: {
         type: DataTypes.ARRAY(DataTypes.INTEGER),

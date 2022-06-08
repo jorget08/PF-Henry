@@ -1,0 +1,26 @@
+.Container{
+  width: calc(100vh + 35.89rem);
+  margin-left: 150px;
+}
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  table tr:nth-child(even){background-color: #dbdbdb;}
+  
+  table tr:hover {background-color: rgb(160, 160, 160);}
+  
+  table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #d85353;
+    color: white;
+  }
