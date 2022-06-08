@@ -11,6 +11,7 @@ import './styles.css'
 import Stars from '../Stars/Stars';
 
 import { useSelector,useDispatch } from 'react-redux';
+import Swal from "sweetalert2";
 
 
 export default function BookCard({ land, title, author, img, price, score, id }) {
@@ -51,8 +52,12 @@ export default function BookCard({ land, title, author, img, price, score, id })
                 setIsFav(true)
 
                     
-
-            } else alert('You must login first to do this!')
+                
+            } else Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'You must login first to do this!',
+              })
 
         }
         if (isFav == true) {
