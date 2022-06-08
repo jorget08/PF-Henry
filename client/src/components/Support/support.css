@@ -1,59 +1,88 @@
 .contactContainer {
   display: block;
-
   padding: 2rem 0;
 }
-.contactContainer h1:hover {
+.contactContainer .conttext h1:hover {
+  color: #e67373;
   cursor: pointer;
 }
 .contactContainer p {
-  text-align: center;
   width: 700px;
   font-family: 'Source Sans Pro', sans-serif;
+  text-align: justify;
 }
 .contactContainer h1 {
-  text-align: center;
-  font-family: 'Source Sans Pro', sans-serif;
+  text-align: left;
+  font-family: 'Roboto Flex', sans-serif;
 }
 .options {
-  border: solid;
-  background-color: #914343;
+  background-color: #94a7e6;
+  padding: 10px;
 }
 .minitag {
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
+  transition: transform 0.5s;
 }
-.minitag:hover {
+.minitag a:hover {
   cursor: pointer;
+  color: #ffd0d0;
   transform: scale(1.02);
 }
 .conttext {
   text-align: left;
-  border-bottom: solid rgb(58, 67, 108);
-  border-bottom-width: 1px;
+  margin-left: 20%;
+}
+.conttext .clickMe {
+  font-size: 14px;
+  font-weight: 400;
 }
 .descriptionS {
-  text-align: left;
+  text-align: center;
 }
 .text {
-  margin-left: 10px;
+  margin: 10px;
   font-size: larger;
+  border: 2px solid #c4c4c4;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  background-color: rgba(163, 33, 33, 0.781);
 }
 .contactInfo {
   border: 1px solid #c4c4c4;
   box-shadow: 5px 5px 20px -2px black;
   border-radius: 20px;
-  /* padding: 2rem 0; */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-evenly; */
   font-family: 'Merriweather', serif;
   font-size: 20px;
   text-align: justify;
-  /* align-items: flex-start; */
   min-width: 400px;
   max-width: 600px;
   background-color: white;
+}
+.contactInfo button {
+  background-color: #98ff98;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-family: 'Source Sans Pro', sans-serif;
+  border: 1px solid #c4c4c4;
+  font-weight: 400;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+}
+.contactInfo .description {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+}
+.contactInfo .description input,
+.contactInfo .description textarea {
+  margin: auto;
 }
 @media (max-width: 700px) {
   .contactInfo {
@@ -65,21 +94,23 @@
   margin: 5px auto;
   max-width: 20rem;
   display: flex;
-/*   justify-content: space-between; */
+  /*   justify-content: space-between; */
 }
 .minimize {
   /* margin: auto; */
-  background-color: #98ff98;
+  background-color: #fdb7b7;
+  color: black;
   outline: none;
   padding: 10px;
   border-radius: 10px;
   font-size: 18px;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Roboto Flex', sans-serif;
   border: 1px solid #c4c4c4;
   font-weight: 400;
+  margin: 10px;
 }
 .minimize:hover {
-  background-color: #65b365;
+  background-color: #803d3d;
   color: white;
   cursor: pointer;
 }
