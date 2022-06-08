@@ -7,6 +7,7 @@ export const CSearch = ({column}) => {
     <span className={s.span}>
       Search:{' '}
       <input 
+        type='search'
         value={filterValue || ''} 
         onChange={e => setFilter(e.target.value)}
        />
