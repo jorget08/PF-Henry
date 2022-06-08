@@ -52,12 +52,12 @@ const createRole = async () => {
 
 
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
-    // dataBaseLoadCategories()
-    // console.log('categories cargads')
-    // dataBaseLoad()
-    // createRole();
+    dataBaseLoadCategories()
+    console.log('categories cargads')
+    dataBaseLoad()
+    createRole();
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });

@@ -3,16 +3,31 @@ const { Book, Review, User } = require('../db')
 const router = Router()
 const { Op } = require('sequelize')
 
-
+router.get('/allReviews/admin',async(req,res,next)=>{
+    try {
+        const allReviews = await Review.findAll({
+            where:
+            {
+                report: {
+                    [Op.ne]: null
+                  }
+            }, include:[{model:Book, attributes: ['id','title','image']}
+            ,{model:User, attributes: ['idUser']}]
+        })
+        return res.status(200).json(allReviews)
+    } catch (error) {
+        next(error)
+    }
+})
 router.get('/allReviews', async (req, res, next) => {
-    const { book, user } = req.query
+    const { book, user, admin } = req.query
     try {
         if (book) {
             const allReviews = await Review.findAll({
                 where:
                 {
                     bookId: book
-                }
+                },include:{model:User}
             })
             return res.status(200).json(allReviews)
         }
@@ -26,6 +41,7 @@ router.get('/allReviews', async (req, res, next) => {
             console.log('soy data user',allReviews)
             return res.status(200).json(allReviews)
         }
+        
         else res.status(400).json({msg:'Need query params'})
 
     }catch (error) {
