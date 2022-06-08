@@ -79,6 +79,7 @@ function ShoppingHistory() {
       <div>
         <h1>Shopping History</h1>
         <br></br>
+        
       <DataTable 
         columns={column}
         data={finalpay}

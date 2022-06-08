@@ -21,6 +21,10 @@ import { AuthContext } from "./auth/authContext";
 import { getUser } from "./redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import ShoppingHistory from './components/ShoppingHistory/ShoppingHistory'
+import UserConfirmation from "./components/UserConfirmation/UserConfirmation";
+import RequestNewPassword from "./components/RequestNewPassword/RequestNewPassword";
+import NewPassword from "./components/NewPassword/NewPassword";
+
 
 function App() {
   const token = localStorage.getItem("token");
@@ -55,11 +59,15 @@ function App() {
         <Route exact path={"/admin/newbook"} component={FormCreate} />
         <Route exact path={"/admin/stock"} component={Stock} />
         <Route exact path={"/admin/users"} component={Users} />
+        <Route exact path={"/admin/supportAdmin"} component={SupportAdmin} />
         <Route path={"/checkout"} component={Checkout} />
         <Route path={"/support"} component={Support} />
         <Route path={"/editProfile"} component={EditProfile} />
         <Route exact path={'/favourites'} component={UserFavs}/>
         <Route path={`/ShoppingHistory/${id}`} component={ShoppingHistory} />
+        <Route path={`/confirmation/:id`} component={UserConfirmation} />
+        <Route path={`/newPassword`} component={RequestNewPassword} />
+        <Route path={`/password/:id`} component={NewPassword} />
 
       </>
 

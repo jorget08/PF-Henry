@@ -7,12 +7,20 @@
   display: block;
   margin: auto;
   margin-top: 1px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   align-items: left;
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
+  align-items: center;
+  text-align: center;
 }
-
+.foot li {
+  list-style: none;
+  text-align: center;
+}
 .titleFoot {
   font-family: 'Source Sans Pro', sans-serif;
+  margin: 0;
+  margin-top: 10px;
+  text-align: center;
 }

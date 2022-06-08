@@ -36,7 +36,8 @@ import {
   DELETE_FAVS,
   POST_FAVS,
   GET_SHOPPING_HISTORY,
-  SET_PAGE
+  SET_PAGE,
+  CONFIRMATION_MAIL
 } from "../actions/types";
 
 const initialState = {
@@ -56,7 +57,7 @@ const initialState = {
   favs: [],
   changed:false,
   comments: [],
-  support: [],
+  support: ["empty"],
   ShoppingHistory:[],
   page: 1
 };
@@ -311,6 +312,11 @@ export default function rootReducer(state = initialState, action) {
         return{
           ...state,
           page: payload
+      }
+
+    case CONFIRMATION_MAIL:
+      return{
+        ...state
       }
 
     default:

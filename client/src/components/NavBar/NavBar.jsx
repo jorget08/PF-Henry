@@ -99,27 +99,32 @@ export default function NavBar() {
                         </Link>
                         <Link to='/cart'>
                             <BsCart2 size={30} className="iconCart" />
-                            <p> {JSON.parse(localStorage.getItem("carrito"))?.length}</p>
+                            <p> {JSON.parse(localStorage.getItem("carrito")) ? JSON.parse(localStorage.getItem("carrito"))?.length : 0}</p>
                         </Link>
                         {!isLogged &&
                             <div className='log'>
                                 <IoMdContact size={33} onClick={openModal} />
                                 <Modal isOpen={isOpenModal} closeModal={closeModal}>
                                     <Login />
+
                                 </Modal>
                             </div>}
                     </div>
                     {isLogged &&
                         <div className='sideBar'>
-
-                            <AiOutlineMenu onClick={showSideBar} style={{ cursor: 'pointer' }} size={30} className="menu" />
+                            {console.log(user.imgProfile)}
+                            {user?.imgProfile ?
+                                <img onClick={showSideBar} style={{ cursor: 'pointer', width: '3rem', borderRadius: '50%', padding: '10px 20px' }} src={user?.imgProfile} alt="" />
+                                :
+                                <IoMdContact onClick={showSideBar} style={{ cursor: 'pointer' }} size={40} className="menu" />
+                            }
                             <ProSidebar collapsed={sideBar} width={210} collapsedWidth={"0px"} onClick={showSideBar} >
                                 <Menu iconShape="square">
                                     <MenuItem icon={<CgProfile />}>Your Profile<Link to="/userProfile" /></MenuItem>
 
-                                    <MenuItem icon={<BsFillBookmarkHeartFill />}>Liked<Link to="/favourites"/></MenuItem>
-                                  
-                                  
+                                    <MenuItem icon={<BsFillBookmarkHeartFill />}>Liked<Link to="/favourites" /></MenuItem>
+
+
                                     <MenuItem icon={<FaShoppingBag />}>Shopping History<Link to={`/ShoppingHistory/${id}`}></Link></MenuItem>
                                     {user.rols?.name === "admin" &&
                                         <MenuItem icon={<RiAdminFill />}>Dashboard<Link to="/admin" /></MenuItem>

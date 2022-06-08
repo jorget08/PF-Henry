@@ -34,36 +34,34 @@ const createUser = async (req, res) => {
 
         user.password = undefined;
         //? enviar email de confirmacion de registro
-        // const transporter = nodemailer.createTransport({
-        //     service: 'gmail',
-        //     auth: {
-        //         user: 'nachoburgos1995@gmail.com',
-        //         pass: 'mtlsdatewtbcwhbf'
-        //     }
-        // });
-        // const mailOptions = {
-        //     from: "SevenDevsNfts <",
-        //     to: usuario.email,
-        //     subject: 'Confirmation of registration',
-        //     text: 'Hello ' + usuario.firstName + ' ' + usuario.lastName + '\n\n' +
-        //         'Thank you for registering on SevenDevsNfts.\n' +
-        //         'To confirm your registration, please click on the following link:\n\n' +
-        //         'http://localhost:3000/confirmar/' + usuario._id + '\n\n' +
-        //         "If it doesn't work, copy and paste the link into your browser.\n\n" +
-        //         'Thank you,\n' +
-        //         'SevenDevsNfts'
-        // };
-        // transporter.sendMail(mailOptions, function (error, info) {
-        //     if (error) {
-        //         console.log(error);
-        //     } else {
-        //         console.log('Email sent: ' + info.response);
-        //     }
-        // });
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'bookstore1511@gmail.com',
+                pass: 'qyrvkdsvuzwgotne'
+            }
+        });
+        const mailOptions = {
+            from: "BookStore <",
+            to: user.email,
+            subject: 'Confirmation of registration',
+            text: 'Hello ' + user.name + ' ' + user.lastName + '\n\n' +
+                'Thank you for registering on BookStore.\n' +
+                'To confirm your registration, please click on the following link:\n\n' +
+                'http://localhost:3000/confirmation/' + user.idUser + '\n\n' +
+                "If it doesn't work, copy and paste the link into your browser.\n\n" +
+                'Thank you,\n' +
+                'BookStore'
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
         //? generar jwt
         const token = await generateJwt(user.idUser);
-
-
         //? respuesta
         res.json({
             ok: true,
@@ -129,6 +127,12 @@ const updateUser = async (req, res) => {
         if (req.body.email) {
             delete req.body.email;
         }
+        if (req.body.password) {
+            const salt = await bcrypt.genSalt(10);
+            const passEncript = bcrypt.hashSync(req.body.password, salt);
+            req.body.password = passEncript;
+        }
+
         await User.update(req.body, {
             where: { idUser: id }
         });

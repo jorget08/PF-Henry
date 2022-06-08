@@ -19,7 +19,7 @@ router.post('/',
 );
 router.get('/', getUsers);
 //? validar admin role o mi usuario
-router.put('/:id', [ validarJwt, validarAdminOmio ], updateUser);
+router.put('/:id', updateUser);
 router.delete('/:id', [ validarJwt, validarAdminOmio ], deleteUser);
 
 module.exports = router;
