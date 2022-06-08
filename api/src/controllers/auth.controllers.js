@@ -34,7 +34,6 @@ const login = async (req, res) => {
         //? no enviar password 
         user.password = undefined;
         //? destructurar todo user menos rol
-    
         console.log(user.role);
         res.json({
             ok: true,
@@ -133,4 +132,43 @@ const googleSignIn = async (req, res) => {
 
 }
 
-module.exports = { login, renewToken, googleSignIn };
+const confirmation = async (req, res) => {
+    const { id } = req.params
+    try {
+        const user = await User.findOne({ where: { idUser: id } });
+        if (!user) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'El usuario no existe'
+            });
+        }
+        const obj = {
+            confirmation: true
+        }
+        await User.update(obj, {
+            where: { idUser: id }
+        });
+        res.json({
+            ok: true,
+            msg: 'Usuario confirmado'
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'error al confirmar usuario'
+        });
+    }
+}
+
+const changePass = async (req, res) => {
+    const { id } = req.params;
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
+module.exports = { login, renewToken, googleSignIn, confirmation, changePass };

@@ -34,5 +34,41 @@ const sendEmail = async (req, res) => {
         msg: 'Email sent'
     });
 }
+const sendEmailPassword = async (req, res) => {
+    const { email} = req.body;
+    console.log(req.body)
+    const user = await User.findOne({ where: { email } });
+        
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'bookstore1511@gmail.com',
+            pass: 'qyrvkdsvuzwgotne'
+        }
+    });
+    const mailOptions = {
+        from: "BookStore <",
+        to: email,
+        subject: 'Change Password',
+        text: 'Hello ' + user.name + ' ' + user.lastName + '\n\n' +
+        'If you have requested a change in your password please enter the link below:\n' +
+        'http://localhost:3000/password/' + user.idUser + '\n\n' +
+        "If you have not please ignore this mail.\n\n" +
+        'Thank you,\n' +
+        'BookStore'
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });   
+    res.json({
+        ok: true,
+        msg: 'Email sent'
+    });
+}
 
-module.exports = { sendEmail };
+
+module.exports = { sendEmail, sendEmailPassword };

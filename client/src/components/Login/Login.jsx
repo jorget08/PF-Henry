@@ -26,6 +26,10 @@ export default function Login() {
 
   return (
     <div>
+      <h3 style={{
+        textAlign: 'center',
+        fontSize: '25px'
+      }}>Welcome to BookStore!</h3>
       <Formik
         initialValues={{
           email: '',
@@ -53,16 +57,16 @@ export default function Login() {
         {({ touched, errors }) => (
           <Form className="LoginForm">
             <div className='fieldLog'>
-              <label>User</label>
               <Field type="text" name="email" placeholder="Email" />
               {touched.email && errors.email && <span>{errors.email}</span>}
             </div>
             <div className='fieldLog'>
-              <label>Password</label>
               <Field type="password" name="password" placeholder="Password" />
               {touched.password && errors.password && <span>{errors.password}</span>}
             </div>
-
+            <Link to='/newPassword' className='signUp'>
+              <span>Forgot password?</span>
+            </Link>
             <button type="submit">Log in</button>
 
           </Form>
@@ -84,7 +88,7 @@ export default function Login() {
           className="googleLog"
         />
       </div>
-    </div>
+    </div >
   )
 }
 

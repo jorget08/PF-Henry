@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { postUser } from '../../redux/actions';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUsers, postUser } from '../../redux/actions';
 import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
 import Swal from "sweetalert2";
@@ -8,37 +8,13 @@ import './styles.css'
 export default function Register() {
     const dispatch = useDispatch()
     const history = useHistory()
+    useEffect(() => {
+        dispatch(getUsers())
+    }, [dispatch])
 
-    /* const [newUser, setNewUser]=useState({
-      name:"",
-      lastName:"",
-      password:"",
-      password2:"",
-      email:"",
-      imgProfile: ""   
-    })
+    const users = useSelector(state => state.users)
+    console.log("usuarios",users)
   
-    function handleChange(e){
-      e.preventDefault();
-      setNewUser({
-          ...newUser,
-          [e.target.name] : e.target.value
-      })
-  }
-  
-  function handleSubmit(e){
-      e.preventDefault();
-      dispatch(postUser(newUser))
-      alert("Te has registrado")
-      console.log("SOY EL USER PAPA", newUser)
-      setNewUser({
-          name:"",
-          lastName:"",
-          password:"",
-          email:"",
-          imgProfile: ""        
-      })
-  } */
 
     const redirect = () => {
         history.push("/home")
@@ -72,6 +48,9 @@ export default function Register() {
                     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(valores.email)) {
                         errors.email = 'Invalid e-mail address';
                     }
+                    else if (users.find(e=>e.email===valores.email)) {
+                        errors.email = 'This mail is already registered';
+                    }
                     if (!valores.password) {
                         errors.password = 'Password required'
                     }
@@ -84,7 +63,7 @@ export default function Register() {
                     dispatch(postUser(valores))
                     Swal.fire(
                         'You have been registered',
-                        'Welcome to bookstore c:',
+                        'Please confirm your email before logging in',
                         'success'
                       )
                     resetForm()

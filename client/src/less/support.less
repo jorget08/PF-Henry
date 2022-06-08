@@ -1,45 +1,62 @@
-.formContainer {
-    h1:hover {
-        cursor: pointer;
-        transform: scale(1.05);
+@import './variables.less';
+
+.contactContainer {
+    display: block;
+    padding: 2rem 0;
+
+    .conttext {
+        h1 {
+
+            &:hover {
+                color: rgb(230, 115, 115);
+                cursor: pointer;
+            }
+        }
     }
 
     p {
-        text-align: center;
         width: 700px;
         font-family: 'Source Sans Pro', sans-serif;
+        text-align: justify;
+
     }
 
     h1 {
-        text-align: center;
-        font-family: 'Source Sans Pro', sans-serif;
+        text-align: left;
+        font-family: @Roboto;
     }
-
-    background: #ffe8f2;
-    background: linear-gradient(148deg, #ffe8f2 0%, #d8fffb 31%, #ffffff 58%, #ffe8f2 83%);
-    display: block;
-    padding: 2rem 0;
 }
+
+
+
 
 .options {
-    border: solid;
-    background-color: #914343;
+    background-color: #94a7e6;
+    padding: 10px;
 }
-
 
 .minitag {
     font-family: 'Source Sans Pro', sans-serif;
     color: white;
-}
+    transition: transform 0.5s;
 
-.minitag:hover {
-    cursor: pointer;
-    transform: scale(1.02);
+    a:hover {
+        cursor: pointer;
+        color: rgb(255, 208, 208);
+        transform: scale(1.02);
+    }
 }
 
 
 .conttext {
-    text-align: center;
+    text-align: left;
+    margin-left: 20%;
+
+    .clickMe {
+        font-size: 14px;
+        font-weight: 400;
+    }
+
 }
 
 .descriptionS {
@@ -47,56 +64,86 @@
 }
 
 .text {
-    margin: 0px auto;
+    margin: 10px;
     font-size: larger;
+    border: 2px solid @borderColor;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    background-color: rgba(163, 33, 33, 0.781);
 }
 
-.formInfo {
+.contactInfo {
     border: 1px solid #c4c4c4;
     box-shadow: 5px 5px 20px -2px black;
     border-radius: 20px;
-    padding: 2rem 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
     font-family: 'Merriweather', serif;
     font-size: 20px;
     text-align: justify;
-    align-items: flex-start;
     min-width: 400px;
     max-width: 600px;
-    margin: auto;
     background-color: white;
+
+    button {
+        background-color: #98ff98;
+        outline: none;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 18px;
+        font-family: 'Source Sans Pro', sans-serif;
+        border: 1px solid #c4c4c4;
+        font-weight: 400;
+        margin: 10px auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .description {
+        padding: 10px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        text-align: center;
+
+        input,
+        textarea {
+            margin: auto;
+        }
+
+    }
 }
 
 @media (max-width: 700px) {
-    .formInfo {
+    .contactInfo {
         min-width: 300px;
         max-width: 400px;
     }
 }
 
-.formInfo .field {
+.contactInfo .field {
     margin: 5px auto;
     max-width: 20rem;
     display: flex;
-    justify-content: space-between;
+    /*   justify-content: space-between; */
 }
 
 .minimize {
-    margin: auto;
-    background-color: #98ff98;
+    /* margin: auto; */
+    background-color: rgb(253, 183, 183);
+    color: black;
     outline: none;
     padding: 10px;
     border-radius: 10px;
     font-size: 18px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: @Roboto;
     border: 1px solid #c4c4c4;
     font-weight: 400;
-}
+    margin: 10px;
 
-.minimize:hover {
-    background-color: #65b365;
-    color: white;
-    cursor: pointer;
+    &:hover {
+        background-color: #803d3d;
+        color: white;
+        cursor: pointer;
+    }
+
 }
