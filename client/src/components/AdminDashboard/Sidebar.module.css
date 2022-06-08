@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
 
 .sidebar{
+    
     background-color: #1C2833;    
     width: 150px;
     height: 100%;
-    margin: auto;
     position:fixed;    
+    margin: auto;
     font-family: 'Rubik', sans-serif;
     padding-top: 50px;
     border-right: 2px solid grey;
@@ -31,8 +32,4 @@
     margin-top: -50px;
     width: 50px;
     height: 50px;
-}
-
-.hr{
-    background-color: black;
 }
