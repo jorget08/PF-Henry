@@ -37,7 +37,11 @@ import {
   SET_PAGE,
   DELETE_REVIEW,
   REPORT_REVIEW,
-  UPDATE_REVIEW
+  UPDATE_REVIEW,
+  CONFIRMATION_MAIL,
+  REQUEST_NEW_PASSWORD,
+  CHANGE_PASSWORD1
+
 } from "./types";
 
 import axios from "axios";
@@ -235,9 +239,12 @@ export function logUser(payload) {
   return async function (dispatch) {
     try {
       var response = await axios.post(`http://localhost:3001/auth/`, payload);
-      let TKN = response.data.token;
+      if(response.data.user.confirmation===false){
+        alert("You have not confirmed your mail")
+      }
+      else{let TKN = response.data.token;
       localStorage.setItem("token", JSON.stringify(TKN));
-      return dispatch({ type: LOG_USER, payload: response.data.user });
+      return dispatch({ type: LOG_USER, payload: response.data.user });}
     } catch (e) {
       console.log(e);
     }
@@ -395,7 +402,12 @@ export function showComments(id){
 export function getSupport() {
   return async function (dispatch) {
     try {
-      const response = await axios.get("http://localhost:3001/support");
+      const response = await axios.get("http://localhost:3001/support", {
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("token")),
+        },
+      });
+      localStorage.setItem("token", JSON.stringify(response.data.token));
       return dispatch({ type: GET_SUPPORT, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -465,16 +477,32 @@ export function changeFavs(payload) {
   return { type: CHANGE_FAVS, payload };
 }
 
+
 export function reportReview(id,idBook, obj) {
   return async function (dispatch) {
     try {
       const response = await axios.put(`http://localhost:3001/reviews/report/${id}?book=${idBook}`,obj);
       return dispatch({ type: REPORT_REVIEW, payload: response.data });
+       } catch (error) {
+      console.log(error);
+    }
+    }
+  }
+
+export function confirmationMail(id){
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(`http://localhost:3001/auth/confirmation/${id}`);
+      console.log("response",response)
+      return dispatch({ type: CONFIRMATION_MAIL });
+
     } catch (error) {
       console.log(error);
     }
     }
   }
+
+  
 
   export function editReview(id, obj) {
     return async function (dispatch) {
@@ -487,5 +515,33 @@ export function reportReview(id,idBook, obj) {
       }
     }
  
+
+
+export function requestPassword(email){
+  return async function (dispatch) {
+    try {
+      console.log(email)
+      const response = await axios.post(`http://localhost:3001/email/password`, {email});
+      console.log("response",response)
+      return dispatch({ type: REQUEST_NEW_PASSWORD });
+    } catch (error) {
+      console.log(error);
+    }
+    }
+}
+
+
+export function changePassword1(id, password){
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(`http://localhost:3001/user/${id}`, {password});
+      console.log("response",response)
+      return dispatch({ type: CHANGE_PASSWORD1 });
+    } catch (error) {
+      console.log(error);
+    }
+    }
+}
+
 
 

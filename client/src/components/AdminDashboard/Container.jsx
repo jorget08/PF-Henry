@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getBooks, getUsers } from '../../redux/actions'
 import Card from './Card'
 import CardU from './CardU'
+import CardB from './CardB'
 import s from './Container.module.css'
 
 export default function Container() {
@@ -17,9 +18,13 @@ export default function Container() {
   },[dispatch])
     
   return (
+    <>
+    <h1 className={s.h1}>Welcome, this is your god mode!</h1>
     <div className={s.Container}>
           <Card books={allBooks}/>
           <CardU users={allUsers}/>
+          <CardB/>
     </div>
+    </>
   )
 }

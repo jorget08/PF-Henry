@@ -45,6 +45,7 @@ const createRole = async () => {
         email: 'admin@mail.com',
         password: passEncript,
         imgProfile: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
+        confirmation: true
     });
     // assign role admin to user
     await adminUser.addRols(admin);
