@@ -10,7 +10,8 @@ import {
   infoSoldBooks,
   sendEmail,
   getUser,
-  exchangeCrypto
+  exchangeCrypto,
+  totalPrice
 } from "../../redux/actions";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -55,6 +56,9 @@ export default function Checkout() {
   console.log("TOY AQUI PUTA MADREEEEEE", crypto)
 
   let x = preciototal/crypto
+  let valuecrypto= x.toString()
+  let val=valuecrypto.slice(0,11)
+  console.log("soy val",val)
 
   const createOrder = (data, actions) => {
     if (user.hasOwnProperty("name")) {
@@ -128,13 +132,13 @@ export default function Checkout() {
           cant={e.cant}
         />
       ))}
-      <h1>Order Total: ${preciototal}</h1>
+      <h1>Order Total: ${preciototal} -- ETH : {val} </h1>
       <div className="paypal">
         <PayPalButton
           createOrder={(data, actions) => createOrder(data, actions)}
           onApprove={(data, actions) => onApprove(data, actions)}
         />
-        <Crypto value={x}></Crypto>
+        <Crypto value={val} infoBook={checkoutinfo} userId={userId} ></Crypto>
       </div>
     </div>
   );

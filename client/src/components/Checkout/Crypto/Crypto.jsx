@@ -2,9 +2,10 @@ import React from 'react'
 import { useState } from "react";
 import { ethers } from "ethers";
 import ErrorMessage from "./ErrorMessage";
-import TxList from "./TxList";
+import { useDispatch} from "react-redux";
+import {infoSoldBooks} from "../../../redux/actions";
 
-const startPayment = async ({ setError, setTxs, ether, addr }) => {
+const startPayment = async ({ setError, setTxs, ether, addr}) => {
     try {
       if (!window.ethereum)
         throw new Error("No crypto wallet found. Please install it.");
@@ -15,11 +16,14 @@ const startPayment = async ({ setError, setTxs, ether, addr }) => {
       ethers.utils.getAddress(addr);
       const tx = await signer.sendTransaction({
         to: addr,
-        value: ethers
-      });
-      console.log({ ether, addr });
-      console.log("tx", tx);
+        value: ethers.utils.parseEther(ether)
+      }
+      
+      
+      );
+     
       setTxs([tx]);
+      return tx
     } catch (err) {
       setError(err.message);
     }
@@ -28,60 +32,51 @@ const startPayment = async ({ setError, setTxs, ether, addr }) => {
   
 
 
-function Crypto({value}) {
+function Crypto({value,infoBook,userId}) {
     const [error, setError] = useState();
     const [txs, setTxs] = useState([]);
+    const dispatch = useDispatch();
+    
   
     const handleSubmit = async (e) => {
       e.preventDefault();
       const data = new FormData(e.target);
       setError();
-      await startPayment({
+      
+      const x= await startPayment({
         setError,
         setTxs,
         ether: value,
-        addr: data.get("addr")
+        addr: "0x1AD379959ff0F23f68F69f5f4e3E1b4f0E7bFf62",
       });
+      
+      let totalInfo={
+          data:x.hash,
+          totalPrice:value,
+          infoBook:infoBook,
+          userId:userId
+        }  
+        console.log("sadfasdfsadf",totalInfo)  
+        dispatch(infoSoldBooks(totalInfo));
     };
 
+    console.log("value eht",value)
   
     
 
   return (
-    <form className="m-4" onSubmit={handleSubmit}>
-      <div className="credit-card w-full lg:w-1/2 sm:w-auto shadow-lg mx-auto rounded-xl bg-white">
-        <main className="mt-4 p-4">
-          <h1 className="text-xl font-semibold text-gray-700 text-center">
-            Send ETH payment
-          </h1>
-          <div className="">
-            <div className="my-3">
-              <input
-                type="text"
-                name="addr"
-                className="input input-bordered block w-full focus:ring focus:outline-none"
-                placeholder="Recipient Address"
-              />
-            </div>
-            <div className="my-3">
-              <input
-                name="ether"
-                type="text"
-                className="input input-bordered block w-full focus:ring focus:outline-none"
-                placeholder="Amount in ETH"
-              />
-            </div>
-          </div>
-        </main>
-        <footer className="p-4">
+    <form onSubmit={handleSubmit}>
+      <div >
+       
+        <footer >
           <button
             type="submit"
-            className="btn btn-primary submit-button focus:ring focus:outline-none w-full"
+           
           >
             Pay now
           </button>
           <ErrorMessage message={error} />
-          <TxList txs={txs} />
+          
         </footer>
       </div>
     </form>
