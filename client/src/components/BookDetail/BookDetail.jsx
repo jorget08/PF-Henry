@@ -143,28 +143,13 @@ export default function BookDetail() {
         </div>
 
       }
-      <div>
-        <h3>Comments:</h3>
-        {comments.length !=0 ? comments.map(e => {
-          return (e.report == null &&
-            <>
-            {console.log('soyyy comentario', e)}
-            <div className='comments'>
-              <img src={e.user.imgProfile} alt="" width='30' height='30' />
-              
-              <h4>{e.user.name} {e.user.lastName}</h4>
-              <h5>{e.title}</h5>
-              <p>{e.description}</p>
-              <button onClick={() => reportComment(e)}>Report</button>
-              <button onClick={() => editComment(e)}>Edit</button>
-            </div>
-            </>
-          )
-        }) :
-          <p>Be the first to comment this book</p>}
+      <div className='commentTitle'>
+        <h3>Have you already read the book? {!comments.length && <span>(Be the first to comment this book)</span>}</h3>
+        <p>Leave a comment about it below!</p>
+
       </div>
+
       {token ? <div>
-        <h3>Add a comment:</h3>
         <Formik
           initialValues={comment}
           validate={(valores) => {
@@ -191,22 +176,41 @@ export default function BookDetail() {
             resetForm()
           }}>
           {({ touched, errors }) => (
-            <Form>
+            <Form className='formReview'>
+
+              {/* <div>
+                  <label>Title</label>
+                  <Field type="text" name="title" placeholder="Title" />
+                  {touched.title && errors.title && <span className='errorMsg'>{errors.title}</span>}
+                </div> */}
+              {/* <label>Review</label> */}
               <div>
-                <label>Title</label>
-                <Field type="text" name="title" placeholder="Title" />
-                {touched.title && errors.title && <span>{errors.title}</span>}
-              </div>
-              <div>
-                <label>Review</label>
                 <Field type="text" name="description" placeholder="Review" />
-                {touched.review && errors.review && <span>{errors.review}</span>}
+                {touched.review && errors.review && <span className='errorMsg'>{errors.review}</span>}
+
               </div>
+
               <button type="submit">Send review</button>
             </Form>
           )}
         </Formik>
       </div> : <p>Log in to comment</p>}
+       {comments.length !=0 && comments.map(e => {
+          return (e.report == null &&
+            <>
+            {console.log('soyyy comentario', e)}
+            <div className='comments'>
+              <img src={e.user.imgProfile} alt="" width='30' height='30' />
+              
+              <h4>{e.user.name} {e.user.lastName}</h4>
+              <h5>{e.title}</h5>
+              <p>{e.description}</p>
+              <button onClick={() => reportComment(e)}>Report</button>
+              <button onClick={() => editComment(e)}>Edit</button>
+            </div>
+            </>
+          )
+        })}
       <Footer />
     </div>
   )

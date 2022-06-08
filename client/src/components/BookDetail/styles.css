@@ -12,6 +12,16 @@
   justify-content: center;
   padding: 5rem 0;
 }
+.all {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+.all .commentTitle {
+  text-align: center;
+}
+.all .commentTitle p {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
 .container__info {
   box-shadow: 5px 5px 20px -2px black;
   display: flex;
@@ -67,4 +77,38 @@
 }
 .container__info .info {
   margin: 1rem;
+}
+.formReview {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1rem;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+.formReview input {
+  width: 800px;
+  border: 1px solid #c4c4c4;
+  font-size: 20px;
+  padding: 1rem;
+  font-family: 'Source Sans Pro', sans-serif;
+  border-radius: 20px;
+  outline: #da6464;
+}
+.formReview input:focus {
+  border: 2px solid #da6464;
+}
+.formReview button {
+  font-size: 20px;
+  background-color: #d85353;
+  color: white;
+  font-family: 'Source Sans Pro', sans-serif;
+  border-radius: 10px;
+  border: 1px solid #c4c4c4;
+  outline: none;
+  padding: 0px 10px;
+  height: 3rem;
+  margin: auto;
+}
+.formReview button:hover {
+  background-color: #521616;
+  cursor: pointer;
 }
