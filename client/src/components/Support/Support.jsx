@@ -181,19 +181,21 @@ export default function Support() {
                                                 <div className='description'>
                                                     <label>Name </label>
                                                     <Field type="text" name="name" placeholder="Name" />
-                                                    {touched.name && errors.name && <span>{errors.name}</span>}
+                                                    {touched.name && errors.name && <span className="error">{errors.name}</span>}
                                                 </div>
                                                 <div className='description'>
                                                     <label>Email </label>
                                                     <Field type="text" name="email" placeholder="Email" />
-                                                    {touched.email && errors.email && <span>{errors.email}</span>}
+                                                    {touched.email && errors.email && <span className="error">{errors.email}</span>}
                                                 </div>
                                                 <div className='description'>
                                                     <label>What you want to tell us?</label>
-                                                    <Field type="text" name="comment" className="description" as="textarea" placeholder="Write your question here!" />
-                                                    {touched.comment && errors.comment && <span>{errors.comment}</span>}
+                                                </div>  
+                                                <div className='description'>    
+                                                    <Field type="text" name="comment" className="descriptionArea" as="textarea" placeholder="Write your question here!" />     
                                                 </div>
-                                                <button type="submit">Send!</button>
+                                                {touched.comment && errors.comment && <span className="error">{errors.comment}</span>}
+                                                <button className="minimize" type="submit">Send!</button>
 
                                             </div>
                                         </Form>

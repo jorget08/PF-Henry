@@ -1,12 +1,14 @@
 .contactContainer {
   display: block;
   padding: 2rem 0;
+  padding-left: 20px;
 }
 .contactContainer .conttext h1:hover {
   color: #e67373;
   cursor: pointer;
 }
 .contactContainer p {
+
   width: 700px;
   font-family: 'Source Sans Pro', sans-serif;
   text-align: justify;
@@ -14,6 +16,7 @@
 .contactContainer h1 {
   text-align: left;
   font-family: 'Roboto Flex', sans-serif;
+
 }
 .options {
   background-color: #94a7e6;
@@ -40,6 +43,12 @@
 .descriptionS {
   text-align: center;
 }
+
+.descriptionArea{
+  height: 150px;
+  width: 450px;
+}
+
 .text {
   margin: 10px;
   font-size: larger;
@@ -100,6 +109,7 @@
   /* margin: auto; */
   background-color: #fdb7b7;
   color: black;
+
   outline: none;
   padding: 10px;
   border-radius: 10px;
@@ -113,4 +123,8 @@
   background-color: #803d3d;
   color: white;
   cursor: pointer;
+}
+
+.error {
+  color: red;
 }
