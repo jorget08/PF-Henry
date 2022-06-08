@@ -15,6 +15,7 @@ import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./styles.css";
 import Login from "../Login/Login";
+import Crypto from "./Crypto/Crypto";
 
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
@@ -127,6 +128,7 @@ export default function Checkout() {
           createOrder={(data, actions) => createOrder(data, actions)}
           onApprove={(data, actions) => onApprove(data, actions)}
         />
+        <Crypto></Crypto>
       </div>
     </div>
   );
