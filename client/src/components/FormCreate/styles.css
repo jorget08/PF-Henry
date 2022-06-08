@@ -6,9 +6,8 @@ h2 {
   font-family: 'Source Sans Pro', sans-serif;
 }
 .formContainer {
-  background: #ffe8f2;
-  background: linear-gradient(148deg, #ffe8f2 0%, #d8fffb 31%, #ffffff 58%, #ffe8f2 83%);
   display: block;
+  background-color: white;
   padding: 2rem 0;
 }
 .formInfo {
@@ -19,26 +18,53 @@ h2 {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  font-family: 'Merriweather', serif;
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: 20px;
   text-align: justify;
   align-items: flex-start;
   min-width: 400px;
   max-width: 600px;
-  margin: auto;
+  margin-left: 33%;
   background-color: white;
+}
+.formInfo h2 {
+  margin: 0 auto 20px auto;
 }
 @media (max-width: 700px) {
   .formInfo {
     min-width: 300px;
     max-width: 400px;
+    margin: 0 0 0 33% !important;
+  }
+}
+@media (max-width: 950px) {
+  .formInfo {
+    margin-left: 25%;
+  }
+}
+@media (max-width: 850px) {
+  .formInfo {
+    margin-left: 23%;
   }
 }
 .formInfo .field {
-  margin: 5px auto;
-  max-width: 20rem;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 7px;
+  margin-left: 30%;
+}
+@media (max-width: 700px) {
+  .formInfo .field {
+    margin-left: 15%;
+  }
+}
+.formInfo .field select {
+  border: none;
+  background-color: #d8d8d8;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  padding-left: 10px;
 }
 .formInfo .field button {
   margin: auto;
@@ -65,6 +91,9 @@ h2 {
   border-bottom: 1px solid #c4c4c4;
   margin-left: 5px;
 }
+.formInfo .field input:focus {
+  border-bottom: 1px solid #1C2833;
+}
 .formInfo .description {
   display: block;
   margin: 10px auto;
@@ -80,6 +109,7 @@ h2 {
   line-height: 15px;
   padding: 10px;
   border-radius: 10px;
+  outline: none;
 }
 .formInfo button {
   margin: auto;
@@ -98,12 +128,19 @@ h2 {
   cursor: pointer;
 }
 .pastInfo {
-  background: #ffe8f2;
-  background: linear-gradient(148deg, #ffe8f2 0%, #d8fffb 31%, #ffffff 58%, #ffe8f2 83%);
   display: block;
   padding: 2rem 0;
+  margin-left: 13%;
 }
 .pastInfo h1 {
   text-align: center;
   font-family: 'Source Sans Pro', sans-serif;
+}
+.errorMsg {
+  position: absolute;
+  z-index: 10;
+  margin-left: 22%;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 17px;
+  color: #c52020;
 }
