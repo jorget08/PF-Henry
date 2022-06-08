@@ -5,7 +5,7 @@ import DataTable from 'react-data-table-component'
 import { getSupport } from '../../redux/actions'
 
 
-export default function Users () {
+export default function SupportAdmin () {
 
     const dispatch = useDispatch()
     const support = useSelector(state => state.support)

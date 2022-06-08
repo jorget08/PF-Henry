@@ -1,18 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+
 *{
     margin: 0%;
     padding: 0%;
 }
-.Prueba{
-    display: flex;
-    flex-direction: column;
-    align-items: center;   
-    background-color: lightblue;
-    bottom: 50px;
+
+.Container{
+     display: block;
+    justify-content: center; 
+    font-family: 'Rubik', sans-serif;
+    padding-bottom: 20px;
+    margin-right: '20px';
+    background-color: #566573;
 }
 
-.Search{
-    margin-top: 50px;
-    border-radius: 10px;
-    padding: 10px;
-    border: 1px solid black;
+.rdt_Table {        
+        padding-left: 155px; 
+        background-color: #566573;       
 }

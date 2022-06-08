@@ -59,6 +59,7 @@ function App() {
         <Route exact path={"/admin/newbook"} component={FormCreate} />
         <Route exact path={"/admin/stock"} component={Stock} />
         <Route exact path={"/admin/users"} component={Users} />
+        <Route exact path={"/admin/support"} component={SupportAdmin} />
         <Route path={"/checkout"} component={Checkout} />
         <Route path={"/support"} component={Support} />
         <Route path={"/editProfile"} component={EditProfile} />
