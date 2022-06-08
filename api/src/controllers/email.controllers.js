@@ -35,7 +35,10 @@ const sendEmail = async (req, res) => {
     });
 }
 const sendEmailPassword = async (req, res) => {
-    const { email, name, lastName} = req.body;
+    const { email} = req.body;
+    console.log(req.body)
+    const user = await User.findOne({ where: { email } });
+        
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -47,9 +50,12 @@ const sendEmailPassword = async (req, res) => {
         from: "BookStore <",
         to: email,
         subject: 'Change Password',
-        text: 'Hello ' + name + ' ' + lastName + '\n\n' +
-            'Thank you for purchase on BookStore.\n' +
-            'Thank you,\n'
+        text: 'Hello ' + user.name + ' ' + user.lastName + '\n\n' +
+        'If you have requested a change in your password please enter the link below:\n' +
+        'http://localhost:3000/password/' + user.idUser + '\n\n' +
+        "If you have not please ignore this mail.\n\n" +
+        'Thank you,\n' +
+        'BookStore'
     };
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {

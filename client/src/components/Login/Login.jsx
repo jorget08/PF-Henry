@@ -69,7 +69,9 @@ export default function Login() {
         )}
       </Formik>
       <div className='register'>
-
+      <Link to='/newPassword' className='signUp'>
+          <button>Forgot password?</button>
+        </Link>
         <Link to='/register' className='signUp'>
           <button>Sign Up</button>
         </Link>
