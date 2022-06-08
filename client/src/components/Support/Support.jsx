@@ -3,7 +3,10 @@ import { Link } from 'react-scroll';
 import NavBar from '../NavBar/NavBar';
 import { Formik, Form, Field } from 'formik'
 import './support.css'
-import { scrollToTop } from 'react-scroll/modules/mixins/animate-scroll';
+// import { scrollToTop } from 'react-scroll/modules/mixins/animate-scroll';
+import { MdKeyboardArrowUp } from 'react-icons/md'
+import { MdKeyboardArrowDown } from 'react-icons/md'
+
 import { postSupport } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 import Footer from '../Footer/Footer';
@@ -61,7 +64,7 @@ export default function Support() {
             </div>
             <div className="contactContainer">
                 <div className="conttext">
-                    <h1 ref={scroll0} id="Home" onClick={(e) => handleClick(e)}>What is BookStore?</h1>
+                    <h1 ref={scroll0} id="Home" onClick={(e) => handleClick(e)}>What is BookStore?<span className='clickMe'> Click to {render.Home ? 'Hide' : 'find out!'}</span>{render.Home ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />} </h1>
                     {
                         render.Home && <p className='text'>
                             BookStore is a online retailer of all kind of books. In our store
@@ -74,27 +77,29 @@ export default function Support() {
 
                 </div>
                 <div className="conttext">
-                    <h1 ref={scroll1} id="WorkTeam" onClick={(e) => handleClick(e)}>Can you tell me about the work team behind?</h1>
+                    <h1 ref={scroll1} id="WorkTeam" onClick={(e) => handleClick(e)}>Can you tell me about the work team behind?<span className='clickMe'> Click to {render.WorkTeam ? 'Hide' : 'find out!'}</span>{render.Home ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
                     {
                         render.WorkTeam && <p className='text'>
                             Of course! We are students at Henry's bootcamp. We are studying to be Full Stack Web Developers, by the moment
                             you can see us like juniors web page developers. As you can see, our web is awsome.
                             <br /><br />
-                            The team is:<br /><br />
-                            <li>Christian Cordoba</li><br />
-                            <li>Alvaro Cordoba</li><br />
-                            <li>Federico Garcia</li><br />
-                            <li>Camila Castillo</li><br />
-                            <li>Gaston Cajal Skaf</li><br />
-                            <li>Ignacion Burgos</li><br />
-                            <li>Jorge Torres</li><br />
-                            <li>Gonzalo Rumi</li><br />
-                            <br />
+                            The team is:<br />
+                            <span style={{ display: 'flex', justifyContent: 'center', lineHeight: '30px' }}>Christian Cordoba /
+                                Alvaro Cordoba /
+                                Federico Garcia /
+                                Camila Castillo
+                                <br />
+
+                                Gaston Cajal Skaf /
+                                Ignacion Burgos /
+                                Jorge Torres /
+                                Gonzalo Rumi
+                            </span >
                         </p>}
 
                 </div>
                 <div className="conttext">
-                    <h1 ref={scroll2} id="Networks" onClick={(e) => handleClick(e)}>Any social network to follow you?</h1>
+                    <h1 ref={scroll2} id="Networks" onClick={(e) => handleClick(e)}>Any social network to follow you?<span className='clickMe'> Click to {render.Networks ? 'Hide' : 'find out!'}</span>{render.Home ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
                     {
                         render.Networks && <p className='text'>
                             Yes! You can follow us on Facebook (bookStore), Instagram (@bookstore) and LinkedIn (bookstore).
@@ -104,7 +109,7 @@ export default function Support() {
 
                 </div>
                 <div className="conttext">
-                    <h1 ref={scroll3} id="Payment" onClick={(e) => handleClick(e)}>Which are the payment metods availables?</h1>
+                    <h1 ref={scroll3} id="Payment" onClick={(e) => handleClick(e)}>Which are the payment metods availables?<span className='clickMe'> Click to {render.Payment ? 'Hide' : 'find out!'}</span>{render.Home ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
                     {
                         render.Payment && <p className='text'>
                             You can pay through PayPal. At this moment, we are developing a
@@ -113,7 +118,7 @@ export default function Support() {
                         </p>}
                 </div>
                 <div className="conttext">
-                    <h1 ref={scroll4} id="Advertising" onClick={(e) => handleClick(e)}>Do you sell advertising on your site?</h1>
+                    <h1 ref={scroll4} id="Advertising" onClick={(e) => handleClick(e)}>Do you sell advertising on your site?<span className='clickMe'> Click to {render.Advertising ? 'Hide' : 'find out!'}</span>{render.Home ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
                     {
                         render.Advertising && <p className='text'>
                             By the moment we only focus on offers you the most complete collection of books! Maybe later. If you want to
@@ -123,7 +128,7 @@ export default function Support() {
                         </p>}
                 </div>
                 <div className="conttext">
-                    <h1 ref={scroll5} id="Write" onClick={(e) => handleClick(e)}>How can i do to contact you directly?</h1>
+                    <h1 ref={scroll5} id="Write" onClick={(e) => handleClick(e)}>How can i do to contact you directly?<span className='clickMe'> Click to {render.Write ? 'Hide' : 'find out!'}</span>{render.Home ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
                     {
                         render.Write &&
                         <div>
@@ -133,8 +138,8 @@ export default function Support() {
                                 member of our community, we can follow all your request closer. If you are not register
                                 in our page yet, we recomends you to do it now clicking here.
                             </p>
-                            
-                            
+
+
                             <Formik
                                 initialValues={{
                                     name: "",
@@ -168,11 +173,11 @@ export default function Support() {
                                 }}>
 
                                 {({ touched, errors }) => (
-                                    <div className='contactContainer'>
+                                    <div className='formContainer'>
                                         <Form>
                                             <div className='contactInfo'>
 
-                                                <h2 style={{marginLeft: "240px"}}>Write us!</h2>
+                                                <h2 style={{ marginLeft: "240px" }}>Write us!</h2>
                                                 <div className='description'>
                                                     <label>Name </label>
                                                     <Field type="text" name="name" placeholder="Name" />
@@ -200,9 +205,12 @@ export default function Support() {
                         </div>
                     }
                 </div>
-                <div className='descriptionS'>
-                    <button type="button" className="minimize" onClick={(e) => { handleMinimize(e) }}>Minimize all tags</button>
-                </div>
+                {render?.Advertising || render?.Home || render?.Networks || render?.WorkTeam || render?.Write ?
+                    <div className='descriptionS'>
+                        <button type="button" className="minimize" onClick={(e) => { handleMinimize(e) }}>Minimize all tags</button>
+                    </div>
+                    : ''
+                }
             </div>
             <Footer />
         </>
