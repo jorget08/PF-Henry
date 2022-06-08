@@ -162,4 +162,13 @@ const confirmation = async (req, res) => {
     }
 }
 
-module.exports = { login, renewToken, googleSignIn, confirmation };
+const changePass = async (req, res) => {
+    const { id } = req.params;
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
+module.exports = { login, renewToken, googleSignIn, confirmation, changePass };

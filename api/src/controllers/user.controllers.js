@@ -127,6 +127,12 @@ const updateUser = async (req, res) => {
         if (req.body.email) {
             delete req.body.email;
         }
+        if (req.body.password) {
+            const salt = await bcrypt.genSalt(10);
+            const passEncript = bcrypt.hashSync(req.body.password, salt);
+            req.body.password = passEncript;
+        }
+
         await User.update(req.body, {
             where: { idUser: id }
         });
