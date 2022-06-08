@@ -34,7 +34,8 @@ import {
   GET_FAVS,
   CHANGE_FAVS,DELETE_FAVS, POST_FAVS,
   GET_SHOPPING_HISTORY,
-  SET_PAGE
+  SET_PAGE,
+  CONFIRMATION_MAIL
 
 } from "./types";
 
@@ -233,9 +234,12 @@ export function logUser(payload) {
   return async function (dispatch) {
     try {
       var response = await axios.post(`http://localhost:3001/auth/`, payload);
-      let TKN = response.data.token;
+      if(response.data.user.confirmation===false){
+        alert("You have not confirmed your mail")
+      }
+      else{let TKN = response.data.token;
       localStorage.setItem("token", JSON.stringify(TKN));
-      return dispatch({ type: LOG_USER, payload: response.data.user });
+      return dispatch({ type: LOG_USER, payload: response.data.user });}
     } catch (e) {
       console.log(e);
     }
@@ -461,6 +465,18 @@ export function setPage(num) {
 
 export function changeFavs(payload) {
   return { type: CHANGE_FAVS, payload };
+}
+
+export function confirmationMail(id){
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(`http://localhost:3001/auth/confirmation/${id}`);
+      console.log("response",response)
+      return dispatch({ type: CONFIRMATION_MAIL });
+    } catch (error) {
+      console.log(error);
+    }
+    }
 }
 
 

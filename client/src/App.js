@@ -21,6 +21,7 @@ import { AuthContext } from "./auth/authContext";
 import { getUser } from "./redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import ShoppingHistory from './components/ShoppingHistory/ShoppingHistory'
+import UserConfirmation from "./components/UserConfirmation/UserConfirmation";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -60,6 +61,7 @@ function App() {
         <Route path={"/editProfile"} component={EditProfile} />
         <Route exact path={'/favourites'} component={UserFavs}/>
         <Route path={`/ShoppingHistory/${id}`} component={ShoppingHistory} />
+        <Route path={`/confirmation/:id`} component={UserConfirmation} />
 
       </>
 

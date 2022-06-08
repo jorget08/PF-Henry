@@ -63,7 +63,7 @@ export default function Register() {
                     dispatch(postUser(valores))
                     Swal.fire(
                         'You have been registered',
-                        'Welcome to bookstore c:',
+                        'Please confirm your email before logging in',
                         'success'
                       )
                     resetForm()
