@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { getDetail, clearDetail, deleteBook, addComment, showComments, getBooks } from "../../redux/actions";
+import { getDetail, clearDetail, deleteBook, addComment, showComments, getBooks, reportReview } from "../../redux/actions";
 import DetailCompra from '../DetailCompra/DetailCompra';
 import { Formik, Form, Field } from 'formik'
 import Stars from '../Stars/Stars';
@@ -31,7 +31,9 @@ export default function BookDetail() {
 
   const dispatch = useDispatch()
   const { id } = useParams()
+
   var comments = useSelector(state => state.comments)
+
   useEffect(() => {
     dispatch(getDetail(id))
     dispatch(showComments(id))
@@ -82,7 +84,7 @@ export default function BookDetail() {
     const obj={
       report:report
     }
-    helpCallUpdate(`/reviews/report/${element.id}`, obj)
+    dispatch(reportReview(element.id, bookDet.id,obj))
   }
   function editComment(element) {
     setComment({
@@ -143,8 +145,10 @@ export default function BookDetail() {
       }
       <div>
         <h3>Comments:</h3>
-        {comments.length ? comments.map(e => {
+        {comments.length !=0 ? comments.map(e => {
           return (e.report == null &&
+            <>
+            {console.log('soyyy comentario', e)}
             <div className='comments'>
               <img src={e.user.imgProfile} alt="" width='30' height='30' />
               
@@ -154,6 +158,7 @@ export default function BookDetail() {
               <button onClick={() => reportComment(e)}>Report</button>
               <button onClick={() => editComment(e)}>Edit</button>
             </div>
+            </>
           )
         }) :
           <p>Be the first to comment this book</p>}
@@ -182,6 +187,7 @@ export default function BookDetail() {
               user: user.idUser
             }
             dispatch(addComment(rev))
+
             resetForm()
           }}>
           {({ touched, errors }) => (

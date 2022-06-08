@@ -35,6 +35,9 @@ import {
   CHANGE_FAVS,DELETE_FAVS, POST_FAVS,
   GET_SHOPPING_HISTORY,
   SET_PAGE,
+  DELETE_REVIEW,
+  REPORT_REVIEW,
+  UPDATE_REVIEW,
   CONFIRMATION_MAIL,
   REQUEST_NEW_PASSWORD,
   CHANGE_PASSWORD1
@@ -372,12 +375,12 @@ export function postSupport(payload) {
   };
 }
 
-export function addComment(payload){
+export function addComment(obj){
   return async function (dispatch) {
     try {
-      console.log("add comment", payload)
-      var response = await axios.post(`http://localhost:3001/reviews`,payload);
-      return dispatch({ type: ADD_COMMENT });
+     
+      var response = await axios.post(`http://localhost:3001/reviews`,obj);
+      return dispatch({ type: ADD_COMMENT, payload:response.data });
     } catch (e) {
       console.log(e);
     }
@@ -474,17 +477,45 @@ export function changeFavs(payload) {
   return { type: CHANGE_FAVS, payload };
 }
 
+
+export function reportReview(id,idBook, obj) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(`http://localhost:3001/reviews/report/${id}?book=${idBook}`,obj);
+      return dispatch({ type: REPORT_REVIEW, payload: response.data });
+       } catch (error) {
+      console.log(error);
+    }
+    }
+  }
+
 export function confirmationMail(id){
   return async function (dispatch) {
     try {
       const response = await axios.put(`http://localhost:3001/auth/confirmation/${id}`);
       console.log("response",response)
       return dispatch({ type: CONFIRMATION_MAIL });
+
     } catch (error) {
       console.log(error);
     }
     }
-}
+  }
+
+  
+
+  export function editReview(id, obj) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.put(`http://localhost:3001/reviews/report/${id}`,obj);
+        return dispatch({ type: REPORT_REVIEW, payload: response.data });
+      } catch (error) {
+        console.log(error);
+      }
+      }
+    }
+ 
+
 
 export function requestPassword(email){
   return async function (dispatch) {
@@ -511,5 +542,6 @@ export function changePassword1(id, password){
     }
     }
 }
+
 
 
