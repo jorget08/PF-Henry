@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import { useTable, useSortBy } from 'react-table'
+import { useTable, useSortBy, useGlobalFilter, useFilters } from 'react-table'
 import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBooks} from '../../../redux/actions'
 import { COLUMNS } from './Columns'
+import { BiCaretDown, BiCaretUp } from "react-icons/bi";
+import SearchBar from './SearchBar'
 
 
 export default function Stock() {
@@ -19,27 +21,37 @@ export default function Stock() {
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => allBooks, [])
 
-  const tableInstance = useTable({
-    columns,
-    data
-  })
-  
-  const { 
+  const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
-    prepareRow
-  } = tableInstance
+    prepareRow,
+    state,
+    setGlobalFilter,
+  } = useTable({
+    columns,
+    data
+  },
+  useFilters,
+  useGlobalFilter,
+  useSortBy)
+
+  const { globalFilter } = state
   
   return (
+    <>
+    <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     <table {...getTableProps()} className={'Container'}>
       <thead >
         {headerGroups.map((headerGroups) => (
         <tr {...headerGroups.getHeaderGroupProps()}>
-          {
-            headerGroups.headers.map(column => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+          {headerGroups.headers.map(column => (
+              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                {column.render('Header')}
+                {column.isSorted ? (column.isSortedDesc ? <BiCaretDown/> : <BiCaretUp/>) : ''}
+                <div>{column.canFilter ? column.render('Filter') : null}</div>
+              </th>
             ))}
         </tr>            
         ))}
@@ -61,5 +73,6 @@ export default function Stock() {
         }
       </tbody>
     </table>
+    </>
   )
 }

@@ -13,9 +13,9 @@ table {
     padding: 8px;
   }
   
-  table tr:nth-child(even){background-color: #f2f2f2;}
+  table tr:nth-child(even){background-color: #dbdbdb;}
   
-  table tr:hover {background-color: #ddd;}
+  table tr:hover {background-color: rgb(160, 160, 160);}
   
   table th {
     padding-top: 12px;
