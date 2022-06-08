@@ -10,6 +10,7 @@ import {
   infoSoldBooks,
   sendEmail,
   getUser,
+  exchangeCrypto
 } from "../../redux/actions";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -48,7 +49,12 @@ export default function Checkout() {
 
   useEffect(() => {
     dispatch(getCart());
+    dispatch(exchangeCrypto())
   }, [dispatch]);
+  const crypto = useSelector(state => state.crypto)
+  console.log("TOY AQUI PUTA MADREEEEEE", crypto)
+
+  let x = preciototal/crypto
 
   const createOrder = (data, actions) => {
     if (user.hasOwnProperty("name")) {
@@ -128,7 +134,7 @@ export default function Checkout() {
           createOrder={(data, actions) => createOrder(data, actions)}
           onApprove={(data, actions) => onApprove(data, actions)}
         />
-        <Crypto></Crypto>
+        <Crypto value={x}></Crypto>
       </div>
     </div>
   );

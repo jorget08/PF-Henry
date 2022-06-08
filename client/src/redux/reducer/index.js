@@ -37,7 +37,8 @@ import {
   POST_FAVS,
   GET_SHOPPING_HISTORY,
   SET_PAGE,
-  CONFIRMATION_MAIL
+  CONFIRMATION_MAIL,
+  CRYPTO
 } from "../actions/types";
 
 const initialState = {
@@ -59,7 +60,8 @@ const initialState = {
   comments: [],
   support: [],
   ShoppingHistory:[],
-  page: 1
+  page: 1,
+  crypto: 0
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -72,6 +74,11 @@ export default function rootReducer(state = initialState, action) {
         allBookBackup: payload,
         books: payload,
       };
+    case CRYPTO:
+      return{
+        ...state,
+        crypto: payload
+      }
     case GET_CATEGORIES:
       return {
         ...state,

@@ -15,7 +15,7 @@ const startPayment = async ({ setError, setTxs, ether, addr }) => {
       ethers.utils.getAddress(addr);
       const tx = await signer.sendTransaction({
         to: addr,
-        value: ethers.utils.parseEther(ether)
+        value: ethers
       });
       console.log({ ether, addr });
       console.log("tx", tx);
@@ -28,7 +28,7 @@ const startPayment = async ({ setError, setTxs, ether, addr }) => {
   
 
 
-function Crypto() {
+function Crypto({value}) {
     const [error, setError] = useState();
     const [txs, setTxs] = useState([]);
   
@@ -39,7 +39,7 @@ function Crypto() {
       await startPayment({
         setError,
         setTxs,
-        ether: data.get("ether"),
+        ether: value,
         addr: data.get("addr")
       });
     };
