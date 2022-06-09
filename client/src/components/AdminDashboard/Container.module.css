@@ -1,13 +1,22 @@
-*{
-    
-}
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
 .Container{
-    background-color: white;    
+    background-color: #dbdbdb;  
     display: grid;    
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 15px;
+    padding-left: 270px;
+    height: 100vh;
+}
+
+.h1{
+    background-color: #dbdbdb;
+    height: 69px;
+    border-bottom: 2px solid black;
+    color: black;
     padding-left: 250px;
-    height: 100vh; 
+    font-size: 50px;
+    font-family: 'Rubik', sans-serif;
+    
 }

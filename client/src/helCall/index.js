@@ -13,6 +13,13 @@ export async function helpCallPut(url, obj) {
 
 }
 
+export async function helpCallUpdate(url, obj) {
+  return axios.put(`http://localhost:3001${url}`, obj).then((res) => {
+    return res.data;
+  });
+
+}
+
 export async function helpCallDelete(url) {
   return axios.delete(`http://localhost:3001${url}`).then((res) => {
     return res.data;

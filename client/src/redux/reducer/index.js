@@ -39,6 +39,7 @@ import {
   SET_PAGE,
   CONFIRMATION_MAIL,
   CRYPTO
+  REPORT_REVIEW,
 } from "../actions/types";
 
 const initialState = {
@@ -58,7 +59,7 @@ const initialState = {
   favs: [],
   changed:false,
   comments: [],
-  support: [],
+  support: ["empty"],
   ShoppingHistory:[],
   page: 1,
   crypto: 0
@@ -270,7 +271,13 @@ export default function rootReducer(state = initialState, action) {
 
     case ADD_COMMENT:
       return{
-        ...state
+        ...state,
+        comments:payload
+      }
+      case REPORT_REVIEW:
+      return{
+        ...state,
+        comments:payload
       }
     case GET_COMMENTS:
       return{
