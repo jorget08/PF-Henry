@@ -34,10 +34,12 @@ export default function UserProfile() {
       <h1>{user.name} {user.lastName}</h1>
       <img src={user.imgProfile} alt="" />
       <h2>Mail: {user.email}</h2>
-      {/* <ul>
-            {user.favoritos.map(e=>{
-                return <li key={e}>{e}</li>})}
-        </ul> */}
+      <h3>Adresses: </h3>
+      {/* {<ul>
+            {user.adress.map(e=>{
+                return <div><li key={e}>{e.street} {e.number}, {e.city}, {e.state}, {e.country}</li>
+                <button>Delete this adress</button></div>})}
+        </ul>} */}
       <Link to='/editProfile'>
         <button>Edit profile</button>
       </Link>
