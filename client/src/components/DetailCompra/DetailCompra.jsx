@@ -21,7 +21,7 @@ export default function Compra({ title, author, price, categories, id }) {
     dispatch(addToCart(id))
     const Toast = Swal.mixin({
       toast: true,
-      position: 'top-end',
+      position: 'bottom-start',
       showConfirmButton: false,
       timer: 3000,
       timerProgressBar: true,

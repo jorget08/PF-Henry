@@ -138,7 +138,7 @@ export default function Checkout() {
           createOrder={(data, actions) => createOrder(data, actions)}
           onApprove={(data, actions) => onApprove(data, actions)}
         />
-        <Crypto value={val} infoBook={checkoutinfo} userId={userId} ></Crypto>
+        <Crypto value={val} infoBook={checkoutinfo} userId={userId} email={email} name={name} lastName={lastName} payment={payment}></Crypto>
       </div>
     </div>
   );
