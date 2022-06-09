@@ -46,7 +46,6 @@ module.exports = (sequelize) => {
     },
     adress:{
       type: DataTypes.STRING,
-      defaultValue: '[]',
       //? devolver como objeto json 
       get: function () {
         return JSON.parse(this.getDataValue('adress'));

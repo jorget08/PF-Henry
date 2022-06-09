@@ -88,7 +88,7 @@ const getUsers = async (req, res) => {
         //? contar usuarios
         const count = await User.count();
         //? obtener usuarios
-        const users = await User.findAll({
+        const user = await User.findAll({
             attributes: { exclude: ['password'] },
             include: {
                 model: Rol,
@@ -99,7 +99,13 @@ const getUsers = async (req, res) => {
             raw:true, // <----- HERE
             nest:true
         });
-        
+        //? 
+        const users = user.map(user=>{
+            if(user.adress !== null){
+                user.adress = JSON.parse(user.adress);
+            }
+            return user;
+        })
         res.json({
             ok: true,
             users,
@@ -134,7 +140,8 @@ const updateUser = async (req, res) => {
         }
 
         if (req.body.adress) {
-            const adress = userExist.adress;
+            let adress = userExist.adress;
+            adress === null ? adress = [] : adress;
             //? si adress es un array
             if (Array.isArray(adress)) {
                 console.log('es array', adress.length);
@@ -144,8 +151,8 @@ const updateUser = async (req, res) => {
             }
             else{
                 //? si adress es un string parsearlo
-                const adress = JSON.parse(userExist.adress);
-                const arrayObject = [...adress, req.body.adress];
+                let adress = JSON.parse(userExist.adress);
+                let arrayObject = [...adress, req.body.adress];
                 req.body.adress = arrayObject;
             }   
         }
