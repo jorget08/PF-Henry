@@ -97,14 +97,15 @@ export default function Checkout() {
     let timerInterval;
     Swal.fire({
       title: "Your payment was successful",
+      html: 'Thank you for trusting in BookStore',
       timer: 5000,
       timerProgressBar: true,
-      didOpen: (success) => {
-        Swal.getIcon(success);
-        const b = Swal.getHtmlContainer().querySelector("b");
+      didOpen: () => {
+        Swal.showLoading()
+        const b = Swal.getHtmlContainer().querySelector('b')
         timerInterval = setInterval(() => {
-          b.textContent = Swal.getTimerLeft();
-        }, 100);
+          b.textContent = Swal.getTimerLeft()
+        }, 100)
       },
       willClose: () => {
         clearInterval(timerInterval);
