@@ -71,7 +71,7 @@ router.get("/execute-payment", executePayment)
 router.post("/", async (req, res, next) => {
     try {
         const {data, totalPrice, infoBook, userId} = req.body
-        if(typeof data !== string){
+        if(typeof data !== "string"){
         const {orderID, payerID, paymentSource} = data
         for (let i = 0; i < infoBook.length; i++) {
             let b = await Book.findOne({

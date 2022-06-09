@@ -51,7 +51,7 @@ function Crypto({value,infoBook,userId}) {
       });
       
       let totalInfo={
-          data:x.hash,
+          data:x?.hash,
           totalPrice:value,
           infoBook:infoBook,
           userId:userId
