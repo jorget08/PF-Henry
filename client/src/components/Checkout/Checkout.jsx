@@ -88,6 +88,8 @@ export default function Checkout() {
       userId: userId,
     };
 
+  
+
     dispatch(infoBooks(infoBook));
     dispatch(infoSoldBooks(totalInfo));
     dispatch(sendEmail({ email, name, lastName, payment }));

@@ -62,30 +62,31 @@ function Crypto({value,infoBook,userId,email,name,lastName,payment}) {
         dispatch(infoBooks(infoBook));
         dispatch(sendEmail({ email, name, lastName, payment }));
 
-        let timerInterval;
-        Swal.fire({
-          title: "Your payment was successful",
-          timer: 5000,
-          timerProgressBar: true,
-          didOpen: (success) => {
-            Swal.getIcon(success);
-            const b = Swal.getHtmlContainer().querySelector("b");
-            timerInterval = setInterval(() => {
-              b.textContent = Swal.getTimerLeft();
-            }, 100);
-          },
-          willClose: () => {
-            clearInterval(timerInterval);
-          },
-        }).then((result) => {
-          /* Read more about handling dismissals below */
-          if (result.dismiss === Swal.DismissReason.timer) {
-            localStorage.removeItem("carrito");
+        let timerInterval
+Swal.fire({
+  title: 'Your payment was successful',
+  html: 'Thank you for trusting in BookStore',
+  timer: 5000,
+
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    const b = Swal.getHtmlContainer().querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+   localStorage.removeItem("carrito");
             window.location.href = "/home";
-            console.log("I was closed by the timer");
-          }
-        });
-    
+    console.log('I was closed by the timer')
+  }
+})
     };
 
     console.log("value eht",value)
