@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBooks, getUsers } from '../../redux/actions'
-import Card from './Card'
-import CardU from './CardU'
-import CardB from './CardB'
+import Card from './Cards/Card'
+import CardU from './Cards/CardU'
+import CardB from './Cards/CardB'
 import s from './Container.module.css'
 
 export default function Container() {

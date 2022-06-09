@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import s from './Stock.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getBooks } from '../../redux/actions'
+import { getBooks } from '../../../redux/actions'
 import DataTable from 'react-data-table-component'
 
 export default function Stock() {
