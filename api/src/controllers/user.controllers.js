@@ -133,6 +133,23 @@ const updateUser = async (req, res) => {
             req.body.password = passEncript;
         }
 
+        if (req.body.adress) {
+            const adress = userExist.adress;
+            //? si adress es un array
+            if (Array.isArray(adress)) {
+                console.log('es array', adress.length);
+                adress.push(req.body.adress);
+                req.body.adress = JSON.stringify(adress);
+                console.log(req.body.adress);
+            }
+            else{
+                //? si adress es un string parsearlo
+                const adress = JSON.parse(userExist.adress);
+                const arrayObject = [...adress, req.body.adress];
+                req.body.adress = JSON.stringify(arrayObject);
+            }   
+        }
+
         await User.update(req.body, {
             where: { idUser: id }
         });
