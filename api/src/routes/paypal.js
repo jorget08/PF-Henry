@@ -176,10 +176,14 @@ router.get("/payments/:id", async (req, res, next) => {
             where : {
                 idUser: id
             },
-            include:{
+            include:[{
                 model: Payment,
                 include: Paymentbook
+            },{
+                model: Paymentcrypto,
+                include: Paymentbook
             }
+            ]
         })
 
         res.json(user)
