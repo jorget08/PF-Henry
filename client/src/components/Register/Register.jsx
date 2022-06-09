@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers, postUser } from '../../redux/actions';
 import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
 import Swal from "sweetalert2";
+import ReCAPTCHA from "react-google-recaptcha";
+
 import './styles.css'
 export default function Register() {
     const dispatch = useDispatch()
+    const captcha = useRef(null)
+    const [captchaVal, setCaptchaVal]=useState(false)
     const history = useHistory()
     useEffect(() => {
         dispatch(getUsers())
@@ -20,6 +24,10 @@ export default function Register() {
         history.push("/home")
     }
 
+    function onChange(){
+        setCaptchaVal(true)
+    }
+
     return (
         <div className='containerRegister'>
             <Formik
@@ -29,7 +37,8 @@ export default function Register() {
                     password: "",
                     password2: "",
                     email: "",
-                    imgProfile: ""
+                    imgProfile: "",
+                    captcha:""
                 }}
                 validate={(valores) => {
                     let errors = {};
@@ -60,14 +69,21 @@ export default function Register() {
                     return errors;
                 }}
                 onSubmit={(valores, { resetForm }) => {
-                    dispatch(postUser(valores))
+                    if(captchaVal===false){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Please click the captcha box to register',
+                          })
+                    }
+                    else{dispatch(postUser(valores))
                     Swal.fire(
                         'You have been registered',
                         'Please confirm your email before logging in',
                         'success'
                       )
                     resetForm()
-                    setTimeout(() => redirect(), "1000")
+                    setTimeout(() => redirect(), "1000")}
                 }}>
                 {({ touched, errors }) => (
                     <Form classname="registerForm">
@@ -100,6 +116,13 @@ export default function Register() {
                         <div className='fieldReg'>
                             <label>Profile picture (optional): </label>
                             <Field type="text" name="imgProfile" placeholder="Profile picture" />
+                        </div>
+                        <div>
+                        <ReCAPTCHA
+                            ref={captcha}
+                            sitekey="6Lc_RlkgAAAAAHm3lFu7iwKYTD3wu2owN56SxDdW"
+                            onChange={onChange}
+                        />
                         </div>
                         <div className='fieldReg'>
                             <button type="submit">Register</button>
