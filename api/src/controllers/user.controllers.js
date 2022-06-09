@@ -139,14 +139,14 @@ const updateUser = async (req, res) => {
             if (Array.isArray(adress)) {
                 console.log('es array', adress.length);
                 adress.push(req.body.adress);
-                req.body.adress = JSON.stringify(adress);
+                req.body.adress = adress;
                 console.log(req.body.adress);
             }
             else{
                 //? si adress es un string parsearlo
                 const adress = JSON.parse(userExist.adress);
                 const arrayObject = [...adress, req.body.adress];
-                req.body.adress = JSON.stringify(arrayObject);
+                req.body.adress = arrayObject;
             }   
         }
 
@@ -162,14 +162,14 @@ const updateUser = async (req, res) => {
             },
             raw:true, // <----- HERE
             nest:true
-            
         });
         //? no mandar array
-        
+        const adress = JSON.parse(userUp.adress);
+        userUp.adress = adress;
         //? respuesta
         res.json({
             ok: true,
-            userUp
+            userUp,
         });
     } catch (error) {
         console.log(error);
