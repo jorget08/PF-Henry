@@ -11,6 +11,7 @@ import {
   getCart,
   totalPrice,
   infoBooks,
+  exchangeCrypto
 } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import "./styles.css";
@@ -24,8 +25,6 @@ export default function Cart() {
   const [add, setAdd] = useState(false);
   const token = localStorage.getItem("token")
   const [isOpenModal, openModal, closeModal] = useModals(false)
- 
-  
  console.log("soy local storage",localstorage)
   
   function newDel() {
@@ -93,7 +92,10 @@ export default function Cart() {
 
   useEffect(() => {
     dispatch(getCart());
+    //dispatch(exchangeCrypto())
   }, [dispatch]);
+  // const crypto = useSelector(state => state.crypto)
+  // console.log("TOY AQUI PUTA MADREEEEEE", crypto)
 
   //<button onClick={handleDeleteAll}>Eliminar Todo del Carrito</button>
   return (
