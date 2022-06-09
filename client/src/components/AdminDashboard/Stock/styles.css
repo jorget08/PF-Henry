@@ -24,3 +24,9 @@ table {
     background-color: #d85353;
     color: white;
   }
+
+  .button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
