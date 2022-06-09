@@ -38,7 +38,7 @@ import {
   GET_SHOPPING_HISTORY,
   SET_PAGE,
   CONFIRMATION_MAIL,
-  CRYPTO
+  CRYPTO,
   REPORT_REVIEW,
 } from "../actions/types";
 
