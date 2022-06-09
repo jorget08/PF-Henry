@@ -3,15 +3,16 @@ import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table
 import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBooks} from '../../../redux/actions'
-import { COLUMNS } from './Columns'
+import { COLUMNS } from './Columns.jsx'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from './SearchBar'
+import EditableCell from './EditableCell'
 
 
 export default function Stock() {
-
   const dispatch = useDispatch()
   const allBooks = useSelector(state => state.books)
+  const [isEdit, setIsEdit] = useState(false)
 
   useEffect(() => {
     dispatch(getBooks)    
