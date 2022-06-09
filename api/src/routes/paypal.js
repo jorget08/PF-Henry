@@ -192,4 +192,31 @@ router.get("/payments/:id", async (req, res, next) => {
     }
 })
 
+router.get("/allpayments", async (req, res, next) => {
+    try {
+        const paypalPayment = await Payment.findAll({
+            include: [{
+                model: User
+            },{
+                model: Paymentbook
+            }]
+        })
+
+        const paypalCrypto = await Paymentcrypto.findAll({
+            include: [{
+                model: User
+            },{
+                model: Paymentbook
+            }]
+        })
+
+        const all = [...paypalPayment, ...paypalCrypto]
+
+        res.json(all)
+
+    } catch (error) {
+        next(error)
+    }
+})
+
 module.exports = router;
