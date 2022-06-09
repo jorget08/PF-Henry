@@ -59,6 +59,7 @@ function Crypto({value,infoBook,userId,email,name,lastName,payment}) {
         }  
        
         dispatch(infoSoldBooks(totalInfo));
+        
         dispatch(infoBooks(infoBook));
         dispatch(sendEmail({ email, name, lastName, payment }));
 
@@ -83,7 +84,7 @@ Swal.fire({
   /* Read more about handling dismissals below */
   if (result.dismiss === Swal.DismissReason.timer) {
    localStorage.removeItem("carrito");
-            window.location.href = "/home";
+    window.location.href = "/home";
     console.log('I was closed by the timer')
   }
 })
