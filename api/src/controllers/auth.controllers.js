@@ -34,6 +34,13 @@ const login = async (req, res) => {
         //? no enviar password 
         user.password = undefined;
         //? destructurar todo user menos rol
+        if (user.adress === null) {
+            user.adress = []
+        }
+        else{
+            const adress = JSON.parse(user.adress);
+            user.adress = adress;
+        }
         console.log(user.role);
         res.json({
             ok: true,
@@ -70,6 +77,13 @@ const renewToken = async (req, res) => {
         const token = await generateJwt(user.idUser);
         //? no enviar password
         user.password = undefined;
+        if (user.adress === null) {
+            user.adress = []
+        }
+        else{
+            const adress = JSON.parse(user.adress);
+            user.adress = adress;
+        }
         res.json({
             ok: true,
             user,
@@ -92,6 +106,14 @@ const googleSignIn = async (req, res) => {
         const user = await User.findOne({
             where: { email }
         });
+        if (user.adress === null) {
+            user.adress = []
+        }
+        else{
+            const adress = JSON.parse(user.adress);
+            user.adress = adress;
+        }
+
         if (user) {
             const token = await generateJwt(user.idUser);
             //? no enviar password
