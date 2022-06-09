@@ -4,21 +4,17 @@ export const COLUMNS = [
     {
         Header: 'Title',
         accessor: 'title',
-        Filter: CSearch,
     },
     {
         Header: 'Author',
-        accessor: 'author',
-        Filter: CSearch,
+        accessor: 'author'
     },
     {
         Header: 'Stock',
         accessor: 'stock',
-        Filter: CSearch,
     },
     {
         Header: 'Price',
         accessor: 'price',
-        Filter: CSearch,
     },
 ]
