@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import { useHistory, useParams } from "react-router-dom";
 import { changePassword1 } from '../../redux/actions'
+import Swal from "sweetalert2";
 
 export default function NewPassword() {
   
@@ -28,6 +29,11 @@ export default function NewPassword() {
     }}
     onSubmit={(valores, { resetForm }) => {
       dispatch(changePassword1(id, valores.password))
+      Swal.fire({
+        icon: 'success',
+        title: 'Done',
+        text: 'Your password has been changed',
+      })
       setTimeout(() => redirect(), "1000")
       resetForm()
     }}>

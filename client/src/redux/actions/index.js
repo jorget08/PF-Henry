@@ -239,13 +239,15 @@ export function logUser(payload) {
   return async function (dispatch) {
     try {
       var response = await axios.post(`http://localhost:3001/auth/`, payload);
+      console.log("log",response.data)
       if(response.data.user.confirmation===false){
-        alert("You have not confirmed your mail")
+        return 
       }
       else{let TKN = response.data.token;
       localStorage.setItem("token", JSON.stringify(TKN));
       return dispatch({ type: LOG_USER, payload: response.data.user });}
     } catch (e) {
+      console.log("log",e.message)
       console.log(e);
     }
   };

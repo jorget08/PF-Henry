@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUser } from '../../redux/actions';
+import { getUser, requestPassword } from '../../redux/actions';
 import NavBar from '../NavBar/NavBar';
+import Swal from "sweetalert2";
 export default function UserProfile() {
   var user = useSelector(state => state.user)
   const dispatch = useDispatch()
@@ -12,6 +13,20 @@ export default function UserProfile() {
     console.log(user)
   }, [])
 
+  function handleClick(){
+    Swal.fire({
+      title: 'Do you want to change your password?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Change',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('An email has been sent to you to change your password')
+        dispatch(requestPassword(user.email))
+      } 
+    })
+  }
 
   return (
     <div>
@@ -26,7 +41,7 @@ export default function UserProfile() {
       <Link to='/editProfile'>
         <button>Edit profile</button>
       </Link>
-      <button>Change password</button>
+      <button onClick={handleClick}>Change password</button>
 
     </div>
   )
