@@ -1,6 +1,45 @@
 .landing {
   background-color: #dbdbdb;
 }
+.landing .dataLeft {
+  align-items: center;
+  display: flex;
+  margin-left: 5rem;
+}
+.landing .dataLeft img {
+  width: 400px;
+  margin: 0;
+  border-radius: 30px;
+  height: 300px;
+}
+.landing .dataLeft h1 {
+  font-family: 'Merriweather', serif;
+  color: #a76b6b;
+  width: 20rem;
+  font-size: 35px;
+  padding: 10px;
+  text-align: left;
+}
+.landing .dataRight {
+  align-items: center;
+  display: flex;
+  justify-content: end;
+  margin-right: 5rem;
+}
+.landing .dataRight img {
+  width: 400px;
+  margin: 0;
+  border-radius: 30px;
+  height: 300px;
+}
+.landing .dataRight h1 {
+  font-family: 'Merriweather', serif;
+  color: #a76b6b;
+  width: 20rem;
+  font-size: 35px;
+  padding: 10px;
+  text-align: left;
+}
 .landInfo {
   display: flex;
   justify-content: space-evenly;

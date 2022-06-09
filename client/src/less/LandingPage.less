@@ -1,7 +1,43 @@
 @import './variables.less';
 
+.imgData() {
+
+    img {
+        width: 400px;
+        margin: 0;
+        border-radius: 30px;
+        height: 300px;
+    }
+
+    align-items: center;
+
+    h1 {
+        font-family: @merri;
+        color: rgb(167, 107, 107);
+        width: 20rem;
+        font-size: 35px;
+        padding: 10px;
+        text-align: left;
+    }
+
+}
+
 .landing {
     background-color: rgb(219, 219, 219);
+
+    .dataLeft {
+        .imgData();
+        display: flex;
+        margin-left: 5rem;
+    }
+
+    .dataRight {
+        .imgData();
+        display: flex;
+        justify-content: end;
+        margin-right: 5rem;
+    }
+
 }
 
 .landInfo {

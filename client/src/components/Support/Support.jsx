@@ -190,9 +190,9 @@ export default function Support() {
                                                 </div>
                                                 <div className='description'>
                                                     <label>What you want to tell us?</label>
-                                                </div>  
-                                                <div className='description'>    
-                                                    <Field type="text" name="comment" className="descriptionArea" as="textarea" placeholder="Write your question here!" />     
+                                                </div>
+                                                <div className='description'>
+                                                    <Field type="text" name="comment" className="descriptionArea" as="textarea" placeholder="Write your question here!" />
                                                 </div>
                                                 {touched.comment && errors.comment && <span className="error">{errors.comment}</span>}
                                                 <button className="minimize" type="submit">Send!</button>

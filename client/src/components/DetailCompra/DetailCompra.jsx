@@ -13,29 +13,30 @@ export default function Compra({ title, author, price, categories, id }) {
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart)
   const [cartIcon, setCartIcon] = useState(<BsCartPlus size={25} onClick={handleClick} className="icon" />)
-  let bookinCart=JSON.parse(localStorage.getItem("carrito"))?.filter(e=>e.id===id)
-  
-  
+  let bookinCart = JSON.parse(localStorage.getItem("carrito"))?.filter(e => e.id === id)
+
+
   function handleClick() {
-    if(!bookinCart?.length){
-    dispatch(addToCart(id))
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      }
-    })
-    
-    Toast.fire({
-      icon: 'success',
-      title: `Added "${title}" to cart`,
-    })
-    setCartIcon(<BsCartCheckFill size={25} className="done" />)}
+    if (!bookinCart?.length) {
+      dispatch(addToCart(id))
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'bottom-start',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'success',
+        title: `Added "${title}" to cart`,
+      })
+      setCartIcon(<BsCartCheckFill size={25} className="done" />)
+    }
   }
 
   return (
@@ -44,7 +45,7 @@ export default function Compra({ title, author, price, categories, id }) {
       <div className='addTo'>
         <p>Add to Cart</p>
         <button>
-          {bookinCart?.length?<BsCartCheckFill size={25} className="done" />:cartIcon}
+          {bookinCart?.length ? <BsCartCheckFill size={25} className="done" /> : cartIcon}
         </button>
 
       </div>
