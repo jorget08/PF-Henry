@@ -404,13 +404,14 @@ export function showComments(id){
 export function getSupport() {
   return async function (dispatch) {
     try {
-      const response = await axios.get("http://localhost:3001/support", {
+      const res = await axios.get("http://localhost:3001/support", {
         headers: {
-          Authorization: JSON.parse(localStorage.getItem("token")),
+          Authorization: JSON.parse(localStorage.getItem("token"))
         },
       });
-      localStorage.setItem("token", JSON.stringify(response.data.token));
-      return dispatch({ type: GET_SUPPORT, payload: response.data });
+      localStorage.setItem("token", JSON.stringify(res.data.token));
+      console.log(res.data)
+      return dispatch({ type: GET_SUPPORT, payload: res.data });
     } catch (error) {
       console.log(error);
     }
