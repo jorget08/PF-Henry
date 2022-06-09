@@ -34,10 +34,7 @@ const login = async (req, res) => {
         //? no enviar password 
         user.password = undefined;
         //? destructurar todo user menos rol
-        if (user.adress === null) {
-            user.adress = []
-        }
-        else{
+        if (user.adress !== null) {
             const adress = JSON.parse(user.adress);
             user.adress = adress;
         }
@@ -77,10 +74,7 @@ const renewToken = async (req, res) => {
         const token = await generateJwt(user.idUser);
         //? no enviar password
         user.password = undefined;
-        if (user.adress === null) {
-            user.adress = []
-        }
-        else{
+        if (user.adress !== null) {
             const adress = JSON.parse(user.adress);
             user.adress = adress;
         }
@@ -106,10 +100,7 @@ const googleSignIn = async (req, res) => {
         const user = await User.findOne({
             where: { email }
         });
-        if (user.adress === null) {
-            user.adress = []
-        }
-        else{
+        if (user.adress !== null) {
             const adress = JSON.parse(user.adress);
             user.adress = adress;
         }

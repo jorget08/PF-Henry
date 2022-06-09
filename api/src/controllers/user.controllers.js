@@ -146,14 +146,14 @@ const updateUser = async (req, res) => {
             if (Array.isArray(adress)) {
                 console.log('es array', adress.length);
                 adress.push(req.body.adress);
-                req.body.adress = adress;
+                req.body.adress = JSON.stringify(adress);
                 console.log(req.body.adress);
             }
             else{
                 //? si adress es un string parsearlo
                 let adress = JSON.parse(userExist.adress);
                 let arrayObject = [...adress, req.body.adress];
-                req.body.adress = arrayObject;
+                req.body.adress = JSON.stringify(arrayObject);
             }   
         }
 
