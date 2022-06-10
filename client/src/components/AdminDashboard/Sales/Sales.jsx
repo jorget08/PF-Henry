@@ -1,13 +1,15 @@
 import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSales} from '../../../redux/actions'
+import { getSales } from '../../../redux/actions'
 import { GROUPED_COLUMNS } from './Columns.jsx'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from './SearchBar'
 
 
 export default function Sales() {
+  
+
   const dispatch = useDispatch()
   const allSales = useSelector(state => state.sales)
 
@@ -21,7 +23,6 @@ export default function Sales() {
   
   const columns = useMemo(() => GROUPED_COLUMNS, [])
   const data = useMemo(() => allSales, [])
-
 
   const {
     getTableProps,
@@ -52,6 +53,7 @@ export default function Sales() {
   const { pageIndex, pageSize } = state
   return (
     <>
+
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     <table {...getTableProps()} className={'Container'}>
       <thead >
