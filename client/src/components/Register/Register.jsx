@@ -73,7 +73,7 @@ export default function Register() {
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
-                            text: 'Please click the captcha box to register',
+                            text: 'Please check the captcha box to register',
                           })
                     }
                     else{dispatch(postUser(valores))

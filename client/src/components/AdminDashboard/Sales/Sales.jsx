@@ -1,59 +1,28 @@
 import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
-import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteBook, getBooks } from '../../../redux/actions'
+import { getSales } from '../../../redux/actions'
+import { GROUPED_COLUMNS } from './Columns.jsx'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from './SearchBar'
-import { COLUMNS } from './Columns'
-import Modal from './Modal/Modal'
-import { useModals } from '../../Utils/useModals'
-import EditBook from './EditBook'
 
-export default function Stock() {
+
+export default function Sales() {
+  
 
   const dispatch = useDispatch()
-  const allBooks = useSelector(state => state.books)
-  const [isOpenModal, openModal, closeModal] = useModals(false);
+  const allSales = useSelector(state => state.sales)
 
   useEffect(() => {
-    dispatch(getBooks)    
+    dispatch(getSales())    
   }, [dispatch])
+  setTimeout(() => {
+    console.log('SALE SALE SALE', allSales);
+  }, "3000")
+
   
-  const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => allBooks, [])
-
-  const tableHooks = (hooks) => {
-    hooks.visibleColumns.push((columns) => [
-      ...columns,
-        {
-          id:"Actions",
-          Header:"Actions",
-          Cell: ({ row }) => ( 
-            <>
-            <button onClick={e => handleEdit(e, row)}>
-              Edit
-            </button>
-            <button onClick={handleDelete}>
-              Delete
-            </button>
-            </>
-          )
-        }
-      ]
-    )
-  }
-
-  const handleDelete = (e) => {
-    e.preventDefault()
-    alert ('QUERE BORRAR VO ? SO LOCO SO?')
-  }
-
-  const handleEdit = (e, row) => {
-    e.preventDefault()
-    openModal()    
-  }
-
+  const columns = useMemo(() => GROUPED_COLUMNS, [])
+  const data = useMemo(() => allSales, [])
 
   const {
     getTableProps,
@@ -75,7 +44,6 @@ export default function Stock() {
     columns,
     data
   },
-  tableHooks,
   useGlobalFilter,
   useSortBy,
   usePagination,
@@ -83,19 +51,15 @@ export default function Stock() {
 
   const { globalFilter } = state
   const { pageIndex, pageSize } = state
-
-
   return (
     <>
-    <Modal isOpen={isOpenModal} closeModal={closeModal}>
-      <EditBook/>
-    </Modal>
+
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     <table {...getTableProps()} className={'Container'}>
       <thead >
-        {headerGroups?.map((headerGroups) => (
+        {headerGroups.map((headerGroups) => (
         <tr {...headerGroups.getHeaderGroupProps()}>
-          {headerGroups?.headers?.map(column => (
+          {headerGroups.headers.map(column => (
               <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                 {column.render('Header')}
                 {column.isSorted ? (column.isSortedDesc ? <BiCaretDown/> : <BiCaretUp/>) : ''}

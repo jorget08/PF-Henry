@@ -41,7 +41,8 @@ import {
   CONFIRMATION_MAIL,
   REQUEST_NEW_PASSWORD,
   CHANGE_PASSWORD1,
-  CRYPTO
+  CRYPTO,
+  GET_SALES
 } from "./types";
 
 import axios from "axios";
@@ -319,14 +320,35 @@ export function editProfile(payload, id) {
   return async function (dispatch) {
     try {
       var response = await axios.put(
-        `http://localhost:3001/user/${id}`,
-        payload,
+        `http://localhost:3001/user/${id}`, {  adress: payload },
         {
           headers: {
             Authorization: JSON.parse(localStorage.getItem("token")),
           },
         }
       );
+      console.log("edit", response.data);
+      return dispatch({ type: EDIT_PROFILE, payload: response.data.userUp });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+export function deleteProfile(payload, id) {
+  return async function (dispatch) {
+    try {
+      const adress = payload
+      //? cotent-type=application/json 
+      var response = await axios.delete(
+        `http://localhost:3001/auth/adress/${id}`,{
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Access-Control-Allow-Origin': '*'
+          },
+          data: { adress }
+        }
+      );
+
       return dispatch({ type: EDIT_PROFILE, payload: response.data.userUp });
     } catch (e) {
       console.log(e);
@@ -558,4 +580,15 @@ export function exchangeCrypto() {
   };
 }
 
+export function getSales() {
+  return async function (dispatch){
+    try {
+      const res = await axios.get(`http://localhost:3001/paypal/allpayments`)
+      console.log("COMPRAS", res)
+      return dispatch ({type: GET_SALES, payload: res.data})
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
 

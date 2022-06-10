@@ -3,5 +3,6 @@
     padding: 0%;
 }
 .rdt_Table {        
-    padding-left: 155px;        
+    padding-left: 155px;    
+    background-color: red;    
 }

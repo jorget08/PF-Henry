@@ -88,6 +88,8 @@ export default function Checkout() {
       userId: userId,
     };
 
+  
+
     dispatch(infoBooks(infoBook));
     dispatch(infoSoldBooks(totalInfo));
     dispatch(sendEmail({ email, name, lastName, payment }));
@@ -95,14 +97,15 @@ export default function Checkout() {
     let timerInterval;
     Swal.fire({
       title: "Your payment was successful",
+      html: 'Thank you for trusting in BookStore',
       timer: 5000,
       timerProgressBar: true,
-      didOpen: (success) => {
-        Swal.getIcon(success);
-        const b = Swal.getHtmlContainer().querySelector("b");
+      didOpen: () => {
+        Swal.showLoading()
+        const b = Swal.getHtmlContainer().querySelector('b')
         timerInterval = setInterval(() => {
-          b.textContent = Swal.getTimerLeft();
-        }, 100);
+          b.textContent = Swal.getTimerLeft()
+        }, 100)
       },
       willClose: () => {
         clearInterval(timerInterval);
@@ -138,7 +141,7 @@ export default function Checkout() {
           createOrder={(data, actions) => createOrder(data, actions)}
           onApprove={(data, actions) => onApprove(data, actions)}
         />
-        <Crypto value={val} infoBook={checkoutinfo} userId={userId} ></Crypto>
+        <Crypto value={val} infoBook={checkoutinfo} userId={userId} email={email} name={name} lastName={lastName} payment={payment}></Crypto>
       </div>
     </div>
   );

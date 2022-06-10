@@ -1,16 +1,15 @@
 import React from 'react'
 import s from './SearchBar.module.css'
 
-export const CSearch = ({column}) => {
-    const {filterValue, setFilter } = column;
+export default function SearchBar({filter, setFilter}) {
   return (
     <span className={s.span}>
-      Search:{' '}
+      Global Search:{' '}
       <input 
-        type='search'
-        value={filterValue || ''} 
+        type='search' 
+        value={filter || ''} 
         onChange={e => setFilter(e.target.value)}
-       />
+      />
     </span>
   )
 }

@@ -17,26 +17,25 @@ export default function Compra({ title, author, price, categories, id }) {
 
 
   function handleClick() {
-    if (!bookinCart?.length) {
-      dispatch(addToCart(id))
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'bottom-start',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-
-      Toast.fire({
-        icon: 'success',
-        title: `Added "${title}" to cart`,
-      })
-      setCartIcon(<BsCartCheckFill size={25} className="done" />)
-    }
+    if(!bookinCart?.length){
+    dispatch(addToCart(id))
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'bottom-start',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: `Added "${title}" to cart`,
+    })
+    setCartIcon(<BsCartCheckFill size={25} className="done" />)}
   }
 
   return (
