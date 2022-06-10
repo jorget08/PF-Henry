@@ -10,10 +10,14 @@ import { MdKeyboardArrowDown } from 'react-icons/md'
 import { postSupport } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 import Footer from '../Footer/Footer';
+import Swal from "sweetalert2";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Support() {
 
     const dispatch = useDispatch()
+    const captcha = useRef(null)
+    const [captchaVal, setCaptchaVal]=useState(false)
 
     const scroll0 = useRef()
     const scroll1 = useRef()
@@ -35,6 +39,10 @@ export default function Support() {
         e.preventDefault();
         if (bool) setRender({ ...render, [e.target.id]: true })
         else setRender({ ...render, [e.target.id]: !render[e.target.id] })
+    }
+
+    function onChange(){
+        setCaptchaVal(true)
     }
 
     const handleMinimize = (e) => {
@@ -167,9 +175,16 @@ export default function Support() {
                                 }}
 
                                 onSubmit={(valores, { resetForm }) => {
-                                    dispatch(postSupport(valores))
+                                    if(captchaVal===false){
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Oops...',
+                                            text: 'Please check the captcha box to send your question',
+                                          })
+                                    }
+                                    else{dispatch(postSupport(valores))
                                     alert("Query sent!")
-                                    resetForm()
+                                    resetForm()}
                                 }}>
 
                                 {({ touched, errors }) => (
@@ -195,6 +210,13 @@ export default function Support() {
                                                     <Field type="text" name="comment" className="descriptionArea" as="textarea" placeholder="Write your question here!" />     
                                                 </div>
                                                 {touched.comment && errors.comment && <span className="error">{errors.comment}</span>}
+                                                <div>
+                                                <ReCAPTCHA
+                                                    ref={captcha}
+                                                    sitekey="6Lc_RlkgAAAAAHm3lFu7iwKYTD3wu2owN56SxDdW"
+                                                    onChange={onChange}
+                                                />
+                                                </div>
                                                 <button className="minimize" type="submit">Send!</button>
 
                                             </div>

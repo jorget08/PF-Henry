@@ -4,6 +4,7 @@ import { editProfile } from '../../redux/actions';
 import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
 import Swal from "sweetalert2";
+import NavBar from '../NavBar/NavBar';
 
 export default function Register() {
     const dispatch = useDispatch()
@@ -16,6 +17,7 @@ const redirect = ()=>{
   
     return (
     <div>
+        <NavBar />
         <Formik
         initialValues={{
             name:user.name,
