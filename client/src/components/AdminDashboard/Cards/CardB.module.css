@@ -1,7 +1,7 @@
 .Card{
     display:block;
     align-items: center;
-    margin-top: 30px;    
+    margin-top: 30px;
     background-color: #d85353;
     border-radius: 15px;
     width: 15rem;
@@ -10,7 +10,6 @@
     -webkit-box-shadow: 10px 10px 19px 0px rgba(0,0,0,0.97);
     -moz-box-shadow: 10px 10px 19px 0px rgba(0,0,0,0.97);
     transition: transform 1,9s;
-    backdrop-filter: blur(7px);
 }
 
 .Card:hover{
@@ -29,5 +28,4 @@
     font-size: 60px;
     color: white;
     padding-left: 28%;
-    padding-top: 15px;
 }

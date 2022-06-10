@@ -6,21 +6,19 @@ import { getBooks} from '../../../redux/actions'
 import { COLUMNS } from './Columns.jsx'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from './SearchBar'
-import EditableCell from './EditableCell'
 
 
 export default function Stock() {
   const dispatch = useDispatch()
   const allBooks = useSelector(state => state.books)
-  const [isEdit, setIsEdit] = useState(false)
 
   useEffect(() => {
     dispatch(getBooks)    
   }, [dispatch])
   
-
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => allBooks, [])
+
 
   const {
     getTableProps,
@@ -44,11 +42,11 @@ export default function Stock() {
   },
   useGlobalFilter,
   useSortBy,
-  usePagination)
+  usePagination,
+  )
 
   const { globalFilter } = state
   const { pageIndex, pageSize } = state
-  
   return (
     <>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>

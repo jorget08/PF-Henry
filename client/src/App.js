@@ -11,6 +11,7 @@ import Checkout from "./components/Checkout/Checkout";
 import UserProfile from "./components/UserProfile/UserProfile";
 import Sidebar from "./components/AdminDashboard/Sidebar";
 import Stock from "./components/AdminDashboard/Stock/Stock";
+import Sales from "./components/AdminDashboard/Sales/Sales"
 import SupportAdmin from "./components/AdminDashboard/SupportAdmin/SupportAdmin";
 import { UserFavs } from "./components/User/UserFavs/UserFavs";
 import Support from "./components/Support/Support";
@@ -58,6 +59,7 @@ function App() {
         <Route exact path={"/admin/newbook"} component={FormCreate} />
         <Route exact path={"/admin/stock"} component={Stock} />
         <Route exact path={"/admin/users"} component={Users} />
+        <Route exact path={"/admin/sales"} component={Sales} />
         <Route exact path={"/admin/supportAdmin"} component={SupportAdmin} />
         <Route path={"/checkout"} component={Checkout} />
         <Route path={"/support"} component={Support} />

@@ -41,7 +41,8 @@ import {
   CONFIRMATION_MAIL,
   REQUEST_NEW_PASSWORD,
   CHANGE_PASSWORD1,
-  CRYPTO
+  CRYPTO,
+  GET_SALES
 } from "./types";
 
 import axios from "axios";
@@ -557,4 +558,15 @@ export function exchangeCrypto() {
   };
 }
 
+export function getSales() {
+  return async function (dispatch){
+    try {
+      const res = await axios.get(`http://localhost:3001/paypal/allpayments`)
+      console.log("COMPRAS", res)
+      return dispatch ({type: GET_SALES, payload: res.data})
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
 
