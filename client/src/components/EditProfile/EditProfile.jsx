@@ -86,12 +86,13 @@ const redirect = ()=>{
             return errors;
         }}
         onSubmit={(valores, {resetForm}) => {
-            var adress={}
-            adress.country=valores.country
-            adress.state=valores.state
-            adress.city=valores.city
-            adress.street=valores.street
-            adress.number=valores.number
+            const adress = {
+                country:valores.country,
+                state:valores.state,
+                city:valores.city,
+                street:valores.street,
+                number:valores.number     
+            }
             dispatch(editProfile(adress, user.idUser))
             Swal.fire(
                 'Done!',

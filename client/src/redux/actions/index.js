@@ -319,8 +319,7 @@ export function editProfile(payload, id) {
   return async function (dispatch) {
     try {
       var response = await axios.put(
-        `http://localhost:3001/user/${id}`,
-        payload,
+        `http://localhost:3001/user/${id}`, {  adress: payload },
         {
           headers: {
             Authorization: JSON.parse(localStorage.getItem("token")),
