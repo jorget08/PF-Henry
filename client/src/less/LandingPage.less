@@ -1,7 +1,83 @@
 @import './variables.less';
 
+.imgData() {
+
+    img {
+        width: 400px;
+        margin: 10px 0;
+        border-radius: 30px;
+        height: 300px;
+    }
+
+    align-items: center;
+
+    h1 {
+        font-family: @merri;
+        color: rgb(167, 107, 107);
+        width: 20rem;
+        font-size: 35px;
+        padding: 10px;
+        text-align: left;
+    }
+
+    border-bottom: 1px solid rgb(116, 108, 108);
+    margin: 2rem 5rem;
+    padding-bottom: 2rem;
+
+}
+
 .landing {
     background-color: rgb(219, 219, 219);
+
+    .dataLeft {
+        .imgData();
+        display: flex;
+
+    }
+
+    .dataRight {
+        .imgData();
+        display: flex;
+        justify-content: end;
+    }
+
+
+    .dataUp {
+        align-items: center;
+        border-bottom: 1px solid rgb(116, 108, 108);
+        padding-bottom: 2rem;
+        margin: 2rem 5rem;
+
+        h1 {
+            font-family: @merri;
+            color: rgb(167, 107, 107);
+            font-size: 35px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        img {
+            display: flex;
+            justify-content: center;
+            width: 50%;
+            border-radius: 30px;
+        }
+
+        display: flex;
+        flex-direction: column;
+
+    }
+
+}
+
+.sections {
+    h1 {
+        font-family: @merri;
+        color: rgb(133, 45, 45);
+        font-size: 50px;
+        padding: 10px;
+        text-align: center;
+    }
 }
 
 .landInfo {

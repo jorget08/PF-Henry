@@ -71,6 +71,8 @@ export default function NavBar() {
     const user = useSelector(state => state.user)
     let id = user.idUser
 
+    console.log("isfasdfasd",user)
+
 
     return (
         <div className="navbar">
@@ -112,12 +114,8 @@ export default function NavBar() {
                     </div>
                     {isLogged &&
                         <div className='sideBar'>
-                            {console.log(user.imgProfile)}
-                            {user?.imgProfile ?
-                                <img onClick={showSideBar} style={{ cursor: 'pointer', width: '3rem', borderRadius: '50%', padding: '10px 20px' }} src={user?.imgProfile} alt="" />
-                                :
-                                <IoMdContact onClick={showSideBar} style={{ cursor: 'pointer' }} size={40} className="menu" />
-                            }
+                           
+                                 <IoMdContact onClick={showSideBar} style={{ cursor: 'pointer' }} size={40} className="menu" />
                             <ProSidebar collapsed={sideBar} width={210} collapsedWidth={"0px"} onClick={showSideBar} >
                                 <Menu iconShape="square">
                                     <MenuItem icon={<CgProfile />}>Your Profile<Link to="/userProfile" /></MenuItem>
