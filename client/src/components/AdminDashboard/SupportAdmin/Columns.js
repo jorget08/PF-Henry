@@ -2,28 +2,37 @@ import {CSearch} from './CSearch'
 
 export const COLUMNS = [
     {
-        Header: 'Name',
-        accessor: 'name',
-        Filter: CSearch,
-    },
-    {
-        Header: 'Email',
-        accessor: 'email',
-        Filter: CSearch,
-    },
-    {
-        Header: 'Comment',
-        accessor: 'Comment',
-        Filter: CSearch,
-    },
-    {
-        Header: 'State',
-        accessor: 'state',
-        Filter: CSearch,
+        Header: 'UserID',
+        accessor: row => {if (row.userIdUser === null) return "None"
+                            else return row.user},
     },
     {
         Header: 'User',
-        accessor: 'User',
-        Filter: CSearch,
-    }
+        accessor: row => {if (row.user === null) return "Guest"
+                            else return row.user},
+    },  
+    {
+        Header: 'Email',
+        accessor: 'emailGuess',
+    },
+    {
+        Header: 'Comment',
+        accessor: 'comment',
+    },
+    {
+        Header: 'Response',
+        accessor: 'response',
+    },
+    {
+        Header: 'Status',
+        accessor: 'status',
+    },
+    {
+        Header: 'Comment Date',
+        accessor: 'date',
+    },
+    {
+        Header: 'Id Support',
+        accessor: 'idSupport',
+    },
 ]

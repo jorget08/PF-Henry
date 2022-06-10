@@ -282,7 +282,7 @@ export default function rootReducer(state = initialState, action) {
     case GET_SUPPORT:
       return{
         ...state,
-        support: [...payload]
+        support: payload
       };
       case GET_FAVS:
       return{
