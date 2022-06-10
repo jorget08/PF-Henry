@@ -3,10 +3,32 @@ import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table
 import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBooks} from '../../../redux/actions'
-import { COLUMNS } from './Columns.jsx'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from './SearchBar'
 
+const COLUMNS = [
+  {   
+      Header: 'Title',
+      accessor: 'title',
+  },
+  {          
+      Header: 'Author',
+      accessor: 'author'
+  },
+  {        
+      Header: 'Stock',
+      accessor: 'stock',
+  },
+  {        
+      Header: 'Price',
+      accessor: 'price',
+  },
+  {        
+      Header: 'Actions',
+      accessor: 'actions',
+
+  },
+]
 
 export default function Stock() {
   const dispatch = useDispatch()
@@ -47,6 +69,8 @@ export default function Stock() {
 
   const { globalFilter } = state
   const { pageIndex, pageSize } = state
+
+
   return (
     <>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
