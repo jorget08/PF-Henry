@@ -41,7 +41,8 @@ import {
   CONFIRMATION_MAIL,
   REQUEST_NEW_PASSWORD,
   CHANGE_PASSWORD1,
-  CRYPTO
+  CRYPTO,
+  REPLY_SUPPORT
 } from "./types";
 
 import axios from "axios";
@@ -411,9 +412,10 @@ export function getSupport() {
       });
       localStorage.setItem("token", JSON.stringify(res.data.token));
       console.log(res.data)
-      return dispatch({ type: GET_SUPPORT, payload: res.data });
+      console.log("id admin", localStorage.getItem("token"))
+      return dispatch({ type: GET_SUPPORT, payload: res.data.supports});
     } catch (error) {
-      console.log(error);
+      console.log(error); 
     }
   };
 }
@@ -554,6 +556,26 @@ export function exchangeCrypto() {
     } catch (e) {
       console.log(e);
 
+    }
+  };
+}
+
+export function replySupport(payload) {
+  return async function (dispatch) {
+    try {
+      var response = await axios.put(
+        `http://localhost:3001/support`,
+        payload,
+        {
+          headers: {
+            Authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        }
+      );
+      console.log(response.data)
+      return dispatch({ type: REPLY_SUPPORT, payload: response.data});
+    } catch (e) {
+      console.log(e);
     }
   };
 }
