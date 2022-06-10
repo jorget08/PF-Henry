@@ -15,7 +15,7 @@ import Sales from "./components/AdminDashboard/Sales/Sales"
 import SupportAdmin from "./components/AdminDashboard/SupportAdmin/SupportAdmin";
 import { UserFavs } from "./components/User/UserFavs/UserFavs";
 import Support from "./components/Support/Support";
-import Users from "./components/AdminDashboard/Users";
+import Users from "./components/AdminDashboard/Users/Users";
 import EditProfile from "./components/EditProfile/EditProfile";
 import Container from "./components/AdminDashboard/Container";
 import { AuthContext } from "./auth/authContext";
