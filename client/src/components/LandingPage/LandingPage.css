@@ -3,12 +3,14 @@
 }
 .landing .dataLeft {
   align-items: center;
+  border-bottom: 1px solid #746c6c;
+  margin: 2rem 5rem;
+  padding-bottom: 2rem;
   display: flex;
-  margin-left: 5rem;
 }
 .landing .dataLeft img {
   width: 400px;
-  margin: 0;
+  margin: 10px 0;
   border-radius: 30px;
   height: 300px;
 }
@@ -22,13 +24,15 @@
 }
 .landing .dataRight {
   align-items: center;
+  border-bottom: 1px solid #746c6c;
+  margin: 2rem 5rem;
+  padding-bottom: 2rem;
   display: flex;
   justify-content: end;
-  margin-right: 5rem;
 }
 .landing .dataRight img {
   width: 400px;
-  margin: 0;
+  margin: 10px 0;
   border-radius: 30px;
   height: 300px;
 }
@@ -39,6 +43,34 @@
   font-size: 35px;
   padding: 10px;
   text-align: left;
+}
+.landing .dataUp {
+  align-items: center;
+  border-bottom: 1px solid #746c6c;
+  padding-bottom: 2rem;
+  margin: 2rem 5rem;
+  display: flex;
+  flex-direction: column;
+}
+.landing .dataUp h1 {
+  font-family: 'Merriweather', serif;
+  color: #a76b6b;
+  font-size: 35px;
+  padding: 10px;
+  text-align: center;
+}
+.landing .dataUp img {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  border-radius: 30px;
+}
+.sections h1 {
+  font-family: 'Merriweather', serif;
+  color: #852d2d;
+  font-size: 50px;
+  padding: 10px;
+  text-align: center;
 }
 .landInfo {
   display: flex;
