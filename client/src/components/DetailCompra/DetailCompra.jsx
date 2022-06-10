@@ -13,9 +13,9 @@ export default function Compra({ title, author, price, categories, id }) {
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart)
   const [cartIcon, setCartIcon] = useState(<BsCartPlus size={25} onClick={handleClick} className="icon" />)
-  let bookinCart=JSON.parse(localStorage.getItem("carrito"))?.filter(e=>e.id===id)
-  
-  
+  let bookinCart = JSON.parse(localStorage.getItem("carrito"))?.filter(e => e.id === id)
+
+
   function handleClick() {
     if(!bookinCart?.length){
     dispatch(addToCart(id))
@@ -44,7 +44,7 @@ export default function Compra({ title, author, price, categories, id }) {
       <div className='addTo'>
         <p>Add to Cart</p>
         <button>
-          {bookinCart?.length?<BsCartCheckFill size={25} className="done" />:cartIcon}
+          {bookinCart?.length ? <BsCartCheckFill size={25} className="done" /> : cartIcon}
         </button>
 
       </div>
