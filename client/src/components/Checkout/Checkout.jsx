@@ -18,6 +18,7 @@ import Swal from "sweetalert2";
 import "./styles.css";
 import Login from "../Login/Login";
 import Crypto from "./Crypto/Crypto";
+import CheckoutDirection from "../CheckoutDirection/CheckoutDirection";
 
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
@@ -125,6 +126,8 @@ export default function Checkout() {
   return (
     <div className="checkout">
       <NavBar></NavBar>
+      <CheckoutDirection></CheckoutDirection>
+
       {checkoutinfo?.map((e) => (
         <Itemscheckout
           key={e.id}
