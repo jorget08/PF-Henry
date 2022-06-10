@@ -120,6 +120,8 @@ const getUsers = async (req, res) => {
     }
 }
 const updateUser = async (req, res) => {
+    console.log('aqui',req.body);
+    console.log('aqui 2',req.body.adress);
     const { id } = req.params;
     try {
         const userExist = await User.findOne({ where: { idUser: id } });

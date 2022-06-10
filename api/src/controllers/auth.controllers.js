@@ -100,15 +100,15 @@ const googleSignIn = async (req, res) => {
         const user = await User.findOne({
             where: { email }
         });
-        if (user.adress !== null) {
-            const adress = JSON.parse(user.adress);
-            user.adress = adress;
-        }
 
         if (user) {
             const token = await generateJwt(user.idUser);
             //? no enviar password
             user.password = undefined;
+            if (user.adress !== null) {
+                const adress = JSON.parse(user.adress);
+                user.adress = adress;
+            }
             res.json({
                 ok: true,
                 user,
@@ -125,6 +125,10 @@ const googleSignIn = async (req, res) => {
                 favoritos: []
             });
             await newUser.addRols(roles);
+            if (newUser.adress !== null) {
+                const adress = JSON.parse(newUser.adress);
+                newUser.adress = adress;
+            }
 
             const token = await generateJwt(newUser.idUser);
             //? no enviar password
