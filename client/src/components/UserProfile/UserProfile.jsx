@@ -16,7 +16,6 @@ export default function UserProfile() {
   function handleClick(){
     Swal.fire({
       title: 'Do you want to change your password?',
-      showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: 'Change',
     }).then((result) => {
