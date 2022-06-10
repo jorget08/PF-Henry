@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUser, requestPassword } from '../../redux/actions';
+import { getUser, requestPassword, deleteProfile } from '../../redux/actions';
 import NavBar from '../NavBar/NavBar';
 import Swal from "sweetalert2";
 export default function UserProfile() {
@@ -12,6 +12,15 @@ export default function UserProfile() {
     dispatch(getUser())
     console.log(user)
   }, [])
+
+  const handleDelete = async (id) => {
+    let adress = await user.adress.filter(adress => adress.idAdress !== id)
+    if(adress.length === 0){
+      adress = null
+    }
+    console.log('soy adress',adress)
+    dispatch(deleteProfile(adress, user.idUser))
+  }
 
   function handleClick(){
     Swal.fire({
@@ -39,7 +48,7 @@ export default function UserProfile() {
             { user.adress && 
               user.adress.map(e=>{
                 return <div><li key={e}>{e.street} {e.number}, {e.city}, {e.state}, {e.country}</li>
-                      <button>Delete this adress</button></div>}
+                      <button onClick={()=>handleDelete(e.idAdress)}>Delete this adress</button></div>}
               )
             }
         </ul>

@@ -247,17 +247,6 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         users: payload,
       };
-
-    case TOTAL_PRICE:
-      return {
-        ...state,
-        totalPrice: payload,
-      };
-    case CHECKOUT_BOOKS:
-      return {
-        ...state,
-        infoBooks: payload,
-      };
     case EDIT_PROFILE:
       return {
         ...state,

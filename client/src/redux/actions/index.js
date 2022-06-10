@@ -327,6 +327,28 @@ export function editProfile(payload, id) {
           },
         }
       );
+      console.log("edit", response.data);
+      return dispatch({ type: EDIT_PROFILE, payload: response.data.userUp });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+export function deleteProfile(payload, id) {
+  return async function (dispatch) {
+    try {
+      const adress = payload
+      //? cotent-type=application/json 
+      var response = await axios.delete(
+        `http://localhost:3001/auth/adress/${id}`,{
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Access-Control-Allow-Origin': '*'
+          },
+          data: { adress }
+        }
+      );
+
       return dispatch({ type: EDIT_PROFILE, payload: response.data.userUp });
     } catch (e) {
       console.log(e);

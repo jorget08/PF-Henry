@@ -88,7 +88,12 @@ const redirect = ()=>{
             return errors;
         }}
         onSubmit={(valores, {resetForm}) => {
+            //? si adress null, crear una nueva [adress]
+            //* [adress, ...adress]
+            //? adress [{}] filtrar
+
             const adress = {
+                idAdress: valores.number + valores.street,
                 country:valores.country,
                 state:valores.state,
                 city:valores.city,
