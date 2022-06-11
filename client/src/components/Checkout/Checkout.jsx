@@ -126,7 +126,7 @@ export default function Checkout() {
   return (
     <div className="checkout">
       <NavBar></NavBar>
-      <CheckoutDirection></CheckoutDirection>
+      
 
       {checkoutinfo?.map((e) => (
         <Itemscheckout
@@ -138,6 +138,7 @@ export default function Checkout() {
           cant={e.cant}
         />
       ))}
+      
       <h1>Order Total: ${preciototal} -- ETH : {val} </h1>
       <div className="paypal">
         <PayPalButton

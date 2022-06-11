@@ -25,10 +25,14 @@ export default function CheckoutDirection() {
         <ul>
             { user.adress && 
               user.adress.map(e=>{
-                return <div><h3>{e.street +' ' + e.number}</h3> 
+                return (
+                <Link to={"/home"}>
+                <div><h3>{e.street +' ' + e.number}</h3> 
                  <h4>{e.city}, {e.state}, {e.country}</h4>
-                </div>}
-              )
+                </div>
+                
+               </Link> )}
+                  )
             }
         </ul>
       }

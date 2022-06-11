@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import Item from "../Item/Item";
 import NavBar from "../NavBar/NavBar";
 import Modal from '../Modal/Modal';
@@ -16,7 +17,10 @@ import {
 import { Link } from "react-router-dom";
 import "./styles.css";
 import Footer from "../Footer/Footer";
+import { IoIosArrowDown } from "react-icons/io";
+
 export default function Cart() {
+ 
   const dispatch = useDispatch();
   const bookCarts = useSelector((state) => state.cart);
   let localstorage=JSON.parse(localStorage.getItem("carrito"))
@@ -25,6 +29,7 @@ export default function Cart() {
   const [add, setAdd] = useState(false);
   const token = localStorage.getItem("token")
   const [isOpenModal, openModal, closeModal] = useModals(false)
+  var user = useSelector((state) => state.user);
  console.log("soy local storage",localstorage)
   
   function newDel() {
@@ -117,8 +122,25 @@ export default function Cart() {
                   newDel={newDel}
                 />
               ))}
+     
+
               <div className="subTotal">
-                <h3>
+              {
+        <ul>
+            { user.adress && 
+              user.adress.map(e=>{
+                return (
+                <Link to={"/home"}>
+                <div><h3>Send to: {e.street +' ' + e.number},{e.city}, {e.state}, {e.country }<IoIosArrowDown/></h3> 
+                 
+                </div>
+                
+               </Link> )}
+                  )
+            }
+        </ul>
+      }
+                <h3 >
                   subTotal <span>{`(${handleSubItems()} items)`}</span>
                 </h3>
                 <p>${handleAddItems()}, 00</p>
