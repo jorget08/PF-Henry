@@ -1,7 +1,7 @@
 export const COLUMNS = [
     {
         Header: "Title",
-        accessor: "email",
+        accessor: "payments[0].title",
     },
     {
         Header: "Author",
