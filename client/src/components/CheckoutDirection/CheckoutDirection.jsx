@@ -19,7 +19,7 @@ export default function CheckoutDirection() {
 <>
 
 
-<h2>Choose an address to send your order! :) <br></br>or add a new one!
+{/* <h2>Choose an address to send your order! :) <br></br>or add a new one!
 </h2>
     {
         <ul>
@@ -35,7 +35,7 @@ export default function CheckoutDirection() {
                   )
             }
         </ul>
-      }
+      } */}
 
 <Formik
         initialValues={{
@@ -48,15 +48,15 @@ export default function CheckoutDirection() {
         validate={(valores)=>{
             let errors = {};
             if (!valores.country) {
-                errors.name = "Country required"}
+                errors.country = "Country required"}
             if (!valores.state) {
-                 errors.name = "State required"}
+                 errors.state = "State required"}
             if (!valores.city) {
-                errors.name = "City required"}
+                errors.city = "City required"}
             if (!valores.street) {
-                errors.name = "Street required"}
+                errors.street = "Street required"}
             if (!valores.number) {
-                errors.name = "Number required"}
+                errors.number = "Number required"}
             return errors;
         }}
         onSubmit={(valores, {resetForm}) => {
@@ -82,7 +82,6 @@ export default function CheckoutDirection() {
         }}>
         {({touched, errors}) => (
         <Form classname="Adress">
-        <h1>Add an adress</h1>
         <div>
             <label>Country: </label>
             <Field type="text" name="country" placeholder="Country"/>
