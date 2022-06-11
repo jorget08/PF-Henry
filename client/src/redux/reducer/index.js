@@ -41,7 +41,8 @@ import {
   CRYPTO,
   REPORT_REVIEW,
   GET_SALES,
-  REPLY_SUPPORT
+  GET_REVIEWS,
+  REPLY_SUPPORT,
 } from "../actions/types";
 
 const initialState = {
@@ -65,7 +66,8 @@ const initialState = {
   ShoppingHistory:[],
   page: 1,
   crypto: 0,
-  sales: []
+  sales: [],
+  reviews: []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -328,10 +330,17 @@ export default function rootReducer(state = initialState, action) {
         sales:payload
       }
 
+    case GET_REVIEWS:
+      return{
+        ...state,
+        reviews:payload
+      }
+
     case REPLY_SUPPORT:
       return{
         ...state
       }
+
 
     default:
     return state;
