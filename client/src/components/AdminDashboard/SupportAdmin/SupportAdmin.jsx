@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useTable, useSortBy, useGlobalFilter, useFilters } from 'react-table'
 import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSupport} from '../../../redux/actions'
+import { getSupport, replySupport} from '../../../redux/actions'
 import { COLUMNS } from './Columns'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from './SearchBar'
@@ -15,7 +15,9 @@ export default function SupportAdmin() {
   const dispatch = useDispatch()
   const supportData = useSelector((state) => state.support)
   const [isOpenModal, openModal, closeModal] = useModals(false);
-  const [sup, setSup] = useState("hola")
+  const [sup, setSup] = useState("")
+
+  const [respon, setResponse] = useState("")
 
   useEffect(() => {
     dispatch(getSupport())    
@@ -24,14 +26,27 @@ export default function SupportAdmin() {
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => supportData, [supportData])
 
-  var idSup = ""
-
   const handleClick = (e, data) => {
     e.preventDefault();
-    var idSup = data;
-    console.log("Soy el sup", sup)
-    console.log("Soy el idSup", idSup)
+    const idSup = data;
+    setSup(idSup)
+    console.log(sup)
     openModal()
+  }
+  
+  const handleChangeInput = (e) => {
+    setResponse(e.target.value)
+    console.log(respon)
+  }
+
+  const submitReply = (e) => {
+    e.preventDefault();
+    dispatch(replySupport({
+      idSupport: sup, 
+      response: respon
+    }))
+    alert("aca toy")
+    closeModal()
   }
 
   const tableHooks = (hooks) => {
@@ -41,7 +56,7 @@ export default function SupportAdmin() {
           id:"Actions",
           Header:"Actions",
           Cell: ({ row }) => ( 
-            <button onClick={(e) => handleClick(e, row.values.idSupport)} onChange={setSup(row.values.idSupport)}>
+            <button onClick={(e) => handleClick(e, row.values.idSupport)}>
               Reply
             </button>
           )
@@ -50,12 +65,6 @@ export default function SupportAdmin() {
     )
   }
 
-  const submitReply = (e) => {
-    e.preventDefault();
-    console.log(e)
-    alert("aca toy")
-    closeModal()
-  }
 
   const {
     getTableProps,
@@ -80,7 +89,7 @@ export default function SupportAdmin() {
     <Modal isOpen={isOpenModal} closeModal={closeModal}>
         <div className="reply">
           <label>Put the reply here!</label>
-          <textarea type="text"></textarea>
+          <input type="text" value={respon} onChange={e => handleChangeInput(e)}></input>
           <button onClick={(e) => submitReply(e)}>Send reply!</button>
         </div>
     </Modal>

@@ -588,13 +588,13 @@ export function replySupport(payload) {
       var response = await axios.put(
         `http://localhost:3001/support`,
         payload,
-        {
+        /* {
           headers: {
             Authorization: JSON.parse(localStorage.getItem("token")),
           },
-        }
+        } */
       );
-      console.log(response.data)
+      console.log("estoy en el reply")
       return dispatch({ type: REPLY_SUPPORT, payload: response.data});
     } catch (e) {
       console.log(e);

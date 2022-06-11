@@ -40,7 +40,8 @@ import {
   CONFIRMATION_MAIL,
   CRYPTO,
   REPORT_REVIEW,
-  GET_SALES
+  GET_SALES,
+  REPLY_SUPPORT
 } from "../actions/types";
 
 const initialState = {
@@ -326,6 +327,12 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         sales:payload
       }
+
+    case REPLY_SUPPORT:
+      return{
+        ...state
+      }
+
     default:
     return state;
 
