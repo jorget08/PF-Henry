@@ -13,15 +13,14 @@
 
 .modal.is-open{
     display: flex;
+    width: 50rem;
 }
 
 .modal-container{
     position: relative;
-    background-color: #fff;
-    height: 500px;
-    overflow-y: auto;
+    background-color: #fff;   
     display: flex;
-    width: 100px;
+    width:10rem;
     align-items: center;
     justify-content: center;
     border-radius: 30px;

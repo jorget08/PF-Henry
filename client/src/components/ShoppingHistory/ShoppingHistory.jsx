@@ -10,11 +10,11 @@ import SearchBar from './SearchBar'
 export default function ShoppingHistory() {
 
   const user = useSelector((state) => state.user);
-  const x = useSelector((state) => state.ShoppingHistory);
+  const shoph = useSelector((state) => state.ShoppingHistory);
   let id = user.idUser;
   let a=[]
   let finalpay=[]
-  let pay = x.payments?.map((e) => e.paymentbooks);
+  let pay = shoph.payments?.map((e) => e.paymentbooks);
   pay?.forEach(element => {
     a.push(element)
   })
@@ -24,7 +24,7 @@ export default function ShoppingHistory() {
     element.forEach((e,i)=>finalpay.push(e))  }) 
 
 
-  console.log("SOYYYY?",x)
+  console.log("SOYYYY?",finalpay)
 
   finalpay.map(e=>e.createdAt=e.createdAt.split("T")[0])
 
@@ -36,7 +36,7 @@ export default function ShoppingHistory() {
   }, [dispatch]);
 
   const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => x, [])
+  const data = useMemo(() => shoph, [])
 
   const {
     getTableProps,
