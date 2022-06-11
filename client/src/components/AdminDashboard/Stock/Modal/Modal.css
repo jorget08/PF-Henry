@@ -30,7 +30,6 @@
 }
 .modal.is-open{
     display: flex;
-    width: 50rem;
 }
 
 .modal-container{
