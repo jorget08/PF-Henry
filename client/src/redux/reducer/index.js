@@ -40,7 +40,8 @@ import {
   CONFIRMATION_MAIL,
   CRYPTO,
   REPORT_REVIEW,
-  GET_SALES
+  GET_SALES,
+  GET_REVIEWS
 } from "../actions/types";
 
 const initialState = {
@@ -64,7 +65,8 @@ const initialState = {
   ShoppingHistory:[],
   page: 1,
   crypto: 0,
-  sales: []
+  sales: [],
+  reviews: []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -336,6 +338,11 @@ export default function rootReducer(state = initialState, action) {
       return{
         ...state,
         sales:payload
+      }
+    case GET_REVIEWS:
+      return{
+        ...state,
+        reviews:payload
       }
     default:
     return state;

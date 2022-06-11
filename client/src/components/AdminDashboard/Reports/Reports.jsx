@@ -1,31 +1,28 @@
-import NavBar from "../NavBar/NavBar";
-import { getShoppingHistory, getUsers } from "../../redux/actions";
 import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import { useDispatch, useSelector } from 'react-redux'
-import { COLUMNS } from './Columns'
+import { getReviews } from '../../../redux/actions'
+import { GROUPED_COLUMNS } from './Columns.jsx'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from './SearchBar'
 
-export default function ShoppingHistory() {
 
-  const user = useSelector((state) => state.user);
-  const shoph = useSelector((state) => state.ShoppingHistory);
-  let id = user.idUser;
+export default function Reports() {
+  
 
-
-  console.log("SOYYYY?",shoph)
-
-
-
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch()
+  const allReviews = useSelector(state => state.sales)
 
   useEffect(() => {
-    dispatch(getShoppingHistory(id));
-  }, [dispatch]);
+    dispatch(getReviews())    
+  }, [dispatch])
+  setTimeout(() => {
+    console.log('SALE SALE SALE', allReviews);
+  }, "3000")
 
-  const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => shoph, [])
+  
+  const columns = useMemo(() => GROUPED_COLUMNS, [])
+  const data = useMemo(() => allReviews, [])
 
   const {
     getTableProps,
@@ -52,18 +49,10 @@ export default function ShoppingHistory() {
   usePagination,
   )
 
-
   const { globalFilter } = state
   const { pageIndex, pageSize } = state
   return (
-    
-    
     <>
-    <NavBar/>
-    <div>
-      <h1>Shopping History</h1>
-      <br></br>
-    </div>
 
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     <table {...getTableProps()} className={'Container'}>
@@ -129,5 +118,4 @@ export default function ShoppingHistory() {
     </div>
     </>
   )
-};
-
+}

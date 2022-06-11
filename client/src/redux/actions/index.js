@@ -32,7 +32,7 @@ import {
   GET_COMMENTS,
   GET_SUPPORT,
   GET_FAVS,
-  CHANGE_FAVS,DELETE_FAVS, POST_FAVS,
+  CHANGE_FAVS, DELETE_FAVS, POST_FAVS,
   GET_SHOPPING_HISTORY,
   SET_PAGE,
   DELETE_REVIEW,
@@ -42,7 +42,8 @@ import {
   REQUEST_NEW_PASSWORD,
   CHANGE_PASSWORD1,
   CRYPTO,
-  GET_SALES
+  GET_SALES,
+  GET_REVIEWS,
 } from "./types";
 
 import axios from "axios";
@@ -240,15 +241,17 @@ export function logUser(payload) {
   return async function (dispatch) {
     try {
       var response = await axios.post(`http://localhost:3001/auth/`, payload);
-      console.log("log",response.data)
-      if(response.data.user.confirmation===false){
-        return 
+      console.log("log", response.data)
+      if (response.data.user.confirmation === false) {
+        return
       }
-      else{let TKN = response.data.token;
-      localStorage.setItem("token", JSON.stringify(TKN));
-      return dispatch({ type: LOG_USER, payload: response.data.user });}
+      else {
+        let TKN = response.data.token;
+        localStorage.setItem("token", JSON.stringify(TKN));
+        return dispatch({ type: LOG_USER, payload: response.data.user });
+      }
     } catch (e) {
-      console.log("log",e.message)
+      console.log("log", e.message)
       console.log(e);
     }
   };
@@ -320,7 +323,7 @@ export function editProfile(payload, id) {
   return async function (dispatch) {
     try {
       var response = await axios.put(
-        `http://localhost:3001/user/${id}`, {  adress: payload },
+        `http://localhost:3001/user/${id}`, { adress: payload },
         {
           headers: {
             Authorization: JSON.parse(localStorage.getItem("token")),
@@ -377,24 +380,24 @@ export function postSupport(payload) {
   };
 }
 
-export function addComment(obj){
+export function addComment(obj) {
   return async function (dispatch) {
     try {
-     
-      var response = await axios.post(`http://localhost:3001/reviews`,obj);
-      return dispatch({ type: ADD_COMMENT, payload:response.data });
+
+      var response = await axios.post(`http://localhost:3001/reviews`, obj);
+      return dispatch({ type: ADD_COMMENT, payload: response.data });
     } catch (e) {
       console.log(e);
     }
   };
 }
 
-export function showComments(id){
+export function showComments(id) {
   return async function (dispatch) {
     try {
       let response = await axios.get(`http://localhost:3001/reviews/allReviews?book=${id}`);
-      console.log("comentarios",response)
-      return dispatch ({type:GET_COMMENTS, payload: response.data})
+      console.log("comentarios", response)
+      return dispatch({ type: GET_COMMENTS, payload: response.data })
     } catch (e) {
       console.log(e);
     }
@@ -427,7 +430,8 @@ export function getFavs(user) {
     } catch (error) {
       console.log(error);
     }
-  }}
+  }
+}
 
 export function getShoppingHistory(id) {
   return async function (dispatch) {
@@ -442,7 +446,7 @@ export function getShoppingHistory(id) {
 }
 
 
-export function deleteFavs(user,book) {
+export function deleteFavs(user, book) {
   return async function (dispatch) {
     try {
       const response = await axios.delete(`http://localhost:3001/favourites?user=${user}&favs=${book}`);
@@ -455,13 +459,13 @@ export function deleteFavs(user,book) {
 export function postFavs(obj) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`http://localhost:3001/favourites`,obj);
+      const response = await axios.post(`http://localhost:3001/favourites`, obj);
       return dispatch({ type: POST_FAVS, payload: response.data });
     } catch (error) {
       console.log(error);
     }
-    }
   }
+}
 
 
 export function setPage(num) {
@@ -481,69 +485,69 @@ export function changeFavs(payload) {
 }
 
 
-export function reportReview(id,idBook, obj) {
+export function reportReview(id, idBook, obj) {
   return async function (dispatch) {
     try {
-      const response = await axios.put(`http://localhost:3001/reviews/report/${id}?book=${idBook}`,obj);
+      const response = await axios.put(`http://localhost:3001/reviews/report/${id}?book=${idBook}`, obj);
       return dispatch({ type: REPORT_REVIEW, payload: response.data });
-       } catch (error) {
+    } catch (error) {
       console.log(error);
     }
-    }
   }
+}
 
-export function confirmationMail(id){
+export function confirmationMail(id) {
   return async function (dispatch) {
     try {
       const response = await axios.put(`http://localhost:3001/auth/confirmation/${id}`);
-      console.log("response",response)
+      console.log("response", response)
       return dispatch({ type: CONFIRMATION_MAIL });
 
     } catch (error) {
       console.log(error);
     }
+  }
+}
+
+
+
+export function editReview(id, obj) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(`http://localhost:3001/reviews/report/${id}`, obj);
+      return dispatch({ type: REPORT_REVIEW, payload: response.data });
+    } catch (error) {
+      console.log(error);
     }
   }
-
-  
-
-  export function editReview(id, obj) {
-    return async function (dispatch) {
-      try {
-        const response = await axios.put(`http://localhost:3001/reviews/report/${id}`,obj);
-        return dispatch({ type: REPORT_REVIEW, payload: response.data });
-      } catch (error) {
-        console.log(error);
-      }
-      }
-    }
- 
+}
 
 
-export function requestPassword(email){
+
+export function requestPassword(email) {
   return async function (dispatch) {
     try {
       console.log(email)
-      const response = await axios.post(`http://localhost:3001/email/password`, {email});
-      console.log("response",response)
+      const response = await axios.post(`http://localhost:3001/email/password`, { email });
+      console.log("response", response)
       return dispatch({ type: REQUEST_NEW_PASSWORD });
     } catch (error) {
       console.log(error);
     }
-    }
+  }
 }
 
 
-export function changePassword1(id, password){
+export function changePassword1(id, password) {
   return async function (dispatch) {
     try {
-      const response = await axios.put(`http://localhost:3001/user/${id}`, {password});
-      console.log("response",response)
+      const response = await axios.put(`http://localhost:3001/user/${id}`, { password });
+      console.log("response", response)
       return dispatch({ type: CHANGE_PASSWORD1 });
     } catch (error) {
       console.log(error);
     }
-    }
+  }
 }
 
 export function exchangeCrypto() {
@@ -559,14 +563,25 @@ export function exchangeCrypto() {
 }
 
 export function getSales() {
-  return async function (dispatch){
+  return async function (dispatch) {
     try {
       const res = await axios.get(`http://localhost:3001/paypal/allpayments`)
-      console.log("COMPRAS", res)
-      return dispatch ({type: GET_SALES, payload: res.data})
+      console.log("ACT COMPRAS", res)
+      return dispatch({ type: GET_SALES, payload: res.data })
     } catch (err) {
       console.log(err)
     }
   }
 }
 
+export function getReviews() {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get(`http://localhost3001/reviews/allReviews/admin`)
+      console.log("ACT REVIEWS", res)
+      return dispatch({ type: GET_REVIEWS, payload: res.data })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}

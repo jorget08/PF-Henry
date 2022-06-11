@@ -1,23 +1,34 @@
 export const COLUMNS = [
     {
         Header: "Title",
-        accessor: "payments[0].title",
+        accessor: (row) => {
+            console.log("TUCARA", row.paymentbooks?.map(e => e.title))
+            return row.paymentbooks?.map(e => e.title).join(',  ')                     
+        },
     },
     {
         Header: "Author",
-        accessor: "name",
+        accessor: (row) => {
+            return row.paymentbooks?.map(e => e.author).join(',  ') 
+        },
     },
-    {
-        Header: "Price",
-        accessor: "lastName",
+    {        
+        Header: 'Import',
+        accessor: (row) => {
+            return "$" + row.totalPrice + ".00";       
+        },
     },
     {
         Header: "Quantity",
-        accessor: "password",
+        accessor: (row) => {
+            return row.payments?.paymentsbooks?.length
         },
+    },
     {
         Header: "Date",
-        accessor: "createdAt",
+        accessor: (row) => {
+            return "createdAt"
+        }
     },
 ]
 
