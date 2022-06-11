@@ -11,10 +11,11 @@ import Checkout from "./components/Checkout/Checkout";
 import UserProfile from "./components/UserProfile/UserProfile";
 import Sidebar from "./components/AdminDashboard/Sidebar";
 import Stock from "./components/AdminDashboard/Stock/Stock";
+import Sales from "./components/AdminDashboard/Sales/Sales"
 import SupportAdmin from "./components/AdminDashboard/SupportAdmin/SupportAdmin";
 import { UserFavs } from "./components/User/UserFavs/UserFavs";
 import Support from "./components/Support/Support";
-import Users from "./components/AdminDashboard/Users";
+import Users from "./components/AdminDashboard/Users/Users";
 import EditProfile from "./components/EditProfile/EditProfile";
 import Container from "./components/AdminDashboard/Container";
 import { AuthContext } from "./auth/authContext";
@@ -23,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ShoppingHistory from './components/ShoppingHistory/ShoppingHistory'
 import UserConfirmation from "./components/UserConfirmation/UserConfirmation";
 import NewPassword from "./components/NewPassword/NewPassword";
+import CheckoutDirection from "./components/CheckoutDirection/CheckoutDirection";
 
 
 function App() {
@@ -58,6 +60,7 @@ function App() {
         <Route exact path={"/admin/newbook"} component={FormCreate} />
         <Route exact path={"/admin/stock"} component={Stock} />
         <Route exact path={"/admin/users"} component={Users} />
+        <Route exact path={"/admin/sales"} component={Sales} />
         <Route exact path={"/admin/supportAdmin"} component={SupportAdmin} />
         <Route path={"/checkout"} component={Checkout} />
         <Route path={"/support"} component={Support} />
@@ -66,6 +69,7 @@ function App() {
         <Route path={`/ShoppingHistory/${id}`} component={ShoppingHistory} />
         <Route path={`/confirmation/:id`} component={UserConfirmation} />
         <Route path={`/password/:id`} component={NewPassword} />
+       
 
       </>
 

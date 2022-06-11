@@ -1,0 +1,54 @@
+.modal{
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0,0,0,0.75);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    
+}
+.formModal {
+    width: 50% !important;
+    max-height: 90% !important;
+    height: 80% !important;
+    padding: 1rem;
+}  
+.formModalContainer {
+    margin-bottom: 20px;
+    background-color: unset;
+    padding: 0 !important;
+    max-width: 600px;
+    margin: auto;
+}
+.formInfoContainer {
+    padding: 0 1.5rem;
+    margin: auto;
+}
+.modal.is-open{
+    display: flex;
+    width: 50rem;
+}
+
+.modal-container{
+    position: relative;
+    background-color: #fff;   
+    display: flex;
+    width:10rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    background-color: rgba(255, 253, 253, 0.867);
+    box-shadow: -2px 0px 53px 4px rgba(0,0,0,0.75);
+    -webkit-box-shadow: -2px 0px 53px 4px rgba(0,0,0,0.75);
+    -moz-box-shadow: -2px 0px 53px 4px rgba(0,0,0,0.75);
+}
+
+.modal-close{
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}

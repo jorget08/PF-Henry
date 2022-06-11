@@ -34,6 +34,10 @@ const login = async (req, res) => {
         //? no enviar password 
         user.password = undefined;
         //? destructurar todo user menos rol
+        if (user.adress !== null) {
+            const adress = JSON.parse(user.adress);
+            user.adress = adress;
+        }
         console.log(user.role);
         res.json({
             ok: true,
@@ -70,6 +74,10 @@ const renewToken = async (req, res) => {
         const token = await generateJwt(user.idUser);
         //? no enviar password
         user.password = undefined;
+        if (user.adress !== null) {
+            const adress = JSON.parse(user.adress);
+            user.adress = adress;
+        }
         res.json({
             ok: true,
             user,
@@ -92,10 +100,15 @@ const googleSignIn = async (req, res) => {
         const user = await User.findOne({
             where: { email }
         });
+
         if (user) {
             const token = await generateJwt(user.idUser);
             //? no enviar password
             user.password = undefined;
+            if (user.adress !== null) {
+                const adress = JSON.parse(user.adress);
+                user.adress = adress;
+            }
             res.json({
                 ok: true,
                 user,
@@ -112,6 +125,10 @@ const googleSignIn = async (req, res) => {
                 favoritos: []
             });
             await newUser.addRols(roles);
+            if (newUser.adress !== null) {
+                const adress = JSON.parse(newUser.adress);
+                newUser.adress = adress;
+            }
 
             const token = await generateJwt(newUser.idUser);
             //? no enviar password
@@ -171,4 +188,62 @@ const changePass = async (req, res) => {
     }
 }
 
-module.exports = { login, renewToken, googleSignIn, confirmation, changePass };
+const deleteAdress = async (req, res) => {
+    const { id } = req.params;
+    try {
+        console.log('body', req.body);
+        console.log('aquii', req.body.adress);
+        const user = await User.findOne({ where: { idUser: id } });
+        if (!user) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'El usuario no existe'
+            });
+        }
+        
+        //? actualizar adress
+        if (Array.isArray(req.body.adress)) {
+            await User.update({adress: JSON.stringify(req.body.adress)}, {
+                where: { idUser: id }
+            });    
+        }
+        else if(req.body.adress === null){
+            await User.update({adress: null}, {
+                where: { idUser: id }
+            });
+        }
+        else{
+            await User.update({adress: JSON.stringify([req.body.adress])}, {
+                where: { idUser: id }
+            });
+        }
+
+
+        const userUp = await User.findOne({
+            where: { idUser: id },
+            attributes: { exclude: ['createdAt', 'updatedAt'] },
+            include: {
+                model: Rol,
+                attributes: ['name']
+            },
+            raw:true, // <----- HERE
+            nest:true
+        });
+        //? no mandar array
+        const adress = JSON.parse(userUp.adress);
+        userUp.adress = adress;
+        //? respuesta
+        res.json({
+            ok: true,
+            userUp,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al eliminar dirección'
+        });
+    }
+}
+
+module.exports = { login, renewToken, googleSignIn, confirmation, changePass, deleteAdress };

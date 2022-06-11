@@ -7,8 +7,10 @@ h2 {
 }
 .formContainer {
   display: block;
-  background-color: #dbdbdb;
+  background-color: white;
   padding: 2rem 0;
+  max-width: min-content;
+  margin: auto;
 }
 .formInfo {
   border: 1px solid #c4c4c4;

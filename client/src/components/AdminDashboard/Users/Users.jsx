@@ -1,42 +1,27 @@
-import NavBar from "../NavBar/NavBar";
-import { getShoppingHistory, getUsers } from "../../redux/actions";
 import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import { useDispatch, useSelector } from 'react-redux'
-import { COLUMNS } from "./Columns";
+import { COLUMNS } from './Columns.jsx'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from './SearchBar'
+import { getUsers } from '../../../redux/actions';
 
-export default function ShoppingHistory() {
 
-  const user = useSelector((state) => state.user);
-  const shoph = useSelector((state) => state.ShoppingHistory);
-  let id = user.idUser;
-  let a=[]
-  let finalpay=[]
-  let pay = shoph.payments?.map((e) => e.paymentbooks);
-  pay?.forEach(element => {
-    a.push(element)
-  })
- 
+export default function Users () {
   
-  a.forEach((element,i) => {
-    element.forEach((e,i)=>finalpay.push(e))  }) 
-
-
-  console.log("SOYYYY?",finalpay)
-
-  finalpay.map(e=>e.createdAt=e.createdAt.split("T")[0])
-
-
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch()
+  const allUsers = useSelector(state => state.users)
 
   useEffect(() => {
-    dispatch(getShoppingHistory(id));
-  }, [dispatch]);
+    dispatch(getUsers())    
+  }, [dispatch])
+  setTimeout(() => {
+    console.log('SALE SALE SALE', allUsers);
+  }, "3000")
 
+  
   const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => shoph, [])
+  const data = useMemo(() => allUsers, [])
 
   const {
     getTableProps,
@@ -63,18 +48,10 @@ export default function ShoppingHistory() {
   usePagination,
   )
 
-
-    const { globalFilter } = state
+  const { globalFilter } = state
   const { pageIndex, pageSize } = state
   return (
-    
-    
     <>
-    <NavBar/>
-    <div>
-      <h1>Shopping History</h1>
-      <br></br>
-    </div>
 
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     <table {...getTableProps()} className={'Container'}>

@@ -88,7 +88,7 @@ const getUsers = async (req, res) => {
         //? contar usuarios
         const count = await User.count();
         //? obtener usuarios
-        const users = await User.findAll({
+        const user = await User.findAll({
             attributes: { exclude: ['password'] },
             include: {
                 model: Rol,
@@ -99,7 +99,13 @@ const getUsers = async (req, res) => {
             raw:true, // <----- HERE
             nest:true
         });
-        
+        //? 
+        const users = user.map(user=>{
+            if(user.adress !== null){
+                user.adress = JSON.parse(user.adress);
+            }
+            return user;
+        })
         res.json({
             ok: true,
             users,
@@ -114,6 +120,8 @@ const getUsers = async (req, res) => {
     }
 }
 const updateUser = async (req, res) => {
+    console.log('aqui',req.body);
+    console.log('aqui 2',req.body.adress);
     const { id } = req.params;
     try {
         const userExist = await User.findOne({ where: { idUser: id } });
@@ -133,6 +141,24 @@ const updateUser = async (req, res) => {
             req.body.password = passEncript;
         }
 
+        if (req.body.adress) {
+            let adress = userExist.adress;
+            adress === null ? adress = [] : adress;
+            //? si adress es un array
+            if (Array.isArray(adress)) {
+                console.log('es array', adress.length);
+                adress.push(req.body.adress);
+                req.body.adress = JSON.stringify(adress);
+                console.log(req.body.adress);
+            }
+            else{
+                //? si adress es un string parsearlo
+                let adress = JSON.parse(userExist.adress);
+                let arrayObject = [...adress, req.body.adress];
+                req.body.adress = JSON.stringify(arrayObject);
+            }   
+        }
+
         await User.update(req.body, {
             where: { idUser: id }
         });
@@ -145,14 +171,14 @@ const updateUser = async (req, res) => {
             },
             raw:true, // <----- HERE
             nest:true
-            
         });
         //? no mandar array
-        
+        const adress = JSON.parse(userUp.adress);
+        userUp.adress = adress;
         //? respuesta
         res.json({
             ok: true,
-            userUp
+            userUp,
         });
     } catch (error) {
         console.log(error);

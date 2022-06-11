@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUser, requestPassword } from '../../redux/actions';
+import { getUser, requestPassword, deleteProfile } from '../../redux/actions';
 import NavBar from '../NavBar/NavBar';
 import Swal from "sweetalert2";
 export default function UserProfile() {
@@ -13,10 +13,18 @@ export default function UserProfile() {
     console.log(user)
   }, [])
 
+  const handleDelete = async (id) => {
+    let adress = await user.adress.filter(adress => adress.idAdress !== id)
+    if(adress.length === 0){
+      adress = null
+    }
+    console.log('soy adress',adress)
+    dispatch(deleteProfile(adress, user.idUser))
+  }
+
   function handleClick(){
     Swal.fire({
       title: 'Do you want to change your password?',
-      showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: 'Change',
     }).then((result) => {
@@ -34,10 +42,17 @@ export default function UserProfile() {
       <h1>{user.name} {user.lastName}</h1>
       <img src={user.imgProfile} alt="" />
       <h2>Mail: {user.email}</h2>
-      {/* <ul>
-            {user.favoritos.map(e=>{
-                return <li key={e}>{e}</li>})}
-        </ul> */}
+      <h3>Adresses: </h3>
+      {
+        <ul>
+            { user.adress && 
+              user.adress.map(e=>{
+                return <div><li key={e}>{e.street} {e.number}, {e.city}, {e.state}, {e.country}</li>
+                      <button onClick={()=>handleDelete(e.idAdress)}>Delete this adress</button></div>}
+              )
+            }
+        </ul>
+      }
       <Link to='/editProfile'>
         <button>Edit profile</button>
       </Link>

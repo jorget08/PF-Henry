@@ -40,8 +40,13 @@ import {
   CONFIRMATION_MAIL,
   CRYPTO,
   REPORT_REVIEW,
+
   UPDATE_REVIEW,
-  DELETE_REVIEW
+  DELETE_REVIEW,
+
+  GET_SALES,
+  REPLY_SUPPORT
+
 } from "../actions/types";
 
 const initialState = {
@@ -64,7 +69,8 @@ const initialState = {
   support: [],
   ShoppingHistory:[],
   page: 1,
-  crypto: 0
+  crypto: 0,
+  sales: []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -219,7 +225,6 @@ export default function rootReducer(state = initialState, action) {
       };
     case LOG_WITH_GOOGLE:
       localStorage.setItem("token", JSON.stringify(payload.token));
-      console.log(payload);
       return {
         ...state,
         user: { ...payload.user },
@@ -243,22 +248,10 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         infoBooks: payload,
       };
-    case GET_USERS:
-      console.log("SOY EL PAYLOAD CARAJO", payload);
+    case GET_USERS:      
       return {
         ...state,
         users: payload,
-      };
-
-    case TOTAL_PRICE:
-      return {
-        ...state,
-        totalPrice: payload,
-      };
-    case CHECKOUT_BOOKS:
-      return {
-        ...state,
-        infoBooks: payload,
       };
     case EDIT_PROFILE:
       return {
@@ -305,7 +298,7 @@ export default function rootReducer(state = initialState, action) {
     case GET_SUPPORT:
       return{
         ...state,
-        support: [...payload]
+        support: payload
       };
       case GET_FAVS:
       return{
@@ -341,6 +334,16 @@ export default function rootReducer(state = initialState, action) {
       }
 
     case CONFIRMATION_MAIL:
+      return{
+        ...state
+      }
+    case GET_SALES:      
+      return{
+        ...state,
+        sales:payload
+      }
+
+    case REPLY_SUPPORT:
       return{
         ...state
       }
