@@ -40,6 +40,8 @@ import {
   CONFIRMATION_MAIL,
   CRYPTO,
   REPORT_REVIEW,
+  UPDATE_REVIEW,
+  DELETE_REVIEW
 } from "../actions/types";
 
 const initialState = {
@@ -275,6 +277,16 @@ export default function rootReducer(state = initialState, action) {
         comments:payload
       }
       case REPORT_REVIEW:
+      return{
+        ...state,
+        comments:payload
+      }
+      case UPDATE_REVIEW:
+      return{
+        ...state,
+        comments:payload
+      }
+      case DELETE_REVIEW:
       return{
         ...state,
         comments:payload
