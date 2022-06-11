@@ -116,9 +116,9 @@ export default function EditBook() {
                 }}
             >
                 {({ errors, touched }) => (
-                    <div className='formContainer'>
+                    <div className='formContainer formModalContainer'>
                         <Form>
-                            <div className='formInfo'>
+                            <div className='formInfo formInfoContainer'>
                                 <h2 style={{ textAlign: "center", fontWeight: "800" }}>Modify the book</h2>
 
                                 <div className='field'>
