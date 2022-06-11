@@ -14,10 +14,11 @@ import {
   infoBooks,
   exchangeCrypto
 } from "../../redux/actions";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./styles.css";
 import Footer from "../Footer/Footer";
 import { IoIosArrowDown } from "react-icons/io";
+import Swal from "sweetalert2";
 
 export default function Cart() {
  
@@ -30,7 +31,10 @@ export default function Cart() {
   const token = localStorage.getItem("token")
   const [isOpenModal, openModal, closeModal] = useModals(false)
   var user = useSelector((state) => state.user);
- console.log("soy local storage",localstorage)
+  console.log("soy local storage",localstorage)
+  const history = useHistory()
+
+  const [adressSelected, setAdressSelected] = useState("Choose an adress")
   
   function newDel() {
     setItems(localstorage);
@@ -93,7 +97,22 @@ export default function Cart() {
     }, 0);
   }
 
+  function handleSelect(e) {
+    e.preventDefault();
+    console.log("adress", e.target.value)
+    setAdressSelected(e.target.value)
+  }
 
+  function handleCheckOut(e) {
+    if (adressSelected === "Choose an adress") {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'You didn´t select an adress',
+      })
+    }
+    else history.push("/checkout")
+  }
 
   useEffect(() => {
     dispatch(getCart());
@@ -127,19 +146,34 @@ export default function Cart() {
               <div className="subTotal">
               {
         <ul>
-            { user.adress && 
-              user.adress.map(e=>{
-                return (
-                <Link to={"/home"}>
-                <div><h3>Send to: {e.street +' ' + e.number},{e.city}, {e.state}, {e.country }<IoIosArrowDown/></h3> 
-                 
-                </div>
-                
-               </Link> )}
-                  )
-            }
+            
         </ul>
       }
+        {
+          (adressSelected==="Choose an adress") ? 
+          <div><h3 onClick={openModal} style={{color:"blue"}}>{adressSelected}<IoIosArrowDown/></h3></div> 
+          : <div><h3 onClick={openModal}>Send to:{adressSelected}<IoIosArrowDown/></h3></div>
+        }
+        <Modal isOpen={isOpenModal} closeModal={closeModal}>
+          {
+            <div>
+            <select onChange={(e) => handleSelect(e)}>
+            <option value="default" hidden>Select an adress</option>
+              { user.adress && 
+                user.adress.map(a=>{
+                  return (
+                  <option value={a.street +' '+ a.number+", "+ a.city}>{a.street +' '+ a.number},{a.city}, {a.state}, {a.country}</option>
+                )}
+                )
+              }
+            </select>
+            <button type="button" onClick={closeModal}>Ready!</button>
+            </div>
+          }
+        </Modal>
+
+
+
                 <h3 >
                   subTotal <span>{`(${handleSubItems()} items)`}</span>
                 </h3>
@@ -149,9 +183,9 @@ export default function Cart() {
                 <Link to="/home">
                   <p className="keep">Keep Shopping</p>
                 </Link>
-                {token?<Link to="/checkout">
-                  <p className="checkout">Continue to Checkout</p>
-                </Link>:
+                {(token)?
+                  <button className="checkout" onClick={(e) => handleCheckOut(e)}>Continue to Checkout</button>
+                  :
                 <div>
                 <p className="checkout"onClick={openModal}>Log in first before going to checkout</p>
                 <Modal isOpen={isOpenModal} closeModal={closeModal}>
