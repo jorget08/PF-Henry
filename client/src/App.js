@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ShoppingHistory from './components/ShoppingHistory/ShoppingHistory'
 import UserConfirmation from "./components/UserConfirmation/UserConfirmation";
 import NewPassword from "./components/NewPassword/NewPassword";
+import CheckoutDirection from "./components/CheckoutDirection/CheckoutDirection";
 
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
         <Route path={`/ShoppingHistory/${id}`} component={ShoppingHistory} />
         <Route path={`/confirmation/:id`} component={UserConfirmation} />
         <Route path={`/password/:id`} component={NewPassword} />
+       
 
       </>
 
