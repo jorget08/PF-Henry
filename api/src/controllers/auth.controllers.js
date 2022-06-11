@@ -188,4 +188,62 @@ const changePass = async (req, res) => {
     }
 }
 
-module.exports = { login, renewToken, googleSignIn, confirmation, changePass };
+const deleteAdress = async (req, res) => {
+    const { id } = req.params;
+    try {
+        console.log('body', req.body);
+        console.log('aquii', req.body.adress);
+        const user = await User.findOne({ where: { idUser: id } });
+        if (!user) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'El usuario no existe'
+            });
+        }
+        
+        //? actualizar adress
+        if (Array.isArray(req.body.adress)) {
+            await User.update({adress: JSON.stringify(req.body.adress)}, {
+                where: { idUser: id }
+            });    
+        }
+        else if(req.body.adress === null){
+            await User.update({adress: null}, {
+                where: { idUser: id }
+            });
+        }
+        else{
+            await User.update({adress: JSON.stringify([req.body.adress])}, {
+                where: { idUser: id }
+            });
+        }
+
+
+        const userUp = await User.findOne({
+            where: { idUser: id },
+            attributes: { exclude: ['createdAt', 'updatedAt'] },
+            include: {
+                model: Rol,
+                attributes: ['name']
+            },
+            raw:true, // <----- HERE
+            nest:true
+        });
+        //? no mandar array
+        const adress = JSON.parse(userUp.adress);
+        userUp.adress = adress;
+        //? respuesta
+        res.json({
+            ok: true,
+            userUp,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al eliminar dirección'
+        });
+    }
+}
+
+module.exports = { login, renewToken, googleSignIn, confirmation, changePass, deleteAdress };

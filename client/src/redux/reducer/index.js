@@ -41,7 +41,8 @@ import {
   CRYPTO,
   REPORT_REVIEW,
   GET_SALES,
-  GET_REVIEWS
+  GET_REVIEWS,
+  REPLY_SUPPORT,
 } from "../actions/types";
 
 const initialState = {
@@ -249,17 +250,6 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         users: payload,
       };
-
-    case TOTAL_PRICE:
-      return {
-        ...state,
-        totalPrice: payload,
-      };
-    case CHECKOUT_BOOKS:
-      return {
-        ...state,
-        infoBooks: payload,
-      };
     case EDIT_PROFILE:
       return {
         ...state,
@@ -295,7 +285,7 @@ export default function rootReducer(state = initialState, action) {
     case GET_SUPPORT:
       return{
         ...state,
-        support: [...payload]
+        support: payload
       };
       case GET_FAVS:
       return{
@@ -339,11 +329,19 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         sales:payload
       }
+
     case GET_REVIEWS:
       return{
         ...state,
         reviews:payload
       }
+
+    case REPLY_SUPPORT:
+      return{
+        ...state
+      }
+
+
     default:
     return state;
 

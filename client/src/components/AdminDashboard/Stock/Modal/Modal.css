@@ -9,8 +9,25 @@
     display: none;
     justify-content: center;
     align-items: center;
+    
 }
-
+.formModal {
+    width: 50% !important;
+    max-height: 90% !important;
+    height: 80% !important;
+    padding: 1rem;
+}  
+.formModalContainer {
+    margin-bottom: 20px;
+    background-color: unset;
+    padding: 0 !important;
+    max-width: 600px;
+    margin: auto;
+}
+.formInfoContainer {
+    padding: 0 1.5rem;
+    margin: auto;
+}
 .modal.is-open{
     display: flex;
     width: 50rem;

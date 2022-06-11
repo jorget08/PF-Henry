@@ -44,6 +44,7 @@ import {
   CRYPTO,
   GET_SALES,
   GET_REVIEWS,
+  REPLY_SUPPORT,
 } from "./types";
 
 import axios from "axios";
@@ -330,6 +331,28 @@ export function editProfile(payload, id) {
           },
         }
       );
+      console.log("edit", response.data);
+      return dispatch({ type: EDIT_PROFILE, payload: response.data.userUp });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+export function deleteProfile(payload, id) {
+  return async function (dispatch) {
+    try {
+      const adress = payload
+      //? cotent-type=application/json 
+      var response = await axios.delete(
+        `http://localhost:3001/auth/adress/${id}`,{
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Access-Control-Allow-Origin': '*'
+          },
+          data: { adress }
+        }
+      );
+
       return dispatch({ type: EDIT_PROFILE, payload: response.data.userUp });
     } catch (e) {
       console.log(e);
@@ -414,9 +437,10 @@ export function getSupport() {
       });
       localStorage.setItem("token", JSON.stringify(res.data.token));
       console.log(res.data)
-      return dispatch({ type: GET_SUPPORT, payload: res.data });
+      console.log("id admin", localStorage.getItem("token"))
+      return dispatch({ type: GET_SUPPORT, payload: res.data.supports});
     } catch (error) {
-      console.log(error);
+      console.log(error); 
     }
   };
 }
@@ -562,6 +586,26 @@ export function exchangeCrypto() {
   };
 }
 
+export function replySupport(payload) {
+  return async function (dispatch) {
+    try {
+      var response = await axios.put(
+        `http://localhost:3001/support`,
+        payload,
+        /* {
+          headers: {
+            Authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        } */
+      );
+      console.log("estoy en el reply")
+      return dispatch({ type: REPLY_SUPPORT, payload: response.data});
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+
 export function getSales() {
   return async function (dispatch) {
     try {
@@ -585,3 +629,4 @@ export function getReviews() {
     }
   }
 }
+

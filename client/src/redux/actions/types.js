@@ -46,6 +46,8 @@ export const CHANGE_PASSWORD1 = "CHANGE_PASSWORD1";
 export const CRYPTO = "CRYPTO";
 export const GET_SALES = "GET_SALES";
 export const GET_REVIEWS = "GET_REVIEWS";
+export const REPLY_SUPPORT= "REPLY_SUPPORT";
+
 
 
 

@@ -1,72 +1,43 @@
-import React, {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import { editProfile } from '../../redux/actions';
-import { Formik, Form, Field } from 'formik';
-import { useHistory, Link } from 'react-router-dom';
-import Swal from "sweetalert2";
+import React , { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUser } from '../../redux/actions';
 import NavBar from '../NavBar/NavBar';
+import Swal from "sweetalert2";
+import { Formik, Form, Field } from 'formik';
+import { editProfile } from '../../redux/actions';
 
-export default function Register() {
+
+
+
+export default function CheckoutDirection() {
     const dispatch = useDispatch()
-    const history = useHistory()
-    var user = useSelector(state => state.user)
-
-const redirect = ()=>{
-    history.push("/home")
-}
+    let user = useSelector(state => state.user)
   
-    return (
-    <div>
-        <NavBar />
-        <Link to="/userProfile"><button>Go back to your profile</button></Link>
-        <Formik
-        initialValues={{
-            name:user.name,
-            lastName:user.lastName,
-            imgProfile: user.imgProfile   
-        }}
-        validate={(valores)=>{
-            let errors = {};
-            if (/^\s/.test(valores.name)) {
-                errors.name = "Cant start whit an empty space"}
-            if (/^\s/.test(valores.lastName)) {
-                errors.lastName = "Cant start whit an empty space"}
-            return errors;
-        }}
-        onSubmit={(valores, {resetForm}) => {
-            dispatch(editProfile(valores, user.idUser))
-            Swal.fire(
-                'Done!',
-                'Your profile has been updated',
-                'success'
-              )
-            resetForm()
-            setTimeout(() => redirect(), "1000")
-        }}>
-        {({touched, errors}) => (
-        <Form classname="RegisterForm">
-        <h1>Modify your profile</h1>
-        <div>
-            <label>Name: </label>
-            <Field type="text" name="name" placeholder="Name"/>
-            {touched.name && errors.name && <span>{errors.name}</span>}
-        </div>
-        <div>
-            <label>Last name: </label>
-            <Field type="text" name="lastName" placeholder="Last name"/>
-            {touched.lastName && errors.lastName && <span>{errors.lastName}</span>}
-        </div>
-        <div>
-            <label>Profile picture (optional): </label>
-            <Field type="text" name="imgProfile" placeholder="Profile picture"/>
-        </div>
-        <div>
-        <button type="submit">Modify</button>
-        </div>
-        </Form>
-        )}
-        </Formik>
-        <Formik
+  
+  return (
+<>
+
+
+{/* <h2>Choose an address to send your order! :) <br></br>or add a new one!
+</h2>
+    {
+        <ul>
+            { user.adress && 
+              user.adress.map(e=>{
+                return (
+                <Link to={"/home"}>
+                <div><h3>{e.street +' ' + e.number}</h3> 
+                 <h4>{e.city}, {e.state}, {e.country}</h4>
+                </div>
+                
+               </Link> )}
+                  )
+            }
+        </ul>
+      } */}
+
+<Formik
         initialValues={{
             country:"",
             state:"",
@@ -111,7 +82,6 @@ const redirect = ()=>{
         }}>
         {({touched, errors}) => (
         <Form classname="Adress">
-        <h1>Add an adress</h1>
         <div>
             <label>Country: </label>
             <Field type="text" name="country" placeholder="Country"/>
@@ -143,6 +113,11 @@ const redirect = ()=>{
         </Form>
         )}
         </Formik>
-    </div>
-  )
+
+
+
+
+  </>
+    )
 }
+
