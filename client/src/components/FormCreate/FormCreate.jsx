@@ -114,6 +114,9 @@ export default function FormCreate() {
                 }}
 
                 onSubmit={(valores, { resetForm }) => {
+                    if(valores.image===""){
+                        valores.image='https://us.123rf.com/450wm/urric/urric1810/urric181000005/118555840-libro-marr%C3%B3n-sobre-fondo-blanco.jpg?ver=6'
+                    }
                     (detail.id !== undefined) ? dispatch(putBook(valores, detail.id)) : dispatch(postBook(valores))
                     resetForm()
                     setFormSubmit(true)
