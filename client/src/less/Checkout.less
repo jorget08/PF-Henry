@@ -1,6 +1,7 @@
 @import './variables.less';
 
 .checkout {
+
     h1 {
         font-size: 30px;
         font-family: @Roboto;
@@ -10,18 +11,29 @@
     }
 
     .paypal {
-        margin-left: 20%;
+        display: flex;
+        justify-content: center;
+    }
+}
 
-        @media (max-width: 1125px) {
-            margin-left: 15%;
-        }
+.checkoutCont {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 20px 20px 20px;
+}
 
-        @media (max-width: 1070px) {
-            margin-left: 10%;
-        }
+.pay {
+    position: sticky;
+    top: 20px;
+    background-color: rgb(218, 218, 218);
+    padding: 20px 50px;
+    height: min-content;
+    font-family: @Source;
+    border: 1px solid @borderColor;
 
-        @media (max-width: 900px) {
-            margin: 0 5%;
-        }
+    h3 {
+        font-size: 20px;
+        text-align: justify;
+
     }
 }

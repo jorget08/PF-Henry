@@ -6,20 +6,25 @@
   font-weight: 600;
 }
 .checkout .paypal {
-  margin-left: 20%;
+  display: flex;
+  justify-content: center;
 }
-@media (max-width: 1125px) {
-  .checkout .paypal {
-    margin-left: 15%;
-  }
+.checkoutCont {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 20px 20px 20px;
 }
-@media (max-width: 1070px) {
-  .checkout .paypal {
-    margin-left: 10%;
-  }
+.pay {
+  position: sticky;
+  top: 20px;
+  background-color: #dadada;
+  padding: 20px 50px;
+  height: min-content;
+  font-family: 'Source Sans Pro', sans-serif;
+  border: 1px solid #c4c4c4;
 }
-@media (max-width: 900px) {
-  .checkout .paypal {
-    margin: 0 5%;
-  }
+.pay h3 {
+  font-size: 20px;
+  text-align: justify;
+  padding-top: '10px';
 }
