@@ -32,10 +32,10 @@ export default function Stock() {
         Header: "Actions",
         Cell: ({ row }) => (
           <div style={{ display: 'flex' }}>
-            <button className='icon' onClick={e => handleEdit(e, row)}>
+            <button className='iconDash' onClick={e => handleEdit(e, row)}>
               <AiFillEdit size={30} />
             </button>
-            <button className='icon delete' onClick={handleDelete}>
+            <button className='iconDash delete' onClick={handleDelete}>
               <FaRegTrashAlt size={30} />
             </button>
           </div>

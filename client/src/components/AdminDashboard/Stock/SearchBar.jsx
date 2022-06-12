@@ -9,7 +9,6 @@ export default function SearchBar({ filter, setFilter }) {
         type='search'
         value={filter || ''}
         onChange={e => setFilter(e.target.value)}
-        className='inputSearch'
       />
     </span>
   )
