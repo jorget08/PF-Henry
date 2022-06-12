@@ -536,28 +536,23 @@ export function changeFavs(payload) {
 export function reportReview(id, idBook, obj) {
   return async function (dispatch) {
     try {
-      const response = await axios.put(
-        `http://localhost:3001/reviews/report/${id}?book=${idBook}`,
-        obj
-      );
+      const response = await axios.put(`http://localhost:3001/reviews/report/${id}?book=${idBook}`, obj);
       return dispatch({ type: REPORT_REVIEW, payload: response.data });
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 }
-export function deleteReview(user, book, review) {
-  return async function (dispatch) {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3001/reviews?user=${user}&book=${book}&review=${review}`
-      );
-      return dispatch({ type: DELETE_REVIEW, payload: response.data });
-    } catch (error) {
-      console.log(error);
+  export function deleteReview(user, book, review) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.delete(`http://localhost:3001/reviews?user=${user}&book=${book}&review=${review}`);
+        return dispatch({ type: DELETE_REVIEW, payload: response.data });
+         } catch (error) {
+        console.log(error);
+      }
+      }
     }
-  };
-}
 
 export function updateReview(review, book, obj) {
   return async function (dispatch) {
