@@ -10,22 +10,24 @@ import SearchBar from './SearchBar'
 export default function ShoppingHistory() {
 
   const user = useSelector((state) => state.user);
-  const shoph = useSelector((state) => state.ShoppingHistory);
+  var {payments} = useSelector((state) => state.ShoppingHistory);
   let id = user.idUser;
 
+  console.log("SOYYYY?",payments)
 
-  console.log("SOYYYY?",shoph)
-
-
+  if (payments === undefined) var dat = []
+  else var dat = payments
 
   const dispatch = useDispatch();  
 
-  useEffect(() => {
-    dispatch(getShoppingHistory(id));
-  }, [dispatch]);
+  useEffect(() =>  {
+      dispatch(getShoppingHistory(id))
+  }, [dispatch, payments]);
 
-  const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => shoph, [])
+  var columns = useMemo(() => COLUMNS, [])
+  var data = useMemo(() => dat, [payments])
+  // if (shoph.payments === undefined) {var data = {paymentbooks: [{title: "hola", author: "soy yo"}]}}
+  // else {var data = shoph.payments}
 
   const {
     getTableProps,
@@ -52,12 +54,10 @@ export default function ShoppingHistory() {
   usePagination,
   )
 
-
   const { globalFilter } = state
   const { pageIndex, pageSize } = state
-  return (
-    
-    
+  
+  return (  
     <>
     <NavBar/>
     <div>
