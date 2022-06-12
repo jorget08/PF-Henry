@@ -120,8 +120,6 @@ const getUsers = async (req, res) => {
     }
 }
 const updateUser = async (req, res) => {
-    console.log('aqui',req.body);
-    console.log('aqui 2',req.body.adress);
     const { id } = req.params;
     try {
         const userExist = await User.findOne({ where: { idUser: id } });
@@ -146,10 +144,8 @@ const updateUser = async (req, res) => {
             adress === null ? adress = [] : adress;
             //? si adress es un array
             if (Array.isArray(adress)) {
-                console.log('es array', adress.length);
                 adress.push(req.body.adress);
                 req.body.adress = JSON.stringify(adress);
-                console.log(req.body.adress);
             }
             else{
                 //? si adress es un string parsearlo

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { editProfile } from '../../redux/actions';
+import { editProfile, addAdress } from '../../redux/actions';
 import { Formik, Form, Field } from 'formik';
 import { useHistory, Link } from 'react-router-dom';
 import Swal from "sweetalert2";
@@ -101,7 +101,7 @@ const redirect = ()=>{
                 street:valores.street,
                 number:valores.number     
             }
-            dispatch(editProfile(adress, user.idUser))
+            dispatch(addAdress(adress, user.idUser))
             Swal.fire(
                 'Done!',
                 'An adress have been added to your profile',
