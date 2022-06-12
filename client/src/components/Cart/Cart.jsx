@@ -19,6 +19,7 @@ import "./styles.css";
 import Footer from "../Footer/Footer";
 import { IoIosArrowDown } from "react-icons/io";
 import Swal from "sweetalert2";
+import CheckoutDirection from "../CheckoutDirection/CheckoutDirection";
 
 export default function Cart() {
  
@@ -157,6 +158,7 @@ export default function Cart() {
         <Modal isOpen={isOpenModal} closeModal={closeModal}>
           {
             <div>
+              <h4>Choose your address</h4>
             <select onChange={(e) => handleSelect(e)}>
             <option value="default" hidden>Select an adress</option>
               { user.adress && 
@@ -167,6 +169,8 @@ export default function Cart() {
                 )
               }
             </select>
+            <h4>Add a new adress!</h4>
+            <CheckoutDirection/>
             <button type="button" onClick={closeModal}>Ready!</button>
             </div>
           }

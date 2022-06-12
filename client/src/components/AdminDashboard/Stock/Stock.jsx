@@ -9,7 +9,8 @@ import { COLUMNS } from './Columns'
 import Modal from './Modal/Modal'
 import { useModals } from '../../Utils/useModals'
 import EditBook from './EditBook'
-
+import { FaRegTrashAlt } from 'react-icons/fa'
+import { AiFillEdit } from 'react-icons/ai'
 export default function Stock() {
 
   const dispatch = useDispatch()
@@ -17,41 +18,42 @@ export default function Stock() {
   const [isOpenModal, openModal, closeModal] = useModals(false);
 
   useEffect(() => {
-    dispatch(getBooks)    
+    dispatch(getBooks)
   }, [dispatch])
-  
+
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => allBooks, [])
 
   const tableHooks = (hooks) => {
     hooks.visibleColumns.push((columns) => [
       ...columns,
-        {
-          id:"Actions",
-          Header:"Actions",
-          Cell: ({ row }) => ( 
-            <>
-            <button onClick={e => handleEdit(e, row)}>
-              Edit
+      {
+        id: "Actions",
+        Header: "Actions",
+        Cell: ({ row }) => (
+          <div style={{ display: 'flex' }}>
+            <button className='icon' onClick={e => handleEdit(e, row)}>
+              <AiFillEdit size={30} />
             </button>
-            <button onClick={handleDelete}>
-              Delete
+            <button className='icon delete' onClick={handleDelete}>
+              <FaRegTrashAlt size={30} />
             </button>
-            </>
-          )
-        }
-      ]
+          </div>
+
+        )
+      }
+    ]
     )
   }
 
   const handleDelete = (e) => {
     e.preventDefault()
-    alert ('QUERE BORRAR VO ? SO LOCO SO?')
+    alert('QUERE BORRAR VO ? SO LOCO SO?')
   }
 
   const handleEdit = (e, row) => {
     e.preventDefault()
-    openModal()    
+    openModal()
   }
 
 
@@ -75,10 +77,10 @@ export default function Stock() {
     columns,
     data
   },
-  tableHooks,
-  useGlobalFilter,
-  useSortBy,
-  usePagination,
+    tableHooks,
+    useGlobalFilter,
+    useSortBy,
+    usePagination,
   )
 
   const { globalFilter } = state
@@ -87,71 +89,71 @@ export default function Stock() {
 
   return (
     <>
-    <Modal isOpen={isOpenModal} closeModal={closeModal}>
-      <EditBook/>
-    </Modal>
-    <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
-    <table {...getTableProps()} className={'Container'}>
-      <thead >
-        {headerGroups?.map((headerGroups) => (
-        <tr {...headerGroups.getHeaderGroupProps()}>
-          {headerGroups?.headers?.map(column => (
-              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                {column.render('Header')}
-                {column.isSorted ? (column.isSortedDesc ? <BiCaretDown/> : <BiCaretUp/>) : ''}
-              
-              </th>
-            ))}
-        </tr>            
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps}>
-        {
-          page.map(row => {
-            prepareRow(row)
-            return(
-              <tr {...row.getRowProps()}>
-                {
-                  row.cells.map(cell => {
-                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                  })
-                }                
-              </tr>
-            )
-          })
-        }
-      </tbody>
-    </table>
-    <div className="button">
-      <span>
-         Go to page : {' '}
-        <input type='number' defaultValue={pageIndex+1}
-          onChange={e => {
-            const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0
-            gotoPage(pageNumber)
-          }}
-        />
-      </span>
-      <span>
-        Page {' '}
-        <strong>
-          {pageIndex +1} of {pageOptions.length}
-        </strong>
-      </span>
-      <select value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
-        {
-          [10, 20, 30, 40, 50].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))
-        }
-      </select>
-      <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</button>
-      <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
-      <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
-      <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</button>
-    </div>
+      <Modal isOpen={isOpenModal} closeModal={closeModal}>
+        <EditBook />
+      </Modal>
+      <SearchBar filter={globalFilter} setFilter={setGlobalFilter} />
+      <table {...getTableProps()} className={'Container'}>
+        <thead >
+          {headerGroups?.map((headerGroups) => (
+            <tr {...headerGroups.getHeaderGroupProps()}>
+              {headerGroups?.headers?.map(column => (
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render('Header')}
+                  {column.isSorted ? (column.isSortedDesc ? <BiCaretDown /> : <BiCaretUp />) : ''}
+
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps}>
+          {
+            page.map(row => {
+              prepareRow(row)
+              return (
+                <tr {...row.getRowProps()}>
+                  {
+                    row.cells.map(cell => {
+                      return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                    })
+                  }
+                </tr>
+              )
+            })
+          }
+        </tbody>
+      </table>
+      <div className="button">
+        <span>
+          Go to page : {' '}
+          <input type='number' defaultValue={pageIndex + 1}
+            onChange={e => {
+              const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0
+              gotoPage(pageNumber)
+            }}
+          />
+        </span>
+        <span>
+          Page {' '}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>
+        </span>
+        <select value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+          {
+            [10, 20, 30, 40, 50].map(pageSize => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
+            ))
+          }
+        </select>
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</button>
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+        <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</button>
+      </div>
     </>
   )
 }

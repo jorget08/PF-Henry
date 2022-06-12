@@ -7,26 +7,26 @@ import CardB from './Cards/CardB'
 import s from './Container.module.css'
 
 export default function Container() {
-  
+
   const dispatch = useDispatch()
   const allBooks = useSelector(state => state.books)
-  const allUsers = useSelector(state => state.users) 
+  const allUsers = useSelector(state => state.users)
   const allSales = useSelector(state => state.sales)
 
-  useEffect(()=> {
-    dispatch(getUsers())       
+  useEffect(() => {
+    dispatch(getUsers())
     dispatch(getBooks)
     dispatch(getSales())
-  },[dispatch])
-    
+  }, [dispatch])
+
   return (
     <>
-    <h1 className={s.h1}>Welcome, this is your god mode!</h1>
-    <div className={s.Container}>
-          <Card books={allBooks}/>
-          <CardU users={allUsers}/>
-          <CardB sales={allSales}/>
-    </div>
+      <h1 className={s.h1}>Welcome, this is your god mode!</h1>
+      <div className={s.Container}>
+        <Card books={allBooks} />
+        <CardU users={allUsers} />
+        <CardB sales={allSales} />
+      </div>
     </>
   )
 }

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { editProfile } from '../../redux/actions';
 import { Formik, Form, Field } from 'formik';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Swal from "sweetalert2";
 import NavBar from '../NavBar/NavBar';
 
@@ -18,6 +18,7 @@ const redirect = ()=>{
     return (
     <div>
         <NavBar />
+        <Link to="/userProfile"><button>Go back to your profile</button></Link>
         <Formik
         initialValues={{
             name:user.name,
@@ -76,15 +77,15 @@ const redirect = ()=>{
         validate={(valores)=>{
             let errors = {};
             if (!valores.country) {
-                errors.name = "Country required"}
+                errors.country = "Country required"}
             if (!valores.state) {
-                 errors.name = "State required"}
+                 errors.state = "State required"}
             if (!valores.city) {
-                errors.name = "City required"}
+                errors.city = "City required"}
             if (!valores.street) {
-                errors.name = "Street required"}
+                errors.street = "Street required"}
             if (!valores.number) {
-                errors.name = "Number required"}
+                errors.number = "Number required"}
             return errors;
         }}
         onSubmit={(valores, {resetForm}) => {
