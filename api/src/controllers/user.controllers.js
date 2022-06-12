@@ -79,6 +79,34 @@ const createUser = async (req, res) => {
     }
 
 }
+const getUserId=async (req,res)=>{
+    const {id} = req.params
+    try {
+        const user = await User.findByPk(id,{
+            attributes: { exclude: ['password'] },
+            include: {
+                model: Rol,
+                attributes: ['name']
+            }
+            
+        });
+        //? 
+        // const users = user.map(user=>{
+        //     if(user.adress !== null){
+        //         user.adress = JSON.parse(user.adress);
+        //     }
+        //     return user;
+        // })
+        res.json(user);
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado'
+        });
+    }
+}
 const getUsers = async (req, res) => {
     const { page = 1, limit = 10 } = req.query; 
     try {
@@ -209,5 +237,5 @@ const deleteUser = async (req, res) => {
     }
 }
 
-module.exports = { createUser, getUsers, updateUser, deleteUser };
+module.exports = { createUser, getUsers, updateUser, deleteUser, getUserId };
 
