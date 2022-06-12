@@ -324,6 +324,25 @@ export function editProfile(payload, id) {
   return async function (dispatch) {
     try {
       var response = await axios.put(
+        `http://localhost:3001/user/${id}`, payload ,
+        {
+          headers: {
+            Authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        }
+      );
+      console.log("edit", response.data);
+      return dispatch({ type: EDIT_PROFILE, payload: response.data.userUp });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+
+export function addAdress(payload, id) {
+  return async function (dispatch) {
+    try {
+      var response = await axios.put(
         `http://localhost:3001/user/${id}`, { adress: payload },
         {
           headers: {
@@ -519,6 +538,28 @@ export function reportReview(id, idBook, obj) {
     }
   }
 }
+  export function deleteReview(user, book, review) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.delete(`http://localhost:3001/reviews?user=${user}&book=${book}&review=${review}`);
+        return dispatch({ type: DELETE_REVIEW, payload: response.data });
+         } catch (error) {
+        console.log(error);
+      }
+      }
+    }
+
+  export function updateReview(review,book,obj) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.put(`http://localhost:3001/reviews?review=${review}&book=${book}`,obj);
+        return dispatch({ type: UPDATE_REVIEW, payload: response.data });
+         } catch (error) {
+        console.log(error);
+      }
+      }
+    }
+
 
 export function confirmationMail(id) {
   return async function (dispatch) {

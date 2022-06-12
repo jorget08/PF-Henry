@@ -45,7 +45,7 @@ module.exports = (sequelize) => {
       defaultValue: false
     },
     adress:{
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true
     }
   });

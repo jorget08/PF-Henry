@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { Formik, Form, Field } from 'formik';
 import { editProfile } from '../../redux/actions';
 import './styles.css';
+import { addAdress } from '../../redux/actions';
 
 
 
@@ -118,10 +119,6 @@ export default function CheckoutDirection() {
                     </Form>
                 )}
             </Formik>
-
-
-
-
         </>
     )
 }
