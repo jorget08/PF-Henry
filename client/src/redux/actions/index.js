@@ -518,7 +518,29 @@ export function reportReview(id, idBook, obj) {
       console.log(error);
     }
   }
-}
+
+  export function deleteReview(user, book, review) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.delete(`http://localhost:3001/reviews?user=${user}&book=${book}&review=${review}`);
+        return dispatch({ type: DELETE_REVIEW, payload: response.data });
+         } catch (error) {
+        console.log(error);
+      }
+      }
+    }
+
+  export function updateReview(review,book,obj) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.put(`http://localhost:3001/reviews?review=${review}&book=${book}`,obj);
+        return dispatch({ type: UPDATE_REVIEW, payload: response.data });
+         } catch (error) {
+        console.log(error);
+      }
+      }
+    }
+
 
 export function confirmationMail(id) {
   return async function (dispatch) {

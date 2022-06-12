@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { getDetail, clearDetail, deleteBook, addComment, showComments, getBooks, reportReview } from "../../redux/actions";
+import { getDetail, clearDetail, deleteBook, addComment, showComments, getBooks, reportReview, updateReview, deleteReview } from "../../redux/actions";
 import DetailCompra from '../DetailCompra/DetailCompra';
 import { Formik, Form, Field } from 'formik'
 import Stars from '../Stars/Stars';
@@ -18,8 +18,8 @@ export default function BookDetail() {
   const user = useSelector(state => state.user)
   const history = useHistory()
   const token = localStorage.getItem("token")
-  const [comment, setComment] = useState({title:'',description:''})
-  const [bool,setBool]=useState(true)
+  const [comment, setComment] = useState({ title: 'default', description: '', id: '' })
+  const [errors, setErrors] = useState({})
 
   console.log("hystory", history)
   var bookDet = useSelector(state => state.detail)
@@ -42,7 +42,7 @@ export default function BookDetail() {
     }
   }, [dispatch, id])
 
-  
+
 
   function delet(e) {
     e.preventDefault();
@@ -81,17 +81,82 @@ export default function BookDetail() {
         title: 'Se report xd',
       })
     }
-    const obj={
-      report:report
+    const obj = {
+      report: report
     }
-    dispatch(reportReview(element.id, bookDet.id,obj))
+    dispatch(reportReview(element.id, bookDet.id, obj))
   }
   function editComment(element) {
+
     setComment({
-      title:element.title,
-      description:element.description
+      title: element.title,
+      description: element.description,
+      id: element.id
     })
-    setBool(!bool)
+
+  }
+  function deleteComment(element) {
+    dispatch(deleteReview(user.idUser, bookDet.id,element.id))
+  }
+  function validate(coment) {
+    let errors = {};
+
+    if (coment.title === 'default') errors.title = "You need to select an option";
+    if (coment.description === '') errors.description = "You need to write something";
+    if (coment.description.length >500) errors.description = "You cannot exceed 500 characters";
+    
+    setErrors(errors)
+    return errors;
+  }
+  
+  async function onSubmit(event) {
+    event.preventDefault()
+      
+    
+    if (Object.keys(validate(comment)).length === 0) {
+      if (comment.id !== '') {
+        const review = {
+          title: comment.title,
+          description: comment.description
+        }
+
+        dispatch(updateReview(comment.id, bookDet.id, review))
+        return setComment({
+          title: 'default',
+          description: '',
+          id: ''
+        })
+      } else {
+        
+        var rev = {
+          review: {
+            title: comment.title,
+            description: comment.description
+          },
+          book: bookDet.id,
+          user: user.idUser
+        }
+        setComment({
+          title: 'default',
+          description: ''
+        })
+      }
+      return dispatch(addComment(rev))
+    } 
+
+  }
+  
+  function handleOnChange(e) {
+    setComment({
+      ...comment,
+      [e.target.name]: e.target.value
+    })
+    validate(
+      {
+        ...comment,
+      [e.target.name]: e.target.value
+      })
+    
   }
   return (
     <div className='all'>
@@ -150,69 +215,60 @@ export default function BookDetail() {
       </div>
 
       {token ? <div>
-        <Formik
-          initialValues={comment}
-          validate={(valores) => {
-            let errors = {};
-            if (valores.title > 50) {
-              errors.title = "The title of the review cannot have more than 50 characters";
-            }
-            if (valores.description > 1000) {
-              errors.description = "The review cannot have more than 1000 characters";
-            }
-            return errors;
-          }}
-          onSubmit={(valores, { resetForm }) => {
-            var rev = {
-              review: {
-                title: valores.title,
-                description: valores.description
-              },
-              book: bookDet.id,
-              user: user.idUser
-            }
-            dispatch(addComment(rev))
 
-            resetForm()
-          }}>
-          {({ touched, errors }) => (
-            <Form className='formReview'>
 
-              {/* <div>
-                  <label>Title</label>
-                  <Field type="text" name="title" placeholder="Title" />
-                  {touched.title && errors.title && <span className='errorMsg'>{errors.title}</span>}
-                </div> */}
-              {/* <label>Review</label> */}
-              <div>
-                <Field type="text" name="description" placeholder="Review" />
-                {touched.review && errors.review && <span className='errorMsg'>{errors.review}</span>}
 
-              </div>
 
-              <button type="submit">Send review</button>
-            </Form>
-          )}
-        </Formik>
+        <form className='' onSubmit={onSubmit}>
+          <div>
+            <label>How much did you like this book?</label>
+            <select name="title" id=""  placeholder="How much did you like it?"  value={comment.title} onChange={handleOnChange} >
+              <option value="default">How much did you like it?</option>
+              <option value="I Loved it">I Loved it</option>
+              <option value="I liked it">I liked it</option>
+              <option value="I didn't like it that much">I didn't like it that much</option>
+              <option value="I hated it">I hated it</option>
+            </select>
+           
+            {errors.title && <span className='errorMsg'>{errors.title}</span>}
+          </div>
+          <label>Tell us your opinion about this book</label>
+          <div>
+            <textarea name="description" id="" cols="30" rows="10" value={comment.description} onChange={handleOnChange}></textarea>
+
+            {errors.description && <span className='errorMsg'>{errors.description}</span>}
+
+          </div>
+
+          <button type="submit">Send review</button>
+        </form>
+
+
       </div> : <p>Log in to comment</p>}
-       {comments.length !=0 && comments.map(e => {
-          return (e.report == null &&
-            <>
-            {console.log('soyyy comentario', e)}
+      {comments.length != 0 && comments.map(e => {
+        return (e.report == null && e.id !== comment.id &&
+          <>
+
+
             <div className='comments'>
               <img src={e.user.imgProfile} alt="" width='30' height='30' />
-              
+
               <h4>{e.user.name} {e.user.lastName}</h4>
               <h5>{e.title}</h5>
               <p>{e.description}</p>
               <button onClick={() => reportComment(e)}>Report</button>
-              <button onClick={() => editComment(e)}>Edit</button>
+              {
+                e.userIdUser === user.idUser &&
+                <>
+                <button onClick={() => editComment(e)}>Edit</button>
+                <button onClick={() => deleteComment(e)}>Delete</button>
+                </>
+              }
             </div>
-            </>
-          )
-        })}
+          </>
+        )
+      })}
       <Footer />
     </div>
   )
 }
-
