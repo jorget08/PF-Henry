@@ -78,7 +78,8 @@ export default function CheckoutDirection() {
                         street: valores.street,
                         number: valores.number
                     }
-                    dispatch(editProfile(adress, user.idUser))
+                    dispatch(addAdress(adress, user.idUser))
+
                     Swal.fire(
                         'Done!',
                         'An adress have been added to your profile',
