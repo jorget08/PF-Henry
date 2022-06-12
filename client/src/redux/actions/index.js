@@ -518,7 +518,7 @@ export function reportReview(id, idBook, obj) {
       console.log(error);
     }
   }
-
+}
   export function deleteReview(user, book, review) {
     return async function (dispatch) {
       try {
