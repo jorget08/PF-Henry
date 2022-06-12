@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 import Modal from '../Modal/Modal';
 import Login from '../Login/Login';
-import { BsCart2 } from 'react-icons/bs';
+import { BsCartFill } from 'react-icons/bs';
 import { IoMdContact } from 'react-icons/io';
-import { IoHomeOutline } from 'react-icons/io5';
+import { IoHomeSharp } from 'react-icons/io5';
 import { MdContactSupport } from 'react-icons/md';
 import { AiOutlineMenu } from 'react-icons/ai'
 import { useModals } from '../Utils/useModals';
@@ -91,16 +91,16 @@ export default function NavBar() {
                     </div>
                     <div className='links'>
                         <Link to='/' className='link'>
-                            <IoHomeOutline size={30} />
+                            <IoHomeSharp size={30} />
                         </Link>
                         <Link to='/home' className='link'>
-                            <ImBooks size={30} />
+                            <ImBooks  size={30} />
                         </Link>
                         <Link to='/support' className='link'>
                             <MdContactSupport size={32} />
                         </Link>
                         <Link to='/cart'>
-                            <BsCart2 size={30} className="iconCart" />
+                            <BsCartFill size={30} className="iconCart" />
                             <p> {JSON.parse(localStorage.getItem("carrito")) ? JSON.parse(localStorage.getItem("carrito"))?.length : 0}</p>
                         </Link>
                         {!isLogged &&

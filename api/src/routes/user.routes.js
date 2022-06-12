@@ -5,7 +5,7 @@ const { validarCampos } = require('../middlewares/validar.campos.js');
 const { validarJwt } = require('../middlewares/validarJwt.js');
 const { validarAdminRole, validarAdminOmio } = require('../middlewares/validar.admin.js');
 //? controllers
-const { createUser, getUsers, updateUser, deleteUser } = require('../controllers/user.controllers');
+const { createUser, getUsers, updateUser, deleteUser, getUserId } = require('../controllers/user.controllers');
 
 router.post('/',
     [
@@ -17,7 +17,9 @@ router.post('/',
     ], 
     createUser
 );
+router.get('/:id', getUserId);
 router.get('/', getUsers);
+
 //? validar admin role o mi usuario
 router.put('/:id', updateUser);
 router.delete('/:id', [ validarJwt, validarAdminOmio ], deleteUser);
