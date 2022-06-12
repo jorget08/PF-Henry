@@ -1,14 +1,17 @@
 .footContainer {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   background-color: #914343;
+  font-size: 13px;
+  padding-bottom: 10px;
+  justify-content: space-evenly;
 }
 
 .foot {
-  display: block;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   margin: auto;
-  margin-top: 1px;
-  margin-bottom: 20px;
-  align-items: left;
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
   align-items: center;
@@ -18,9 +21,13 @@
   list-style: none;
   text-align: center;
 }
+.foot ul {
+  padding: 0;
+  margin: 0;
+}
 .titleFoot {
   font-family: 'Source Sans Pro', sans-serif;
   margin: 0;
-  margin-top: 10px;
+  margin-top: 5px;
   text-align: center;
 }

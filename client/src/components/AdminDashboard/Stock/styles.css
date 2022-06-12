@@ -2,11 +2,11 @@
   width: calc(100vh + 35.89rem);
   margin-left: 150px;
 }
-.icon:hover {
+.iconDash:hover {
   cursor: pointer;
   color: white;
 }
-.icon {
+.newAddress {
   border: none;
   background-color: unset;
 }

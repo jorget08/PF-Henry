@@ -3,7 +3,9 @@ import ReactDOM from "react-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../NavBar/NavBar";
+import Footer from "../Footer/Footer";
 import Itemscheckout from "./Itemscheckout";
+import { FaEthereum } from 'react-icons/fa'
 import {
   getCart,
   infoBooks,
@@ -42,10 +44,10 @@ export default function Checkout() {
   console.log("soy user id", user.idUser);
 
 
-// useEffect(() => {
-//   dispatch(getUser())
-  
-// }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(getUser())
+
+  // }, [dispatch])
 
   console.log(user);
 
@@ -55,15 +57,15 @@ export default function Checkout() {
   }, [dispatch]);
   const crypto = useSelector(state => state.crypto)
   console.log("TOY AQUI PUTA MADREEEEEE", crypto)
-
-  let x = preciototal/crypto
-  let valuecrypto= x.toString()
-  let val=valuecrypto.slice(0,11)
-  console.log("soy val",val)
+  const address = useSelector(state => state.address)
+  let x = preciototal / crypto
+  let valuecrypto = x.toString()
+  let val = valuecrypto.slice(0, 11)
+  console.log("soy val", val)
 
   const createOrder = (data, actions) => {
     if (user.hasOwnProperty("name")) {
-      
+
       return actions.order.create({
         purchase_units: [
           {
@@ -89,7 +91,7 @@ export default function Checkout() {
       userId: userId,
     };
 
-  
+
 
     dispatch(infoBooks(infoBook));
     dispatch(infoSoldBooks(totalInfo));
@@ -126,27 +128,35 @@ export default function Checkout() {
   return (
     <div className="checkout">
       <NavBar></NavBar>
-      
+      <div className="checkoutCont">
+        <div>
+          {checkoutinfo?.map((e) => (
+            <Itemscheckout
+              key={e.id}
+              img={e.image}
+              title={e.title}
+              author={e.author}
+              price={e.price * e.cant}
+              cant={e.cant}
+            />
+          ))}
 
-      {checkoutinfo?.map((e) => (
-        <Itemscheckout
-          key={e.id}
-          img={e.image}
-          title={e.title}
-          author={e.author}
-          price={e.price * e.cant}
-          cant={e.cant}
-        />
-      ))}
-      
-      <h1>Order Total: ${preciototal} -- ETH : {val} </h1>
-      <div className="paypal">
-        <PayPalButton
-          createOrder={(data, actions) => createOrder(data, actions)}
-          onApprove={(data, actions) => onApprove(data, actions)}
-        />
-        <Crypto value={val} infoBook={checkoutinfo} userId={userId} email={email} name={name} lastName={lastName} payment={payment}></Crypto>
+        </div>
+        <div className="pay">
+          <h1 style={{ textAlign: 'center', fontSize: '30px' }}>Order Total</h1>
+          <h3>USD: ${preciototal}</h3>
+          <h3>ETH <FaEthereum /> : {val} </h3>
+          <p style={{ textAlign: 'center', }}>Delivery at {localStorage.getItem('address')}</p>
+          <Crypto value={val} infoBook={checkoutinfo} userId={userId} email={email} name={name} lastName={lastName} payment={payment}></Crypto>
+          <div className="paypal">
+            <PayPalButton
+              createOrder={(data, actions) => createOrder(data, actions)}
+              onApprove={(data, actions) => onApprove(data, actions)}
+            />
+          </div>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }

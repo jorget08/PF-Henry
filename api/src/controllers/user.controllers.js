@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer')
 
 const createUser = async (req, res) => {
     //? agregar usuario  //? phone
-    const { name, lastName, email, password, imgProfile = 'https://res.cloudinary.com/dzqbzqgqy/image/upload/v1598418856/default_profile_img_zqbzqgqy.png' } = req.body;
+    const { name, lastName, email, password, imgProfile = 'https://fundacionmdi.com/wp-content/uploads/2021/05/img-user0.png' } = req.body;
     try {
         //? validar nickname !importante y email
         const existEmail = await User.findOne({ where: { email } });
@@ -148,8 +148,6 @@ const getUsers = async (req, res) => {
     }
 }
 const updateUser = async (req, res) => {
-    console.log('aqui',req.body);
-    console.log('aqui 2',req.body.adress);
     const { id } = req.params;
     try {
         const userExist = await User.findOne({ where: { idUser: id } });
@@ -174,10 +172,8 @@ const updateUser = async (req, res) => {
             adress === null ? adress = [] : adress;
             //? si adress es un array
             if (Array.isArray(adress)) {
-                console.log('es array', adress.length);
                 adress.push(req.body.adress);
                 req.body.adress = JSON.stringify(adress);
-                console.log(req.body.adress);
             }
             else{
                 //? si adress es un string parsearlo
