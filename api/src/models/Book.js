@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
     },
     image:{
       type: DataTypes.TEXT,
-      defaultValue:'https://www.libreriacollino.com.ar/static/media/default-book.1d8c3114.png'
+      defaultValue:'https://res.cloudinary.com/hysmatafuegos/image/upload/v1653854618/default-book.1d8c3114_iqs1em.png'
     },
     price:{
       type:DataTypes.INTEGER,

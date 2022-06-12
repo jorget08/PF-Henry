@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer')
 
 const createUser = async (req, res) => {
     //? agregar usuario  //? phone
-    const { name, lastName, email, password, imgProfile = 'https://res.cloudinary.com/dzqbzqgqy/image/upload/v1598418856/default_profile_img_zqbzqgqy.png' } = req.body;
+    const { name, lastName, email, password, imgProfile = 'https://fundacionmdi.com/wp-content/uploads/2021/05/img-user0.png' } = req.body;
     try {
         //? validar nickname !importante y email
         const existEmail = await User.findOne({ where: { email } });
