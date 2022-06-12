@@ -24,6 +24,7 @@ export default function BookDetail() {
   console.log("hystory", history)
   var bookDet = useSelector(state => state.detail)
   var stars = [false, false, false, false, false];
+ 
 
   const redirect = () => {
     history.push("/home")
@@ -166,7 +167,7 @@ export default function BookDetail() {
           <div className='container__info'>
             <div className='image'>
               <img src={bookDet.image} alt="" />
-              <DetailCompra title={bookDet.title} author={bookDet.author} price={bookDet.price} categories={bookDet.categories} id={bookDet.id}></DetailCompra>
+              <DetailCompra title={bookDet.title} author={bookDet.author} price={bookDet.price} categories={bookDet.categories} id={bookDet.id} stock={bookDet.stock}></DetailCompra>
             </div>
             <div className='info'>
               <h1>{bookDet.title}</h1>
