@@ -24,6 +24,12 @@ export const COLUMNS = [
         },
     },
     {
+        Header: "paymentSource",
+        accessor: (row) => {
+            return row.paymentSource
+        },
+    },
+    {
         Header: "Date",
         accessor: (row) => {
             return row.createdAt

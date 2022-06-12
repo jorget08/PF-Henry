@@ -103,6 +103,7 @@ export default function NavBar() {
                             <BsCartFill size={30} className="iconCart" />
                             <p> {JSON.parse(localStorage.getItem("carrito")) ? JSON.parse(localStorage.getItem("carrito"))?.length : 0}</p>
                         </Link>
+                        {isLogged?<h2 style={{marginTop:"18px",color: "rgb(63, 84, 151)",fontWeight:"700px"}}>Welcome , {user?.name + ' ' + user?.lastName}!</h2>:null}
                         {!isLogged &&
                             <div className='log'>
                                 <IoMdContact size={33} onClick={openModal} />
