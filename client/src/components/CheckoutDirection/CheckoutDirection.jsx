@@ -5,7 +5,7 @@ import { getUser } from '../../redux/actions';
 import NavBar from '../NavBar/NavBar';
 import Swal from "sweetalert2";
 import { Formik, Form, Field } from 'formik';
-import { editProfile } from '../../redux/actions';
+import { addAdress } from '../../redux/actions';
 
 
 
@@ -72,7 +72,7 @@ export default function CheckoutDirection() {
                 street:valores.street,
                 number:valores.number     
             }
-            dispatch(editProfile(adress, user.idUser))
+            dispatch(addAdress(adress, user.idUser))
             Swal.fire(
                 'Done!',
                 'An adress have been added to your profile',

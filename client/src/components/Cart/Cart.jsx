@@ -188,7 +188,7 @@ export default function Cart() {
                   <p className="keep">Keep Shopping</p>
                 </Link>
                 {(token)?
-                  <button className="checkout" onClick={(e) => handleCheckOut(e)}>Continue to Checkout</button>
+                  <p className="checkout" onClick={(e) => handleCheckOut(e)}>Continue to Checkout</p>
                   :
                 <div>
                 <p className="checkout"onClick={openModal}>Log in first before going to checkout</p>
