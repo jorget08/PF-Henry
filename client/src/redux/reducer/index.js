@@ -40,15 +40,12 @@ import {
   CONFIRMATION_MAIL,
   CRYPTO,
   REPORT_REVIEW,
-
   UPDATE_REVIEW,
   DELETE_REVIEW,
-
   GET_SALES,
-
+  SET_DELIVERY_ADDRESS,
   GET_REVIEWS,
   REPLY_SUPPORT,
-
 } from "../actions/types";
 
 const initialState = {
@@ -66,14 +63,15 @@ const initialState = {
   infoBooks: [],
   users: [],
   favs: [],
-  changed:false,
+  changed: false,
   comments: [],
   support: [],
-  ShoppingHistory:[],
+  ShoppingHistory: [],
   page: 1,
   crypto: 0,
   sales: [],
-  reviews: []
+  reviews: [],
+  address: "",
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -86,11 +84,16 @@ export default function rootReducer(state = initialState, action) {
         allBookBackup: payload,
         books: payload,
       };
-    case CRYPTO:
-      return{
+    case SET_DELIVERY_ADDRESS:
+      return {
         ...state,
-        crypto: payload
-      }
+        address: payload,
+      };
+    case CRYPTO:
+      return {
+        ...state,
+        crypto: payload,
+      };
     case GET_CATEGORIES:
       return {
         ...state,
@@ -224,21 +227,18 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         user: { ...payload },
-        
       };
     case LOG_WITH_GOOGLE:
       localStorage.setItem("token", JSON.stringify(payload.token));
       return {
         ...state,
         user: { ...payload.user },
-       
       };
     case UNLOG_USER:
       localStorage.removeItem("token");
       return {
         ...state,
         user: {},
-        
       };
 
     case TOTAL_PRICE:
@@ -251,7 +251,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         infoBooks: payload,
       };
-    case GET_USERS:      
+    case GET_USERS:
       return {
         ...state,
         users: payload,
@@ -268,30 +268,30 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case ADD_COMMENT:
-      return{
+      return {
         ...state,
-        comments:payload
-      }
-      case REPORT_REVIEW:
-      return{
+        comments: payload,
+      };
+    case REPORT_REVIEW:
+      return {
         ...state,
-        comments:payload
-      }
-      case UPDATE_REVIEW:
-      return{
+        comments: payload,
+      };
+    case UPDATE_REVIEW:
+      return {
         ...state,
-        comments:payload
-      }
-      case DELETE_REVIEW:
-      return{
+        comments: payload,
+      };
+    case DELETE_REVIEW:
+      return {
         ...state,
-        comments:payload
-      }
+        comments: payload,
+      };
     case GET_COMMENTS:
-      return{
+      return {
         ...state,
-        comments: payload
-      }
+        comments: payload,
+      };
 
     case POST_SUPPORT:
       return {
@@ -299,69 +299,65 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case GET_SUPPORT:
-      return{
+      return {
         ...state,
-        support: payload
+        support: payload,
       };
-      case GET_FAVS:
-      return{
+    case GET_FAVS:
+      return {
         ...state,
-        favs: payload
-      }
-      case CHANGE_FAVS:
-      return{
-        ...state,
-        changed: payload
-      }
-      case DELETE_FAVS:
-      return{
-        ...state,
-        favs:payload
+        favs: payload,
       };
-      case POST_FAVS:
-      return{
+    case CHANGE_FAVS:
+      return {
         ...state,
-        favs:payload
-      }
+        changed: payload,
+      };
+    case DELETE_FAVS:
+      return {
+        ...state,
+        favs: payload,
+      };
+    case POST_FAVS:
+      return {
+        ...state,
+        favs: payload,
+      };
 
     case GET_SHOPPING_HISTORY:
-      return{
+      return {
         ...state,
-        ShoppingHistory:payload
-      }
+        ShoppingHistory: payload,
+      };
 
     case SET_PAGE:
-        return{
-          ...state,
-          page: payload
-      }
+      return {
+        ...state,
+        page: payload,
+      };
 
     case CONFIRMATION_MAIL:
-      return{
-        ...state
-      }
-    case GET_SALES:      
-      return{
+      return {
         ...state,
-        sales:payload
-      }
+      };
+    case GET_SALES:
+      return {
+        ...state,
+        sales: payload,
+      };
 
     case GET_REVIEWS:
-      return{
+      return {
         ...state,
-        reviews:payload
-      }
+        reviews: payload,
+      };
 
     case REPLY_SUPPORT:
-      return{
-        ...state
-      }
-
+      return {
+        ...state,
+      };
 
     default:
-    return state;
-
-
-    
+      return state;
   }
 }

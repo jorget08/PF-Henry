@@ -12,7 +12,8 @@ import {
   getCart,
   totalPrice,
   infoBooks,
-  exchangeCrypto
+  exchangeCrypto,
+  setDeliveryAddress
 } from "../../redux/actions";
 import { Link, useHistory } from "react-router-dom";
 import "./styles.css";
@@ -112,7 +113,10 @@ export default function Cart() {
         text: 'You didn´t select an adress',
       })
     }
-    else history.push("/checkout")
+    else {
+      localStorage.setItem('address', adressSelected)
+      history.push("/checkout")
+    }
   }
 
   useEffect(() => {
@@ -171,7 +175,6 @@ export default function Cart() {
                         }
                       </select>
                       <h4 style={{ margin: '0', marginTop: '10px', fontSize: '20px' }}>or</h4>
-                      <h4 style={{ margin: '5px 0' }}>Add a new address!</h4>
                       <CheckoutDirection />
                       <button style={{ fontSize: '30px', width: '100%', margin: '10px 0' }} type="button" onClick={closeModal}>Ready!</button>
                     </div>
