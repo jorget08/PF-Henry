@@ -69,6 +69,43 @@ const sendEmailPassword = async (req, res) => {
         msg: 'Email sent'
     });
 }
+const sendEmailSupport = async (req, res) => {
+    const { email, name, message } = req.body;
+    //? si no viene el email no se envia el correo 
+    if (!email || !name || !message) {
+        return res.json({
+            ok: false,
+            msg: 'Email not sent'
+        });
+    }
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'bookstore1511@gmail.com',
+            pass: 'qyrvkdsvuzwgotne'
+        }
+    });
+    const mailOptions = {
+        from: "BookStore <",
+        to: email,
+        subject: 'Support - BookStore',
+        text: 'Hello ' + name + '\n\n' +
+        'You have a new support message:\n' +
+        message + '\n\n' +
+        'BookStore'
+    };     
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });   
+    res.json({
+        ok: true,
+        msg: 'Email sent'
+    });
 
+}
 
-module.exports = { sendEmail, sendEmailPassword };
+module.exports = { sendEmail, sendEmailPassword, sendEmailSupport };
