@@ -22,7 +22,7 @@ export default function ShoppingHistory() {
 
   useEffect(() =>  {
       dispatch(getShoppingHistory(id))
-  }, [dispatch, payments]);
+  }, [dispatch]);
 
   var columns = useMemo(() => COLUMNS, [])
   var data = useMemo(() => dat, [payments])
