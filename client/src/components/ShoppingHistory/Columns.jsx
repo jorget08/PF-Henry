@@ -2,8 +2,7 @@ export const COLUMNS = [
     {
         Header: "Title",
         accessor: (row) => {
-            console.log("TUCARA", row.paymentbooks?.map(e => e.title))
-            return row.paymentbooks?.map(e => e.title).join(',  ')                     
+            return row.paymentbooks?.map(e => e.title).join(',  ')                 
         },
     },
     {
@@ -21,13 +20,13 @@ export const COLUMNS = [
     {
         Header: "Quantity",
         accessor: (row) => {
-            return row.payments?.paymentsbooks?.length
+            return row.paymentbooks.length
         },
     },
     {
         Header: "Date",
         accessor: (row) => {
-            return "createdAt"
+            return row.createdAt
         }
     },
 ]
