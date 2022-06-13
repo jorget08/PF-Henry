@@ -14,6 +14,7 @@ export default function ShoppingHistory() {
   let id = user.idUser;
  
   console.log(paymentcryptos)
+  console.log(payments)
 
   if (payments === undefined) var dat = []
   else var dat = payments.concat(paymentcryptos)

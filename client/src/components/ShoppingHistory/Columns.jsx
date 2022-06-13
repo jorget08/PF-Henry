@@ -47,7 +47,7 @@ export const COLUMNS = [
         accessor: (row) => {
             let has=row.hash
             let ref="https://rinkeby.etherscan.io/tx/"+has
-            return row.hash? <a href={ref} target="_blank">Etherscan</a>:null
+            return row.hash? <a href={ref} target="_blank">Click here for details!</a>:<h3>Not available</h3>
         }
     },
 ]
