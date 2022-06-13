@@ -16,6 +16,10 @@ export const COLUMNS = [
         accessor: 'emailGuess',
     },
     {
+        Header: 'Name',
+        accessor: 'nameGuess',
+    },
+    {
         Header: 'Comment',
         accessor: 'comment',
     },
