@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteBook, getBooks } from '../../../redux/actions'
+import { deleteBook, deleteReview, getBooks } from '../../../redux/actions'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from './SearchBar'
 import { COLUMNS } from './Columns'
@@ -15,6 +15,8 @@ export default function Stock() {
 
   const dispatch = useDispatch()
   const allBooks = useSelector(state => state.books)
+  const user = useSelector(state => state.user)
+  const bookDet = useSelector(state => state.detail)
   const [isOpenModal, openModal, closeModal] = useModals(false);
 
   useEffect(() => {
@@ -35,7 +37,7 @@ export default function Stock() {
             <button className='iconDash' onClick={e => handleEdit(e, row)}>
               <AiFillEdit size={30} />
             </button>
-            <button className='iconDash delete' onClick={handleDelete}>
+            <button className='iconDash delete' onClick={(e) => deleteComment(row.original.id)}>
               <FaRegTrashAlt size={30} />
             </button>
           </div>
@@ -46,9 +48,9 @@ export default function Stock() {
     )
   }
 
-  const handleDelete = (e) => {
-    e.preventDefault()
-    alert('QUERE BORRAR VO ? SO LOCO SO?')
+
+  function deleteComment(element) {
+    dispatch(deleteReview(user.idUser, bookDet.id,element.id))
   }
 
   const handleEdit = (e, row) => {
