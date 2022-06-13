@@ -25,10 +25,10 @@ export default function Reports() {
   const data = useMemo(() => allReviews, [])
 
   const handleDelete = (e, row) => {
-    console.log ("SOY e", row)
-    e.preventDefault();
-    dispatch(discardReport(row, {report:null}))
-  
+    // console.log ("SOY e", row)
+    // e.preventDefault();
+    // dispatch(discardReport(row, {report:null}))  
+    alert ('HOLA A TODOS, YO SOY EL LEON!')
   }
 
 
@@ -44,6 +44,7 @@ export default function Reports() {
               Delete
             </button>
             <button className='' onClick={(row) => handleDelete(row)}>
+            
               Discard
             </button>
           </div>
