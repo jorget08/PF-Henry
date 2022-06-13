@@ -25,9 +25,8 @@ box-shadow: 0 5px 50px 5px #001044;
     
     
 }
-.settingsUser button{
+.buttonSeting{
     border-radius: 50%;
-
     border: 2px solid #c03b3b;
     height: 2.5rem;
     width: 2.5rem;
@@ -85,28 +84,6 @@ ul{
     justify-content: flex-end;
 }
 
-/* @media all and (max-width: 1000px) {
-    .tableAdress .tableHeader {
-        display: none;
-   }
-    .tableAdress li {
-        display: block;
-   }
-    .tableAdress .col {
-        flex-basis: 100%;
-   }
-    .tableAdress .col {
-        display: flex;
-        padding: 10px 0;
-   }
-    .tableAdress .col:before {
-        color: #6c7a89;
-        padding-right: 10px;
-        content: attr(data-label);
-        flex-basis: 50%;
-        text-align: right;
-   }
-} */
 
 
 

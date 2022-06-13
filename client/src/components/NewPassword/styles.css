@@ -32,6 +32,7 @@
     background-color: #da6868;
 }
 
+
 .containerButton {
     display: flex;
     flex-direction: column;
@@ -62,10 +63,9 @@
     --color: #da6868;
     --hover: #da6868;
 }
-.containerButton button {
+.pulse {
     background: none;
     border: 2px solid;
-    border-radius: 0 !important;
     font: inherit;
     line-height: 1;
     margin: 0.5em;
@@ -73,12 +73,11 @@
     width:  18rem;
     cursor: pointer;
 }
-.containerButton button {
+.pulse {
     color: #da6868;
     transition: 0.25s;
 }
-.containerButton button:hover, button:focus {
-    border-color: #da6868 !important;
-    color: #da6868 !important;
-    background-color: white !important;
+.pulse button:hover, button:focus {
+    border-color: #da6868;
+    color: #da6868;
 }
