@@ -48,6 +48,7 @@ import {
   GET_REVIEWS,
   REPLY_SUPPORT,
   SET_DELIVERY_ADDRESS,
+  REPLY_SUPPORT_GUEST,
 } from "./types";
 
 import axios from "axios";
@@ -698,6 +699,32 @@ export function setDeliveryAddress(address) {
       return dispatch({ type: SET_DELIVERY_ADDRESS, payload: address });
     } catch (error) {
       console.log(error);
+    }
+  };
+}
+
+export function replySupportGuest(payload) {
+  return async function (dispatch) {
+    try {
+      var response = await axios.post(
+        `http://localhost:3001/email/support`,
+        payload
+        /* {
+          headers: {
+            Authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        } */
+      );
+      const res = await axios.get("http://localhost:3001/support", {
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("token")),
+        },
+      });
+      localStorage.setItem("token", JSON.stringify(res.data.token));
+      return dispatch({ type: GET_SUPPORT, payload: res.data.supports });
+      
+    } catch (e) {
+      console.log(e);
     }
   };
 }

@@ -373,6 +373,10 @@ export default function rootReducer(state = initialState, action) {
         var filtered = filter.filter(e => e.status === 1)
       }
 
+      if (payload === "all") {
+        filtered = [...state.backupSupport]
+      }
+
       if (filtered === undefined) {return {
         ...state,
         support: []

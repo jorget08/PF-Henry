@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useTable, useSortBy, useGlobalFilter, useFilters } from 'react-table'
 import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { filterSupportStatus, getSupport, replySupport} from '../../../redux/actions'
+import { filterSupportStatus, getSupport, replySupport, replySupportGuest} from '../../../redux/actions'
 import { COLUMNS } from './Columns'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from './SearchBar'
@@ -14,37 +14,37 @@ export default function SupportAdmin() {
   const dispatch = useDispatch()
   const supportData = useSelector((state) => state.support)
   const [isOpenModal, openModal, closeModal] = useModals(false);
-  const [sup, setSup] = useState("")
+  const [resp, setResp] = useState({name: "", email: "", message: ""})
+  const [bool, setBool] = useState(true) 
 
   const [respon, setResponse] = useState("")
 
   useEffect(() => {
     dispatch(getSupport())    
-  }, [dispatch])
+  }, [dispatch, supportData])
 
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => supportData, [supportData])
 
-  const handleClick = (e, data) => {
+  const handleClick = (e, {name, email}) => {
     e.preventDefault();
-    const idSup = data;
-    setSup(idSup)
-    console.log(sup)
+    setResp({...resp, name: name, email: email})
+    console.log("Soy el ID y el mail", name, email)
     openModal()
   }
   
   const handleChangeInput = (e) => {
     setResponse(e.target.value)
+    setResp({...resp, message: respon})
     console.log(respon)
   }
 
   const submitReply = (e) => {
     e.preventDefault();
-    dispatch(replySupport({
-      idSupport: sup, 
-      response: respon
-    }))
-    alert("aca toy")
+    dispatch(replySupportGuest(resp))
+    console.log(resp)
+    alert("Answer sent!")
+    setBool(!bool)
     closeModal()
   }
 
@@ -62,14 +62,15 @@ export default function SupportAdmin() {
           Cell: ({ row }) => ( 
             <div>
               {
-                (row.values.user === null && row.values.status === 0)? <button onClick={(e) => handleClick(e, row.values.idSupport)}>
-                Reply by mail
-                </button>: <span>-</span>
-              }
-              {
-                (row.values.status === 0)? <button onClick={(e) => handleClick(e, row.values.idSupport)}>
+                (row.values.userIdUser === undefined && row.values.status === 0)? <button onClick={(e) => handleClick(e, {
+                  name: row.values.nameGuess,
+                  email: row.values.emailGuess
+                })}>
+                Reply by mail 
+                </button>:
+                <button onClick={(e) => handleClick(e, {email: row.values.emailGuess})}>
                 Reply
-                </button>: <span>-</span>
+                </button>
               }
             </div>
           )
