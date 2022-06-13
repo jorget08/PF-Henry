@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
 import NavBar from '../NavBar/NavBar';
 import { Formik, Form, Field } from 'formik'
@@ -6,7 +6,6 @@ import './support.css'
 // import { scrollToTop } from 'react-scroll/modules/mixins/animate-scroll';
 import { MdKeyboardArrowUp } from 'react-icons/md'
 import { MdKeyboardArrowDown } from 'react-icons/md'
-
 import { postSupport } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 import Footer from '../Footer/Footer';
@@ -18,6 +17,9 @@ export default function Support() {
     const dispatch = useDispatch()
     const captcha = useRef(null)
     const [captchaVal, setCaptchaVal]=useState(false)
+
+    const token = localStorage.getItem("token");
+    const [isLogged, setIsLogged] = useState(false);
 
     const scroll0 = useRef()
     const scroll1 = useRef()
@@ -56,6 +58,10 @@ export default function Support() {
             Payment: false
         })
     }
+
+    useEffect(() => {
+        token ? setIsLogged(true) : setIsLogged(false);
+      }, [token, isLogged]);
 
     return (
         <>
@@ -147,7 +153,12 @@ export default function Support() {
                                 in our page yet, we recomends you to do it now clicking here.
                             </p>
 
-
+                            {isLogged? 
+                            
+                            <p  className='text'>You are already a member of our community! You can ask what you want on your profile directly!</p>
+                            
+                            : 
+                            
                             <Formik
                                 initialValues={{
                                     name: "",
@@ -224,6 +235,7 @@ export default function Support() {
                                     </div>
                                 )}
                             </Formik>
+                            }
                         </div>
                     }
                 </div>

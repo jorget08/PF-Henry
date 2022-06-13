@@ -22,6 +22,7 @@ import { AuthContext } from "./auth/authContext";
 import { getUser } from "./redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import ShoppingHistory from "./components/ShoppingHistory/ShoppingHistory";
+import SupportUser from "./components/SupportUser/SupportUser";
 import UserConfirmation from "./components/UserConfirmation/UserConfirmation";
 import NewPassword from "./components/NewPassword/NewPassword";
 import CheckoutDirection from "./components/CheckoutDirection/CheckoutDirection";
@@ -66,6 +67,7 @@ function App() {
         <Route path={"/editProfile"} component={EditProfile} />
         <Route exact path={"/favourites"} component={UserFavs} />
         <Route path={`/ShoppingHistory/${id}`} component={ShoppingHistory} />
+        <Route path={`/SupportUser`} component={SupportUser} />
         <Route path={`/confirmation/:id`} component={UserConfirmation} />
         <Route path={`/password/:id`} component={NewPassword} />
       </>

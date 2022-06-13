@@ -20,6 +20,7 @@ import { FaShoppingBag } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
 import { ImBooks } from "react-icons/im";
 import { FiSun } from "react-icons/fi";
+import { cBiSupport } from "react-icons/bi"
 import Swal from "sweetalert2";
 import "./styles.css";
 
@@ -174,6 +175,11 @@ export default function NavBar() {
                   <MenuItem icon={<FaShoppingBag />}>
                     Shopping History<Link to={`/ShoppingHistory/${id}`}></Link>
                   </MenuItem>
+
+                  <MenuItem icon={<cBiSupport />}>
+                    User Support<Link to={`/SupportUser`}></Link>
+                  </MenuItem>
+
                   {user.rols?.name === "admin" && (
                     <MenuItem icon={<RiAdminFill />}>
                       Dashboard
