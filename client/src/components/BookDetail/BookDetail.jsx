@@ -16,7 +16,7 @@ import Swal from 'sweetalert2'
 
 export default function BookDetail() {
 
-  const [isAdmin, setIsAdmin] = useState(false)
+
   const user = useSelector(state => state.user)
   const history = useHistory()
   const token = localStorage.getItem("token")
@@ -25,7 +25,9 @@ export default function BookDetail() {
 
   console.log("hystory", history)
   var bookDet = useSelector(state => state.detail)
+
   var stars = [false, false, false, false, false];
+
 
 
   const redirect = () => {
@@ -63,10 +65,10 @@ export default function BookDetail() {
       input: 'select',
       inputOptions: {
 
-        type1: 'Dice algo malo',
-        type2: 'no me gusta',
-        type3: 'xd',
-        type4: 'Ogatitoranges'
+        type1: 'It is inappropriate',
+        type2: 'Can be discriminatory',
+        type3: 'It is offensive',
+        type4: 'Has inappropriate language'
 
       },
       inputPlaceholder: 'Select why',
@@ -81,7 +83,7 @@ export default function BookDetail() {
     if (report) {
       Swal.fire({
         icon: 'success',
-        title: 'Se report xd',
+        title: 'This comment has been reported',
       })
     }
     const obj = {
@@ -99,13 +101,33 @@ export default function BookDetail() {
 
   }
   function deleteComment(element) {
-    dispatch(deleteReview(user.idUser, bookDet.id, element.id))
+
+    Swal.fire({
+      title: 'Do you want to delete this comment?',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'This comment has been deleted',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        dispatch(deleteReview(user.idUser, bookDet.id, element.id))
+      }
+    })
+
+
   }
   function validate(coment) {
     let errors = {};
 
+
     if (coment.title === 'default') errors.title = "Please select an option before sending your opinion";
     if (coment.description === '') errors.description = "Please write something before sending your opinion";
+
     if (coment.description.length > 500) errors.description = "You cannot exceed 500 characters";
 
     setErrors(errors)
@@ -224,16 +246,19 @@ export default function BookDetail() {
           <div className='formReview'>
             <select name="title" id="" defaultValue='default' placeholder="How much did you like it?" value={comment.title} onChange={handleOnChange} >
               <option value="default" hidden>How much did you like it?</option>
+
               <option value="I Loved it">I Loved it</option>
               <option value="I liked it">I liked it</option>
               <option value="I didn't like it that much">I didn't like it that much</option>
               <option value="I hated it">I hated it</option>
             </select>
+
             {errors.title && <span className='spanSelect'>{errors.title}</span>}
             <label>Tell us your opinion about this book</label>
             {errors.description && <span className='spanSelect'>{errors.description}</span>}
             <textarea name="description" id="" cols="30" rows="10" value={comment.description} onChange={handleOnChange}>
             </textarea>
+
 
             <button type="submit">Send review</button>
           </div>
@@ -253,6 +278,7 @@ export default function BookDetail() {
               <h4>{e.user.name} {e.user.lastName}</h4>
               <h5>{e.title}</h5>
               <p>{e.description}</p>
+
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
                 {
@@ -265,6 +291,7 @@ export default function BookDetail() {
                     <button className='report' onClick={() => reportComment(e)}>Report <MdWarning style={{ marginBottom: '-2px' }} /></button>
                 }
               </div>
+
             </div>
           </>
         )

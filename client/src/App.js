@@ -16,7 +16,6 @@ import SupportAdmin from "./components/AdminDashboard/SupportAdmin/SupportAdmin"
 import { UserFavs } from "./components/User/UserFavs/UserFavs";
 import Support from "./components/Support/Support";
 import Users from "./components/AdminDashboard/Users/Users";
-import EditProfile from "./components/EditProfile/EditProfile";
 import Container from "./components/AdminDashboard/Container";
 import { AuthContext } from "./auth/authContext";
 import { getUser } from "./redux/actions/index";
@@ -66,7 +65,6 @@ function App() {
         <Route exact path={"/admin/supportAdmin"} component={SupportAdmin} />
         <Route path={"/checkout"} component={Checkout} />
         <Route path={"/support"} component={Support} />
-        <Route path={"/editProfile"} component={EditProfile} />
         <Route exact path={"/favourites"} component={UserFavs} />
         <Route path={`/ShoppingHistory/${id}`} component={ShoppingHistory} />
         <Route path={`/SupportUser`} component={SupportUser} />

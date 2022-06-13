@@ -4,8 +4,8 @@ import { editProfile, addAdress } from '../../redux/actions';
 import { Formik, Form, Field } from 'formik';
 import { useHistory, Link } from 'react-router-dom';
 import Swal from "sweetalert2";
-import NavBar from '../NavBar/NavBar';
 
+import './style.css'
 export default function Register() {
     const dispatch = useDispatch()
     const history = useHistory()
@@ -17,8 +17,7 @@ const redirect = ()=>{
   
     return (
     <div>
-        <NavBar />
-        <Link to="/userProfile"><button>Go back to your profile</button></Link>
+       
         <Formik
         initialValues={{
             name:user.name,
@@ -28,13 +27,14 @@ const redirect = ()=>{
         validate={(valores)=>{
             let errors = {};
             if (/^\s/.test(valores.name)) {
-                errors.name = "Cant start whit an empty space"}
+                errors.name = "Cant start with an empty space"}
             if (/^\s/.test(valores.lastName)) {
-                errors.lastName = "Cant start whit an empty space"}
+                errors.lastName = "Cant start with an empty space"}
             return errors;
         }}
         onSubmit={(valores, {resetForm}) => {
             dispatch(editProfile(valores, user.idUser))
+           
             Swal.fire(
                 'Done!',
                 'Your profile has been updated',
@@ -44,29 +44,29 @@ const redirect = ()=>{
             setTimeout(() => redirect(), "1000")
         }}>
         {({touched, errors}) => (
-        <Form classname="RegisterForm">
+        <Form  className="LoginForm">
         <h1>Modify your profile</h1>
-        <div>
+        <div className='fieldLog' >
             <label>Name: </label>
             <Field type="text" name="name" placeholder="Name"/>
             {touched.name && errors.name && <span>{errors.name}</span>}
         </div>
-        <div>
+        <div className='fieldLog'>
             <label>Last name: </label>
             <Field type="text" name="lastName" placeholder="Last name"/>
             {touched.lastName && errors.lastName && <span>{errors.lastName}</span>}
         </div>
-        <div>
-            <label>Profile picture (optional): </label>
+        <div className='fieldLog'>
+            <label>Profile picture: </label>
             <Field type="text" name="imgProfile" placeholder="Profile picture"/>
         </div>
-        <div>
+        <div className='fieldLog'>
         <button type="submit">Modify</button>
         </div>
         </Form>
         )}
         </Formik>
-        <Formik
+        {/* <Formik
         initialValues={{
             country:"",
             state:"",
@@ -142,7 +142,7 @@ const redirect = ()=>{
         </div>
         </Form>
         )}
-        </Formik>
+        </Formik> */}
     </div>
   )
 }
