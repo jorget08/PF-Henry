@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import s from './Sidebar.module.css'
 import { RiHome2Line } from 'react-icons/ri'
-import { BiSupport, BiBookAdd, BiUserCheck, BiTrendingUp, BiDollar } from 'react-icons/bi'
+import { BiSupport, BiBookAdd, BiUserCheck, BiTrendingUp, BiDollar, BiCommentX } from 'react-icons/bi'
 
 export default function Sidebar() {
 
@@ -31,6 +31,10 @@ export default function Sidebar() {
           <hr />
           <li className={s.Li}>
             <Link to="/admin/sales" className={s.Li}> <BiDollar /> <span style={{ marginLeft: "10px" }}> Sales</span></Link>
+          </li>
+          <hr />
+          <li className={s.Li}>
+            <Link to="/admin/reports" className={s.Li}> <BiCommentX /> <span style={{ marginLeft: "10px" }}> Reports</span></Link>
           </li>
           <hr />
           <li className={s.Li}>

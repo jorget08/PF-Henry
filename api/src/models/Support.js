@@ -12,6 +12,10 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
+        nameGuess: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         //? idAdmin es el id del admin que responde al support 
         idAdmin: {
             type: DataTypes.UUID,

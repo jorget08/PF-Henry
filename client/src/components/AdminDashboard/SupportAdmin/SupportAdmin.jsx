@@ -2,10 +2,10 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useTable, useSortBy, useGlobalFilter, useFilters } from 'react-table'
 import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { filterSupportStatus, getSupport, replySupport} from '../../../redux/actions'
+import { filterSupportStatus, getSupport, replySupport, replySupportGuest} from '../../../redux/actions'
 import { COLUMNS } from './Columns'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
-import SearchBar from './SearchBar'
+import SearchBar from '../SearchBar/SearchBar'
 import { useModals } from '../../Utils/useModals'
 import Modal from '../../Modal/Modal'
 
@@ -14,37 +14,38 @@ export default function SupportAdmin() {
   const dispatch = useDispatch()
   const supportData = useSelector((state) => state.support)
   const [isOpenModal, openModal, closeModal] = useModals(false);
-  const [sup, setSup] = useState("")
+  const [resp, setResp] = useState({name: "", email: "", message: "", id: null})
+  const [bool, setBool] = useState(true) 
 
   const [respon, setResponse] = useState("")
 
   useEffect(() => {
     dispatch(getSupport())    
-  }, [dispatch])
+  }, [dispatch, supportData])
 
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => supportData, [supportData])
 
-  const handleClick = (e, data) => {
+  const handleClick = (e, {name, email, id}) => {
     e.preventDefault();
-    const idSup = data;
-    setSup(idSup)
-    console.log(sup)
+    if (id === null) setResp({...resp, name: name, email: email})
+    else {setResp({response: "", idSupport: id})}
+    console.log("Soy el ID y el mail", name, email)
     openModal()
   }
   
   const handleChangeInput = (e) => {
     setResponse(e.target.value)
+    setResp({...resp, message: respon})
     console.log(respon)
   }
 
   const submitReply = (e) => {
     e.preventDefault();
-    dispatch(replySupport({
-      idSupport: sup, 
-      response: respon
-    }))
-    alert("aca toy")
+    dispatch(replySupportGuest(resp))
+    console.log(resp)
+    alert("Answer sent!")
+    setBool(!bool)
     closeModal()
   }
 
@@ -62,12 +63,14 @@ export default function SupportAdmin() {
           Cell: ({ row }) => ( 
             <div>
               {
-                (row.values.user === null && row.values.status === 0)? <button onClick={(e) => handleClick(e, row.values.idSupport)}>
-                Reply by mail
-                </button>: <span>-</span>
-              }
-              {
-                (row.values.status === 0)? <button onClick={(e) => handleClick(e, row.values.idSupport)}>
+                (row.values.userIdUser === undefined && row.values.status === 0)? <button onClick={(e) => handleClick(e, {
+                  name: row.values.nameGuess,
+                  email: row.values.emailGuess
+                })}>
+                Reply by mail 
+                </button>:
+                (row.values.userIdUser.length && row.values.status === 0)?
+                <button onClick={(e) => handleClick(e, {id: row.values.idSupport})}>
                 Reply
                 </button>: <span>-</span>
               }
@@ -106,6 +109,7 @@ export default function SupportAdmin() {
           <button onClick={(e) => submitReply(e)}>Send reply!</button>
         </div>
     </Modal>
+    <h2 className='h1'>Support</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     <select style={{marginLeft:"150px", width:"150px"}}onChange={(e) => handleSelect(e)}>
       <option value="default">Filter by</option>

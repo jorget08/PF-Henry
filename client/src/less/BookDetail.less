@@ -8,6 +8,35 @@
 
 }
 
+.comments {
+    margin: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.iconEdit {
+    &:hover {
+        color: rgb(131, 160, 212);
+    }
+}
+
+.report {
+    font-size: 15px;
+    padding: 5px 10px;
+    font-family: @Source;
+    cursor: pointer;
+    color: rgb(90, 51, 51);
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid gray;
+
+    &:hover {
+        background-color: rgb(161, 82, 82);
+        color: white;
+    }
+}
+
 .all {
 
     font-family: @Source;
@@ -86,12 +115,45 @@
 .formReview {
     display: flex;
     justify-content: space-evenly;
+    flex-direction: column;
     margin: 1rem;
-    font-family: @Source;
+    font-family: @Roboto;
+    margin: auto;
+    width: 800px;
+
+    .spanSelect {
+        text-align: justify;
+        color: @mainColor;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    select {
+        width: fit-content;
+        font-family: @Roboto;
+        border: 1px solid @borderColor;
+        outline: none;
+        padding: 5px;
+        text-align: left;
+        font-size: 18px;
+
+        &:hover {
+            color: @mainColor;
+            cursor: pointer;
+
+            option {
+                color: black;
+            }
+        }
+    }
+
+    label {
+        margin: 20px 0;
+        text-align: justify;
+    }
 
 
-    input {
-        width: 800px;
+    textarea {
         border: 1px solid @borderColor;
         font-size: 20px;
         padding: 1rem;
@@ -115,7 +177,7 @@
         outline: none;
         padding: 0px 10px;
         height: 3rem;
-        margin: auto;
+        margin: 20px auto;
 
         &:hover {
             background-color: rgb(82, 22, 22);

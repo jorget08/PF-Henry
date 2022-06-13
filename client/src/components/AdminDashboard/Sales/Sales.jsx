@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getSales } from '../../../redux/actions'
 import { GROUPED_COLUMNS } from './Columns.jsx'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
-import SearchBar from './SearchBar'
+import SearchBar from '../SearchBar/SearchBar'
 
 
 export default function Sales() {
@@ -53,7 +53,7 @@ export default function Sales() {
   const { pageIndex, pageSize } = state
   return (
     <>
-
+    <h2 className='h1'>Sales</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     <table {...getTableProps()} className={'Container'}>
       <thead >

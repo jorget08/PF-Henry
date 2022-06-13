@@ -1,49 +1,41 @@
-export const GROUPED_COLUMNS = [
-    {
-        Header: 'User',
-        columns: [
+import handleDelete from './Reports'
+export const COLUMNS = [    
+
             {   
-                Header: 'Name',
+                Header: 'User',
                 accessor: (row) => {
-                    return row.users[0]?.name.charAt(0).toUpperCase() + row.users[0]?.name?.slice(1);
+                    return row.user.name + ' ' + row.user.lastName;
                 },
             },
             {          
-                Header: 'Lastname',
+                Header: "Email",
                 accessor: (row) => {
-                    return row.users[0]?.lastName.charAt(0).toUpperCase() + row.users[0]?.lastName?.slice(1);
+                    return row.user.email;
                 }
             },
             {        
-                Header: 'Email',
-                accessor: 'users[0].email',
-            },
-        ]
-    },
-    {
-        Header: 'Purcharse Info',
-        columns: [
-            {        
-                Header: 'Purchase',
+                Header: "Book's Title",
                 accessor: (row) => {
-                    console.log("TUCARA", row.paymentbooks.map(e => e.title))
-                    return row.paymentbooks?.map(e => e.title).join(',  ')                     
-                }  
-                
-            },
-            {        
-                Header: 'Method of pay',
-                accessor: (row) => {
-                    return row.paymentSource?.charAt(0).toUpperCase() + row.paymentSource?.slice(1);
+                    return (
+                        row.book.title
+                    )
                 },
-        
-            },
+            },       
             {        
-                Header: 'Import',
+                Header: "Reviews",
                 accessor: (row) => {
-                    return "$" + row.totalPrice + ".00";       
-            },
-            }
-        ]
-    }
+                    return (
+                        row.description + ' ' + row.createdAt
+                    )
+                },
+            }, 
+            {        
+                Header: "Actionss",
+                accessor: (row) => {
+                    return (
+                        <button onClick={(e) => handleDelete(row.id)}>DISCARD</button>
+                    )
+                },
+            },    
+  
 ]

@@ -100,7 +100,7 @@ function Crypto({ value, infoBook, userId, email, name, lastName, payment }) {
 
         <button
           type="submit"
-          style={{ textAlign: 'center', alignItems: 'center', padding: ' 14px 2rem', margin: '10px 0', borderRadius: '5px', color: 'white', border: 'none', backgroundColor: '#4c72ad' }}
+          style={{ textAlign: 'center', alignItems: 'center', padding: ' 14px 2rem', margin: '10px 0', borderRadius: '5px', color: 'white', border: 'none', backgroundColor: '#4c72ad',cursor:'pointer' }}
         >
           Pay With Metamask
           <FaEthereum size={15} style={{ marginLeft: '1px', marginBottom: '-2px' }} />

@@ -48,9 +48,13 @@ import {
   GET_REVIEWS,
   REPLY_SUPPORT,
   SET_DELIVERY_ADDRESS,
+  REPLY_SUPPORT_GUEST,
+  DELETE_ADM_REVIEW,
+  DISCARD_REPORT,
 } from "./types";
 
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export function getBySearch(input) {
   return async function (dispatch) {
@@ -114,7 +118,12 @@ export function filterCategory(category) {
         var response = await axios.get(
           `http://localhost:3001/books?category=${category}`
         );
-        return dispatch({ type: FILTER_CATEGORY, payload: response.data });
+        if(response.data.length!==0){return dispatch({ type: FILTER_CATEGORY, payload: response.data })}
+        else{Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'There are no books that match your search',
+        })};
       } catch (e) {
         console.log(e);
       }
@@ -128,7 +137,12 @@ export function filterPrice(price1, price2) {
       var response = await axios.get(
         `http://localhost:3001/books?rango1=${price1}&rango2=${price2}`
       );
-      return dispatch({ type: FILTER_PRICE, payload: response.data });
+      if(response.data.length!==0){return dispatch({ type: FILTER_PRICE, payload: response.data })}
+      else{Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'There are no books that match your search',
+      })};
     } catch (e) {
       console.log(e);
     }
@@ -155,7 +169,12 @@ export function filterScore(score) {
         var response = await axios.get(
           `http://localhost:3001/books?score=${score}`
         );
-        return dispatch({ type: FILTER_SCORE, payload: response.data });
+        if(response.data.length!==0){return dispatch({ type: FILTER_SCORE, payload: response.data })}
+        else{Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'There are no books that match your search',
+        })};
       } catch (e) {
         console.log(e);
       }
@@ -674,15 +693,36 @@ export function getSales() {
 export function getReviews() {
   return async function (dispatch) {
     try {
-      const res = await axios.get(
-        `http://localhost3001/reviews/allReviews/admin`
-      );
+      const res = await axios.get('http://localhost:3001/reviews/allReviews/admin');
       console.log("ACT REVIEWS", res);
       return dispatch({ type: GET_REVIEWS, payload: res.data });
     } catch (err) {
       console.log(err);
     }
   };
+}
+
+export function deleteAdmReview(id, obj) {
+  return async function (dispatch) {
+    try {
+      const res = await axios.put(`http://localhost:3001/reviews/report/${id}`, obj)
+      console.log("DELETED", res.data)
+      return dispatch({ type: DELETE_ADM_REVIEW, payload: res.data });
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+export function discardReport(){
+  return async function (dispatch){
+    try {
+      const res = await axios.delete('http://localhost:3001/reviews?user=idUSer&books=idBook&review=idReview')
+      return dispatch({type: DISCARD_REPORT, payload:res.data})
+    } catch (err) {
+      console.log(err)
+    }
+  }
 }
 
 export function filterSupportStatus (payload) {
@@ -698,6 +738,32 @@ export function setDeliveryAddress(address) {
       return dispatch({ type: SET_DELIVERY_ADDRESS, payload: address });
     } catch (error) {
       console.log(error);
+    }
+  };
+}
+
+export function replySupportGuest(payload) {
+  return async function (dispatch) {
+    try {
+      var response = await axios.post(
+        `http://localhost:3001/email/support`,
+        payload
+        /* {
+          headers: {
+            Authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        } */
+      );
+      const res = await axios.get("http://localhost:3001/support", {
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("token")),
+        },
+      });
+      localStorage.setItem("token", JSON.stringify(res.data.token));
+      return dispatch({ type: GET_SUPPORT, payload: res.data.supports });
+      
+    } catch (e) {
+      console.log(e);
     }
   };
 }
