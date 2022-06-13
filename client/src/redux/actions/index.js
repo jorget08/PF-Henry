@@ -685,6 +685,13 @@ export function getReviews() {
   };
 }
 
+export function filterSupportStatus (payload) {
+  return ({
+      type: "FILTER_SUPPORT",
+      payload: payload
+  })
+}
+
 export function setDeliveryAddress(address) {
   return async function (dispatch) {
     try {

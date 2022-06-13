@@ -46,6 +46,7 @@ import {
   SET_DELIVERY_ADDRESS,
   GET_REVIEWS,
   REPLY_SUPPORT,
+  FILTER_SUPPORT,
 } from "../actions/types";
 
 const initialState = {
@@ -66,7 +67,8 @@ const initialState = {
   changed: false,
   comments: [],
   support: [],
-  ShoppingHistory: [],
+  backupSupport: [],
+  ShoppingHistory:[],
   page: 1,
   crypto: 0,
   sales: [],
@@ -302,6 +304,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         support: payload,
+        backupSupport: payload
       };
     case GET_FAVS:
       return {
@@ -353,11 +356,34 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case REPLY_SUPPORT:
-      return {
-        ...state,
-      };
+      return{
+        ...state
+      }
 
+    case FILTER_SUPPORT: {
+      
+      var filter = [...state.backupSupport]
+      console.log(payload)
+      
+      if (payload === "to_answer") {
+        var filtered = filter.filter(e => e.status === 0) 
+      }
+
+      if (payload === "respond") {
+        var filtered = filter.filter(e => e.status === 1)
+      }
+
+      if (filtered === undefined) {return {
+        ...state,
+        support: []
+      }}
+      else {return {
+        ...state,
+        support: [...filtered]
+      }}
+
+    }
     default:
-      return state;
+    return state;
   }
 }

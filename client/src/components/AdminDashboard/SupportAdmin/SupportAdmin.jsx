@@ -2,13 +2,12 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useTable, useSortBy, useGlobalFilter, useFilters } from 'react-table'
 import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSupport, replySupport} from '../../../redux/actions'
+import { filterSupportStatus, getSupport, replySupport} from '../../../redux/actions'
 import { COLUMNS } from './Columns'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from './SearchBar'
 import { useModals } from '../../Utils/useModals'
 import Modal from '../../Modal/Modal'
-
 
 export default function SupportAdmin() {
 
@@ -49,6 +48,11 @@ export default function SupportAdmin() {
     closeModal()
   }
 
+  const handleSelect = (e) => {
+    e.preventDefault();
+    dispatch(filterSupportStatus(e.target.value))
+  }
+
   const tableHooks = (hooks) => {
     hooks.visibleColumns.push((columns) => [
       ...columns,
@@ -56,9 +60,18 @@ export default function SupportAdmin() {
           id:"Actions",
           Header:"Actions",
           Cell: ({ row }) => ( 
-            <button onClick={(e) => handleClick(e, row.values.idSupport)}>
-              Reply
-            </button>
+            <div>
+              {
+                (row.values.user === null && row.values.status === 0)? <button onClick={(e) => handleClick(e, row.values.idSupport)}>
+                Reply by mail
+                </button>: <span>-</span>
+              }
+              {
+                (row.values.status === 0)? <button onClick={(e) => handleClick(e, row.values.idSupport)}>
+                Reply
+                </button>: <span>-</span>
+              }
+            </div>
           )
         }
       ]
@@ -94,6 +107,12 @@ export default function SupportAdmin() {
         </div>
     </Modal>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
+    <select style={{marginLeft:"150px", width:"150px"}}onChange={(e) => handleSelect(e)}>
+      <option value="default">Filter by</option>
+      <option value="to_answer">To answer</option>
+      <option value="respond">Respond</option>
+      <option value="all">All</option>
+    </select>
     <table {...getTableProps()} className={'Container'}>
       <thead >
         {headerGroups.map((headerGroups) => (
