@@ -10,15 +10,12 @@ import SearchBar from './SearchBar'
 export default function ShoppingHistory() {
 
   const user = useSelector((state) => state.user);
-  var {payments} = useSelector((state) => state.ShoppingHistory);
-  let p =useSelector((state) => state.ShoppingHistory);
+  var {payments,paymentcryptos} = useSelector((state) => state.ShoppingHistory);
   let id = user.idUser;
-  console.log("soy unaprueba",p)
-
-  console.log("SOYYYY?",payments)
+ 
 
   if (payments === undefined) var dat = []
-  else var dat = payments
+  else var dat = payments.concat(paymentcryptos)
 
   const dispatch = useDispatch();  
 
@@ -28,8 +25,7 @@ export default function ShoppingHistory() {
 
   var columns = useMemo(() => COLUMNS, [])
   var data = useMemo(() => dat, [payments])
-  // if (shoph.payments === undefined) {var data = {paymentbooks: [{title: "hola", author: "soy yo"}]}}
-  // else {var data = shoph.payments}
+ 
 
   const {
     getTableProps,

@@ -26,8 +26,7 @@ export const GROUPED_COLUMNS = [
             {        
                 Header: 'Purchase',
                 accessor: (row) => {
-                    console.log("TUCARA", row.paymentbooks.map(e => e.title))
-                    return row.paymentbooks?.map(e => e.title).join(',  ')                     
+                    return row.paymentbooks?.map(e => `${e.title} (${e.cant})`).join(',  ')                     
                 }  
                 
             },

@@ -1,8 +1,15 @@
 export const COLUMNS = [
+     {
+        Header: "ID Purchase",
+        accessor: (row) => {
+            return row.id                
+        },
+    },
     {
         Header: "Title",
         accessor: (row) => {
-            return row.paymentbooks?.map(e => e.title).join(',  ')                 
+            
+            return row.paymentbooks?.map(e => `${e.title} (${e.cant})`).join(',  ')                 
         },
     },
     {
