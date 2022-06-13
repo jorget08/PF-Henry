@@ -1,3 +1,4 @@
+import handleDelete from './Reports'
 export const COLUMNS = [    
 
             {   
@@ -27,6 +28,14 @@ export const COLUMNS = [
                         row.description + ' ' + row.createdAt
                     )
                 },
-            },     
+            }, 
+            {        
+                Header: "Actionss",
+                accessor: (row) => {
+                    return (
+                        <button onClick={(e) => handleDelete(row.id)}>DISCARD</button>
+                    )
+                },
+            },    
   
 ]
