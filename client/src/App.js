@@ -25,6 +25,7 @@ import ShoppingHistory from "./components/ShoppingHistory/ShoppingHistory";
 import UserConfirmation from "./components/UserConfirmation/UserConfirmation";
 import NewPassword from "./components/NewPassword/NewPassword";
 import CheckoutDirection from "./components/CheckoutDirection/CheckoutDirection";
+import Reports from './components/AdminDashboard/Reports/Reports'
 
 function App() {
   const token = localStorage.getItem("token");
@@ -60,6 +61,7 @@ function App() {
         <Route exact path={"/admin/stock"} component={Stock} />
         <Route exact path={"/admin/users"} component={Users} />
         <Route exact path={"/admin/sales"} component={Sales} />
+        <Route exact path={"/admin/reports"} component={Reports} />
         <Route exact path={"/admin/supportAdmin"} component={SupportAdmin} />
         <Route path={"/checkout"} component={Checkout} />
         <Route path={"/support"} component={Support} />

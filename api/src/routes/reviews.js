@@ -12,7 +12,7 @@ router.get('/allReviews/admin', async (req, res, next) => {
                     [Op.ne]: null
                 }
             }, include: [{ model: Book, attributes: ['id', 'title', 'image'] }
-                , { model: User, attributes: ['idUser'] }]
+                , { model: User, attributes: ['idUser', 'name', 'lastName', 'email'] }]
         })
         return res.status(200).json(allReviews)
     } catch (error) {
