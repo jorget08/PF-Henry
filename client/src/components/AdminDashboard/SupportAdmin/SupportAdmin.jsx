@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { filterSupportStatus, getSupport, replySupport, replySupportGuest} from '../../../redux/actions'
 import { COLUMNS } from './Columns'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
-import SearchBar from './SearchBar'
+import SearchBar from '../SearchBar/SearchBar'
 import { useModals } from '../../Utils/useModals'
 import Modal from '../../Modal/Modal'
 
@@ -109,6 +109,7 @@ export default function SupportAdmin() {
           <button onClick={(e) => submitReply(e)}>Send reply!</button>
         </div>
     </Modal>
+    <h2 className='h1'>Support</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     <select style={{marginLeft:"150px", width:"150px"}}onChange={(e) => handleSelect(e)}>
       <option value="default">Filter by</option>
