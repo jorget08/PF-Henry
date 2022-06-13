@@ -6,3 +6,26 @@
     padding-left: 155px;    
     background-color: red;    
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+.span{
+    display: flex;
+    justify-content: flex-start;
+    font-size: 40px;
+    font-family: 'Rubik', sans-serif;
+    padding:18px 0 17px 30rem;
+    align-items: center;
+    width: 60%;
+    
+}
+
+.span input{
+    margin-left: 10px;
+    border-radius: 10px;
+    outline: 0;
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+    border: 1px solid gray;
+    width: 300px;
+    height: 50px;
+}

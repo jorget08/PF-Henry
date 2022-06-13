@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { discardReport, deleteAdmReview, getReviews } from '../../../redux/actions'
 import { COLUMNS } from './Columns.jsx'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
-import SearchBar from './SearchBar'
+import SearchBar from '../SearchBar/SearchBar'
 
 
 export default function Reports() {
@@ -86,7 +86,7 @@ export default function Reports() {
   const { pageIndex, pageSize } = state
   return (
     <>
-
+    <h2 className='h1'>Reports</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     <table {...getTableProps()} className={'Container'}>
       <thead >

@@ -4,7 +4,7 @@ import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteBook, deleteReview, getBooks } from '../../../redux/actions'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
-import SearchBar from './SearchBar'
+import SearchBar from '../SearchBar/SearchBar'
 import { COLUMNS } from './Columns'
 import Modal from './Modal/Modal'
 import { useModals } from '../../Utils/useModals'
@@ -94,6 +94,7 @@ export default function Stock() {
       <Modal isOpen={isOpenModal} closeModal={closeModal}>
         <EditBook />
       </Modal>
+      <h2 className='h1'>Stock</h2>
       <SearchBar filter={globalFilter} setFilter={setGlobalFilter} />
       <table {...getTableProps()} className={'Container'}>
         <thead >

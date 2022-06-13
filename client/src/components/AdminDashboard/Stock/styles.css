@@ -1,6 +1,6 @@
 .Container{
   width: calc(100vh + 35.89rem);
-  margin-left: 150px;
+  margin-left: 150px; 
 }
 .iconDash:hover {
   cursor: pointer;
@@ -40,4 +40,18 @@ table {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.h1{
+  background-color: #dbdbdb;
+  height: 69px;
+  border-bottom: 2px solid black;
+  color: black;
+  padding-left: 10%;
+  font-size: 50px;
+  font-family: 'Rubik', sans-serif;
+  padding-top: 10px;
+  padding-bottom: 6px;
+  margin: 0%;
+  text-align: center;
 }
