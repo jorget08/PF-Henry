@@ -14,7 +14,7 @@ export default function SupportAdmin() {
   const dispatch = useDispatch()
   const supportData = useSelector((state) => state.support)
   const [isOpenModal, openModal, closeModal] = useModals(false);
-  const [resp, setResp] = useState({name: "", email: "", message: ""})
+  const [resp, setResp] = useState({name: "", email: "", message: "", id: null})
   const [bool, setBool] = useState(true) 
 
   const [respon, setResponse] = useState("")
@@ -26,9 +26,10 @@ export default function SupportAdmin() {
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => supportData, [supportData])
 
-  const handleClick = (e, {name, email}) => {
+  const handleClick = (e, {name, email, id}) => {
     e.preventDefault();
-    setResp({...resp, name: name, email: email})
+    if (id === null) setResp({...resp, name: name, email: email})
+    else {setResp({response: "", idSupport: id})}
     console.log("Soy el ID y el mail", name, email)
     openModal()
   }
@@ -68,9 +69,10 @@ export default function SupportAdmin() {
                 })}>
                 Reply by mail 
                 </button>:
-                <button onClick={(e) => handleClick(e, {email: row.values.emailGuess})}>
+                (row.values.userIdUser.length && row.values.status === 0)?
+                <button onClick={(e) => handleClick(e, {id: row.values.idSupport})}>
                 Reply
-                </button>
+                </button>: <span>-</span>
               }
             </div>
           )
