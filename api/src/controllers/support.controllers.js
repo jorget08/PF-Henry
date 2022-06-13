@@ -10,6 +10,7 @@ const createSupport = async (req, res) => {
             //? 
             const support = await Support.create({
                 emailGuess: email,
+                nameGuess: name,
                 comment,
                 date: new Date(),
                 status: 0
