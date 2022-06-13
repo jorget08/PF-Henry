@@ -4,17 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { getDetail, clearDetail, deleteBook, addComment, showComments, getBooks, reportReview, updateReview, deleteReview } from "../../redux/actions";
 import DetailCompra from '../DetailCompra/DetailCompra';
-import { Formik, Form, Field } from 'formik'
 import Stars from '../Stars/Stars';
 import NavBar from '../NavBar/NavBar'
 import Footer from '../Footer/Footer';
 import "./styles.css"
-import { helpCallPut, helpCallUpdate } from '../../helCall';
 import Swal from 'sweetalert2'
 
 export default function BookDetail() {
 
-  const [isAdmin, setIsAdmin] = useState(false)
+
   const user = useSelector(state => state.user)
   const history = useHistory()
   const token = localStorage.getItem("token")
@@ -23,8 +21,8 @@ export default function BookDetail() {
 
   console.log("hystory", history)
   var bookDet = useSelector(state => state.detail)
-  var stars = [false, false, false, false, false];
- 
+
+
 
   const redirect = () => {
     history.push("/home")
@@ -61,10 +59,10 @@ export default function BookDetail() {
       input: 'select',
       inputOptions: {
 
-        type1: 'Dice algo malo',
-        type2: 'no me gusta',
-        type3: 'xd',
-        type4: 'Ogatitoranges'
+        type1: 'It is inappropriate',
+        type2: 'Can be discriminatory',
+        type3: 'It is offensive',
+        type4: 'Has inappropriate language'
 
       },
       inputPlaceholder: 'Select why',
@@ -79,7 +77,7 @@ export default function BookDetail() {
     if (report) {
       Swal.fire({
         icon: 'success',
-        title: 'Se report xd',
+        title: 'This comment has been reported',
       })
     }
     const obj = {
@@ -97,23 +95,39 @@ export default function BookDetail() {
 
   }
   function deleteComment(element) {
-    dispatch(deleteReview(user.idUser, bookDet.id,element.id))
+    Swal.fire({
+      title: 'Do you want to delete this comment?',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'This comment has been deleted',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        dispatch(deleteReview(user.idUser, bookDet.id, element.id))
+      }
+    })
+
   }
   function validate(coment) {
     let errors = {};
 
     if (coment.title === 'default') errors.title = "You need to select an option";
     if (coment.description === '') errors.description = "You need to write something";
-    if (coment.description.length >500) errors.description = "You cannot exceed 500 characters";
-    
+    if (coment.description.length > 500) errors.description = "You cannot exceed 500 characters";
+
     setErrors(errors)
     return errors;
   }
-  
+
   async function onSubmit(event) {
     event.preventDefault()
-      
-    
+
+
     if (Object.keys(validate(comment)).length === 0) {
       if (comment.id !== '') {
         const review = {
@@ -128,7 +142,7 @@ export default function BookDetail() {
           id: ''
         })
       } else {
-        
+
         var rev = {
           review: {
             title: comment.title,
@@ -143,10 +157,10 @@ export default function BookDetail() {
         })
       }
       return dispatch(addComment(rev))
-    } 
+    }
 
   }
-  
+
   function handleOnChange(e) {
     setComment({
       ...comment,
@@ -155,9 +169,9 @@ export default function BookDetail() {
     validate(
       {
         ...comment,
-      [e.target.name]: e.target.value
+        [e.target.name]: e.target.value
       })
-    
+
   }
   return (
     <div className='all'>
@@ -223,14 +237,14 @@ export default function BookDetail() {
         <form className='' onSubmit={onSubmit}>
           <div>
             <label>How much did you like this book?</label>
-            <select name="title" id=""  placeholder="How much did you like it?"  value={comment.title} onChange={handleOnChange} >
+            <select name="title" id="" placeholder="How much did you like it?" value={comment.title} onChange={handleOnChange} >
               <option value="default">How much did you like it?</option>
               <option value="I Loved it">I Loved it</option>
               <option value="I liked it">I liked it</option>
               <option value="I didn't like it that much">I didn't like it that much</option>
               <option value="I hated it">I hated it</option>
             </select>
-           
+
             {errors.title && <span className='errorMsg'>{errors.title}</span>}
           </div>
           <label>Tell us your opinion about this book</label>
@@ -261,8 +275,8 @@ export default function BookDetail() {
               {
                 e.userIdUser === user.idUser &&
                 <>
-                <button onClick={() => editComment(e)}>Edit</button>
-                <button onClick={() => deleteComment(e)}>Delete</button>
+                  <button onClick={() => editComment(e)}>Edit</button>
+                  <button onClick={() => deleteComment(e)}>Delete</button>
                 </>
               }
             </div>

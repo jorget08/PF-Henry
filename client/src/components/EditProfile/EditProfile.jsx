@@ -27,9 +27,9 @@ const redirect = ()=>{
         validate={(valores)=>{
             let errors = {};
             if (/^\s/.test(valores.name)) {
-                errors.name = "Cant start whit an empty space"}
+                errors.name = "Cant start with an empty space"}
             if (/^\s/.test(valores.lastName)) {
-                errors.lastName = "Cant start whit an empty space"}
+                errors.lastName = "Cant start with an empty space"}
             return errors;
         }}
         onSubmit={(valores, {resetForm}) => {
