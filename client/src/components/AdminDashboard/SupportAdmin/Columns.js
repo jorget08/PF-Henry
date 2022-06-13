@@ -1,5 +1,3 @@
-import {CSearch} from './CSearch'
-
 export const COLUMNS = [
     {
         Header: 'UserID',

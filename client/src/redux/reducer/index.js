@@ -47,6 +47,8 @@ import {
   GET_REVIEWS,
   REPLY_SUPPORT,
   FILTER_SUPPORT,
+  DELETE_ADM_REVIEW,
+  DISCARD_REPORT,
 } from "../actions/types";
 
 const initialState = {
@@ -384,9 +386,18 @@ export default function rootReducer(state = initialState, action) {
       else {return {
         ...state,
         support: [...filtered]
-      }}
-
+      }}      
     }
+    case DELETE_ADM_REVIEW:
+      return {
+        ...state,
+        reviews: payload,
+      };
+    case DISCARD_REPORT:
+      return{
+        ...state,
+        reviews:payload
+      }
     default:
     return state;
   }

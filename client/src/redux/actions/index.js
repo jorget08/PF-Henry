@@ -49,6 +49,8 @@ import {
   REPLY_SUPPORT,
   SET_DELIVERY_ADDRESS,
   REPLY_SUPPORT_GUEST,
+  DELETE_ADM_REVIEW,
+  DISCARD_REPORT,
 } from "./types";
 
 import axios from "axios";
@@ -691,15 +693,36 @@ export function getSales() {
 export function getReviews() {
   return async function (dispatch) {
     try {
-      const res = await axios.get(
-        `http://localhost3001/reviews/allReviews/admin`
-      );
+      const res = await axios.get('http://localhost:3001/reviews/allReviews/admin');
       console.log("ACT REVIEWS", res);
       return dispatch({ type: GET_REVIEWS, payload: res.data });
     } catch (err) {
       console.log(err);
     }
   };
+}
+
+export function deleteAdmReview(id, obj) {
+  return async function (dispatch) {
+    try {
+      const res = await axios.put(`http://localhost:3001/reviews/report/${id}`, obj)
+      console.log("DELETED", res.data)
+      return dispatch({ type: DELETE_ADM_REVIEW, payload: res.data });
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+export function discardReport(){
+  return async function (dispatch){
+    try {
+      const res = await axios.delete('http://localhost:3001/reviews?user=idUSer&books=idBook&review=idReview')
+      return dispatch({type: DISCARD_REPORT, payload:res.data})
+    } catch (err) {
+      console.log(err)
+    }
+  }
 }
 
 export function filterSupportStatus (payload) {

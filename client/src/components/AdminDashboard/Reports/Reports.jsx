@@ -1,28 +1,59 @@
 import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import { useDispatch, useSelector } from 'react-redux'
-import { getReviews } from '../../../redux/actions'
-import { GROUPED_COLUMNS } from './Columns.jsx'
+import { discardReport, deleteAdmReview, getReviews } from '../../../redux/actions'
+import { COLUMNS } from './Columns.jsx'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from './SearchBar'
 
 
 export default function Reports() {
   
-
   const dispatch = useDispatch()
-  const allReviews = useSelector(state => state.sales)
+ 
+  const allReviews = useSelector(state => state.reviews)
 
   useEffect(() => {
     dispatch(getReviews())    
   }, [dispatch])
   setTimeout(() => {
-    console.log('SALE SALE SALE', allReviews);
+    console.log('REVIEWS', allReviews);
   }, "3000")
 
   
-  const columns = useMemo(() => GROUPED_COLUMNS, [])
+  const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => allReviews, [])
+
+  const handleDelete = (e, row) => {
+    console.log ("SOY e", row)
+    e.preventDefault();
+    dispatch(discardReport(row, {report:null}))
+  
+  }
+
+
+  const tableHooks = (hooks) => {
+    hooks.visibleColumns.push((columns) => [
+      ...columns,
+      {
+        id: "Actions",
+        Header: "Actions",
+        Cell: ({ row }) => (
+          <div style={{ display: 'flex' }}>
+            <button className='' >
+              Delete
+            </button>
+            <button className='' onClick={(row) => handleDelete(row)}>
+              Discard
+            </button>
+          </div>
+
+        )
+      }
+    ]
+    )
+  }
+
 
   const {
     getTableProps,
@@ -44,6 +75,7 @@ export default function Reports() {
     columns,
     data
   },
+  tableHooks,
   useGlobalFilter,
   useSortBy,
   usePagination,
