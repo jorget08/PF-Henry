@@ -671,3 +671,9 @@ export function getReviews() {
   }
 }
 
+export function filterSupportStatus (payload) {
+  return ({
+      type: "FILTER_SUPPORT",
+      payload: payload
+  })
+}
