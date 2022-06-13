@@ -4,12 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { getDetail, clearDetail, deleteBook, addComment, showComments, getBooks, reportReview, updateReview, deleteReview } from "../../redux/actions";
 import DetailCompra from '../DetailCompra/DetailCompra';
-import { Formik, Form, Field } from 'formik'
+import { FaRegTrashAlt } from 'react-icons/fa'
 import Stars from '../Stars/Stars';
 import NavBar from '../NavBar/NavBar'
 import Footer from '../Footer/Footer';
-import "./styles.css"
-import { helpCallPut, helpCallUpdate } from '../../helCall';
+import "./styles.css";
+import { AiFillEdit } from 'react-icons/ai';
+import { MdWarning } from 'react-icons/md'
+// import { helpCallPut, helpCallUpdate } from '../../helCall';
 import Swal from 'sweetalert2'
 
 export default function BookDetail() {
@@ -24,7 +26,7 @@ export default function BookDetail() {
   console.log("hystory", history)
   var bookDet = useSelector(state => state.detail)
   var stars = [false, false, false, false, false];
- 
+
 
   const redirect = () => {
     history.push("/home")
@@ -97,23 +99,23 @@ export default function BookDetail() {
 
   }
   function deleteComment(element) {
-    dispatch(deleteReview(user.idUser, bookDet.id,element.id))
+    dispatch(deleteReview(user.idUser, bookDet.id, element.id))
   }
   function validate(coment) {
     let errors = {};
 
-    if (coment.title === 'default') errors.title = "You need to select an option";
-    if (coment.description === '') errors.description = "You need to write something";
-    if (coment.description.length >500) errors.description = "You cannot exceed 500 characters";
-    
+    if (coment.title === 'default') errors.title = "Please select an option before sending your opinion";
+    if (coment.description === '') errors.description = "Please write something before sending your opinion";
+    if (coment.description.length > 500) errors.description = "You cannot exceed 500 characters";
+
     setErrors(errors)
     return errors;
   }
-  
+
   async function onSubmit(event) {
     event.preventDefault()
-      
-    
+
+
     if (Object.keys(validate(comment)).length === 0) {
       if (comment.id !== '') {
         const review = {
@@ -128,7 +130,7 @@ export default function BookDetail() {
           id: ''
         })
       } else {
-        
+
         var rev = {
           review: {
             title: comment.title,
@@ -143,10 +145,10 @@ export default function BookDetail() {
         })
       }
       return dispatch(addComment(rev))
-    } 
+    }
 
   }
-  
+
   function handleOnChange(e) {
     setComment({
       ...comment,
@@ -155,9 +157,9 @@ export default function BookDetail() {
     validate(
       {
         ...comment,
-      [e.target.name]: e.target.value
+        [e.target.name]: e.target.value
       })
-    
+
   }
   return (
     <div className='all'>
@@ -211,8 +213,6 @@ export default function BookDetail() {
       }
       <div className='commentTitle'>
         <h3>Have you already read the book? {!comments.length && <span>(Be the first to comment this book)</span>}</h3>
-        <p>Leave a comment about it below!</p>
-
       </div>
 
       {token ? <div>
@@ -221,27 +221,23 @@ export default function BookDetail() {
 
 
         <form className='' onSubmit={onSubmit}>
-          <div>
-            <label>How much did you like this book?</label>
-            <select name="title" id=""  placeholder="How much did you like it?"  value={comment.title} onChange={handleOnChange} >
-              <option value="default">How much did you like it?</option>
+          <div className='formReview'>
+            <select name="title" id="" defaultValue='default' placeholder="How much did you like it?" value={comment.title} onChange={handleOnChange} >
+              <option value="default" hidden>How much did you like it?</option>
               <option value="I Loved it">I Loved it</option>
               <option value="I liked it">I liked it</option>
               <option value="I didn't like it that much">I didn't like it that much</option>
               <option value="I hated it">I hated it</option>
             </select>
-           
-            {errors.title && <span className='errorMsg'>{errors.title}</span>}
-          </div>
-          <label>Tell us your opinion about this book</label>
-          <div>
-            <textarea name="description" id="" cols="30" rows="10" value={comment.description} onChange={handleOnChange}></textarea>
+            {errors.title && <span className='spanSelect'>{errors.title}</span>}
+            <label>Tell us your opinion about this book</label>
+            {errors.description && <span className='spanSelect'>{errors.description}</span>}
+            <textarea name="description" id="" cols="30" rows="10" value={comment.description} onChange={handleOnChange}>
+            </textarea>
 
-            {errors.description && <span className='errorMsg'>{errors.description}</span>}
-
+            <button type="submit">Send review</button>
           </div>
 
-          <button type="submit">Send review</button>
         </form>
 
 
@@ -257,14 +253,18 @@ export default function BookDetail() {
               <h4>{e.user.name} {e.user.lastName}</h4>
               <h5>{e.title}</h5>
               <p>{e.description}</p>
-              <button onClick={() => reportComment(e)}>Report</button>
-              {
-                e.userIdUser === user.idUser &&
-                <>
-                <button onClick={() => editComment(e)}>Edit</button>
-                <button onClick={() => deleteComment(e)}>Delete</button>
-                </>
-              }
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+
+                {
+                  e.userIdUser === user.idUser ?
+                    <>
+                      <AiFillEdit className='iconEdit' style={{ marginRight: '10px', cursor: 'pointer' }} size={30} onClick={() => editComment(e)} />
+                      <FaRegTrashAlt className='icon delete' size={30} style={{ marginRight: '10px', cursor: 'pointer' }} onClick={() => deleteComment(e)} />
+                    </>
+                    :
+                    <button className='report' onClick={() => reportComment(e)}>Report <MdWarning style={{ marginBottom: '-2px' }} /></button>
+                }
+              </div>
             </div>
           </>
         )
