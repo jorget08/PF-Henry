@@ -11,7 +11,7 @@ import Checkout from "./components/Checkout/Checkout";
 import UserProfile from "./components/UserProfile/UserProfile";
 import Sidebar from "./components/AdminDashboard/Sidebar";
 import Stock from "./components/AdminDashboard/Stock/Stock";
-import Sales from "./components/AdminDashboard/Sales/Sales"
+import Sales from "./components/AdminDashboard/Sales/Sales";
 import SupportAdmin from "./components/AdminDashboard/SupportAdmin/SupportAdmin";
 import { UserFavs } from "./components/User/UserFavs/UserFavs";
 import Support from "./components/Support/Support";
@@ -21,17 +21,16 @@ import Container from "./components/AdminDashboard/Container";
 import { AuthContext } from "./auth/authContext";
 import { getUser } from "./redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
-import ShoppingHistory from './components/ShoppingHistory/ShoppingHistory'
+import ShoppingHistory from "./components/ShoppingHistory/ShoppingHistory";
 import UserConfirmation from "./components/UserConfirmation/UserConfirmation";
 import NewPassword from "./components/NewPassword/NewPassword";
 import CheckoutDirection from "./components/CheckoutDirection/CheckoutDirection";
-
 
 function App() {
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  let id = user.idUser
+  let id = user.idUser;
   //? if token is not null, get user
   useEffect(() => {
     if (token) {
@@ -65,14 +64,11 @@ function App() {
         <Route path={"/checkout"} component={Checkout} />
         <Route path={"/support"} component={Support} />
         <Route path={"/editProfile"} component={EditProfile} />
-        <Route exact path={'/favourites'} component={UserFavs}/>
+        <Route exact path={"/favourites"} component={UserFavs} />
         <Route path={`/ShoppingHistory/${id}`} component={ShoppingHistory} />
         <Route path={`/confirmation/:id`} component={UserConfirmation} />
         <Route path={`/password/:id`} component={NewPassword} />
-       
-
       </>
-
     </AuthContext.Provider>
   );
 }

@@ -11,7 +11,9 @@ export default function ShoppingHistory() {
 
   const user = useSelector((state) => state.user);
   var {payments} = useSelector((state) => state.ShoppingHistory);
+  let p =useSelector((state) => state.ShoppingHistory);
   let id = user.idUser;
+  console.log("soy unaprueba",p)
 
   console.log("SOYYYY?",payments)
 

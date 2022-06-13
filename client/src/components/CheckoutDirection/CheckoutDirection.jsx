@@ -17,7 +17,8 @@ export default function CheckoutDirection() {
 
 
     return (
-        <>
+        <div className='addCont'>
+            <h4 style={{ margin: '5px 0' }}>Add a new address!</h4>
 
 
             {/* <h2>Choose an address to send your order! :) <br></br>or add a new one!
@@ -120,7 +121,7 @@ export default function CheckoutDirection() {
                     </Form>
                 )}
             </Formik>
-        </>
+        </div>
     )
 }
 

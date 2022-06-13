@@ -1,5 +1,7 @@
 const { User, Rol } = require("../db");
 const nodemailer = require('nodemailer')
+var hbs = require('nodemailer-express-handlebars');
+const path = require('path');
 //sendEmail
 
 const sendEmail = async (req, res) => {
@@ -69,6 +71,56 @@ const sendEmailPassword = async (req, res) => {
         msg: 'Email sent'
     });
 }
+const sendEmailSupport = async (req, res) => {
+    const { email, name, message } = req.body;
+    //? si no viene el email no se envia el correo 
+    if (!email || !name || !message) {
+        return res.json({
+            ok: false,
+            msg: 'Email not sent'
+        });
+    }
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'bookstore1511@gmail.com',
+            pass: 'qyrvkdsvuzwgotne'
+        }
+    });
+    const handlebarOptions = {
+        viewEngine: {
+            extName: '.handlebars',
+            partialsDir: path.resolve('src/views/'),
+            defaultLayout: false,
+        },
+        viewPath: path.resolve('src/views/'),
+        extName: '.handlebars',
+    }
+    transporter.use('compile', hbs(handlebarOptions));
 
+    const mailOptions = {
+        from: "BookStore <",
+        to: email,
+        subject: 'Support - BookStore',
+        template: 'email',
+        context: {
+            name,
+            message
+        },
+        
+    };     
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });   
+    res.json({
+        ok: true,
+        msg: 'Email sent'
+    });
 
-module.exports = { sendEmail, sendEmailPassword };
+}
+
+module.exports = { sendEmail, sendEmailPassword, sendEmailSupport };

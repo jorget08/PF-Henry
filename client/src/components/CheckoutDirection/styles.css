@@ -3,6 +3,12 @@
     justify-content: space-between;
     margin: 10px 0;
 }
+.addCont{
+    border: 1px solid gray;
+    padding: 10px;
+    margin: 2px;
+    border-radius: 10px;
+}
 .errorSpan {
     background-color: rgba(153, 16, 16, 0.849);
     border-radius: 10px;

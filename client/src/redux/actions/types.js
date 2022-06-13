@@ -48,4 +48,5 @@ export const GET_SALES = "GET_SALES";
 export const GET_REVIEWS = "GET_REVIEWS";
 export const REPLY_SUPPORT= "REPLY_SUPPORT";
 export const FILTER_SUPPORT= "FILTER_SUPPORT";
+export const SET_DELIVERY_ADDRESS = "SET_DELIVERY_ADDRESS";
 
