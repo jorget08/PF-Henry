@@ -705,7 +705,7 @@ export function getReviews() {
 export function deleteAdmReview(id, obj) {
   return async function (dispatch) {
     try {
-      const res = await axios.put(`http://localhost:3001/reviews/report/${id}`, obj)
+      const res = await axios.put(`http://localhost:3001/reviews/report/${id}`, {report:null})
       console.log("DELETED", res.data)
       return dispatch({ type: DELETE_ADM_REVIEW, payload: res.data });
     } catch (err) {
