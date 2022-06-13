@@ -13,6 +13,7 @@ export default function ShoppingHistory() {
   var {payments,paymentcryptos} = useSelector((state) => state.ShoppingHistory);
   let id = user.idUser;
  
+  console.log(paymentcryptos)
 
   if (payments === undefined) var dat = []
   else var dat = payments.concat(paymentcryptos)

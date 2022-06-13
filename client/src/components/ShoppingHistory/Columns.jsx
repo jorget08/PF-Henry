@@ -39,7 +39,15 @@ export const COLUMNS = [
     {
         Header: "Date",
         accessor: (row) => {
-            return row.createdAt
+            return row.createdAt.slice(0,10)
+        }
+    },
+    {
+        Header: "Ethereum Transaction Details",
+        accessor: (row) => {
+            let has=row.hash
+            let ref="https://rinkeby.etherscan.io/tx/"+has
+            return row.hash? <a href={ref} target="_blank">Etherscan</a>:null
         }
     },
 ]
