@@ -50,5 +50,18 @@ export const COLUMNS = [
             return row.hash? <a href={ref} target="_blank">Click here for details!</a>:<h3>Not available</h3>
         }
     },
+    {
+        Header: "Delivery Adress",
+        accessor: (row) => {
+            return row.address
+        }
+    },
+    {
+        Header: "Delivery Status",
+        accessor: (row) => {
+            return row.deliveryStatus
+        }
+    },
+    
 ]
 

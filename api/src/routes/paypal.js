@@ -173,7 +173,7 @@ router.post("/", async (req, res, next) => {
 
 router.get("/payments/:id", async (req, res, next) => {
     try {
-        const {id} = req.body
+        const {id} = req.params
         const user = await User.findOne({
             where : {
                 idUser: id
