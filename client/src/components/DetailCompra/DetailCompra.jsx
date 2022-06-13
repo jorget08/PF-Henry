@@ -8,7 +8,7 @@ import { BsCartCheckFill } from 'react-icons/bs'
 import './styles.css'
 import Swal from 'sweetalert2'
 
-export default function Compra({ title, author, price, categories, id }) {
+export default function Compra({ title, author, price, categories, id,stock }) {
 
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart)
@@ -42,13 +42,19 @@ export default function Compra({ title, author, price, categories, id }) {
     <div className='detailCompra'>
       <h3>${price}, 00</h3>
       <div className='addTo'>
+      {stock==0?<h3>No more stock</h3>:
+      <>
         <p>Add to Cart</p>
         <button>
           {bookinCart?.length ? <BsCartCheckFill size={25} className="done" /> : cartIcon}
         </button>
-
+       </>
+}
       </div>
-      <Link to={"/cart"}><button onClick={handleClick} className="buy">Buy This Book</button></Link>
-    </div>
+      {stock==0?null:<Link to={"/cart"}><button onClick={handleClick} className="buy">Buy This Book</button></Link>}
+      
+    </div> 
+  
+    
   )
 }

@@ -14,7 +14,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import Swal from "sweetalert2";
 
 
-export default function BookCard({ land, title, author, img, price, score, id }) {
+export default function BookCard({ land, title, author, img, price, score, id,stock }) {
     const styles = { alignSelf: "flex-end", padding: "10px", color: "#bf3030" };
   
     const user = useSelector(state => state.user);

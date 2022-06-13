@@ -102,3 +102,6 @@
   background-color: #0026ff;
   color: white;
 }
+.spanpointer:hover{
+  cursor: pointer;
+}

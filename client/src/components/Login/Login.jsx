@@ -128,7 +128,7 @@ const user = useSelector(state => state.user)
               {touched.password && errors.password && <span>{errors.password}</span>}
             </div>
             {/* <Link to='/newPassword' className='signUp'> */}
-              <span className='signUp' onClick={handleClick}>Forgot password?</span>
+              <span className='signUp spanpointer' onClick={handleClick}>Forgot password?</span>
             {/* </Link> */}
             <button type="submit">Log in</button>
 

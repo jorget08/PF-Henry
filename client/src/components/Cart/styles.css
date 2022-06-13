@@ -41,6 +41,25 @@
   font-size: 25px;
   margin: 0 2rem 1rem 2rem;
 }
+.newAddressCont {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: flex-start;
+}
+.newAddressCont h4 {
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
+}
+.newAddressCont select {
+  width: 100%;
+  padding: 2px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  outline: none;
+}
 .continue {
   justify-content: center;
 }

@@ -37,7 +37,7 @@ export default function Register() {
                     password: "",
                     password2: "",
                     email: "",
-                    imgProfile: "",
+                    imgProfile: null,
                     captcha:""
                 }}
                 validate={(valores) => {
@@ -75,6 +75,9 @@ export default function Register() {
                             title: 'Oops...',
                             text: 'Please check the captcha box to register',
                           })
+                    }
+                    if(valores.imgProfile===null){
+                        valores.imgProfile='https://cdn-icons-png.flaticon.com/512/149/149071.png'
                     }
                     else{dispatch(postUser(valores))
                     Swal.fire(

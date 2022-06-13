@@ -1,0 +1,82 @@
+.conteinerConfirmation img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(19, 17, 17, 0.7);
+
+}
+
+.conteinerConfirmation {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    color: black;
+
+}
+
+.conteinerConfirmation div {
+    padding: 10px;
+    color: white;
+}
+
+.conteinerConfirmation h3 {
+    font-family: 'Nanum Myeongjo';
+    margin-left: 2rem;
+    color: #c41f1f;
+}
+
+.containerGlobal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #da6868;
+}
+
+.containerButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem;
+}
+
+.containerButton h2 {
+    margin-bottom: 2rem;
+}
+
+.containerButton p {
+    font-family: 'Nanum Myeongjo';
+    margin-top: 2rem;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 #da6868;
+   }}
+
+.pulse:hover, .pulse:focus {
+    animation: pulse 1s;
+    box-shadow: 0 0 0 2em transparent;
+}
+.pulse {
+    --color: #da6868;
+    --hover: #da6868;
+}
+.containerButton button {
+    background: none;
+    border: 2px solid;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 1em 2em;
+    width:  18rem;
+    cursor: pointer;
+}
+.containerButton button {
+    color: #da6868;
+    transition: 0.25s;
+}
+.containerButton button:hover, button:focus {
+    border-color: #da6868;
+    color: #da6868;
+}

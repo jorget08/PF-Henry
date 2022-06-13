@@ -3,16 +3,16 @@ const { Book, Review, User } = require('../db')
 const router = Router()
 const { Op } = require('sequelize')
 
-router.get('/allReviews/admin',async(req,res,next)=>{
+router.get('/allReviews/admin', async (req, res, next) => {
     try {
         const allReviews = await Review.findAll({
             where:
             {
                 report: {
                     [Op.ne]: null
-                  }
-            }, include:[{model:Book, attributes: ['id','title','image']}
-            ,{model:User, attributes: ['idUser']}]
+                }
+            }, include: [{ model: Book, attributes: ['id', 'title', 'image'] }
+                , { model: User, attributes: ['idUser'] }]
         })
         return res.status(200).json(allReviews)
     } catch (error) {
@@ -27,24 +27,24 @@ router.get('/allReviews', async (req, res, next) => {
                 where:
                 {
                     bookId: book
-                },include:{model:User}
+                }, include: { model: User }
             })
             return res.status(200).json(allReviews)
         }
-        if(user){
+        if (user) {
             const allReviews = await Review.findAll({
                 where:
                 {
                     userIdUser: user
                 }
             })
-            console.log('soy data user',allReviews)
+            console.log('soy data user', allReviews)
             return res.status(200).json(allReviews)
         }
-        
-        else res.status(400).json({msg:'Need query params'})
 
-    }catch (error) {
+        else res.status(400).json({ msg: 'Need query params' })
+
+    } catch (error) {
         next(error)
     }
 })
@@ -65,83 +65,99 @@ router.post('/', async (req, res, next) => {
             where:
             {
                 bookId: book
-            },include:{model:User}
+            }, include: { model: User }
         })
         return res.status(200).json(allReviews)
 
-  
+
     } catch (error) {
         next(error)
     }
 })
-router.delete('/',async(req,res,next)=>{
-    const {user,book,review}= req.query
-    
+router.delete('/', async (req, res, next) => {
+    const { user, book, review } = req.query
+
     try {
         const bookFound = await Book.findByPk(book)
-        const userFound= await User.findByPk(user)
+        const userFound = await User.findByPk(user)
         await userFound.removeReview(review)
         await bookFound.removeReview(review)
-        res.send(200)
+        const allReviews = await Review.findAll({
+            where:
+            {
+                bookId: book,
+                report: null
+            }, include: { model: User }
+        })
+        return res.send(allReviews)
+
+
     } catch (error) {
         next(error)
     }
 })
-router.put('/',async(req,res,next)=>{
+router.put('/', async (req, res, next) => {
     try {
-        const {review}= req.query
-        const {title, description}=req.body
+        const { review, book } = req.query
+        const { title, description } = req.body
 
 
-        if(title){
-            Review.update(
+        if (title) {
+            await Review.update(
                 {
-                  title: title,
+                    title: title,
                 },
                 {
-                  where: { id: review },
+                    where: { id: review },
                 }
-              );
+            );
         }
-        if(description){
-            Review.update(
+        if (description) {
+            await Review.update(
                 {
                     description: description,
                 },
                 {
-                  where: { id: review },
+                    where: { id: review },
                 }
-              );
+            );
         }
-        return res.send('Updated!')
+        const allReviews = await Review.findAll({
+            where:
+            {
+                bookId: book,
+                report: null
+            }, include: { model: User }
+        })
+        return res.send(allReviews)
 
-    } catch (error) {
-        next(error)
-    }
-})
-router.put('/report/:id',async(req,res,next)=>{
-    const {id}=req.params
-    const{ book}=req.query
-    const {report}=req.body
+        } catch (error) {
+            next(error)
+        }
+    })
+router.put('/report/:id', async (req, res, next) => {
+    const { id } = req.params
+    const { book } = req.query
+    const { report } = req.body
     try {
-        
-            await Review.update(
-                {
-                    report: report,
-                },
-                {
-                  where: { id: id },
-                }
-              );
-              const allReviews = await Review.findAll({
-                where:
-                {
-                    bookId: book,
-                    report:null
-                },include:{model:User}
-            })
-            return res.status(200).json(allReviews)
-       
+
+        await Review.update(
+            {
+                report: report,
+            },
+            {
+                where: { id: id },
+            }
+        );
+        const allReviews = await Review.findAll({
+            where:
+            {
+                bookId: book,
+                report: null
+            }, include: { model: User }
+        })
+        return res.status(200).json(allReviews)
+
 
     } catch (error) {
         next(error)

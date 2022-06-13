@@ -12,7 +12,7 @@ export default function Register() {
     var user = useSelector(state => state.user)
 
 const redirect = ()=>{
-    history.push("/home")
+    history.push("/userProfile")
 }
   
     return (

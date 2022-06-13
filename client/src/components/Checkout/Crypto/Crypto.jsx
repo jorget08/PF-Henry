@@ -2,117 +2,116 @@ import React from 'react'
 import { useState } from "react";
 import { ethers } from "ethers";
 import ErrorMessage from "./ErrorMessage";
-import { useDispatch} from "react-redux";
-import {infoSoldBooks,infoBooks,sendEmail} from "../../../redux/actions";
+import { useDispatch } from "react-redux";
+import { infoSoldBooks, infoBooks, sendEmail } from "../../../redux/actions";
 import Swal from "sweetalert2";
+import { FaEthereum } from 'react-icons/fa'
+const startPayment = async ({ setError, setTxs, ether, addr }) => {
+  try {
+    if (!window.ethereum)
+      throw new Error("No crypto wallet found. Please install it.");
 
-const startPayment = async ({ setError, setTxs, ether, addr}) => {
-    try {
-      if (!window.ethereum)
-        throw new Error("No crypto wallet found. Please install it.");
-  
-      await window.ethereum.send("eth_requestAccounts");
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      ethers.utils.getAddress(addr);
-      const tx = await signer.sendTransaction({
-        to: addr,
-        value: ethers.utils.parseEther(ether)
-      }
-      
-      
-      );
-     
-      setTxs([tx]);
-      return tx
-    } catch (err) {
-      setError(err.message);
+    await window.ethereum.send("eth_requestAccounts");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    ethers.utils.getAddress(addr);
+    const tx = await signer.sendTransaction({
+      to: addr,
+      value: ethers.utils.parseEther(ether)
     }
+
+
+    );
+
+    setTxs([tx]);
+    return tx
+  } catch (err) {
+    setError(err.message);
+  }
+};
+
+
+
+
+function Crypto({ value, infoBook, userId, email, name, lastName, payment }) {
+  const [error, setError] = useState();
+  const [txs, setTxs] = useState([]);
+  const dispatch = useDispatch();
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    setError();
+
+    const x = await startPayment({
+      setError,
+      setTxs,
+      ether: value,
+      addr: "0x1AD379959ff0F23f68F69f5f4e3E1b4f0E7bFf62",
+    });
+
+    let totalInfo = {
+      data: x?.hash,
+      totalPrice: value,
+      infoBook: infoBook,
+      userId: userId
+    }
+
+    dispatch(infoSoldBooks(totalInfo));
+
+    dispatch(infoBooks(infoBook));
+    dispatch(sendEmail({ email, name, lastName, payment }));
+
+    let timerInterval
+    Swal.fire({
+      title: 'Your payment was successful',
+      html: 'Thank you for trusting in BookStore',
+      timer: 5000,
+
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+        const b = Swal.getHtmlContainer().querySelector('b')
+        timerInterval = setInterval(() => {
+          b.textContent = Swal.getTimerLeft()
+        }, 100)
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        localStorage.removeItem("carrito");
+        window.location.href = "/home";
+        console.log('I was closed by the timer')
+      }
+    })
   };
-  
-  
+
+  console.log("value eht", value)
 
 
-function Crypto({value,infoBook,userId,email,name,lastName,payment}) {
-    const [error, setError] = useState();
-    const [txs, setTxs] = useState([]);
-    const dispatch = useDispatch();
-    
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const data = new FormData(e.target);
-      setError();
-      
-      const x= await startPayment({
-        setError,
-        setTxs,
-        ether: value,
-        addr: "0x1AD379959ff0F23f68F69f5f4e3E1b4f0E7bFf62",
-      });
-      
-      let totalInfo={
-          data:x?.hash,
-          totalPrice:value,
-          infoBook:infoBook,
-          userId:userId
-        }  
-       
-        dispatch(infoSoldBooks(totalInfo));
-        
-        dispatch(infoBooks(infoBook));
-        dispatch(sendEmail({ email, name, lastName, payment }));
-
-        let timerInterval
-Swal.fire({
-  title: 'Your payment was successful',
-  html: 'Thank you for trusting in BookStore',
-  timer: 5000,
-
-  timerProgressBar: true,
-  didOpen: () => {
-    Swal.showLoading()
-    const b = Swal.getHtmlContainer().querySelector('b')
-    timerInterval = setInterval(() => {
-      b.textContent = Swal.getTimerLeft()
-    }, 100)
-  },
-  willClose: () => {
-    clearInterval(timerInterval)
-  }
-}).then((result) => {
-  /* Read more about handling dismissals below */
-  if (result.dismiss === Swal.DismissReason.timer) {
-   localStorage.removeItem("carrito");
-    window.location.href = "/home";
-    console.log('I was closed by the timer')
-  }
-})
-    };
-
-    console.log("value eht",value)
-  
-    
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div >
-       
-        <footer >
-          <button
-            type="submit"
-           
-          >
-            Pay now
-          </button>
-          <ErrorMessage message={error} />
-          
-        </footer>
+    <form onSubmit={handleSubmit} style={{ borderTop: '1px solid gray' }}>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+
+        <button
+          type="submit"
+          style={{ textAlign: 'center', alignItems: 'center', padding: ' 14px 2rem', margin: '10px 0', borderRadius: '5px', color: 'white', border: 'none', backgroundColor: '#4c72ad' }}
+        >
+          Pay With Metamask
+          <FaEthereum size={15} style={{ marginLeft: '1px', marginBottom: '-2px' }} />
+        </button>
+        <ErrorMessage message={error} />
+
       </div>
     </form>
   );
 
-    
+
 }
 
 export default Crypto
