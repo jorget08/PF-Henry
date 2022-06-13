@@ -7,7 +7,7 @@ import Modal from '../Modal/Modal';
 import EditProfile from '../EditProfile/EditProfile'
 import { useModals } from '../Utils/useModals';
 import { FaUserEdit } from 'react-icons/fa'
-import {AiOutlineDelete} from 'react-icons/ai'
+import { AiOutlineDelete } from 'react-icons/ai'
 import { RiMapPinAddLine } from 'react-icons/ri'
 import { MdOutlinePassword } from 'react-icons/md'
 import Swal from "sweetalert2";
@@ -65,7 +65,7 @@ export default function UserProfile() {
 
 
 
-          <button onClick={handleClick}  className='buttonSeting' >
+          <button onClick={handleClick} className='buttonSeting' >
             <MdOutlinePassword color="#c03b3b" title="Change Password" size={25} />
             <Modal isOpen={isOpenModal} closeModal={closeModal}>
               <EditProfile />
@@ -89,7 +89,7 @@ export default function UserProfile() {
               </li>
 
               <ul className='scrollRow'>
-                {user.adress &&
+                {user.adress ?
                   user.adress.map(e => {
                     return (
                       <li className='table-row'>
@@ -100,8 +100,14 @@ export default function UserProfile() {
                         <div className='col col-2 direction'><AiOutlineDelete color="#c03b3b" size={30} title="Delete Address" onClick={() => handleDelete(e.idAdress)} /> </div>
                       </li>
                     )
-                  }
-                  )
+                  }) :
+                  <li className='table-row'>
+                    <div className='col col-1'>
+                      <p> You do not have addresses added yet</p>
+
+                    </div>
+                  </li>
+
                 }
               </ul>
 
