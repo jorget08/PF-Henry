@@ -87,11 +87,9 @@ export default function BookDetail() {
       })
     }
     const obj = {
-      id:element.id,
-      book:bookDet.id,
       report: report
     }
-    dispatch(reportReview( obj))
+    dispatch(reportReview(element.id, bookDet.id, obj))
   }
   function editComment(element) {
 

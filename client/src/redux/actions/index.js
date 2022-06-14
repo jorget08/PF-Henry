@@ -552,10 +552,10 @@ export function changeFavs(payload) {
   return { type: CHANGE_FAVS, payload };
 }
 
-export function reportReview(obj) {
+export function reportReview(id, idBook, obj) {
   return async function (dispatch) {
     try {
-      const response = await axios.put(`http://localhost:3001/reviews/report/`, obj);
+      const response = await axios.put(`http://localhost:3001/reviews/report/${id}?book=${idBook}`, obj);
       return dispatch({ type: REPORT_REVIEW, payload: response.data });
     } catch (error) {
       console.log(error);
