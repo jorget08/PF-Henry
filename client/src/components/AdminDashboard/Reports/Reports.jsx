@@ -51,14 +51,16 @@ export default function Reports() {
         },
     }, 
     {        
-        Header: "Actionss",
+        Header: "Actions",
         accessor: (row) => {
             return (
-                <button onClick={(e) => handleDelete(e, row.id)}>DISCARD</button>
+              <>
+                <button onClick={(e) => handleDelete(e, row.id)}>DISCARD REVIEW (VERDE)</button>
+                <button onClick={(e) => handleDiscard(e, row.id)}>BAN REVIEW (ROJO)</button>
+              </>
             )
         },
-    },    
-
+    },   
 ]
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => allReviews, [allReviews])
@@ -67,7 +69,15 @@ export default function Reports() {
     e.preventDefault()
     console.log ("SOY e", row)
     dispatch(deleteAdmReview(row))  
-    alert ('Report deleted!')
+    alert ('Report discard!')
+    window.location.reload()
+  }
+
+  const handleDiscard = (e, row) => {
+    e.preventDefault()
+    console.log ("SOY e", row)
+    dispatch(discardReport(row))  
+    alert ('Review successfully deleted!')
     window.location.reload()
   }
 
@@ -102,7 +112,7 @@ export default function Reports() {
     <>
     <h2 className='h1'>Reports</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
-    {allReviews.length && <table {...getTableProps()} className={'Container'}>
+    <table {...getTableProps()} className={'Container'}>
       <thead >
         {headerGroups.map((headerGroups) => (
         <tr {...headerGroups.getHeaderGroupProps()}>
@@ -132,7 +142,7 @@ export default function Reports() {
           })
         }
       </tbody>
-    </table>}
+    </table>
     <div className="button">
       <span>
          Go to page : {' '}
