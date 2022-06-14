@@ -20,11 +20,13 @@ export default function Reports() {
   }, [dispatch])
   
   
+  
   const COLUMNS = [    
 
     {   
         Header: 'User',
         accessor: (row) => {
+          console.log(row)
             return row.user.name + ' ' + row.user.lastName;
         },
     },
@@ -62,6 +64,7 @@ export default function Reports() {
         },
     },   
 ]
+
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => allReviews, [allReviews])
 
@@ -112,7 +115,7 @@ export default function Reports() {
     <>
     <h2 className='h1'>Reports</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
-    <table {...getTableProps()} className={'Container'}>
+    {allReviews && <table {...getTableProps()} className={'Container'}>
       <thead >
         {headerGroups.map((headerGroups) => (
         <tr {...headerGroups.getHeaderGroupProps()}>
@@ -142,7 +145,7 @@ export default function Reports() {
           })
         }
       </tbody>
-    </table>
+    </table>}
     <div className="button">
       <span>
          Go to page : {' '}

@@ -30,6 +30,7 @@ export const GROUPED_COLUMNS = [
                 }  
                 
             },
+
             {        
                 Header: 'Method of pay',
                 accessor: (row) => {
