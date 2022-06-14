@@ -19,9 +19,6 @@ export default function Reports() {
     dispatch(getReviews())    
   }, [dispatch])
   
-
-
-  
   
   const COLUMNS = [    
 
@@ -64,14 +61,14 @@ export default function Reports() {
 
 ]
   const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => allReviews, [])
+  const data = useMemo(() => allReviews, [allReviews])
 
   const handleDelete = (e, row) => {
     e.preventDefault()
     console.log ("SOY e", row)
     dispatch(deleteAdmReview(row))  
-    alert ('are you sure?')
-    
+    alert ('Report deleted!')
+    window.location.reload()
   }
 
   const {
