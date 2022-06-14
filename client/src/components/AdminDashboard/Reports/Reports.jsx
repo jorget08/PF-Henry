@@ -70,10 +70,10 @@ export default function Reports() {
 
   const handleDiscard = (e, row) => {
     e.preventDefault()
-    console.log ("IDUSER",row.user.idUser, "BOOKID",row.bookId, "IDREVIEW",row.id)
-    dispatch(discardReport(row.user.idUser, row.bookId, row.id))  
+    console.log ('soy row', row)
+    dispatch(discardReport(row.userIdUser, row.bookId, row.id))  
     alert ('Review successfully deleted!')
-    // window.location.reload()
+    window.location.reload()
   }
 
   const handleDelete = (e, row) => {
