@@ -3,7 +3,7 @@ import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table
 import { useDispatch, useSelector } from 'react-redux'
 import { COLUMNS } from './Columns.jsx'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
-import SearchBar from './SearchBar'
+import SearchBar from '../SearchBar/SearchBar'
 import { getUsers } from '../../../redux/actions';
 
 
@@ -52,7 +52,7 @@ export default function Users () {
   const { pageIndex, pageSize } = state
   return (
     <>
-
+    <h2 className='h1'>Users</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     <table {...getTableProps()} className={'Container'}>
       <thead >

@@ -8,11 +8,11 @@ import { BsCartFill } from "react-icons/bs";
 import { IoMdContact } from "react-icons/io";
 import { IoHomeSharp } from "react-icons/io5";
 import { MdContactSupport } from "react-icons/md";
-import { AiOutlineMenu } from "react-icons/ai";
+import { BsFillSunFill } from "react-icons/bs";
 import { useModals } from "../Utils/useModals";
 import { unlogUser } from "../../redux/actions";
 import { GoogleLogout } from "react-google-login";
-import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import { BsFillBookmarkHeartFill } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
@@ -20,6 +20,7 @@ import { FaShoppingBag } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
 import { ImBooks } from "react-icons/im";
 import { FiSun } from "react-icons/fi";
+import { cBiSupport } from "react-icons/bi"
 import Swal from "sweetalert2";
 import "./styles.css";
 
@@ -123,7 +124,7 @@ export default function NavBar() {
                     fontWeight: "700px",
                   }}
                 >
-                  Welcome , {user?.name + " " + user?.lastName}! <FiSun />
+                  Welcome , {user?.name?.split(' ')[0]}! <BsFillSunFill style={{ color: 'gold', alignItems: 'center' }} />
                 </h2>
               ) : (
                 <h2
@@ -174,6 +175,11 @@ export default function NavBar() {
                   <MenuItem icon={<FaShoppingBag />}>
                     Shopping History<Link to={`/ShoppingHistory/${id}`}></Link>
                   </MenuItem>
+
+                  <MenuItem icon={<cBiSupport />}>
+                    User Support<Link to={`/SupportUser`}></Link>
+                  </MenuItem>
+
                   {user.rols?.name === "admin" && (
                     <MenuItem icon={<RiAdminFill />}>
                       Dashboard

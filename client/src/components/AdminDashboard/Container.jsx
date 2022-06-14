@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getBooks, getSales, getUsers } from '../../redux/actions'
-import Card from './Cards/Card'
-import CardU from './Cards/CardU'
-import CardB from './Cards/CardB'
-import s from './Container.module.css'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBooks, getReviews, getSales, getUsers } from '../../redux/actions';
+import Card from './Cards/Card';
+import CardU from './Cards/CardU';
+import CardB from './Cards/CardB';
+import CardR from './Cards/CardR'
+import s from './Container.module.css';
 
 export default function Container() {
 
@@ -12,11 +13,13 @@ export default function Container() {
   const allBooks = useSelector(state => state.books)
   const allUsers = useSelector(state => state.users)
   const allSales = useSelector(state => state.sales)
+  const allReports = useSelector(state => state.reviews)
 
   useEffect(() => {
     dispatch(getUsers())
     dispatch(getBooks)
     dispatch(getSales())
+    dispatch(getReviews())
   }, [dispatch])
 
   return (
@@ -26,6 +29,7 @@ export default function Container() {
         <Card books={allBooks} />
         <CardU users={allUsers} />
         <CardB sales={allSales} />
+        <CardR reports={allReports}/>
       </div>
     </>
   )

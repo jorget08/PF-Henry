@@ -1,16 +1,33 @@
-
-.comments{
-  border: solid black;
-  margin: 5px 0px 5px 0px;
-  padding: 5px;
-}
-
-
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 5rem 0;
+}
+.comments {
+  margin: 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 5px;
+}
+.iconEdit:hover {
+  color: #83a0d4;
+}
+.report {
+  text-align: center;
+  align-items: center;
+  font-size: 15px;
+  padding: 5px 10px;
+  font-family: 'Source Sans Pro', sans-serif;
+  cursor: pointer;
+  color: #5a3333;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+.report:hover {
+  background-color: #a15252;
+  color: white;
 }
 .all {
   font-family: 'Source Sans Pro', sans-serif;
@@ -81,11 +98,39 @@
 .formReview {
   display: flex;
   justify-content: space-evenly;
+  flex-direction: column;
   margin: 1rem;
-  font-family: 'Source Sans Pro', sans-serif;
-}
-.formReview input {
+  font-family: 'Roboto Flex', sans-serif;
+  margin: auto;
   width: 800px;
+}
+.formReview .spanSelect {
+  text-align: justify;
+  color: #d85353;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.formReview select {
+  width: fit-content;
+  font-family: 'Roboto Flex', sans-serif;
+  border: 1px solid #c4c4c4;
+  outline: none;
+  padding: 5px;
+  text-align: left;
+  font-size: 18px;
+}
+.formReview select:hover {
+  color: #d85353;
+  cursor: pointer;
+}
+.formReview select:hover option {
+  color: black;
+}
+.formReview label {
+  margin: 20px 0;
+  text-align: justify;
+}
+.formReview textarea {
   border: 1px solid #c4c4c4;
   font-size: 20px;
   padding: 1rem;
@@ -93,7 +138,7 @@
   border-radius: 20px;
   outline: #da6464;
 }
-.formReview input:focus {
+.formReview textarea:focus {
   border: 2px solid #da6464;
 }
 .formReview button {
@@ -106,7 +151,7 @@
   outline: none;
   padding: 0px 10px;
   height: 3rem;
-  margin: auto;
+  margin: 20px auto;
 }
 .formReview button:hover {
   background-color: #521616;

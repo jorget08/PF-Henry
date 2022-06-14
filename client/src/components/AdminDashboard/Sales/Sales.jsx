@@ -9,7 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSales, updateSent, updateDone } from "../../../redux/actions";
 import { GROUPED_COLUMNS } from "./Columns.jsx";
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
-import SearchBar from "./SearchBar";
+import SearchBar from '../SearchBar/SearchBar'
+
+
 
 export default function Sales() {
   const dispatch = useDispatch();
@@ -98,32 +100,28 @@ export default function Sales() {
 
   return (
     <>
-      <SearchBar filter={globalFilter} setFilter={setGlobalFilter} />
-      <table {...getTableProps()} className={"Container"}>
-        <thead>
-          {headerGroups.map((headerGroups) => (
-            <tr {...headerGroups.getHeaderGroupProps()}>
-              {headerGroups.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}
-                  {column.isSorted ? (
-                    column.isSortedDesc ? (
-                      <BiCaretDown />
-                    ) : (
-                      <BiCaretUp />
-                    )
-                  ) : (
-                    ""
-                  )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
+
+    <h2 className='h1'>Sales</h2>
+    <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
+    <table {...getTableProps()} className={'Container'}>
+      <thead >
+        {headerGroups.map((headerGroups) => (
+        <tr {...headerGroups.getHeaderGroupProps()}>
+          {headerGroups.headers.map(column => (
+              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                {column.render('Header')}
+                {column.isSorted ? (column.isSortedDesc ? <BiCaretDown/> : <BiCaretUp/>) : ''}
+              
+              </th>
+            ))}
+        </tr>            
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps}>
+        {
+          page.map(row => {
+            prepareRow(row)
+            return(
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   return (

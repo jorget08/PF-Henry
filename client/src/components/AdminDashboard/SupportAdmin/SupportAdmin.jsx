@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { filterSupportStatus, getSupport, replySupport, replySupportGuest} from '../../../redux/actions'
 import { COLUMNS } from './Columns'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
-import SearchBar from './SearchBar'
+import SearchBar from '../SearchBar/SearchBar'
 import { useModals } from '../../Utils/useModals'
 import Modal from '../../Modal/Modal'
 
@@ -14,7 +14,7 @@ export default function SupportAdmin() {
   const dispatch = useDispatch()
   const supportData = useSelector((state) => state.support)
   const [isOpenModal, openModal, closeModal] = useModals(false);
-  const [resp, setResp] = useState({name: "", email: "", message: ""})
+  const [resp, setResp] = useState({name: "", email: "", message: "", id: null})
   const [bool, setBool] = useState(true) 
 
   const [respon, setResponse] = useState("")
@@ -26,9 +26,10 @@ export default function SupportAdmin() {
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => supportData, [supportData])
 
-  const handleClick = (e, {name, email}) => {
+  const handleClick = (e, {name, email, id}) => {
     e.preventDefault();
-    setResp({...resp, name: name, email: email})
+    if (id === null) setResp({...resp, name: name, email: email})
+    else {setResp({response: "", idSupport: id})}
     console.log("Soy el ID y el mail", name, email)
     openModal()
   }
@@ -61,18 +62,21 @@ export default function SupportAdmin() {
           Header:"Actions",
           Cell: ({ row }) => ( 
             <div>
-              {
-                (row.values.userIdUser === undefined && row.values.status === 0)? <button onClick={(e) => handleClick(e, {
-                  name: row.values.nameGuess,
-                  email: row.values.emailGuess
-                })}>
-                Reply by mail 
-                </button>:
-                <button onClick={(e) => handleClick(e, {email: row.values.emailGuess})}>
-                Reply
-                </button>
-              }
+              <button onClick={e => handleClick(e)}>Reply by mail</button>
             </div>
+            /* {
+              (row.values.userIdUser === undefined && row.values.status === 0)? <button onClick={(e) => handleClick(e, {
+                name: row.values.nameGuess,
+                email: row.values.emailGuess
+              })}>
+              Reply by mail 
+              </button>:
+              (row.values.userIdUser.length && row.values.status === 0)?
+              <button onClick={(e) => handleClick(e, {id: row.values.idSupport})}>
+              Reply
+              </button>: <span>-</span>
+            } */
+            
           )
         }
       ]
@@ -107,6 +111,7 @@ export default function SupportAdmin() {
           <button onClick={(e) => submitReply(e)}>Send reply!</button>
         </div>
     </Modal>
+    <h2 className='h1'>Support</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     <select style={{marginLeft:"150px", width:"150px"}}onChange={(e) => handleSelect(e)}>
       <option value="default">Filter by</option>

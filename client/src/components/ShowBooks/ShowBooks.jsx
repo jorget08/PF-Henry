@@ -45,7 +45,7 @@ export default function ShowBooks({ books, categories, func, category, isCategor
             {books.length && categories.length &&
                 <div className="filters">
 
-                    <Filters books={books} func={func} categories={categories} isCategory={isCategory} category={category} setPage={setPage} />
+                    <Filters books={books} func={func} categories={categories} isCategory={isCategory} category={category} />
                 </div>
             }
 

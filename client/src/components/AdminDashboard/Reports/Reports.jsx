@@ -1,28 +1,85 @@
 import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import { useDispatch, useSelector } from 'react-redux'
-import { getReviews } from '../../../redux/actions'
-import { GROUPED_COLUMNS } from './Columns.jsx'
+import { discardReport, deleteAdmReview, getReviews, getBooks, getSales, getUsers } from '../../../redux/actions'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
-import SearchBar from './SearchBar'
+import SearchBar from '../SearchBar/SearchBar'
 
 
 export default function Reports() {
   
-
   const dispatch = useDispatch()
-  const allReviews = useSelector(state => state.sales)
-
+  const allReviews = useSelector(state => state.reviews)
+  console.log("I'm the reviews bitch", allReviews)
+  
   useEffect(() => {
+    dispatch(getUsers())
+    dispatch(getBooks)
+    dispatch(getSales())
     dispatch(getReviews())    
   }, [dispatch])
-  setTimeout(() => {
-    console.log('SALE SALE SALE', allReviews);
-  }, "3000")
-
   
-  const columns = useMemo(() => GROUPED_COLUMNS, [])
-  const data = useMemo(() => allReviews, [])
+  
+  const COLUMNS = [    
+
+    {   
+        Header: 'User',
+        accessor: (row) => {
+            return row.user.name + ' ' + row.user.lastName;
+        },
+    },
+    {          
+        Header: "Email",
+        accessor: (row) => {
+            return row.user.email;
+        }
+    },
+    {        
+        Header: "Book's Title",
+        accessor: (row) => {
+            return (
+                row.book.title
+            )
+        },
+    },       
+    {        
+        Header: "Reviews",
+        accessor: (row) => {
+            return (
+                row.description + ' ' + row.createdAt
+            )
+        },
+    }, 
+    {        
+        Header: "Actions",
+        accessor: (row) => {
+            return (
+              <>
+                <button onClick={(e) => handleDelete(e, row.id)}>DISCARD REVIEW (VERDE)</button>
+                <button onClick={(e) => handleDiscard(e, row.id)}>BAN REVIEW (ROJO)</button>
+              </>
+            )
+        },
+    },   
+]
+  const columns = useMemo(() => COLUMNS, [])
+  const data = useMemo(() => allReviews, [allReviews])
+
+  const handleDiscard = (e, row) => {
+    e.preventDefault()
+    console.log ("SOY e", row)
+    dispatch(discardReport(row))  
+    alert ('Report discard!')
+    window.location.reload()
+  }
+
+  const handleDelete = (e, row) => {
+    e.preventDefault()
+    console.log ("SOY e", row)
+    dispatch(deleteAdmReview(row))  
+    alert ('Review successfully deleted!')
+    window.location.reload()
+  }
 
   const {
     getTableProps,
@@ -53,7 +110,7 @@ export default function Reports() {
   const { pageIndex, pageSize } = state
   return (
     <>
-
+    <h2 className='h1'>Reports</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     <table {...getTableProps()} className={'Container'}>
       <thead >
