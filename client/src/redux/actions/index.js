@@ -49,7 +49,8 @@ import {
   REPLY_SUPPORT,
   SET_DELIVERY_ADDRESS,
   REPLY_SUPPORT_GUEST,
-  UPDATE_SENT
+  UPDATE_SENT,
+  UPDATE_DONE
 } from "./types";
 
 import axios from "axios";
@@ -730,13 +731,23 @@ export function replySupportGuest(payload) {
   };
 }
 
-export function updateSent(payload) {
+export function updateSent(id) {
   return async function (dispatch) {
     try {
-      
-    
-      var response = await axios.put("http://localhost:3001/paypal/payments/sent",payload)
+      var response = await axios.put("http://localhost:3001/paypal/payments/sent",{id:id})
       return dispatch({ type: UPDATE_SENT });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+
+export function updateDone(id) {
+  return async function (dispatch) {
+    try {
+      var response = await axios.put("http://localhost:3001/paypal/payments/done",{id:id})
+      return dispatch({ type: UPDATE_DONE });
     } catch (error) {
       console.log(error);
     }

@@ -12,12 +12,7 @@ export const COLUMNS = [
             return row.paymentbooks?.map(e => `${e.title} (${e.cant})`).join(',  ')                 
         },
     },
-    {
-        Header: "Author",
-        accessor: (row) => {
-            return row.paymentbooks?.map(e => e.author).join(',  ') 
-        },
-    },
+  
     {        
         Header: 'Import',
         accessor: (row) => {
