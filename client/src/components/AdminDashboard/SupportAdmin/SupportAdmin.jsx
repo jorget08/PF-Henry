@@ -62,19 +62,21 @@ export default function SupportAdmin() {
           Header:"Actions",
           Cell: ({ row }) => ( 
             <div>
-              {
-                (row.values.userIdUser === undefined && row.values.status === 0)? <button onClick={(e) => handleClick(e, {
-                  name: row.values.nameGuess,
-                  email: row.values.emailGuess
-                })}>
-                Reply by mail 
-                </button>:
-                (row.values.userIdUser.length && row.values.status === 0)?
-                <button onClick={(e) => handleClick(e, {id: row.values.idSupport})}>
-                Reply
-                </button>: <span>-</span>
-              }
+              <button onClick={e => handleClick(e)}>Reply by mail</button>
             </div>
+            /* {
+              (row.values.userIdUser === undefined && row.values.status === 0)? <button onClick={(e) => handleClick(e, {
+                name: row.values.nameGuess,
+                email: row.values.emailGuess
+              })}>
+              Reply by mail 
+              </button>:
+              (row.values.userIdUser.length && row.values.status === 0)?
+              <button onClick={(e) => handleClick(e, {id: row.values.idSupport})}>
+              Reply
+              </button>: <span>-</span>
+            } */
+            
           )
         }
       ]
