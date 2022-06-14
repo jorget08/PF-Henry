@@ -75,13 +75,11 @@ router.post('/', async (req, res, next) => {
     }
 })
 router.delete('/', async (req, res, next) => {
-    const { user, book, review } = req.query
+    const {  book, review } = req.query
 
     try {
-        const bookFound = await Book.findByPk(book)
-        const userFound = await User.findByPk(user)
-        await userFound.removeReview(review)
-        await bookFound.removeReview(review)
+       
+        Review.destroy({where:{id:review}})
         const allReviews = await Review.findAll({
             where:
             {
