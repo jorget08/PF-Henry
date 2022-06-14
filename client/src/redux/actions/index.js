@@ -706,7 +706,6 @@ export function deleteAdmReview(id, obj) {
   return async function (dispatch) {
     try {
       const res = await axios.put(`http://localhost:3001/reviews/report/${id}`, {report:null})
-      console.log("DELETED", res.data)
       return dispatch({ type: DELETE_ADM_REVIEW, payload: res.data });
     } catch (err) {
       console.log(err)
@@ -714,12 +713,12 @@ export function deleteAdmReview(id, obj) {
   }
 }
 
-export function discardReport(){
-  return async function (dispatch){
-    try {
-      const res = await axios.delete('http://localhost:3001/reviews?user=idUSer&books=idBook&review=idReview')
-      return dispatch({type: DISCARD_REPORT, payload:res.data})
-    } catch (err) {
+export function discardReport({idUser, idBook, idReview }){
+  return async function (dispatch){    
+    try {   
+      const res = await axios.delete(`http://localhost:3001/reviews?user=${idUser}&books=${idBook}&review=${idReview}`)
+      return dispatch({type: DISCARD_REPORT})
+    } catch (err) {                       
       console.log(err)
     }
   }
