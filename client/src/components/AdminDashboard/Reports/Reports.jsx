@@ -56,7 +56,7 @@ export default function Reports() {
             return (
               <>
                 <button onClick={(e) => handleDelete(e, row.id)}>DISCARD REVIEW (VERDE)</button>
-                <button onClick={(e) => handleDiscard(e, row.id)}>BAN REVIEW (ROJO)</button>
+                <button onClick={(e) => handleDiscard(e, row)}>BAN REVIEW (ROJO)</button>
               </>
             )
         },
@@ -67,17 +67,17 @@ export default function Reports() {
 
   const handleDiscard = (e, row) => {
     e.preventDefault()
-    console.log ("SOY e", row)
-    dispatch(discardReport(row))  
-    alert ('Report discard!')
-    window.location.reload()
+    console.log ("IDUSER",row.user.idUser, "BOOKID",row.bookId, "IDREVIEW",row.id)
+    dispatch(discardReport(row.user.idUser, row.bookId, row.id))  
+    alert ('Review successfully deleted!')
+    // window.location.reload()
   }
 
   const handleDelete = (e, row) => {
     e.preventDefault()
     console.log ("SOY e", row)
     dispatch(deleteAdmReview(row))  
-    alert ('Review successfully deleted!')
+    alert ('Report discard!')
     window.location.reload()
   }
 
