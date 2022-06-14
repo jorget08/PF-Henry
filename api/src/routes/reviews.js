@@ -135,10 +135,9 @@ router.put('/', async (req, res, next) => {
             next(error)
         }
     })
-router.put('/report/:id', async (req, res, next) => {
-    const { id } = req.params
-    const { book } = req.query
-    const { report } = req.body
+router.put('/report', async (req, res, next) => {
+
+    const { id,book,report } = req.body
     try {
 
         await Review.update(
