@@ -2,7 +2,7 @@ export const COLUMNS = [
     {
         Header: 'UserID',
         accessor: row => {if (row.userIdUser === null) return "None"
-                            else return row.user},
+                            else return row.userIdUser},
     },
     {
         Header: 'User',
