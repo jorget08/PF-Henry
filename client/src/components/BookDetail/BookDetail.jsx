@@ -22,6 +22,7 @@ export default function BookDetail() {
   const token = localStorage.getItem("token")
   const [comment, setComment] = useState({ title: 'default', description: '', id: '' })
   const [errors, setErrors] = useState({})
+  const [news, setNews] = useState(false)
 
   console.log("hystory", history)
   var bookDet = useSelector(state => state.detail)
@@ -190,6 +191,7 @@ export default function BookDetail() {
     formData.append('img', image)
 
     dispatch(changeImg(bookDet.id, 'book', formData))
+    setNews(news ? false : true)
   }
   return (
     <div className='all'>

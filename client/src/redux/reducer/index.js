@@ -402,7 +402,8 @@ export default function rootReducer(state = initialState, action) {
     case CHANGE_IMG:
       return{
         ...state,
-        user: {...state.user, imgProfile: payload}
+        user: {...state.user, imgProfile: payload},
+        detail: {...state.detail, image: payload}
       }
 
     default:
