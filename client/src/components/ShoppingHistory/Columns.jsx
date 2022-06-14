@@ -12,12 +12,7 @@ export const COLUMNS = [
             return row.paymentbooks?.map(e => `${e.title} (${e.cant})`).join(',  ')                 
         },
     },
-    {
-        Header: "Author",
-        accessor: (row) => {
-            return row.paymentbooks?.map(e => e.author).join(',  ') 
-        },
-    },
+  
     {        
         Header: 'Import',
         accessor: (row) => {
@@ -39,8 +34,29 @@ export const COLUMNS = [
     {
         Header: "Date",
         accessor: (row) => {
-            return row.createdAt
+            return row.createdAt.slice(0,10)
         }
     },
+    {
+        Header: "Ethereum Transaction Details",
+        accessor: (row) => {
+            let has=row.hash
+            let ref="https://rinkeby.etherscan.io/tx/"+has
+            return row.hash? <a href={ref} target="_blank">Click here for details!</a>:<h3>Not available</h3>
+        }
+    },
+    {
+        Header: "Delivery Adress",
+        accessor: (row) => {
+            return row.address
+        }
+    },
+    {
+        Header: "Delivery Status",
+        accessor: (row) => {
+            return row.deliveryStatus
+        }
+    },
+    
 ]
 

@@ -23,6 +23,12 @@ export const GROUPED_COLUMNS = [
     {
         Header: 'Purcharse Info',
         columns: [
+            {
+                Header: "ID Purchase",
+                accessor: (row) => {
+                    return row.id                
+                },
+            },
             {        
                 Header: 'Purchase',
                 accessor: (row) => {
@@ -42,7 +48,19 @@ export const GROUPED_COLUMNS = [
                 accessor: (row) => {
                     return "$" + row.totalPrice + ".00";       
             },
-            }
+            },
+            {
+                Header: "Delivery Adress",
+                accessor: (row) => {
+                    return row.address
+                }
+            },
+            {
+                Header: "Delivery Status",
+                accessor: (row) => {
+                    return row.deliveryStatus
+                }
+            },
         ]
     }
 ]

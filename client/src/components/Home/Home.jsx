@@ -34,7 +34,7 @@ export default function Home() {
             <NavBar />
             {!books.length?<div className="filters">
 
-            <Filters books={books} func={renderBooks} categories={categories} isCategory={searchCat.length} category={search} setPage={setPage}/>
+            <Filters books={books} func={renderBooks} categories={categories} isCategory={searchCat.length} category={search}/>
             </div>:""}
             {books?.length ?
                 <ShowBooks books={books} search={searchCat.length} func={renderBooks} categories={categories} isCategory={searchCat.length} category={search}/>

@@ -1,5 +1,5 @@
 import NavBar from "../NavBar/NavBar";
-import { getShoppingHistory, getUsers } from "../../redux/actions";
+import { getShoppingHistory, updateSent} from "../../redux/actions";
 import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,6 +13,8 @@ export default function ShoppingHistory() {
   var {payments,paymentcryptos} = useSelector((state) => state.ShoppingHistory);
   let id = user.idUser;
  
+  console.log(paymentcryptos)
+  console.log(payments)
 
   if (payments === undefined) var dat = []
   else var dat = payments.concat(paymentcryptos)
@@ -125,6 +127,7 @@ export default function ShoppingHistory() {
       <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
       <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</button>
     </div>
+    
     </>
   )
 };

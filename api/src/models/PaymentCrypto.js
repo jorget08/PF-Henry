@@ -19,5 +19,12 @@ module.exports = (sequelize) => {
     totalPrice: {
         type: DataTypes.STRING,
     },
+    address: {
+      type: DataTypes.TEXT,
+    },
+    deliveryStatus: {
+      type: DataTypes.STRING,
+      defaultValue: 'Pending'
+    },
   });
 };

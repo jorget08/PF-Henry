@@ -72,7 +72,7 @@ export default function NavBar() {
   const user = useSelector((state) => state.user);
   let id = user.idUser;
 
-  console.log("isfasdfasd", user);
+  
 
   return (
     <div className="navbar">
