@@ -24,7 +24,7 @@ export default function Stock() {
   }, [dispatch])
 
   const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => allBooks, [])
+  const data = useMemo(() => allBooks, [allBooks])
 
   const tableHooks = (hooks) => {
     hooks.visibleColumns.push((columns) => [
@@ -37,7 +37,7 @@ export default function Stock() {
             <button className='iconDash' onClick={e => handleEdit(e, row)}>
               <AiFillEdit size={30} />
             </button>
-            <button className='iconDash delete' onClick={(e) => deleteComment(row.original.id)}>
+            <button className='iconDash delete' onClick={(e) => handleDelete(e, row)}>
               <FaRegTrashAlt size={30} />
             </button>
           </div>
@@ -49,8 +49,12 @@ export default function Stock() {
   }
 
 
-  function deleteComment(element) {
-    dispatch(deleteReview(user.idUser, bookDet.id,element.id))
+  function handleDelete(e, row) {
+    e.preventDefault()
+    console.log('SOY ROW', row)
+    dispatch(deleteBook(row.original.id))
+    alert('Are you sure?')
+    window.location.reload()
   }
 
   const handleEdit = (e, row) => {
