@@ -65,18 +65,18 @@ export default function Reports() {
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => allReviews, [allReviews])
 
-  const handleDelete = (e, row) => {
-    e.preventDefault()
-    console.log ("SOY e", row)
-    dispatch(deleteAdmReview(row))  
-    alert ('Report discard!')
-    window.location.reload()
-  }
-
   const handleDiscard = (e, row) => {
     e.preventDefault()
     console.log ("SOY e", row)
     dispatch(discardReport(row))  
+    alert ('Report discard!')
+    window.location.reload()
+  }
+
+  const handleDelete = (e, row) => {
+    e.preventDefault()
+    console.log ("SOY e", row)
+    dispatch(deleteAdmReview(row))  
     alert ('Review successfully deleted!')
     window.location.reload()
   }
