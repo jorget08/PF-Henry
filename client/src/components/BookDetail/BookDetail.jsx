@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { getDetail, clearDetail, deleteBook, addComment, showComments, getBooks, reportReview, updateReview, deleteReview } from "../../redux/actions";
+import { getDetail, clearDetail, deleteBook, addComment, showComments, getBooks, reportReview, updateReview, deleteReview, changeImg } from "../../redux/actions";
 import DetailCompra from '../DetailCompra/DetailCompra';
 import { FaRegTrashAlt } from 'react-icons/fa'
 import Stars from '../Stars/Stars';
@@ -183,6 +183,14 @@ export default function BookDetail() {
       })
 
   }
+
+  const handleImage = (e) => {
+    const image = e.target.files[0]
+    const formData = new FormData()
+    formData.append('img', image)
+
+    dispatch(changeImg(bookDet.id, 'book', formData))
+  }
   return (
     <div className='all'>
       <NavBar />
@@ -191,6 +199,10 @@ export default function BookDetail() {
           <div className='container__info'>
             <div className='image'>
               <img src={bookDet.image} alt="" />
+              {user.rols?.name === "admin" ?
+              <form>
+                <input type="file" onChange={handleImage} name="file" id="" />
+              </form>:""}
               <DetailCompra title={bookDet.title} author={bookDet.author} price={bookDet.price} categories={bookDet.categories} id={bookDet.id} stock={bookDet.stock}></DetailCompra>
             </div>
             <div className='info'>
