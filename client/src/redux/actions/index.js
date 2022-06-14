@@ -50,10 +50,9 @@ import {
   SET_DELIVERY_ADDRESS,
   REPLY_SUPPORT_GUEST,
   UPDATE_SENT,
-  UPDATE_DONE
+  UPDATE_DONE,
   DELETE_ADM_REVIEW,
   DISCARD_REPORT,
-
 } from "./types";
 
 import axios from "axios";
