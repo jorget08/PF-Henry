@@ -65,10 +65,10 @@ export default function BookDetail() {
       input: 'select',
       inputOptions: {
 
-        type1: 'It is inappropriate',
-        type2: 'Can be discriminatory',
-        type3: 'It is offensive',
-        type4: 'Has inappropriate language'
+        'It is inappropriate': 'It is inappropriate',
+        'Can be discriminatory': 'Can be discriminatory',
+        'It is offensive': 'It is offensive',
+        'Has inappropriate language': 'Has inappropriate language'
 
       },
       inputPlaceholder: 'Select why',
