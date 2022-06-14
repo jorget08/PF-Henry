@@ -57,7 +57,7 @@ export default function Register() {
                     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(valores.email)) {
                         errors.email = 'Invalid e-mail address';
                     }
-                    else if (users.find(e=>e.email===valores.email)) {
+                    else if (users.find(e=>e.email.toLowerCase()===valores.email.toLowerCase())) {
                         errors.email = 'This mail is already registered';
                     }
                     if (!valores.password) {
@@ -76,6 +76,7 @@ export default function Register() {
                             text: 'Please check the captcha box to register',
                           })
                     }
+                    valores.email.toLowerCase()
                     if(valores.imgProfile===null){
                         valores.imgProfile='https://cdn-icons-png.flaticon.com/512/149/149071.png'
                     }
