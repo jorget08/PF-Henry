@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUser, requestPassword, deleteProfile } from '../../redux/actions';
+import { getUser, requestPassword, deleteProfile, changeImg } from '../../redux/actions';
 import NavBar from '../NavBar/NavBar';
 import Modal from '../Modal/Modal';
 import EditProfile from '../EditProfile/EditProfile'
@@ -45,6 +45,17 @@ export default function UserProfile() {
     })
   }
 
+  // const formDateishon = new FormData();
+  // formDateishon.append("img", selectedImage);
+
+  const handleImage = (e) => {
+    const image = e.target.files[0]
+    const formData = new FormData()
+    formData.append('img', image)
+
+    dispatch(changeImg(user.idUser, 'user', formData))
+  }
+
   return (
     <>
       <NavBar />
@@ -52,6 +63,10 @@ export default function UserProfile() {
         <div className='profile'>
 
           <img src={user.imgProfile} alt="" />
+          <form>
+            <input type="file" onChange={handleImage} name="file" id="" />
+          </form>
+
           <h1>{user.name} {user.lastName}</h1>
           <h2>{user.email}</h2>
         </div>

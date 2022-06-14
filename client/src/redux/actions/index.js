@@ -53,6 +53,7 @@ import {
   UPDATE_DONE,
   DELETE_ADM_REVIEW,
   DISCARD_REPORT,
+  CHANGE_IMG
 } from "./types";
 
 import axios from "axios";
@@ -790,4 +791,20 @@ export function updateDone(id) {
       console.log(error);
     }
   };
+}
+
+export function changeImg(id, tipo, img) {
+    return async function (dispatch) {
+      try {
+        var response = await axios.put(`http://localhost:3001/upload/${tipo}/${id}`, img, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          }
+        });
+        console.log("change img", response.data);
+        return dispatch({ type: CHANGE_IMG, payload: response.data.url });
+      } catch (error) {
+        console.log(error);
+      }
+    }
 }

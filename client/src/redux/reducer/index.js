@@ -49,6 +49,7 @@ import {
   FILTER_SUPPORT,
   DELETE_ADM_REVIEW,
   DISCARD_REPORT,
+  CHANGE_IMG
 } from "../actions/types";
 
 const initialState = {
@@ -398,6 +399,12 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         reviews:payload
       }
+    case CHANGE_IMG:
+      return{
+        ...state,
+        user: {...state.user, imgProfile: payload}
+      }
+
     default:
     return state;
   }
