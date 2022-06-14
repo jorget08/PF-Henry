@@ -50,10 +50,11 @@ const user = useSelector(state => state.user)
     })
     
     if (email) {
-      if (!users.find(e=>e.email===email)) {
+      if (!users.find(e=>e.email.toLowerCase()===email.toLowerCase())) {
         Swal.fire('This mail is not registrated') ;
     }
     else{
+      email.toLowerCase()
       dispatch(requestPassword(email))
       Swal.fire('An email has been sent to you to change your password')
     }
@@ -85,14 +86,14 @@ const user = useSelector(state => state.user)
           return errors;
         }}
         onSubmit={(valores, { resetForm }) => {
-          if(!users.find(e=>e.email===valores.email)){
+          if(!users.find(e=>e.email.toLowerCase()===valores.email.toLowerCase())){
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
               text: 'You´re not registered to Bookstore',
             })
           }
-          else if(users.find(e=>e.email===valores.email).confirmation===false){
+          else if(users.find(e=>e.email.toLowerCase()===valores.email.toLowerCase()).confirmation===false){
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
@@ -100,6 +101,7 @@ const user = useSelector(state => state.user)
             })
           }
           else{
+            valores.email.toLowerCase()
           dispatch(logUser(valores))
           console.log("valores", valores)
           setTimeout( ()=>{if(localStorage.getItem("token")){Toast.fire({
