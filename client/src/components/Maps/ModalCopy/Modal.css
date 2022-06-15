@@ -1,4 +1,4 @@
-.modal{
+.modall{
     position: fixed;
     z-index: 999;
     top: 0;
@@ -11,18 +11,18 @@
     align-items: center;
 }
 
-.modal.is-open{
+.modall.is-openn{
     display: flex;
 }
 
-.modal-container{
+.modal-containerr{
     position: relative;
     color:black !important;
     background-color: #fff;
-    min-width: 920px;
-    max-width: 680;
-    max-height: 200px;
-    min-height: 500px;
+    min-width: 838px;
+    max-width: 838px;
+    max-height: 500px;
+    min-height: 450px;
     overflow-y: auto;
     display: flex;
     align-items: center;
@@ -34,7 +34,7 @@
     -moz-box-shadow: -2px 0px 53px 4px rgba(0,0,0,0.75);
 }
 
-.modal-close{
+.modal-closee{
     position: absolute;
     right: 1rem;
     top: 1rem;

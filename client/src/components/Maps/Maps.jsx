@@ -1,14 +1,22 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
-import 'mapbox-gl/dist/mapbox-gl.css';
+
 import mapboxgl, { Map, Marker } from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import './styles.css'
+
 import { Formik, Form, Field } from 'formik';
 import { addAdress } from '../../redux/actions';
+
+import 'mapbox-gl/dist/mapbox-gl.css';
+import './styles.css'
 import Swal from "sweetalert2";
+import {TbMapSearch} from 'react-icons/tb'
+import {RiMapPinAddLine} from 'react-icons/ri'
+
 import axios from 'axios'
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2FtaWxhMDAzIiwiYSI6ImNsNGRzNWJtMjA5dzkzcG16c2czMzJpcTMifQ.x1SfyY9BpY3_n-oPk83CSg';
+
 export default function Maps() {
     const dispatch = useDispatch()
     const [logitud, setlogitud] = useState(-64.248373);
@@ -22,75 +30,80 @@ export default function Maps() {
     const mapContainer = useRef(null);
 
     const [mapa, setMapa] = useState()
+    const [markerPoint, setMarkerPoint]=useState()
     
-    let markerPoint = null
+
     
 
     function addAddressToUser(){
         dispatch(addAdress(address, user.idUser))
-         Swal.fire(
-                        'Done!',
-                        'An adress have been added to your profile',
-                        'success'
+         Swal.fire({
+                        title:'Done!',
+                        text:'An adress have been added to your profile',
+                        icon:'success',
+                        showConfirmButton:false,
+                    })
+                    setMapa(
+                        new Map({
+                            container: mapContainer.current,
+                            style: 'mapbox://styles/mapbox/streets-v11',
+                            center: [logitud, lat],
+                            zoom: zoom
+                        })
                     )
+                  
     }
 
-    // async function handleOnClick() {
-    //     const objeto = await axios.get(`https://geocoder.ls.hereapi.com/6.2/geocode.json?apiKey=35c9CgwMnpuFXkfGgfHNlMyBpMfW685i9LOKRMaVRz0&searchtext=${address.street}+${address.number}+${address.city}+${address.country}`)
-    //         .then(res => {
-    //             return {
-    //                 lati: res.data.Response.View[0].Result[0].Location.DisplayPosition.Latitude,
-    //                 login: res.data.Response.View[0].Result[0].Location.DisplayPosition.Longitude
-    //                 // console.log('soyresponse',res.Response.View[0].Result[0].Location.DisplayPosition)
-    //                 // setlogitud(res.Response.View[0].Result[0].Location.DisplayPosition.Longitude)
-    //                 // setLat(res.Response.View[0].Result[0].Location.DisplayPosition.Latitude)
-    //             }
-    //         })
-    //         .catch(error => console.log(error))
-    //     console.log('soy el objetin', objeto)
-    //     // const marker = new Marker()
-       
-            
-    //     mapa?.flyTo({
-    //         center: [objeto.login, objeto.lati],
-    //         zoom: 14
 
-    //     })
-    //     if(markerPoint!==null) markerPoint.remove()
-    //     markerPoint=new mapboxgl.Marker()
-    //    .setLngLat([objeto.login, objeto.lati])
-    //    .addTo(mapa);
-
-
-    // }
     
     useEffect(async ()=>{
         if(Object.keys(address).length!==0){
             console.log('soy adress',address)
             const objeto = await axios.get(`https://geocoder.ls.hereapi.com/6.2/geocode.json?apiKey=35c9CgwMnpuFXkfGgfHNlMyBpMfW685i9LOKRMaVRz0&searchtext=${address.street}+${address.number}+${address.city}+${address.state}+${address.country}`)
             .then(res => {
+                if(res.data.Response.View.length !==0){
                 return {
                     lati: res.data.Response.View[0].Result[0].Location.DisplayPosition.Latitude,
                     login: res.data.Response.View[0].Result[0].Location.DisplayPosition.Longitude
 
+                }}
+                else{
+                    return null
                 }
             })
             .catch(error => console.log(error))
         console.log('soy el objetin', objeto)
         // const marker = new Marker()
        
-            
+            if(objeto!==null){
         mapa?.flyTo({
             center: [objeto.login, objeto.lati],
             zoom: 14
 
         })
-        if(markerPoint!==null) markerPoint.remove()
-        markerPoint=new mapboxgl.Marker()
-       .setLngLat([objeto.login, objeto.lati])
-       .addTo(mapa);
+        markerPoint?.remove()
 
+        setMarkerPoint( new Marker()
+       .setLngLat([objeto.login, objeto.lati])
+       .addTo(mapa));
+
+        }else{
+            Swal.fire({
+                title: 'This address does not exist or not found!!',
+                text:"Do you want to add it anyway?",
+                showCancelButton: true,
+                confirmButtonText: 'Yes, I want to add it',
+              }).then( async(result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    addAddressToUser()
+                  
+                }
+              })
         }
+    
+    
+    }
     },[address])
     useEffect(() => {
         if (mapContainer.current) {// initialize map only once
@@ -104,6 +117,7 @@ export default function Maps() {
             )
            
         };
+        
     }, [mapContainer]);
 
     return (
@@ -154,7 +168,7 @@ export default function Maps() {
                     
                     // dispatch(addAdress(adress, user.idUser))
                    
-                    resetForm()
+                    
                 }}>
                 {({ touched, errors }) => (
                     <Form classname="LoginFormm">
@@ -162,37 +176,37 @@ export default function Maps() {
                         <div className='fieldLog'>
                             <label>Country: </label>
                             <Field type="text" name="country" placeholder="Country" />
-                            {touched.country && errors.country && <span>{errors.country}</span>}
+                            {touched.country && errors.country && <span className="errorsMap">{errors.country}</span>}
                         </div>
                         <div className='fieldLog'>
                             <label>State: </label>
                             <Field type="text" name="state" placeholder="State" />
-                            {touched.state && errors.state && <span>{errors.state}</span>}
+                            {touched.state && errors.state && <span className="errorsMap">{errors.state}</span>}
                         </div>
                         <div className='fieldLog'>
                             <label>City: </label>
                             <Field type="text" name="city" placeholder="City" />
-                            {touched.city && errors.city && <span>{errors.city}</span>}
+                            {touched.city && errors.city && <span className="errorsMap">{errors.city}</span>}
                         </div>
                         <div className='fieldLog'>
                             <label>Street: </label>
                             <Field type="text" name="street" placeholder="Street" />
-                            {touched.street && errors.street && <span>{errors.street}</span>}
+                            {touched.street && errors.street && <span className="errorsMap">{errors.street}</span>}
                         </div>
                         <div className='fieldLog'>
                             <label>Number: </label>
                             <Field type="number" name="number" placeholder="Number" />
-                            {touched.number && errors.number && <span>{errors.number}</span>}
+                            {touched.number && errors.number && <span className="errorsMap">{errors.number}</span>}
                         </div>
                         <div >
-                            <button type="submit" >Search address</button>
+                            <button type="submit" >Search address  <TbMapSearch size={20} /> </button>
                         </div>
                     </Form>
                 )}
             </Formik>
-            <button onClick={addAddressToUser}>Add an address</button>
+            <button onClick={addAddressToUser}>Add an address <RiMapPinAddLine size={20} color="white"/></button>
             </div>
-            <div ref={mapContainer} className="map-container" />
+            <div ref={mapContainer} className="map-container" id="mapita"/>
 
           
            

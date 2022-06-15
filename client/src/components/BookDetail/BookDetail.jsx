@@ -107,6 +107,8 @@ export default function BookDetail() {
       Swal.fire({
         icon: 'success',
         title: 'This comment has been reported',
+        showConfirmButton: false,
+        timer: 1500
       })
     }
     const obj = {
