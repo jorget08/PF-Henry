@@ -27,11 +27,9 @@ export default function SupportAdmin() {
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => supportData, [supportData])
 
-  const handleClick = (e, {name, email, id}) => {
+  const handleClick = (e, row) => {
     e.preventDefault();
-    if (id === null) setResp({...resp, name: name, email: email})
-    else {setResp({response: "", idSupport: id})}
-    console.log("Soy el ID y el mail", name, email)
+    setResp({...resp, name: row.original.name, email: row.original.email})
     openModal()
   }
   
@@ -43,6 +41,7 @@ export default function SupportAdmin() {
 
   const submitReply = (e) => {
     e.preventDefault();
+    setResp({...resp, message: respon})
     dispatch(replySupportGuest(resp))
     console.log(resp)
     const Toast = Swal.mixin({
@@ -64,6 +63,7 @@ export default function SupportAdmin() {
     
     setBool(!bool)
     closeModal()
+    window.location.reload()
   }
 
   const handleSelect = (e) => {
@@ -79,21 +79,8 @@ export default function SupportAdmin() {
           Header:"Actions",
           Cell: ({ row }) => ( 
             <div>
-              <button onClick={e => handleClick(e)}>Reply by mail</button>
+              <button onClick={e => handleClick(e, row)}>Reply by mail</button>
             </div>
-            /* {
-              (row.values.userIdUser === undefined && row.values.status === 0)? <button onClick={(e) => handleClick(e, {
-                name: row.values.nameGuess,
-                email: row.values.emailGuess
-              })}>
-              Reply by mail 
-              </button>:
-              (row.values.userIdUser.length && row.values.status === 0)?
-              <button onClick={(e) => handleClick(e, {id: row.values.idSupport})}>
-              Reply
-              </button>: <span>-</span>
-            } */
-            
           )
         }
       ]

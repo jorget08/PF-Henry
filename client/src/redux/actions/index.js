@@ -746,13 +746,6 @@ export function replySupportGuest(payload) {
           },
         } */
       );
-      const res = await axios.get("http://localhost:3001/support", {
-        headers: {
-          Authorization: JSON.parse(localStorage.getItem("token")),
-        },
-      });
-      localStorage.setItem("token", JSON.stringify(res.data.token));
-      return dispatch({ type: GET_SUPPORT, payload: res.data.supports });
       
     } catch (e) {
       console.log(e);

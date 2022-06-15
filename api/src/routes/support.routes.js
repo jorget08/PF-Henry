@@ -17,7 +17,7 @@ router.post('/',
 );
 router.put('/',
     [
-        validarJwt,
+        // validarJwt,
         check('idSupport', 'El id del support es obligatorio').not().isEmpty(),
         check('response', 'La Respuesta es obligatoria').not().isEmpty(),
         validarCampos
@@ -25,9 +25,9 @@ router.put('/',
     responseSupport
 );
 router.get('/',
-    [
+    /* [
         validarJwt
-    ], 
+    ],  */
     getSupports
 );
 router.put('/:id',

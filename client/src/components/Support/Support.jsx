@@ -146,9 +146,7 @@ export default function Support() {
                     {
                         render.Write &&
                         <div>
-
-                           
-
+                          
                             {isLogged ?
 
                                 <p className='text'>You are already a member of our community! You can ask whatever you want, just click the option "User Support" on your profile menu!</p>
