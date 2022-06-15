@@ -15,7 +15,7 @@
   height: 300px;
 }
 .landing .dataLeft h1 {
-  font-family: 'Merriweather', serif;
+  font-family: 'Source Sans Pro', sans-serif;
   color: #a76b6b;
   width: 20rem;
   font-size: 35px;
@@ -37,7 +37,7 @@
   height: 300px;
 }
 .landing .dataRight h1 {
-  font-family: 'Merriweather', serif;
+  font-family: 'Source Sans Pro', sans-serif;
   color: #a76b6b;
   width: 20rem;
   font-size: 35px;
@@ -53,7 +53,7 @@
   flex-direction: column;
 }
 .landing .dataUp h1 {
-  font-family: 'Merriweather', serif;
+  font-family: 'Source Sans Pro', sans-serif;
   color: #a76b6b;
   font-size: 35px;
   padding: 10px;
@@ -66,7 +66,7 @@
   border-radius: 30px;
 }
 .sections h1 {
-  font-family: 'Merriweather', serif;
+  font-family: 'Source Sans Pro', sans-serif;
   color: #852d2d;
   font-size: 50px;
   padding: 10px;

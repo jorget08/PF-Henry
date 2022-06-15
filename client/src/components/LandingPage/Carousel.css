@@ -1,5 +1,6 @@
-.carousel {
-  background-color: white;
+.carousel.carousel-slider .control-arrow {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 .carousel:hover .newSlide img {
   opacity: 1;

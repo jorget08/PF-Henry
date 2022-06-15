@@ -27,10 +27,6 @@ export default function BookDetail() {
   console.log("hystory", history)
   var bookDet = useSelector(state => state.detail)
 
-  var stars = [false, false, false, false, false];
-
-
-
   const redirect = () => {
     history.push("/home")
   }
@@ -212,8 +208,8 @@ export default function BookDetail() {
               {
                 bookDet.score &&
                 <Stars score={bookDet.score} />
-
               }
+              <p style={{ marginTop: '0', fontSize: '14px', font: 'italic', color: 'gray', cursor: 'default' }}><em>Rated by our experts</em></p>
 
               <div className=''>
                 <p>Author: <strong>{bookDet.author}</strong></p>
