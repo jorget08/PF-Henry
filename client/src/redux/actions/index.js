@@ -474,14 +474,10 @@ export function showComments(id) {
 export function getSupport() {
   return async function (dispatch) {
     try {
-      const res = await axios.get("http://localhost:3001/support", {
-        headers: {
-          Authorization: JSON.parse(localStorage.getItem("token")),
-        },
-      });
-      localStorage.setItem("token", JSON.stringify(res.data.token));
-      console.log(res.data);
-      console.log("id admin", localStorage.getItem("token"));
+      const res = await axios.get("http://localhost:3001/support");
+      // localStorage.setItem("token", JSON.stringify(res.data.token));
+      // console.log(res.data);
+      // console.log("id admin", localStorage.getItem("token"));
       return dispatch({ type: GET_SUPPORT, payload: res.data.supports });
     } catch (error) {
       console.log(error);

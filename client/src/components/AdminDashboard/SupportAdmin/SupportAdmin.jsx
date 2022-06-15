@@ -22,7 +22,7 @@ export default function SupportAdmin() {
 
   useEffect(() => {
     dispatch(getSupport())    
-  }, [dispatch, supportData])
+  }, [dispatch])
 
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => supportData, [supportData])
