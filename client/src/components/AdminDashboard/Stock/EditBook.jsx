@@ -35,14 +35,15 @@ export default function EditBook() {
 
     // var catDetail = [...bookEditDetail?.categories?.map(c => c.name)]
     
-    const data = useMemo(() => base, [base])
+    const data = useMemo((detail) => base, [detail])
+    console.log("DETAIIIIIIl", detail)
     var [base, setBase] = useState({
-        title: data?.title,
-        author: data?.author,
-        price: data?.price,
-        stock: data?.stock,
-        description: data?.description,
-        image: data?.image
+        title: detail.title , 
+        author: detail.author ? detail.author : null,
+        price: detail.price ? detail.price : null,
+        stock: detail.stock ? detail.stock : null,
+        description: detail.description ? detail.description : null,
+        image: detail.image ? detail.image : null,
     })
 
     // function handleChange(e) {
@@ -58,24 +59,23 @@ export default function EditBook() {
     
 
     useEffect(() => {
-        dispatch(getCategories)
+        // dispatch(getCategories)
         dispatch(getDetail(idForEdit))
-    }, [dispatch, base])
+    }, [dispatch, idForEdit])
 
     const redirect = ({ id }) => {
         if (id) {
             history.push(`/book/${id}`)
         }
     }
-    setBase({
-        author: detail.author,
-        description: detail.description,
-        image: detail.image,
-        price: detail.price,
-        stock: detail.stock,
-        title: detail.title
-        
-    })  
+    // setBase({
+    //     author: detail.author ? detail.author : null,
+    //     description: detail.description ? detail.description : null,
+    //     image: detail.image ? detail.image : null,
+    //     price: detail.price ? detail.price : null,
+    //     stock: detail.stock ? detail.stock : null,
+    //     title: detail.title ? detail.title : null,        
+    // }[detail])  
     console.log("LA BASE", base)
     
     
