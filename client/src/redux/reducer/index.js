@@ -1,5 +1,3 @@
-import ShoppingHistory from "../../components/ShoppingHistory/ShoppingHistory";
-import { infoBooks, totalPrice } from "../actions";
 import {
   GET_BY_SEARCH,
   GET_DETAIL,

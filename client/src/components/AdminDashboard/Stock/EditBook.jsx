@@ -15,7 +15,19 @@ export default function EditBook() {
     var [formSubmit, setFormSubmit] = useState(false)
     var [last, setLast] = useState("")
     var catego = useSelector(state => state.categories)
-
+    var [base, setBase] = useState({
+        title: "", 
+        author: "",
+        price: "",
+        stock: "",
+        description:[] ,
+        image: "",
+    })
+    
+    useEffect(() => {
+        // dispatch(getCategories)
+        dispatch(getDetail(idForEdit))
+    }, [dispatch, idForEdit])
   
 
     if (bookEditDetail === undefined) {
@@ -29,23 +41,15 @@ export default function EditBook() {
             image: ""
         }
     } else {
-        var detail  = bookEditDetail
+               
         console.log('soy detail', detail)
     }
 
     // var catDetail = [...bookEditDetail?.categories?.map(c => c.name)]
     
-    const data = useMemo((detail) => base, [base])
+    // const data = useMemo((detail) => base, [base])
     console.log("DETAIIIIIIl", detail)
-    var [base, setBase] = useState({
-        title: "", 
-        author: "",
-        price: "",
-        stock: "",
-        description:[] ,
-        image: "",
-    })
-    
+
 
     // function handleChange(e) {
     //     e.preventDefault();
@@ -59,10 +63,7 @@ export default function EditBook() {
 
     
 
-    useEffect(() => {
-        // dispatch(getCategories)
-        dispatch(getDetail(idForEdit))
-    }, [dispatch, idForEdit])
+
     
     const redirect = ({ id }) => {
         if (id) {
@@ -75,7 +76,7 @@ export default function EditBook() {
   
     return (
         <div className='containerCreate'>
-            <Formik
+     <Formik
 
                 initialValues={base}
 
@@ -260,7 +261,7 @@ export default function EditBook() {
                     </div >
                 )
                 }
-            </Formik >
+            </Formik > 
             {
                 bookEditDetail.id !== undefined &&
                 <div className='pastInfo'>

@@ -22,7 +22,8 @@ export default function Stock() {
   const [isOpenModal, openModal, closeModal] = useModals(false);
 
   useEffect(() => {
-    dispatch(getBooks)    
+    dispatch(getBooks)
+    dispatch(getDetail())    
   }, [dispatch])
 
   const columns = useMemo(() => COLUMNS, [])
@@ -72,8 +73,8 @@ export default function Stock() {
 
   const handleEdit = (e, row) => {
     e.preventDefault()
-    dispatch(bookEdit(row.original.id))
-    dispatch(getDetail(row.original.id))
+    dispatch(getDetail(row?.original?.id))
+    dispatch(bookEdit(row?.original?.id))
     console.log("ROW ID", row.original.id)
     openModal()
   }
