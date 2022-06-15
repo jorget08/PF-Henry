@@ -6,72 +6,72 @@ import { deleteAdmReview, getReviews, getBooks, getSales, getUsers, deleteReview
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
 import Swal from "sweetalert2";
-import { ImCheckmark2,ImCross} from "react-icons/im";
+import { ImCheckmark, ImCross } from "react-icons/im";
 
 
 
 export default function Reports() {
-  
+
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
   const allReviews = useSelector(state => state.reviews)
   console.log("I'm the reviews bitch", allReviews)
-  
+
   useEffect(() => {
     dispatch(getUsers())
     dispatch(getBooks)
     dispatch(getSales())
-    dispatch(getReviews())    
+    dispatch(getReviews())
   }, [dispatch])
-  
-  
-  
-  const COLUMNS = [    
 
-    {   
-        Header: 'User',
-        accessor: (row) => {
-          console.log(row)
-            return row.user.name.charAt(0).toUpperCase() + row.user.name.slice(1) + ' ' + row.user.lastName.charAt(0).toUpperCase() + row.user.lastName.slice(1)
-        },
+
+
+  const COLUMNS = [
+
+    {
+      Header: 'User',
+      accessor: (row) => {
+        console.log(row)
+        return row.user.name.charAt(0).toUpperCase() + row.user.name.slice(1) + ' ' + row.user.lastName.charAt(0).toUpperCase() + row.user.lastName.slice(1)
+      },
     },
-    {          
-        Header: "Email",
-        accessor: (row) => {
-            return row.user.email;
-        }
+    {
+      Header: "Email",
+      accessor: (row) => {
+        return row.user.email;
+      }
     },
-    {        
-        Header: "Book's Title",
-        accessor: (row) => {
-            return (
-                row.book.title
-            )
-        },
-    },       
-    {        
-        Header: "Reviews",
-        accessor: (row) => {
-            return (
-                row.description + ' | ' + row.createdAt.slice(0,10)
-            )
-        },
-    }, 
-    {        
-        Header: "Actions",
-        accessor: (row) => {
-            return (
-              <>
-              <div style={{display:"flex",justifyContent:"space-around"}}>
-                <button className='iconDash'  onClick={(e) => handleDelete(e, row.id)}><ImCheckmark2></ImCheckmark2></button>
-                <button className='iconDash delete' onClick={(e) => handleDiscard(e, row)}><ImCross/></button>
-                </div>
-              </>
-            )
-        },
-    },   
-    
-]
+    {
+      Header: "Book's Title",
+      accessor: (row) => {
+        return (
+          row.book.title
+        )
+      },
+    },
+    {
+      Header: "Reviews",
+      accessor: (row) => {
+        return (
+          row.description + ' | ' + row.createdAt.slice(0, 10)
+        )
+      },
+    },
+    {
+      Header: "Actions",
+      accessor: (row) => {
+        return (
+          <>
+            <div style={{ display: "flex", justifyContent: "space-between", width: '70px' }}>
+              <button className='iconTik' onClick={(e) => handleDelete(e, row.id)}><ImCheckmark></ImCheckmark></button>
+              <button className='iconDash delete' onClick={(e) => handleDiscard(e, row)}><ImCross /></button>
+            </div>
+          </>
+        )
+      },
+    },
+
+  ]
 
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => allReviews, [allReviews])
@@ -87,12 +87,12 @@ export default function Reports() {
       confirmButtonText: 'Yes, delete review!'
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteReview(row.bookId, row.id))  
+        dispatch(deleteReview(row.bookId, row.id))
         window.location.reload()
       }
     })
-    
-   
+
+
   }
 
   const handleDelete = (e, row) => {
@@ -106,11 +106,11 @@ export default function Reports() {
       confirmButtonText: 'Yes, discard report!'
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteAdmReview(row)) 
+        dispatch(deleteAdmReview(row))
         window.location.reload()
       }
     })
-    
+
 
   }
 
@@ -134,15 +134,16 @@ export default function Reports() {
     columns,
     data
   },
-  useGlobalFilter,
-  useSortBy,
-  usePagination,
+    useGlobalFilter,
+    useSortBy,
+    usePagination,
   )
 
   const { globalFilter } = state
   const { pageIndex, pageSize } = state
   return (
     <>
+
     {user.rols?.name === "admin" ?
     <>
     <h2 className='h1'>Reports</h2>
