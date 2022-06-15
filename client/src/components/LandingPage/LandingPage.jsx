@@ -8,7 +8,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import NavBar from "../NavBar/NavBar";
 import SectionCat from "./SectionCat";
-import { getLandingTop, getLandingTopCat } from "../../redux/actions";
+import { getLandingTop, getLandingTopCat, getUser } from "../../redux/actions";
 import LandingCarousel from "./LandingCarousel";
 import Footer from "../Footer/Footer";
 export default function LandingPage() {
@@ -21,6 +21,7 @@ export default function LandingPage() {
     useEffect(() => {
         dispatch(getLandingTop())
         dispatch(getLandingTopCat())
+        dispatch(getUser())
     }, [])
 
 

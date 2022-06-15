@@ -53,6 +53,6 @@ export const REPLY_SUPPORT_GUEST= "REPLY_SUPPORT_GUEST";
 export const UPDATE_SENT ="UPDATE_SENT"
 export const UPDATE_DONE="UPDATE_DONE"
 export const DELETE_ADM_REVIEW = "DELETE_ADM_REVIEW";
-export const DISCARD_REPORT = "DISCARD_REPORT"
-
+export const CHANGE_IMG = "CHANGE_IMG";
+export const BOOK_EDIT = "BOOK_EDIT";
 

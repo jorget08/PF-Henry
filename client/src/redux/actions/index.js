@@ -52,7 +52,8 @@ import {
   UPDATE_SENT,
   UPDATE_DONE,
   DELETE_ADM_REVIEW,
-  DISCARD_REPORT,
+  CHANGE_IMG,
+  BOOK_EDIT,
 } from "./types";
 
 import axios from "axios";
@@ -564,10 +565,10 @@ export function reportReview(id, idBook, obj) {
     }
   }
 }
-  export function deleteReview(user, book, review) {
+  export function deleteReview(book, review) {
     return async function (dispatch) {
       try {
-        const response = await axios.delete(`http://localhost:3001/reviews?user=${user}&book=${book}&review=${review}`);
+        const response = await axios.delete(`http://localhost:3001/reviews?book=${book}&review=${review}`);
         return dispatch({ type: DELETE_REVIEW, payload: response.data });
          } catch (error) {
         console.log(error);
@@ -715,16 +716,6 @@ export function deleteAdmReview(id, obj) {
   }
 }
 
-export function discardReport({idUser, idBook, idReview }){
-  return async function (dispatch){    
-    try {   
-      const res = await axios.delete(`http://localhost:3001/reviews?user=${idUser}&books=${idBook}&review=${idReview}`)
-      return dispatch({type: DISCARD_REPORT})
-    } catch (err) {                       
-      console.log(err)
-    }
-  }
-}
 
 export function filterSupportStatus (payload) {
   return ({
@@ -786,6 +777,32 @@ export function updateDone(id) {
     try {
       var response = await axios.put("http://localhost:3001/paypal/payments/done",{id:id})
       return dispatch({ type: UPDATE_DONE });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function changeImg(id, tipo, img) {
+    return async function (dispatch) {
+      try {
+        var response = await axios.put(`http://localhost:3001/upload/${tipo}/${id}`, img, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          }
+        });
+        console.log("change img", response.data);
+        return dispatch({ type: CHANGE_IMG, payload: response.data.url });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+}
+
+export function bookEdit(id) {
+  return async function (dispatch) {
+    try {
+      return dispatch({ type: BOOK_EDIT, payload: id });
     } catch (error) {
       console.log(error);
     }

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import { useDispatch, useSelector } from 'react-redux'
-import { discardReport, deleteAdmReview, getReviews, getBooks, getSales, getUsers } from '../../../redux/actions'
+import { deleteAdmReview, getReviews, getBooks, getSales, getUsers, deleteReview } from '../../../redux/actions'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
 
@@ -20,11 +20,13 @@ export default function Reports() {
   }, [dispatch])
   
   
+  
   const COLUMNS = [    
 
     {   
         Header: 'User',
         accessor: (row) => {
+          console.log(row)
             return row.user.name + ' ' + row.user.lastName;
         },
     },
@@ -62,20 +64,20 @@ export default function Reports() {
         },
     },   
 ]
+
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => allReviews, [allReviews])
 
   const handleDiscard = (e, row) => {
-    e.preventDefault()
-    console.log ("IDUSER",row.user.idUser, "BOOKID",row.bookId, "IDREVIEW",row.id)
-    dispatch(discardReport(row.user.idUser, row.bookId, row.id))  
+    console.log ('soy row', row)  
+    dispatch(deleteReview(row.bookId, row.id))  
     alert ('Review successfully deleted!')
-    // window.location.reload()
+    window.location.reload()
   }
 
   const handleDelete = (e, row) => {
     e.preventDefault()
-    console.log ("SOY e", row)
+    console.log ("SOY row", row)
     dispatch(deleteAdmReview(row))  
     alert ('Report discard!')
     window.location.reload()
@@ -112,7 +114,7 @@ export default function Reports() {
     <>
     <h2 className='h1'>Reports</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
-    <table {...getTableProps()} className={'Container'}>
+    {allReviews && <table {...getTableProps()} className={'Container'}>
       <thead >
         {headerGroups.map((headerGroups) => (
         <tr {...headerGroups.getHeaderGroupProps()}>
@@ -142,7 +144,7 @@ export default function Reports() {
           })
         }
       </tbody>
-    </table>
+    </table>}
     <div className="button">
       <span>
          Go to page : {' '}

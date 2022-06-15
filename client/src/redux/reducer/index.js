@@ -49,6 +49,8 @@ import {
   FILTER_SUPPORT,
   DELETE_ADM_REVIEW,
   DISCARD_REPORT,
+  CHANGE_IMG,
+  BOOK_EDIT,
 } from "../actions/types";
 
 const initialState = {
@@ -76,6 +78,7 @@ const initialState = {
   sales: [],
   reviews: [],
   address: "",
+  idForEdit: "",
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -393,11 +396,18 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         reviews: payload,
       };
-    case DISCARD_REPORT:
+    case CHANGE_IMG:
       return{
         ...state,
-        reviews:payload
+        user: {...state.user, imgProfile: payload},
+        detail: {...state.detail, image: payload}
       }
+    case BOOK_EDIT:
+      return {
+        ...state,
+        idForEdit: payload
+      }
+      
     default:
     return state;
   }

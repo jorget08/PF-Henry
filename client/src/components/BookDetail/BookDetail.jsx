@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { getDetail, clearDetail, deleteBook, addComment, showComments, getBooks, reportReview, updateReview, deleteReview } from "../../redux/actions";
+import { getDetail, clearDetail, deleteBook, addComment, showComments, getBooks, reportReview, updateReview, deleteReview, changeImg } from "../../redux/actions";
 import DetailCompra from '../DetailCompra/DetailCompra';
 import { FaRegTrashAlt } from 'react-icons/fa'
 import Stars from '../Stars/Stars';
@@ -22,6 +22,7 @@ export default function BookDetail() {
   const token = localStorage.getItem("token")
   const [comment, setComment] = useState({ title: 'default', description: '', id: '' })
   const [errors, setErrors] = useState({})
+  const [news, setNews] = useState(false)
 
   console.log("hystory", history)
   var bookDet = useSelector(state => state.detail)
@@ -61,10 +62,10 @@ export default function BookDetail() {
       input: 'select',
       inputOptions: {
 
-        type1: 'It is inappropriate',
-        type2: 'Can be discriminatory',
-        type3: 'It is offensive',
-        type4: 'Has inappropriate language'
+        'It is inappropriate': 'It is inappropriate',
+        'Can be discriminatory': 'Can be discriminatory',
+        'It is offensive': 'It is offensive',
+        'Has inappropriate language': 'Has inappropriate language'
 
       },
       inputPlaceholder: 'Select why',
@@ -179,6 +180,15 @@ export default function BookDetail() {
       })
 
   }
+
+  const handleImage = (e) => {
+    const image = e.target.files[0]
+    const formData = new FormData()
+    formData.append('img', image)
+
+    dispatch(changeImg(bookDet.id, 'book', formData))
+    setNews(news ? false : true)
+  }
   return (
     <div className='all'>
       <NavBar />
@@ -187,6 +197,10 @@ export default function BookDetail() {
           <div className='container__info'>
             <div className='image'>
               <img src={bookDet.image} alt="" />
+              {user.rols?.name === "admin" ?
+              <form>
+                <input type="file" onChange={handleImage} name="file" id="" />
+              </form>:""}
               <DetailCompra title={bookDet.title} author={bookDet.author} price={bookDet.price} categories={bookDet.categories} id={bookDet.id} stock={bookDet.stock}></DetailCompra>
             </div>
             <div className='info'>

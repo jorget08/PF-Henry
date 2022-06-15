@@ -203,12 +203,12 @@ router.put("/payments/sent", async (req, res, next) => {
 
             if(pay){
                 await pay.update({
-                    deliveryStatus: "Sent"
+                    deliveryStatus: "Send"
                 })
             }
             else{
                 await Paymentcrypto.update({
-                    deliveryStatus: "Sent",
+                    deliveryStatus: "Send",
                 },{
                     where: {id: id}
                 })
@@ -231,12 +231,12 @@ router.put("/payments/done", async (req, res, next) => {
 
             if(pay){
                 await pay.update({
-                    deliveryStatus: "Done"
+                    deliveryStatus: "Order received"
                 })
             }
             else{
                 await Paymentcrypto.update({
-                    deliveryStatus: "Done",
+                    deliveryStatus: "Order received",
                 },{
                     where: {id: id}
                 })

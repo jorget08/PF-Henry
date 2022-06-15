@@ -9,8 +9,8 @@ const createSupport = async (req, res) => {
         if (!userExist) {
             //? 
             const support = await Support.create({
-                emailGuess: email,
-                nameGuess: name,
+                email,
+                name,
                 comment,
                 date: new Date(),
                 status: 0
@@ -22,11 +22,13 @@ const createSupport = async (req, res) => {
             });1
         }
         const support = await Support.create({
+            email: userExist.email,
+            name: userExist.name,
             comment,
             date: new Date(),
             status: 0
         });
-        await support.setUser(uid);
+        // await support.setUser(uid);
         //? get support with user
         const supportWithUser = await Support.findOne({
             where: { idSupport: support.idSupport },

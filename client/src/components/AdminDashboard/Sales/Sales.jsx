@@ -6,7 +6,7 @@ import {
   usePagination,
 } from "react-table";
 import { useDispatch, useSelector } from "react-redux";
-import { getSales, updateSent, updateDone } from "../../../redux/actions";
+import { getSales, updateSent} from "../../../redux/actions";
 import { GROUPED_COLUMNS } from "./Columns.jsx";
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
@@ -25,11 +25,7 @@ export default function Sales() {
     window.location.reload();
   };
 
-  const handleChange2 = ({ e, id }) => {
-    e.preventDefault();
-    dispatch(updateDone(id));
-    window.location.reload();
-  };
+  
 
   useEffect(() => {
     dispatch(getSales());
@@ -51,17 +47,10 @@ export default function Sales() {
           <div>
             {row.original.deliveryStatus === "Pending" ? (
               <button onClick={(e) => handleChange({ e, id: row.original.id })}>
-                Change Status Sent
+                Send the order
               </button>
             ) : null}
-            {row.original.deliveryStatus === "Sent" ? (
-              <button
-                onClick={(e) => handleChange2({ e, id: row.original.id })}
-              >
-                Change Status Done
-              </button>
-            ) : null}
-            {row.original.deliveryStatus === "Done" ? <p>Complete</p> : null}
+            {row.original.deliveryStatus === "Order received" ? <p>Complete</p> : null}
           </div>
         ),
       },

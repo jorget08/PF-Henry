@@ -6,6 +6,11 @@ const path = require('path');
 
 const sendEmail = async (req, res) => {
     const { email, name, lastName, payment} = req.body;
+
+    const totalPrice = payment.reduce((total, item) => {
+        return total + item.price;
+    }, 0);
+
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -13,16 +18,30 @@ const sendEmail = async (req, res) => {
             pass: 'qyrvkdsvuzwgotne'
         }
     });
+    const handlebarOptions = {
+        viewEngine: {
+            extName: '.handlebars',
+            partialsDir: path.resolve('src/views/'),
+            defaultLayout: false,
+        },
+        viewPath: path.resolve('src/views/'),
+        extName: '.handlebars',
+    }
+    transporter.use('compile', hbs(handlebarOptions));
+
     const mailOptions = {
         from: "BookStore <",
         to: email,
         subject: 'Confirmation of payment',
-        text: 'Hello ' + name + ' ' + lastName + '\n\n' +
-            'Thank you for purchase on BookStore.\n' +
-            'Thank you,\n' +
-            `${payment?.map(item=>{
-                return `${item.title} - ${item.price}`
-            })}`
+        template: 'purchase',
+        context: {
+            email,
+            name,
+            lastName,
+            payment,
+            totalPrice
+        }
+        
     };
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
@@ -48,16 +67,28 @@ const sendEmailPassword = async (req, res) => {
             pass: 'qyrvkdsvuzwgotne'
         }
     });
+    const handlebarOptions = {
+        viewEngine: {
+            extName: '.handlebars',
+            partialsDir: path.resolve('src/views/'),
+            defaultLayout: false,
+        },
+        viewPath: path.resolve('src/views/'),
+        extName: '.handlebars',
+    }
+    transporter.use('compile', hbs(handlebarOptions));
+
     const mailOptions = {
         from: "BookStore <",
         to: email,
         subject: 'Change Password',
-        text: 'Hello ' + user.name + ' ' + user.lastName + '\n\n' +
-        'If you have requested a change in your password please enter the link below:\n' +
-        'http://localhost:3000/password/' + user.idUser + '\n\n' +
-        "If you have not please ignore this mail.\n\n" +
-        'Thank you,\n' +
-        'BookStore'
+        template: 'forgotPassword',
+        context: {
+            name: user.name,
+            lastName: user.lastName,
+            email: user.email,
+            id: user.idUser,
+        }
     };
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
@@ -120,7 +151,7 @@ const sendEmailSupport = async (req, res) => {
         });   
     
         //? buscar support por email
-        const support = await Support.findOne({ where: { emailGuess: email } });
+        const support = await Support.findOne({ where: { email } });
         if (support) {
             //? actualizar status a 1
             await Support.update({ status: 1 }, { where: { idSupport: support.idSupport } });
