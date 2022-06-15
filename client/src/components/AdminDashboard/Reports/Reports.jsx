@@ -58,8 +58,10 @@ export default function Reports() {
         accessor: (row) => {
             return (
               <>
-                <button onClick={(e) => handleDelete(e, row.id)}>DISCARD REVIEW (VERDE)</button>
-                <button onClick={(e) => handleDiscard(e, row)}>BAN REVIEW (ROJO)</button>
+              <div style={{display:'flex',justifyContent:'space-between',width:'215px'}}>
+                <button style={{backgroundColor:"green",color:"white",borderRadius:"50px",cursor:"pointer"}} onClick={(e) => handleDelete(e, row.id)}>Discard report</button>
+                <button style={{backgroundColor:"red",color:"white",borderRadius:"50px",cursor:"pointer"}}  onClick={(e) => handleDiscard(e, row)}>Delete review</button>
+                </div>
               </>
             )
         },
@@ -71,10 +73,21 @@ export default function Reports() {
 
   const handleDiscard = (e, row) => {
     e.preventDefault()
-    console.log ('soy row', row)  
-    dispatch(deleteReview(row.bookId, row.id))  
-    alert ('Review successfully deleted!')
-    window.location.reload()
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete review!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteReview(row.bookId, row.id))  
+        window.location.reload()
+      }
+    })
+    
+   
   }
 
   const handleDelete = (e, row) => {
