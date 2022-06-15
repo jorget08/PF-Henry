@@ -18,6 +18,7 @@ export default function UserProfile() {
   var user = useSelector(state => state.user)
   const dispatch = useDispatch()
   const [isOpenModal, openModal, closeModal] = useModals(false);
+  const token = localStorage.getItem("token")
 
   useEffect(() => {
     dispatch(getUser())
@@ -61,6 +62,7 @@ export default function UserProfile() {
   return (
     <>
       <NavBar />
+      {token?
       <div className='allProfile'>
         <div className='profile'>
 
@@ -137,7 +139,13 @@ export default function UserProfile() {
 
 
         </div>
-      </div>
+      </div>:
+      <div  className="aviso">
+      <h2>You need to be logged in to access here</h2>
+      <Link to={`/home`}>
+      <button className='minimize'>Back home</button>
+      </Link>
+      </div>}
     </>
 
   )
