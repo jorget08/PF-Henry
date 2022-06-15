@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import { useDispatch, useSelector } from 'react-redux'
-import { discardReport, deleteAdmReview, getReviews, getBooks, getSales, getUsers } from '../../../redux/actions'
+import { deleteAdmReview, getReviews, getBooks, getSales, getUsers, deleteReview } from '../../../redux/actions'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
 import Swal from "sweetalert2";
@@ -71,8 +71,10 @@ export default function Reports() {
 
   const handleDiscard = (e, row) => {
     e.preventDefault()
-     alert('delte report?')
-    dispatch(discardReport(row.userIdUser, row.bookId, row.id))  
+    console.log ('soy row', row)  
+    dispatch(deleteReview(row.bookId, row.id))  
+    alert ('Review successfully deleted!')
+    window.location.reload()
   }
 
   const handleDelete = (e, row) => {
@@ -91,6 +93,7 @@ export default function Reports() {
       }
     })
     
+
   }
 
   const {
