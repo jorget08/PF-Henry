@@ -173,27 +173,27 @@ export default function Maps() {
                 {({ touched, errors }) => (
                     <Form classname="LoginFormm">
                         <h2 id="title">Add an adress!!</h2>
-                        <div className='fieldLog'>
+                        <div className='fieldLogg'>
                             <label>Country: </label>
                             <Field type="text" name="country" placeholder="Country" />
                             {touched.country && errors.country && <span className="errorsMap">{errors.country}</span>}
                         </div>
-                        <div className='fieldLog'>
+                        <div className='fieldLogg'>
                             <label>State: </label>
                             <Field type="text" name="state" placeholder="State" />
                             {touched.state && errors.state && <span className="errorsMap">{errors.state}</span>}
                         </div>
-                        <div className='fieldLog'>
+                        <div className='fieldLogg'>
                             <label>City: </label>
                             <Field type="text" name="city" placeholder="City" />
                             {touched.city && errors.city && <span className="errorsMap">{errors.city}</span>}
                         </div>
-                        <div className='fieldLog'>
+                        <div className='fieldLogg'>
                             <label>Street: </label>
                             <Field type="text" name="street" placeholder="Street" />
                             {touched.street && errors.street && <span className="errorsMap">{errors.street}</span>}
                         </div>
-                        <div className='fieldLog'>
+                        <div className='fieldLogg'>
                             <label>Number: </label>
                             <Field type="number" name="number" placeholder="Number" />
                             {touched.number && errors.number && <span className="errorsMap">{errors.number}</span>}
