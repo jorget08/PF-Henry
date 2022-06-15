@@ -67,7 +67,7 @@ export default function Maps() {
     useEffect(async ()=>{
         if(Object.keys(address).length!==0){
             console.log('soy adress',address)
-            const objeto = await axios.get(`https://geocoder.ls.hereapi.com/6.2/geocode.json?apiKey=35c9CgwMnpuFXkfGgfHNlMyBpMfW685i9LOKRMaVRz0&searchtext=${address.street}+${address.number}+${address.city}+${address.country}`)
+            const objeto = await axios.get(`https://geocoder.ls.hereapi.com/6.2/geocode.json?apiKey=35c9CgwMnpuFXkfGgfHNlMyBpMfW685i9LOKRMaVRz0&searchtext=${address.street}+${address.number}+${address.state}+${address.city}+${address.country}`)
             .then(res => {
                 return {
                     lati: res.data.Response.View[0].Result[0].Location.DisplayPosition.Latitude,
