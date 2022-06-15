@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import s from './Sidebar.module.css'
 import { RiHome2Line } from 'react-icons/ri'
 import { BiSupport, BiBookAdd, BiUserCheck, BiTrendingUp, BiDollar, BiCommentX } from 'react-icons/bi'
+import { SiBookstack } from 'react-icons/si'
 
 export default function Sidebar() {
 
@@ -10,7 +11,7 @@ export default function Sidebar() {
     <>
       <div className={s.sidebar}>
 
-        <Link to='/'><img className={s.Logo} src="https://cdn-icons-png.flaticon.com/512/695/695896.png" /></Link>
+        <Link to='/'> <siBookstack/><img className={s.Logo} src="https://cdn-icons-png.flaticon.com/512/695/695896.png" /></Link>
         <ul style={{ padding: 0 }}>
           <hr className={s.hr} />
           <li className={s.Li}>
