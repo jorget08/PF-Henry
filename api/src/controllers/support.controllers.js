@@ -111,27 +111,28 @@ const responseSupport = async (req, res) => {
     }
 }
 const getSupports = async (req, res) => {
-    const uid = req.uid;
+                                                //const uid = req.uid;
     try {
         //? traer usuario con su rol
-        const userExist = await User.findOne({ 
-            where: { idUser: uid },
-            attributes: { exclude: ['createdAt', 'updatedAt'] },
-            include: {
-                model: Rol,
-                attributes: ['name']
-            },
-            raw: true,
-            nest: true 
-        });
-        if (!userExist) {
-            return res.status(400).json({
-                ok: false,
-                msg: 'User does not exist'
-            });
-        }
+        // const userExist = await User.findOne({ 
+        //     where: { idUser: uid },
+        //     attributes: { exclude: ['createdAt', 'updatedAt'] },
+        //     include: {
+        //         model: Rol,
+        //         attributes: ['name']
+        //     },
+        //     raw: true,
+        //     nest: true 
+        // });
+        // if (!userExist) {
+        //     return res.status(400).json({
+        //         ok: false,
+        //         msg: 'User does not exist'
+        //     });
+        // }
         //? si es admin mostrar todos los comentarios
-        if (userExist.rols.name === 'admin') {
+        // if (userExist.rols.name === 'admin') 
+        {
             const supports = await Support.findAll({
                 attributes: { exclude: ['createdAt', 'updatedAt'] },
                 include: {
@@ -151,26 +152,26 @@ const getSupports = async (req, res) => {
             });
         }
         //? si es user mostrar solo los de su id
-        else{
-            const supports = await Support.findAll({
-                attributes: { exclude: ['createdAt', 'updatedAt'] },
-                where: { userIdUser : uid },
-                include: {
-                    model: User,
-                    attributes: ['name', 'email']
-                }
-            });
-            if (!supports) {
-                return res.status(400).json({
-                    ok: false,
-                    msg: 'No supports'
-                });
-            }
-            res.json({
-                ok: true,
-                supports
-            });
-        }
+        // else{
+        //     const supports = await Support.findAll({
+        //         attributes: { exclude: ['createdAt', 'updatedAt'] },
+        //         where: { userIdUser : uid },
+        //         include: {
+        //             model: User,
+        //             attributes: ['name', 'email']
+        //         }
+        //     });
+        //     if (!supports) {
+        //         return res.status(400).json({
+        //             ok: false,
+        //             msg: 'No supports'
+        //         });
+        //     }
+        //     res.json({
+        //         ok: true,
+        //         supports
+        //     });
+        // }
     } catch (error) {
         console.log(error);
         res.status(500).json({

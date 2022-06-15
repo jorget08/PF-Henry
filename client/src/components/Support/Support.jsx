@@ -194,7 +194,12 @@ export default function Support() {
                                           })
                                     }
                                     else{dispatch(postSupport(valores))
-                                    alert("Query sent!")
+                                    Swal.fire({
+                                        title: 'Query sent!',
+                                        icon: 'success',
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                        })
                                     resetForm()}
                                 }}>
 

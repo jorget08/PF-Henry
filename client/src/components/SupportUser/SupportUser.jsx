@@ -55,7 +55,12 @@ export default function SupportUser () {
                                     })
                             }
                             else{dispatch(postSupport({comment: valores.comment, email: user.email}))}
-                            alert("Query sent!")
+                            Swal.fire({
+                                title: 'Query sent!',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 2000
+                                })
                             resetForm()
                         }}>
 
