@@ -14,6 +14,7 @@ export default function EditBook() {
     const bookEditDetail = useSelector(state => state.detail)
     var [formSubmit, setFormSubmit] = useState(false)
     var [last, setLast] = useState("")
+    var catego = useSelector(state => state.categories)
 
   
 
@@ -28,48 +29,56 @@ export default function EditBook() {
             image: ""
         }
     } else {
-        const { detail } = bookEditDetail
+        var detail  = bookEditDetail
+        console.log('soy detail', detail)
     }
 
     // var catDetail = [...bookEditDetail?.categories?.map(c => c.name)]
-
+    
+    const data = useMemo(() => base, [base])
     var [base, setBase] = useState({
-        title: bookEditDetail.title,
-        author: bookEditDetail.author,
-        // categories: catDetail,
-        price: bookEditDetail.price,
-        stock: bookEditDetail.stock,
-        description: bookEditDetail.description,
-        image: bookEditDetail.image
+        title: data?.title,
+        author: data?.author,
+        price: data?.price,
+        stock: data?.stock,
+        description: data?.description,
+        image: data?.image
     })
 
-    function handleChange(e) {
-        e.preventDefault();
-        const { name, value } = e.target;
-        setBase({
-            ...base,
-            [name]: value
-        })
-        console.log(base)
-    }
+    // function handleChange(e) {
+    //     e.preventDefault();
+    //     const { name, value } = e.target;
+    //     setBase({
+    //         ...base,
+    //         [name]: value
+    //     })
+    //     console.log(base)
+    // }
 
-    const data = useMemo(() => bookEditDetail, [bookEditDetail  ])
+    
 
     useEffect(() => {
         dispatch(getCategories)
         dispatch(getDetail(idForEdit))
-        console.log("I M THE DETAIL",bookEditDetail, "IDFOREDIT", idForEdit)
-        console.log('DATA', data)
-    }, [dispatch])
+    }, [dispatch, base])
 
     const redirect = ({ id }) => {
         if (id) {
             history.push(`/book/${id}`)
         }
     }
-
-    var catego = useSelector(state => state.categories)
-
+    setBase({
+        author: detail.author,
+        description: detail.description,
+        image: detail.image,
+        price: detail.price,
+        stock: detail.stock,
+        title: detail.title
+        
+    })  
+    console.log("LA BASE", base)
+    
+    
     return (
         <div className='containerCreate'>
             <Formik

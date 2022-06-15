@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { bookEdit, deleteBook, deleteReview, getBooks } from '../../../redux/actions'
+import { bookEdit, deleteBook, deleteReview, getBooks, getDetail } from '../../../redux/actions'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
 import { COLUMNS } from './Columns'
@@ -20,7 +20,7 @@ export default function Stock() {
   const [isOpenModal, openModal, closeModal] = useModals(false);
 
   useEffect(() => {
-    dispatch(getBooks)
+    dispatch(getBooks)    
   }, [dispatch])
 
   const columns = useMemo(() => COLUMNS, [])
@@ -60,6 +60,7 @@ export default function Stock() {
   const handleEdit = (e, row) => {
     e.preventDefault()
     dispatch(bookEdit(row.original.id))
+    dispatch(getDetail(row.original.id))
     console.log("ROW ID", row.original.id)
     openModal()
   }
