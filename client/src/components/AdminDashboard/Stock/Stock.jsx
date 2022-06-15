@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { bookEdit, deleteBook, deleteReview, getBooks, getDetail } from '../../../redux/actions'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
@@ -112,6 +113,8 @@ export default function Stock() {
 
   return (
     <>
+    {user.rols?.name === "admin" ?
+    <>
       <Modal isOpen={isOpenModal} closeModal={closeModal}>
         <EditBook />
       </Modal>
@@ -178,6 +181,14 @@ export default function Stock() {
         <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
         <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</button>
       </div>
+      </>:
+      <div className="aviso">
+      <h2>You don't have access here, please go back home</h2>
+      <Link to={`/home`}>
+      <button className='minimize'>Back home</button>
+      </Link>
+      </div>
+        }
     </>
   )
 }

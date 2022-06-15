@@ -33,3 +33,18 @@ table {
     margin-right: 250px
     
   }
+
+  .aviso {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .aviso h2{
+    text-align: center;
+  }
+
+  .boton {
+    background-color: red;
+  }

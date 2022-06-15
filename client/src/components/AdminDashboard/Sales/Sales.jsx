@@ -6,7 +6,8 @@ import {
   usePagination,
 } from "react-table";
 import { useDispatch, useSelector } from "react-redux";
-import { getSales, updateSent } from "../../../redux/actions";
+import { Link } from 'react-router-dom';
+import { getSales, updateSent} from "../../../redux/actions";
 import { GROUPED_COLUMNS } from "./Columns.jsx";
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
@@ -17,6 +18,7 @@ import { BsCartCheckFill } from "react-icons/bs";
 export default function Sales() {
   const dispatch = useDispatch();
   const allSales = useSelector((state) => state.sales);
+  const user = useSelector(state => state.user)
 
   console.log(allSales);
 
@@ -91,36 +93,38 @@ export default function Sales() {
   return (
     <>
 
-      <h2 className='h1'>Sales</h2>
-      <SearchBar filter={globalFilter} setFilter={setGlobalFilter} />
-      <table {...getTableProps()} className={'Container'}>
-        <thead >
-          {headerGroups.map((headerGroups) => (
-            <tr {...headerGroups.getHeaderGroupProps()}>
-              {headerGroups.headers.map(column => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
-                  {column.isSorted ? (column.isSortedDesc ? <BiCaretDown /> : <BiCaretUp />) : ''}
-
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps}>
-          {
-            page.map(row => {
-              prepareRow(row)
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
+    {user.rols?.name === "admin" ?
+    <>
+    <h2 className='h1'>Sales</h2>
+    <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
+    <table {...getTableProps()} className={'Container'}>
+      <thead >
+        {headerGroups.map((headerGroups) => (
+        <tr {...headerGroups.getHeaderGroupProps()}>
+          {headerGroups.headers.map(column => (
+              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                {column.render('Header')}
+                {column.isSorted ? (column.isSortedDesc ? <BiCaretDown/> : <BiCaretUp/>) : ''}
+              
+              </th>
+            ))}
+        </tr>            
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps}>
+        {
+          page.map(row => {
+            prepareRow(row)
+            return(
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => {
+                  return (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  );
+                })}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <div className="button">
@@ -166,6 +170,13 @@ export default function Sales() {
           {">>"}
         </button>
       </div>
+      </>:
+      <div className="aviso">
+      <h2>You don't have access here, please go back home</h2>
+      <Link to={`/home`}>
+      <button className='minimize'>Back home</button>
+      </Link>
+      </div>}
     </>
   );
 }

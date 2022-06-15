@@ -24,7 +24,6 @@ import ShoppingHistory from "./components/ShoppingHistory/ShoppingHistory";
 import SupportUser from "./components/SupportUser/SupportUser";
 import UserConfirmation from "./components/UserConfirmation/UserConfirmation";
 import NewPassword from "./components/NewPassword/NewPassword";
-import CheckoutDirection from "./components/CheckoutDirection/CheckoutDirection";
 import Reports from './components/AdminDashboard/Reports/Reports'
 
 function App() {
