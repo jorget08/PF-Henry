@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteBook, deleteReview, getBooks } from '../../../redux/actions'
+import { bookEdit, deleteBook, deleteReview, getBooks, getDetail } from '../../../redux/actions'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
 import { COLUMNS } from './Columns'
@@ -11,6 +11,8 @@ import { useModals } from '../../Utils/useModals'
 import EditBook from './EditBook'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { AiFillEdit } from 'react-icons/ai'
+import Swal from "sweetalert2";
+
 export default function Stock() {
 
   const dispatch = useDispatch()
@@ -20,7 +22,7 @@ export default function Stock() {
   const [isOpenModal, openModal, closeModal] = useModals(false);
 
   useEffect(() => {
-    dispatch(getBooks)
+    dispatch(getBooks)    
   }, [dispatch])
 
   const columns = useMemo(() => COLUMNS, [])
@@ -51,14 +53,28 @@ export default function Stock() {
 
   function handleDelete(e, row) {
     e.preventDefault()
-    console.log('SOY ROW', row)
-    dispatch(deleteBook(row.original.id))
-    alert('Are you sure?')
-    window.location.reload()
+   
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete book!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteBook(row.original.id))
+    window.location.reload()     
+      }
+    })
+   
   }
 
   const handleEdit = (e, row) => {
     e.preventDefault()
+    dispatch(bookEdit(row.original.id))
+    dispatch(getDetail(row.original.id))
+    console.log("ROW ID", row.original.id)
     openModal()
   }
 
@@ -157,7 +173,7 @@ export default function Stock() {
           }
         </select>
         <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</button>
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+        <button  onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
         <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
         <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</button>
       </div>

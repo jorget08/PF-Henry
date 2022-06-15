@@ -44,12 +44,24 @@ export default function SupportAdmin() {
     setResp({...resp, message: respon})
     dispatch(replySupportGuest(resp))
     console.log(resp)
-    Swal.fire({
-      title: 'Answer sent by mail!',
-      icon: 'success',
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
       showConfirmButton: false,
-      timer: 2000
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
     })
+    
+    Toast.fire({
+      icon: 'success',
+      title: "Answer sent!"
+    })
+    
+    setBool(!bool)
     closeModal()
     window.location.reload()
   }

@@ -16,7 +16,7 @@ export default function Support() {
 
     const dispatch = useDispatch()
     const captcha = useRef(null)
-    const [captchaVal, setCaptchaVal]=useState(false)
+    const [captchaVal, setCaptchaVal] = useState(false)
 
     const token = localStorage.getItem("token");
     const [isLogged, setIsLogged] = useState(false);
@@ -43,7 +43,7 @@ export default function Support() {
         else setRender({ ...render, [e.target.id]: !render[e.target.id] })
     }
 
-    function onChange(){
+    function onChange() {
         setCaptchaVal(true)
     }
 
@@ -61,7 +61,7 @@ export default function Support() {
 
     useEffect(() => {
         token ? setIsLogged(true) : setIsLogged(false);
-      }, [token, isLogged]);
+    }, [token, isLogged]);
 
     return (
         <>
@@ -91,7 +91,7 @@ export default function Support() {
 
                 </div>
                 <div className="conttext">
-                    <h1 ref={scroll1} id="WorkTeam" onClick={(e) => handleClick(e)}>Can you tell me about the work team behind?<span className='clickMe'> Click to {render.WorkTeam ? 'Hide' : 'find out!'}</span>{render.Home ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
+                    <h1 ref={scroll1} id="WorkTeam" onClick={(e) => handleClick(e)}>Can you tell me about the work team behind?<span className='clickMe'> Click to {render.WorkTeam ? 'Hide' : 'find out!'}</span>{render.WorkTeam ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
                     {
                         render.WorkTeam && <p className='text'>
                             Of course! We are students at Henry's bootcamp. We are studying to be Full Stack Web Developers, by the moment
@@ -113,7 +113,7 @@ export default function Support() {
 
                 </div>
                 <div className="conttext">
-                    <h1 ref={scroll2} id="Networks" onClick={(e) => handleClick(e)}>Any social network to follow you?<span className='clickMe'> Click to {render.Networks ? 'Hide' : 'find out!'}</span>{render.Home ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
+                    <h1 ref={scroll2} id="Networks" onClick={(e) => handleClick(e)}>Any social network to follow you?<span className='clickMe'> Click to {render.Networks ? 'Hide' : 'find out!'}</span>{render.Networks ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
                     {
                         render.Networks && <p className='text'>
                             Yes! You can follow us on Facebook (bookStore), Instagram (@bookstore) and LinkedIn (bookstore).
@@ -123,7 +123,7 @@ export default function Support() {
 
                 </div>
                 <div className="conttext">
-                    <h1 ref={scroll3} id="Payment" onClick={(e) => handleClick(e)}>Which are the payment metods availables?<span className='clickMe'> Click to {render.Payment ? 'Hide' : 'find out!'}</span>{render.Home ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
+                    <h1 ref={scroll3} id="Payment" onClick={(e) => handleClick(e)}>Which are the payment metods availables?<span className='clickMe'> Click to {render.Payment ? 'Hide' : 'find out!'}</span>{render.Payment ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
                     {
                         render.Payment && <p className='text'>
                             You can pay through PayPal. At this moment, we are developing a
@@ -132,7 +132,7 @@ export default function Support() {
                         </p>}
                 </div>
                 <div className="conttext">
-                    <h1 ref={scroll4} id="Advertising" onClick={(e) => handleClick(e)}>Do you sell advertising on your site?<span className='clickMe'> Click to {render.Advertising ? 'Hide' : 'find out!'}</span>{render.Home ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
+                    <h1 ref={scroll4} id="Advertising" onClick={(e) => handleClick(e)}>Do you sell advertising on your site?<span className='clickMe'> Click to {render.Advertising ? 'Hide' : 'find out!'}</span>{render.Advertising ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
                     {
                         render.Advertising && <p className='text'>
                             By the moment we only focus on offers you the most complete collection of books! Maybe later. If you want to
@@ -142,104 +142,107 @@ export default function Support() {
                         </p>}
                 </div>
                 <div className="conttext">
-                    <h1 ref={scroll5} id="Write" onClick={(e) => handleClick(e)}>How can i do to contact you directly?<span className='clickMe'> Click to {render.Write ? 'Hide' : 'find out!'}</span>{render.Home ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
+                    <h1 ref={scroll5} id="Write" onClick={(e) => handleClick(e)}>How can i do to contact you directly?<span className='clickMe'> Click to {render.Write ? 'Hide' : 'find out!'}</span>{render.Write ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}</h1>
                     {
                         render.Write &&
                         <div>
-                            <p className='text'>
-                                Down below you have the option to send us an email, and we will response you quickly. You can
-                                ask what ever you want. In spite of that, the best way to clean all your doubts is being a
-                                member of our community, we can follow all your request closer. If you are not register
-                                in our page yet, we recomends you to do it now clicking here.
-                            </p>
+                          
+                            {isLogged ?
 
-                            {isLogged? 
-                            
-                            <p  className='text'>You are already a member of our community! You can ask what you want on your profile directly!</p>
-                            
-                            : 
-                            
-                            <Formik
-                                initialValues={{
-                                    name: "",
-                                    email: "",
-                                    comment: ""
-                                }}
-                                validate={(valores) => {
+                                <p className='text'>You are already a member of our community! You can ask whatever you want, just click the option "User Support" on your profile menu!</p>
 
-                                    let errors = {};
+                                :
+                                <div>
+                                    <p className='text'>
+                                        Down below you have the option to send us an email, and we will response you quickly. You can
+                                        ask what ever you want. In spite of that, the best way to clean all your doubts is being a
+                                        member of our community, we can follow all your request closer. If you are not register
+                                        in our page yet, we recomends you to do it now clicking here.
+                                    </p>
+                                    <Formik
+                                        initialValues={{
+                                            name: "",
+                                            email: "",
+                                            comment: ""
+                                        }}
+                                        validate={(valores) => {
 
-                                    if (!valores.email) {
-                                        errors.email = 'Email has been required!';
-                                    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(valores.email)) {
-                                        errors.email = 'Invalid email address';
-                                    }
-                                    if (!valores.name) {
-                                        errors.password = 'Name has been required!'
-                                    }
+                                            let errors = {};
 
-                                    if (!valores.comment) {
-                                        errors.comment = 'At least your question must be longer than 100 characters!'
-                                    }
-                                    return errors;
+                                            if (!valores.email) {
+                                                errors.email = 'Email has been required!';
+                                            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(valores.email)) {
+                                                errors.email = 'Invalid email address';
+                                            }
+                                            if (!valores.name) {
+                                                errors.password = 'Name has been required!'
+                                            }
 
-                                }}
+                                            if (!valores.comment) {
+                                                errors.comment = 'At least your question must be longer than 100 characters!'
+                                            }
+                                            return errors;
 
-                                onSubmit={(valores, { resetForm }) => {
-                                    if(captchaVal===false){
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Oops...',
-                                            text: 'Please check the captcha box to send your question',
-                                          })
-                                    }
-                                    else{dispatch(postSupport(valores))
-                                    Swal.fire({
-                                        title: 'Query sent!',
-                                        icon: 'success',
-                                        showConfirmButton: false,
-                                        timer: 2000
-                                        })
-                                    resetForm()}
-                                }}>
+                                        }}
 
-                                {({ touched, errors }) => (
-                                    <div className='formContainer'>
-                                        <Form>
-                                            <div className='contactInfo'>
+                                        onSubmit={(valores, { resetForm }) => {
+                                            if (captchaVal === false) {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'Oops...',
+                                                    text: 'Please check the captcha box to send your question',
+                                                })
+                                            }
+                                            else {
+                                                dispatch(postSupport(valores))
+                                                Swal.fire({
+                                                    icon: 'success',
+                                                    title: 'Thanks!',
+                                                    text: "Your message was sent, we'll see what we can do about it",
+                                                })
+                                                resetForm()
+                                            }
+                                        }}>
 
-                                                <h2 style={{ marginLeft: "240px" }}>Write us!</h2>
-                                                <div className='description'>
-                                                    <label>Name </label>
-                                                    <Field type="text" name="name" placeholder="Name" />
-                                                    {touched.name && errors.name && <span className="error">{errors.name}</span>}
-                                                </div>
-                                                <div className='description'>
-                                                    <label>Email </label>
-                                                    <Field type="text" name="email" placeholder="Email" />
-                                                    {touched.email && errors.email && <span className="error">{errors.email}</span>}
-                                                </div>
-                                                <div className='description'>
-                                                    <label>What you want to tell us?</label>
-                                                </div>
-                                                <div className='description'>
-                                                    <Field type="text" name="comment" className="descriptionArea" as="textarea" placeholder="Write your question here!" />
-                                                </div>
-                                                {touched.comment && errors.comment && <span className="error">{errors.comment}</span>}
-                                                <div>
-                                                <ReCAPTCHA
-                                                    ref={captcha}
-                                                    sitekey="6Lc_RlkgAAAAAHm3lFu7iwKYTD3wu2owN56SxDdW"
-                                                    onChange={onChange}
-                                                />
-                                                </div>
-                                                <button className="minimize" type="submit">Send!</button>
+                                        {({ touched, errors }) => (
+                                            <div className='formContainer' style={{ marginLeft: '15%' }} >
+                                                <Form style={{ display: 'flex', justifyContent: 'center' }}>
+                                                    <div className='contactInfo'>
+                                                        <h2 style={{ textAlign: 'center', margin: '0' }}>Write us!</h2>
 
+                                                        <div className='description'>
+                                                            <label>Name </label>
+                                                            <Field type="text" name="name" placeholder="Name" />
+                                                            {touched.name && errors.name && <span className="error">{errors.name}</span>}
+                                                        </div>
+                                                        <div className='description'>
+                                                            <label>Email </label>
+                                                            <Field type="text" name="email" placeholder="Email" />
+                                                            {touched.email && errors.email && <span className="error">{errors.email}</span>}
+                                                        </div>
+                                                        <div className='description'>
+                                                            <label>What you want to tell us?</label>
+                                                        </div>
+                                                        <div className='description'>
+                                                            <Field style={{ margin: '20px', outline: '1px solid #fc6f53' }} type="text" name="comment" className="descriptionArea" as="textarea" placeholder="Write your question here!" />
+                                                        </div>
+                                                        {touched.comment && errors.comment && <span className="error">{errors.comment}</span>}
+                                                        <div>
+                                                            <ReCAPTCHA
+                                                                ref={captcha}
+                                                                sitekey="6Lc_RlkgAAAAAHm3lFu7iwKYTD3wu2owN56SxDdW"
+                                                                onChange={onChange}
+                                                                style={{ justifyContent: 'center', display: 'flex' }}
+                                                            />
+                                                        </div>
+                                                        <button className="minimize" type="submit">Send!</button>
+
+                                                    </div>
+                                                </Form>
                                             </div>
-                                        </Form>
-                                    </div>
-                                )}
-                            </Formik>
+                                        )}
+                                    </Formik>
+                                </div>
                             }
                         </div>
                     }

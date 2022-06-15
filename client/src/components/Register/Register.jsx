@@ -10,21 +10,21 @@ import './styles.css'
 export default function Register() {
     const dispatch = useDispatch()
     const captcha = useRef(null)
-    const [captchaVal, setCaptchaVal]=useState(false)
+    const [captchaVal, setCaptchaVal] = useState(false)
     const history = useHistory()
     useEffect(() => {
         dispatch(getUsers())
     }, [dispatch])
 
     const users = useSelector(state => state.users)
-    console.log("usuarios",users)
-  
+    console.log("usuarios", users)
+
 
     const redirect = () => {
         history.push("/home")
     }
 
-    function onChange(){
+    function onChange() {
         setCaptchaVal(true)
     }
 
@@ -38,7 +38,7 @@ export default function Register() {
                     password2: "",
                     email: "",
                     imgProfile: null,
-                    captcha:""
+                    captcha: ""
                 }}
                 validate={(valores) => {
                     let errors = {};
@@ -69,25 +69,27 @@ export default function Register() {
                     return errors;
                 }}
                 onSubmit={(valores, { resetForm }) => {
-                    if(captchaVal===false){
+                    if (captchaVal === false) {
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
                             text: 'Please check the captcha box to register',
-                          })
+                        })
                     }
                     valores.email.toLowerCase()
-                    if(valores.imgProfile===null){
-                        valores.imgProfile='https://cdn-icons-png.flaticon.com/512/149/149071.png'
+                    if (valores.imgProfile === null) {
+                        valores.imgProfile = 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
                     }
-                    else{dispatch(postUser(valores))
-                    Swal.fire(
-                        'You have been registered',
-                        'Please confirm your email before logging in',
-                        'success'
-                      )
-                    resetForm()
-                    setTimeout(() => redirect(), "1000")}
+                    else {
+                        dispatch(postUser(valores))
+                        Swal.fire(
+                            'You have been registered',
+                            'Please confirm your email before logging in',
+                            'success'
+                        )
+                        resetForm()
+                        setTimeout(() => redirect(), "1000")
+                    }
                 }}>
                 {({ touched, errors }) => (
                     <Form classname="registerForm">
@@ -121,13 +123,13 @@ export default function Register() {
                             <label>Profile picture (optional): </label>
                             <Field type="text" name="imgProfile" placeholder="Profile picture" />
                         </div>
-                        <div>
                         <ReCAPTCHA
                             ref={captcha}
                             sitekey="6Lc_RlkgAAAAAHm3lFu7iwKYTD3wu2owN56SxDdW"
                             onChange={onChange}
+                            style={{ justifyContent: 'center', display: 'flex' }}
+
                         />
-                        </div>
                         <div className='fieldReg'>
                             <button type="submit">Register</button>
                         </div>

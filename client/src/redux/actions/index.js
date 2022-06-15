@@ -52,8 +52,8 @@ import {
   UPDATE_SENT,
   UPDATE_DONE,
   DELETE_ADM_REVIEW,
-  DISCARD_REPORT,
-  CHANGE_IMG
+  CHANGE_IMG,
+  BOOK_EDIT,
 } from "./types";
 
 import axios from "axios";
@@ -565,10 +565,10 @@ export function reportReview(id, idBook, obj) {
     }
   }
 }
-  export function deleteReview(user, book, review) {
+  export function deleteReview(book, review) {
     return async function (dispatch) {
       try {
-        const response = await axios.delete(`http://localhost:3001/reviews?user=${user}&book=${book}&review=${review}`);
+        const response = await axios.delete(`http://localhost:3001/reviews?book=${book}&review=${review}`);
         return dispatch({ type: DELETE_REVIEW, payload: response.data });
          } catch (error) {
         console.log(error);
@@ -716,16 +716,6 @@ export function deleteAdmReview(id, obj) {
   }
 }
 
-export function discardReport({idUser, idBook, idReview }){
-  return async function (dispatch){    
-    try {   
-      const res = await axios.delete(`http://localhost:3001/reviews?user=${idUser}&books=${idBook}&review=${idReview}`)
-      return dispatch({type: DISCARD_REPORT})
-    } catch (err) {                       
-      console.log(err)
-    }
-  }
-}
 
 export function filterSupportStatus (payload) {
   return ({
@@ -800,4 +790,14 @@ export function changeImg(id, tipo, img) {
         console.log(error);
       }
     }
+}
+
+export function bookEdit(id) {
+  return async function (dispatch) {
+    try {
+      return dispatch({ type: BOOK_EDIT, payload: id });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }

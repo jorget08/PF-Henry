@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import { useDispatch, useSelector } from 'react-redux'
-import { discardReport, deleteAdmReview, getReviews, getBooks, getSales, getUsers } from '../../../redux/actions'
+import { deleteAdmReview, getReviews, getBooks, getSales, getUsers, deleteReview } from '../../../redux/actions'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
+import Swal from "sweetalert2";
 
 
 export default function Reports() {
@@ -57,8 +58,10 @@ export default function Reports() {
         accessor: (row) => {
             return (
               <>
-                <button onClick={(e) => handleDelete(e, row.id)}>DISCARD REVIEW (VERDE)</button>
-                <button onClick={(e) => handleDiscard(e, row)}>BAN REVIEW (ROJO)</button>
+              <div style={{display:'flex',justifyContent:'space-between',width:'215px'}}>
+                <button style={{backgroundColor:"green",color:"white",borderRadius:"50px",cursor:"pointer"}} onClick={(e) => handleDelete(e, row.id)}>Discard report</button>
+                <button style={{backgroundColor:"red",color:"white",borderRadius:"50px",cursor:"pointer"}}  onClick={(e) => handleDiscard(e, row)}>Delete review</button>
+                </div>
               </>
             )
         },
@@ -70,18 +73,40 @@ export default function Reports() {
 
   const handleDiscard = (e, row) => {
     e.preventDefault()
-    console.log ('soy row', row)
-    dispatch(discardReport(row.userIdUser, row.bookId, row.id))  
-    alert ('Review successfully deleted!')
-    window.location.reload()
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete review!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteReview(row.bookId, row.id))  
+        window.location.reload()
+      }
+    })
+    
+   
   }
 
   const handleDelete = (e, row) => {
     e.preventDefault()
-    console.log ("SOY e", row)
-    dispatch(deleteAdmReview(row))  
-    alert ('Report discard!')
-    window.location.reload()
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, discard report!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteAdmReview(row)) 
+        window.location.reload()
+      }
+    })
+    
+
   }
 
   const {
