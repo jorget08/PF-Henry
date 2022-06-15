@@ -117,7 +117,7 @@ export default function SupportAdmin() {
     </Modal>
     <h2 className='h1'>Support</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
-    <select style={{marginLeft:"150px", width:"150px"}}onChange={(e) => handleSelect(e)}>
+    <select className='selectora' style={{marginLeft:"150px", width:"150px"}}onChange={(e) => handleSelect(e)}>
       <option value="default">Filter by</option>
       <option value="to_answer">To answer</option>
       <option value="respond">Respond</option>
