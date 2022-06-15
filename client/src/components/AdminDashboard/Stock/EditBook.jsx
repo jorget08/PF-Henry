@@ -19,7 +19,7 @@ export default function EditBook() {
   
 
     if (bookEditDetail === undefined) {
-        const detail = {
+        var detail = {
             title: "",
             author: "",
             categories: [],
@@ -35,15 +35,17 @@ export default function EditBook() {
 
     // var catDetail = [...bookEditDetail?.categories?.map(c => c.name)]
     
-    const data = useMemo(() => base, [base])
+    const data = useMemo((detail) => base, [base])
+    console.log("DETAIIIIIIl", detail)
     var [base, setBase] = useState({
-        title: data?.title,
-        author: data?.author,
-        price: data?.price,
-        stock: data?.stock,
-        description: data?.description,
-        image: data?.image
+        title: "", 
+        author: "",
+        price: "",
+        stock: "",
+        description:[] ,
+        image: "",
     })
+    
 
     // function handleChange(e) {
     //     e.preventDefault();
@@ -58,27 +60,19 @@ export default function EditBook() {
     
 
     useEffect(() => {
-        dispatch(getCategories)
+        // dispatch(getCategories)
         dispatch(getDetail(idForEdit))
-    }, [dispatch, base])
-
+    }, [dispatch, idForEdit])
+    
     const redirect = ({ id }) => {
         if (id) {
             history.push(`/book/${id}`)
         }
     }
-    setBase({
-        author: detail.author,
-        description: detail.description,
-        image: detail.image,
-        price: detail.price,
-        stock: detail.stock,
-        title: detail.title
-        
-    })  
+
     console.log("LA BASE", base)
     
-    
+  
     return (
         <div className='containerCreate'>
             <Formik
