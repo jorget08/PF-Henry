@@ -16,6 +16,12 @@ export const COLUMNS = [
         accessor: "email",
     },
     {
+        Header : "Register Date",
+        accessor: (row) => {
+            return row.createdAt.slice(0,10)
+        }
+    },
+    {
         Header : "Rol",
         accessor:(row) => {
             return row.rols.name.toUpperCase()
