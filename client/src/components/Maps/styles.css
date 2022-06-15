@@ -1,9 +1,14 @@
 
-.map-container {
-    width: 500px;
+#mapita {
+    width: 500px !important;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(19, 17, 17, 0.7);
     height: 281px;
+    margin: 5px;
+}
+.mapboxgl-canvas{
+    width: 500px !important;
+    height: 281px !important;
 }
 
 .title{
@@ -42,12 +47,37 @@
     border-bottom: 2px solid #4fb8b8;
     background-color: unset;
     outline: none;
-    margin: 10px;
+    margin: 10px 0px;
+   
   }
  .fieldLog input:focus {
     border-bottom: 2px solid #3735bd;
   }
   .fieldLog label {
     font-family: 'Merriweather', serif;
-    font-size: 15px;
+    font-size: 17px !important;
+  }
+
+  .modal-containerr:hover {
+    cursor: default;
+  }
+  .modal-containerr button {
+    font-size: 20px;
+    outline: none;
+    padding: 4px 10px;
+    font-family: 'Source Sans Pro', sans-serif;
+    border: 1px solid #c4c4c4;
+    border-radius: 10px;
+    background-color: #f86a6a;
+    color: white;
+  }
+  .modal-containerr button:hover {
+    background-color: #d85353;
+    cursor: pointer;
+  }
+  .errorsMap{
+    font-size: 7px;
+    color: red;
+    padding: 0 !important;
+    margin: 0.5px !important;
   }

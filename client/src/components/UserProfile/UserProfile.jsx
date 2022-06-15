@@ -14,10 +14,12 @@ import { RiMapPinAddLine } from 'react-icons/ri'
 import { MdOutlinePassword } from 'react-icons/md'
 import Swal from "sweetalert2";
 import './style.css'
+
 export default function UserProfile() {
   var user = useSelector(state => state.user)
   const dispatch = useDispatch()
   const [isOpenModal, openModal, closeModal] = useModals(false);
+  const [isOpenModalCopy, openModalCopy, closeModalCopy] = useModals(false);
 
   useEffect(() => {
     dispatch(getUser())
@@ -25,12 +27,28 @@ export default function UserProfile() {
   }, [])
 
   const handleDelete = async (id) => {
-    let adress = await user.adress.filter(adress => adress.idAdress !== id)
-    if (adress.length === 0) {
-      adress = null
-    }
-    console.log('soy adress', adress)
-    dispatch(deleteProfile(adress, user.idUser))
+    Swal.fire({
+      title: 'Do you want to delete this address?',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+    }).then( async(result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'This address has been deleted',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        let adress = await user.adress.filter(adress => adress.idAdress !== id)
+        if (adress.length === 0) {
+          adress = null
+        }
+        console.log('soy adress', adress)
+        dispatch(deleteProfile(adress, user.idUser))
+      }
+    })
+    
   }
 
   function handleClick() {
@@ -87,8 +105,8 @@ export default function UserProfile() {
             <ul className='tableAdress'>
               <li className='tableHeader'>
                 <div className='col col-1'><h2>My Addresses</h2> </div>
-                <div className='col col-2 direction'> <RiMapPinAddLine onClick={openModal} size={30} color="white" cursor="pointer"/></div>
-                <ModalCopy  isOpen={isOpenModal} closeModal={closeModal}>
+                <div className='col col-2 direction'> <RiMapPinAddLine onClick={openModalCopy} size={30} color="white" cursor="pointer"/></div>
+                <ModalCopy  isOpen={isOpenModalCopy} closeModal={closeModalCopy}>
             <Maps/>
                 </ModalCopy>
               </li>
@@ -102,7 +120,7 @@ export default function UserProfile() {
                           <p key={e}>{e.street} {e.number}, {e.city}, {e.state}, {e.country}</p>
 
                         </div>
-                        <div className='col col-2 direction'><AiOutlineDelete  color="#c03b3b" size={30} title="Delete Address" onClick={() => handleDelete(e.idAdress)} /> </div>
+                        <div className='col col-2 direction'><AiOutlineDelete cursor="pointer"  color="#c03b3b" size={30} title="Delete Address" onClick={() => handleDelete(e.idAdress)} /> </div>
                       </li>
                     )
                   }) :
