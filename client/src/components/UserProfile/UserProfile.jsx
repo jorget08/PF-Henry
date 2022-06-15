@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUser, requestPassword, deleteProfile } from '../../redux/actions';
 import NavBar from '../NavBar/NavBar';
 import Modal from '../Modal/Modal';
+import ModalCopy from '../Maps/ModalCopy/ModalCopy';
+import Maps from '../Maps/Maps';
 import EditProfile from '../EditProfile/EditProfile'
 import { useModals } from '../Utils/useModals';
 import { FaUserEdit } from 'react-icons/fa'
@@ -85,7 +87,10 @@ export default function UserProfile() {
             <ul className='tableAdress'>
               <li className='tableHeader'>
                 <div className='col col-1'><h2>My Addresses</h2> </div>
-                <div className='col col-2 direction'> <RiMapPinAddLine size={30} color="white" /></div>
+                <div className='col col-2 direction'> <RiMapPinAddLine onClick={openModal} size={30} color="white" cursor="pointer"/></div>
+                <ModalCopy  isOpen={isOpenModal} closeModal={closeModal}>
+            <Maps/>
+                </ModalCopy>
               </li>
 
               <ul className='scrollRow'>
@@ -97,7 +102,7 @@ export default function UserProfile() {
                           <p key={e}>{e.street} {e.number}, {e.city}, {e.state}, {e.country}</p>
 
                         </div>
-                        <div className='col col-2 direction'><AiOutlineDelete color="#c03b3b" size={30} title="Delete Address" onClick={() => handleDelete(e.idAdress)} /> </div>
+                        <div className='col col-2 direction'><AiOutlineDelete  color="#c03b3b" size={30} title="Delete Address" onClick={() => handleDelete(e.idAdress)} /> </div>
                       </li>
                     )
                   }) :
