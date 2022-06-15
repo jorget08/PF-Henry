@@ -1,21 +1,24 @@
-import { React, useEffect, useState } from 'react'
+import { React, useEffect, useMemo, useState } from 'react'
 import { Formik, Form, Field, FieldArray } from "formik"
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
 import './styles.css'
-import { getCategories, postBook, putBook } from '../../../redux/actions'
+import { getCategories, getDetail, postBook, putBook } from '../../../redux/actions'
 
 export default function EditBook() {
 
     const dispatch = useDispatch()
     const history = useHistory()
     const location = useLocation()
+    const idForEdit = useSelector(state => state.idForEdit)
+    const bookEditDetail = useSelector(state => state.detail)
     var [formSubmit, setFormSubmit] = useState(false)
     var [last, setLast] = useState("")
-    var [boolean, setBoolean] = useState(true)
 
-    if (location.state === undefined) {
-        var detail = {
+  
+
+    if (bookEditDetail === undefined) {
+        const detail = {
             title: "",
             author: "",
             categories: [],
@@ -25,19 +28,19 @@ export default function EditBook() {
             image: ""
         }
     } else {
-        var { detail } = location.state
+        const { detail } = bookEditDetail
     }
 
-    var catDetail = [...detail.categories.map(c => c.name)]
+    // var catDetail = [...bookEditDetail?.categories?.map(c => c.name)]
 
     var [base, setBase] = useState({
-        title: detail.title,
-        author: detail.author,
-        categories: catDetail,
-        price: detail.price,
-        stock: detail.stock,
-        description: detail.description,
-        image: detail.image
+        title: bookEditDetail.title,
+        author: bookEditDetail.author,
+        // categories: catDetail,
+        price: bookEditDetail.price,
+        stock: bookEditDetail.stock,
+        description: bookEditDetail.description,
+        image: bookEditDetail.image
     })
 
     function handleChange(e) {
@@ -49,8 +52,14 @@ export default function EditBook() {
         })
         console.log(base)
     }
+
+    const data = useMemo(() => bookEditDetail, [bookEditDetail  ])
+
     useEffect(() => {
         dispatch(getCategories)
+        dispatch(getDetail(idForEdit))
+        console.log("I M THE DETAIL",bookEditDetail, "IDFOREDIT", idForEdit)
+        console.log('DATA', data)
     }, [dispatch])
 
     const redirect = ({ id }) => {
@@ -108,11 +117,11 @@ export default function EditBook() {
                 }}
 
                 onSubmit={(valores, { resetForm }) => {
-                    (detail.id !== undefined) ? dispatch(putBook(valores, detail.id)) : dispatch(postBook(valores))
+                    (bookEditDetail.id !== undefined) ? dispatch(putBook(valores, bookEditDetail.id)) : dispatch(postBook(valores))
                     resetForm()
                     setFormSubmit(true)
                     setTimeout(() => setFormSubmit(false), "2000")
-                    setTimeout(() => redirect(detail), "2000")
+                    setTimeout(() => redirect(bookEditDetail), "2000")
                 }}
             >
                 {({ errors, touched }) => (
@@ -161,7 +170,7 @@ export default function EditBook() {
                                                 }>
                                                     {touched.categories && errors.categories && <span className='errorMsg'>{errors.categories}</span>}
                                                     <option value="none">Select category</option>
-                                                    {catego && catego.map(c => {
+                                                    {catego && catego?.map(c => {
                                                         return (
                                                             <option value={c.name} name={c.name}>{c.name}</option>
                                                         )
@@ -188,7 +197,7 @@ export default function EditBook() {
                                                                 if (element !== e.target.value) { extra.push(element) }
                                                             }
                                                             values.categories = extra
-                                                            setBoolean(!boolean)
+                                                            // setBoolean(!boolean)
                                                         }
 
                                                         }
@@ -241,7 +250,7 @@ export default function EditBook() {
                                     />
                                     {touched.description && errors.description && <span className='errorMsg'>{errors.description}</span>}
                                 </div>
-                                {(detail.id !== undefined) ? <button type="submit">Modify!</button> : <button type="submit">Create!</button>}
+                                {(bookEditDetail.id !== undefined) ? <button type="submit">Modify!</button> : <button type="submit">Create!</button>}
                                 {formSubmit && <span>Action successfully complete!</span>}
                             </div>
                         </Form>
@@ -250,13 +259,13 @@ export default function EditBook() {
                 }
             </Formik >
             {
-                detail.id !== undefined &&
+                bookEditDetail.id !== undefined &&
                 <div className='pastInfo'>
 
                     <h1>See how It Was Before</h1>
 
                     <div className='container'>
-                        {console.log(detail.id)}
+                        {console.log(bookEditDetail.id)}
                         <div>
                             <div className='container__info'>
                                 <div className='image'>
