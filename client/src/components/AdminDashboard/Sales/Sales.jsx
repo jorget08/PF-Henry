@@ -6,6 +6,7 @@ import {
   usePagination,
 } from "react-table";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 import { getSales, updateSent} from "../../../redux/actions";
 import { GROUPED_COLUMNS } from "./Columns.jsx";
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
@@ -17,6 +18,7 @@ import { BsCartCheckFill} from "react-icons/bs";
 export default function Sales() {
   const dispatch = useDispatch();
   const allSales = useSelector((state) => state.sales);
+  const user = useSelector(state => state.user)
 
   console.log(allSales);
 
@@ -90,7 +92,8 @@ export default function Sales() {
 
   return (
     <>
-
+    {user.rols?.name === "admin" ?
+    <>
     <h2 className='h1'>Sales</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     <table {...getTableProps()} className={'Container'}>
@@ -166,6 +169,13 @@ export default function Sales() {
           {">>"}
         </button>
       </div>
+      </>:
+      <div className="aviso">
+      <h2>You don't have access here, please go back home</h2>
+      <Link to={`/home`}>
+      <button className='minimize'>Back home</button>
+      </Link>
+      </div>}
     </>
   );
 }
