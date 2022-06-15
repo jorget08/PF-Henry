@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { COLUMNS } from "./Columns";
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
+import { BsFillBagCheckFill } from "react-icons/bs";
 import SearchBar from "./SearchBar";
 
 export default function ShoppingHistory() {
@@ -46,10 +47,10 @@ export default function ShoppingHistory() {
         Cell: ({ row }) => (
           <div>
             {row.original.deliveryStatus === "Send" ? (
-              <button
+              <button style={{borderRadius:"40px",backgroundColor:"##dbdbdb",color:"black",cursor:"pointer"}}
                 onClick={(e) => handleChange2({ e, id: row.original.id })}
               >
-                I received my order
+                I already received my order<BsFillBagCheckFill/>
               </button>
             ) : null}
             {row.original.deliveryStatus === "Order received" ? <p>Complete</p> : null}

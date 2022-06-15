@@ -5,6 +5,8 @@ import { deleteAdmReview, getReviews, getBooks, getSales, getUsers, deleteReview
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
 import Swal from "sweetalert2";
+import { ImCheckmark2,ImCross} from "react-icons/im";
+
 
 
 export default function Reports() {
@@ -58,14 +60,15 @@ export default function Reports() {
         accessor: (row) => {
             return (
               <>
-              <div style={{display:'flex',justifyContent:'space-between',width:'215px'}}>
-                <button style={{backgroundColor:"green",color:"white",borderRadius:"50px",cursor:"pointer"}} onClick={(e) => handleDelete(e, row.id)}>Discard report</button>
-                <button style={{backgroundColor:"red",color:"white",borderRadius:"50px",cursor:"pointer"}}  onClick={(e) => handleDiscard(e, row)}>Delete review</button>
+              <div style={{display:"flex",justifyContent:"space-around"}}>
+                <button className='iconDash'  onClick={(e) => handleDelete(e, row.id)}><ImCheckmark2></ImCheckmark2></button>
+                <button className='iconDash delete' onClick={(e) => handleDiscard(e, row)}><ImCross/></button>
                 </div>
               </>
             )
         },
     },   
+    
 ]
 
   const columns = useMemo(() => COLUMNS, [])
