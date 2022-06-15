@@ -190,7 +190,7 @@ export default function EditBook() {
                                             const { values } = form
                                             return (
                                                 <div >
-                                                    {(values.categories.length > 0) ? values.categories.map(t => {
+                                                    {(values.categories?.length > 0) ? values.categories.map(t => {
                                                         return <div><span value={t}>{t}</span><button type="button" value={t} onClick={(e) => {
                                                             let extra = []
                                                             for (let element of values.categories) {
