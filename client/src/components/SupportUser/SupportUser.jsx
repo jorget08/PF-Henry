@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Formik, Form, Field } from 'formik'
 import Footer from '../Footer/Footer';
 import ReCAPTCHA from "react-google-recaptcha";
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from "sweetalert2";
 import NavBar from '../NavBar/NavBar';
@@ -29,6 +30,7 @@ export default function SupportUser() {
     return (
         <>
             <NavBar />
+            {token?
             <div>
                 <Formik
                     initialValues={{
@@ -93,8 +95,14 @@ export default function SupportUser() {
                         </div>
                     )}
                 </Formik>
-            </div>
-            <Footer />
+                <Footer />
+            </div>:
+             <div  className="aviso">
+             <h2>You need to be logged in to access here</h2>
+             <Link to={`/home`}>
+             <button className='minimize'>Back home</button>
+             </Link>
+             </div>}
         </>
     )
 
