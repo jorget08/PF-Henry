@@ -28,7 +28,7 @@ export default function Reports() {
         Header: 'User',
         accessor: (row) => {
           console.log(row)
-            return row.user.name + ' ' + row.user.lastName;
+            return row.user.name.charAt(0).toUpperCase() + row.user.name.slice(1) + ' ' + row.user.lastName.charAt(0).toUpperCase() + row.user.lastName.slice(1)
         },
     },
     {          
@@ -49,7 +49,7 @@ export default function Reports() {
         Header: "Reviews",
         accessor: (row) => {
             return (
-                row.description + ' ' + row.createdAt
+                row.description + ' | ' + row.createdAt.slice(0,10)
             )
         },
     }, 
