@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { discardReport, deleteAdmReview, getReviews, getBooks, getSales, getUsers } from '../../../redux/actions'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
+import Swal from "sweetalert2";
 
 
 export default function Reports() {
@@ -70,18 +71,26 @@ export default function Reports() {
 
   const handleDiscard = (e, row) => {
     e.preventDefault()
-    console.log ('soy row', row)
+     alert('delte report?')
     dispatch(discardReport(row.userIdUser, row.bookId, row.id))  
-    alert ('Review successfully deleted!')
-    window.location.reload()
   }
 
   const handleDelete = (e, row) => {
     e.preventDefault()
-    console.log ("SOY e", row)
-    dispatch(deleteAdmReview(row))  
-    alert ('Report discard!')
-    window.location.reload()
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, discard report!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteAdmReview(row)) 
+        window.location.reload()
+      }
+    })
+    
   }
 
   const {

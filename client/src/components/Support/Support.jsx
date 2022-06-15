@@ -193,8 +193,24 @@ export default function Support() {
                                             text: 'Please check the captcha box to send your question',
                                           })
                                     }
-                                    else{dispatch(postSupport(valores))
-                                    alert("Query sent!")
+                                    else{
+                                        dispatch(postSupport(valores))
+                                        const Toast = Swal.mixin({
+                                            toast: true,
+                                            position: 'top-end',
+                                            showConfirmButton: false,
+                                            timer: 3000,
+                                            timerProgressBar: true,
+                                            didOpen: (toast) => {
+                                              toast.addEventListener('mouseenter', Swal.stopTimer)
+                                              toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                            }
+                                          })
+                                          
+                                          Toast.fire({
+                                            icon: 'success',
+                                            title: "Message Send!"
+                                          })
                                     resetForm()}
                                 }}>
 
