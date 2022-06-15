@@ -6,11 +6,11 @@ import {
   usePagination,
 } from "react-table";
 import { useDispatch, useSelector } from "react-redux";
-import { getSales, updateSent} from "../../../redux/actions";
+import { getSales, updateSent } from "../../../redux/actions";
 import { GROUPED_COLUMNS } from "./Columns.jsx";
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
-import { BsCartCheckFill} from "react-icons/bs";
+import { BsCartCheckFill } from "react-icons/bs";
 
 
 
@@ -26,7 +26,7 @@ export default function Sales() {
     window.location.reload();
   };
 
-  
+
 
   useEffect(() => {
     dispatch(getSales());
@@ -47,8 +47,8 @@ export default function Sales() {
         Cell: ({ row }) => (
           <div>
             {row.original.deliveryStatus === "Pending" ? (
-              <button className='sendorder' style={{borderRadius:"40px",backgroundColor:"##dbdbdb",color:"black",cursor:"pointer"}}onClick={(e) => handleChange({ e, id: row.original.id })}>
-                Send order<BsCartCheckFill/>
+              <button className='sendorder' style={{ borderRadius: "10px", backgroundColor: "##dbdbdb", width: '150px', height: '50px', cursor: "pointer" }} onClick={(e) => handleChange({ e, id: row.original.id })}>
+                Send order <BsCartCheckFill className="iconOrder" />
               </button>
             ) : null}
             {row.original.deliveryStatus === "Order received" ? <p>Complete</p> : null}
@@ -91,36 +91,36 @@ export default function Sales() {
   return (
     <>
 
-    <h2 className='h1'>Sales</h2>
-    <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
-    <table {...getTableProps()} className={'Container'}>
-      <thead >
-        {headerGroups.map((headerGroups) => (
-        <tr {...headerGroups.getHeaderGroupProps()}>
-          {headerGroups.headers.map(column => (
-              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                {column.render('Header')}
-                {column.isSorted ? (column.isSortedDesc ? <BiCaretDown/> : <BiCaretUp/>) : ''}
-              
-              </th>
-            ))}
-        </tr>            
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps}>
-        {
-          page.map(row => {
-            prepareRow(row)
-            return(
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  );
-                })}
-              </tr>
-            );
-          })}
+      <h2 className='h1'>Sales</h2>
+      <SearchBar filter={globalFilter} setFilter={setGlobalFilter} />
+      <table {...getTableProps()} className={'Container'}>
+        <thead >
+          {headerGroups.map((headerGroups) => (
+            <tr {...headerGroups.getHeaderGroupProps()}>
+              {headerGroups.headers.map(column => (
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render('Header')}
+                  {column.isSorted ? (column.isSortedDesc ? <BiCaretDown /> : <BiCaretUp />) : ''}
+
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps}>
+          {
+            page.map(row => {
+              prepareRow(row)
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return (
+                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
         </tbody>
       </table>
       <div className="button">

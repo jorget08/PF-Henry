@@ -47,10 +47,10 @@ export default function ShoppingHistory() {
         Cell: ({ row }) => (
           <div>
             {row.original.deliveryStatus === "Send" ? (
-              <button style={{borderRadius:"40px",backgroundColor:"##dbdbdb",color:"black",cursor:"pointer"}}
+              <button style={{ borderRadius: "40px", backgroundColor: "##dbdbdb", color: "black", cursor: "pointer" }}
                 onClick={(e) => handleChange2({ e, id: row.original.id })}
               >
-                I already received my order<BsFillBagCheckFill/>
+                I already received my order<BsFillBagCheckFill />
               </button>
             ) : null}
             {row.original.deliveryStatus === "Order received" ? <p>Complete</p> : null}
@@ -94,12 +94,12 @@ export default function ShoppingHistory() {
     <>
       <NavBar />
       <div>
-        <h1>Shopping History</h1>
+        <h1 style={{ marginLeft: '5%', fontWeight: '400', fontFamily: 'Source Sans Pro', fontSize: '50px', color: '#3888ba' }}>Shopping History</h1>
         <br></br>
       </div>
 
       <SearchBar filter={globalFilter} setFilter={setGlobalFilter} />
-      <table {...getTableProps()} className={"Container"}>
+      <table {...getTableProps()} style={{ width: '90%', margin: 'auto' }}>
         <thead>
           {headerGroups.map((headerGroups) => (
             <tr {...headerGroups.getHeaderGroupProps()}>

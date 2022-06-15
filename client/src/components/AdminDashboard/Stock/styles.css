@@ -10,8 +10,29 @@
   border: none;
   background-color: unset;
 }
+.iconTik:hover {
+  color: rgb(50, 194, 50);
+  cursor: pointer;
+}
  .delete:hover {
   color: #d12d2d;
+}
+.sendorder {
+  outline: none;
+border: 1px solid gray;
+font-size: 18px;
+}
+.sendorder:hover{
+  background-color: rgba(143, 134, 134, 0.829);
+  color: white;
+  
+}
+.sendorder:hover .iconOrder{
+color: rgb(109, 231, 109) !important;
+}
+.sendorder:focus{
+  outline: green;
+  
 }
 table {
     font-family: Arial, Helvetica, sans-serif;
