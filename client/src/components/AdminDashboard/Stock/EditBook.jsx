@@ -19,7 +19,7 @@ export default function EditBook() {
   
 
     if (bookEditDetail === undefined) {
-        const detail = {
+        var detail = {
             title: "",
             author: "",
             categories: [],
@@ -35,16 +35,17 @@ export default function EditBook() {
 
     // var catDetail = [...bookEditDetail?.categories?.map(c => c.name)]
     
-    const data = useMemo((detail) => base, [detail])
+    const data = useMemo((detail) => base, [base])
     console.log("DETAIIIIIIl", detail)
     var [base, setBase] = useState({
-        title: detail.title , 
-        author: detail.author ? detail.author : null,
-        price: detail.price ? detail.price : null,
-        stock: detail.stock ? detail.stock : null,
-        description: detail.description ? detail.description : null,
-        image: detail.image ? detail.image : null,
+        title: "", 
+        author: "",
+        price: "",
+        stock: "",
+        description:[] ,
+        image: "",
     })
+    
 
     // function handleChange(e) {
     //     e.preventDefault();
@@ -62,23 +63,16 @@ export default function EditBook() {
         // dispatch(getCategories)
         dispatch(getDetail(idForEdit))
     }, [dispatch, idForEdit])
-
+    
     const redirect = ({ id }) => {
         if (id) {
             history.push(`/book/${id}`)
         }
     }
-    // setBase({
-    //     author: detail.author ? detail.author : null,
-    //     description: detail.description ? detail.description : null,
-    //     image: detail.image ? detail.image : null,
-    //     price: detail.price ? detail.price : null,
-    //     stock: detail.stock ? detail.stock : null,
-    //     title: detail.title ? detail.title : null,        
-    // }[detail])  
+
     console.log("LA BASE", base)
     
-    
+  
     return (
         <div className='containerCreate'>
             <Formik
