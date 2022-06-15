@@ -56,13 +56,13 @@ export default function Checkout() {
     dispatch(exchangeCrypto())
   }, [dispatch]);
   const crypto = useSelector(state => state.crypto)
-  
+
   let address = localStorage.getItem('address')
-  
+
   let x = preciototal / crypto
   let valuecrypto = x.toString()
   let val = valuecrypto.slice(0, 11)
-  
+
 
   const createOrder = (data, actions) => {
     if (user.hasOwnProperty("name")) {
@@ -90,7 +90,7 @@ export default function Checkout() {
       totalPrice: preciototal,
       infoBook: infoBook,
       userId: userId,
-      address:address
+      address: address
     };
 
 
@@ -150,6 +150,7 @@ export default function Checkout() {
           <h3>ETH <FaEthereum /> : {val} </h3>
           <p style={{ textAlign: 'center', }}>Delivery at {localStorage.getItem('address')}</p>
           <Crypto value={val} infoBook={checkoutinfo} userId={userId} email={email} name={name} lastName={lastName} payment={payment}></Crypto>
+          <a href="https://metamask.io/" target='_blank'><span style={{ display: 'flex', justifyContent: 'center', marginTop: '-20px', marginBottom: '-8px' }}> What is Metamask?</span></a>
           <div className="paypal">
             <PayPalButton
               createOrder={(data, actions) => createOrder(data, actions)}

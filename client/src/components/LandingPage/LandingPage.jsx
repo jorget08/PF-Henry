@@ -64,8 +64,8 @@ export default function LandingPage() {
                     <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZnJlZSUyMGxpYnJhcnl8ZW58MHx8MHx8&w=1000&q=80" alt="" />
                 </div>
                 <div className="dataRight" data-aos='fade-left' data-aos-duration="2000" data-aos-offset="100">
-                    <h1>Recieve your favourites books at your house</h1>
                     <img src="https://media.istockphoto.com/photos/close-up-of-hands-cargo-staff-are-delivering-cardboard-boxes-with-picture-id1174589920?k=20&m=1174589920&s=612x612&w=0&h=zC25oGoYo7RXTXRyvmxIjQgsHpG3RdTSn-fJm-_BcnA=" alt="" />
+                    <h1>Recieve your favourites books at your house</h1>
                 </div>
                 <div data-aos='fade-up' data-aos-duration="2000" data-aos-offset="100">
                     <div className="dataUp">
