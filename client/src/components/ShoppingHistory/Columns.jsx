@@ -28,7 +28,7 @@ export const COLUMNS = [
     {
         Header: "paymentSource",
         accessor: (row) => {
-            return row.paymentSource
+            return row.paymentSource.charAt(0).toUpperCase() + row.paymentSource.slice(1)
         },
     },
     {
