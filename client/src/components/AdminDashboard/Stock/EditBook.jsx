@@ -1,304 +1,158 @@
 import { React, useEffect, useMemo, useState } from 'react'
-import { Formik, Form, Field, FieldArray } from "formik"
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useLocation } from 'react-router-dom'
 import './styles.css'
 import { getCategories, getDetail, postBook, putBook } from '../../../redux/actions'
 
 export default function EditBook() {
 
     const dispatch = useDispatch()
-    const history = useHistory()
-    const location = useLocation()
-    const idForEdit = useSelector(state => state.idForEdit)
     const bookEditDetail = useSelector(state => state.detail)
     var [formSubmit, setFormSubmit] = useState(false)
-    var [last, setLast] = useState("")
+    var [boolean, setBoolean] = useState(false)
     var catego = useSelector(state => state.categories)
-    var [base, setBase] = useState({
-        title: "", 
-        author: "",
-        price: "",
-        stock: "",
-        description:[] ,
-        image: "",
-    })
     
+    var [formul, setForm] = useState({bookEditDetail})
+
     useEffect(() => {
-        // dispatch(getCategories)
-        dispatch(getDetail(idForEdit))
-    }, [dispatch, idForEdit])
-  
+        dispatch(getCategories)
+        if (bookEditDetail) setForm(bookEditDetail)
+    }, [bookEditDetail])    
 
-    if (bookEditDetail === undefined) {
-        var detail = {
-            title: "",
-            author: "",
-            categories: [],
-            price: 0,
-            stock: 0,
-            description: "",
-            image: ""
+    var [errors, setErrors] = useState({
+        title : "",
+        author : "",
+        price : "",
+        stock : "",
+        categories : "",
+        description : ""
+    })
+
+    const handleChangeFormul = (e) => {
+        e.preventDefault();
+        setForm({
+            ...formul,
+            [e.target.name] : e.target.value,
+        })
+
+        if (!e.target.value && e.target.name !== "categorie") {
+            setErrors({...errors, [e.target.name] : `Please enter a ${e.target.name}`})
+        } else {
+            setErrors({...errors, [e.target.name] : ""})
         }
-    } else {
-               
-        console.log('soy detail', detail)
+
+        if (e.target.name === "price" || e.target.name === "stock") {
+            if (e.target.value < 0) setErrors({...errors, [e.target.name] : `The ${e.target.name} cant be lower than 0!`})
+            else if ((/\W/).test(e.target.value)) setErrors({...errors, [e.target.name] : `Only positive integers!`})
+            else setErrors({...errors, [e.target.name] : ""})
+        }
+
     }
 
-    // var catDetail = [...bookEditDetail?.categories?.map(c => c.name)]
-    
-    // const data = useMemo((detail) => base, [base])
-    console.log("DETAIIIIIIl", detail)
-
-
-    // function handleChange(e) {
-    //     e.preventDefault();
-    //     const { name, value } = e.target;
-    //     setBase({
-    //         ...base,
-    //         [name]: value
-    //     })
-    //     console.log(base)
-    // }
-
-    
-
-
-    
-    const redirect = ({ id }) => {
-        if (id) {
-            history.push(`/book/${id}`)
-        }
+    function handleTypeSelect (e) {
+        var newy = formul.categories.map((c) => {if (c.name) {return c.name} else {return c} }) 
+        console.log(newy)
+        setForm({...formul, categories: [...newy, e.target.value]})
     }
 
-    console.log("LA BASE", base)
+    function onSubmit (e) {
+        e.preventDefault();
+        console.log(formul);
+        setForm({...formul, categories: formul.categories.map(c => c.name)})
+        dispatch(putBook(formul, formul.id))
+        setFormSubmit(true)
+        setTimeout(() => setFormSubmit(false), "2000")
+        window.location.reload()
+    }
+
+    var validate = true
+
+    if (errors.title === "" &&
+        errors.author === "" &&
+        errors.price === "" &&
+        errors.stock === "" &&
+        errors.categories === "" &&
+        errors.description === "" &&
+        formul.title !== ""
+        ) { validate = false }
     
-  
     return (
-        <div className='containerCreate'>
-     <Formik
 
-                initialValues={base}
+        <div className='formContainer formModalContainer'>
 
-                validate={(valores) => {
 
-                    let errors = {}
-
-                    if (!valores.title) {
-                        errors.title = "Please enter a title"
-                    } else if (/^\s/.test(valores.title)) {
-                        errors.title = "Cant start whit an empty space"
-                    } else if (valores.title.length > 100) {
-                        errors.title = "The title cannot exceed 100 characters"
-                    }
-
-                    if (!valores.author) {
-                        errors.author = "Please enter an author"
-                    } else if (valores.author.length > 50) {
-                        errors.author = "The author cannot exceed 50 characters"
-                    }
-
-                    if (!valores.price) {
-                        errors.price = "Please enter a price"
-                    } else if (valores.price < 0) {
-                        errors.price = "The price cannot be lower than 0"
-                    }
-
-                    if (valores.categories.length === 0 && valores.title && valores.author) {
-                        errors.categories = "Must chose at least one category"
-                    }
-
-                    if (valores.stock < 0) {
-                        errors.stock = "The stock cannot be lower than 0"
-                    }
-
-                    if (valores.description.length > 5000) {
-                        errors.description = "Up to 5000 characters only"
-                    }
-
-                    return errors
-
-                }}
-
-                onSubmit={(valores, { resetForm }) => {
-                    (bookEditDetail.id !== undefined) ? dispatch(putBook(valores, bookEditDetail.id)) : dispatch(postBook(valores))
-                    resetForm()
-                    setFormSubmit(true)
-                    setTimeout(() => setFormSubmit(false), "2000")
-                    setTimeout(() => redirect(bookEditDetail), "2000")
-                }}
-            >
-                {({ errors, touched }) => (
-                    <div className='formContainer formModalContainer'>
-                        <Form>
-                            <div className='formInfo formInfoContainer'>
-                                <h2 style={{ textAlign: "center", fontWeight: "800" }}>Modify the book</h2>
-
-                                <div className='field'>
-                                    <label name="title">Title</label>
-                                    <Field
-                                        type="text"
-                                        name="title"
-                                        placeholder='Title'
-                                    />
-                                    {touched.title && errors.title && <span className='errorMsg'>{errors.title}</span>}
-                                </div>
-                                <div className='field'>
-                                    <label name="author">Author</label>
-                                    <Field
-                                        type="text"
-                                        name="author"
-                                        placeholder='Author'
-
-                                    />
-                                    {touched.author && errors.author && <span className='errorMsg'>{errors.author}</span>}
-                                </div>
-                                <div className='field'>
-                                    <label name="categories">Category</label>
-                                    <FieldArray
-                                        name="categories"
-                                    >
-                                        {props => {
-                                            const { push, form } = props
-                                            const { values } = form
-
-                                            return (
-                                                <select onClick={(e) => {
-                                                    if (!values.categories.includes(e.target.value) && e.target.value !== "none" && e.target.value !== last) {
-                                                        push(e.target.value);
-                                                        setLast(e.target.value)
-                                                    } else {
-                                                        setLast("")
-                                                    }
-                                                }
-                                                }>
-                                                    {touched.categories && errors.categories && <span className='errorMsg'>{errors.categories}</span>}
-                                                    <option value="none">Select category</option>
-                                                    {catego && catego?.map(c => {
-                                                        return (
-                                                            <option value={c.name} name={c.name}>{c.name}</option>
-                                                        )
-                                                    })}
-                                                </select>
-                                            )
-                                        }}
-                                    </FieldArray>
-                                </div>
-                                <div className='field'>
-                                    <label name="categories">Categories selected:</label>
-                                    <FieldArray
-                                        name="categories"
-                                    >
-                                        {props => {
-                                            const { form } = props
-                                            const { values } = form
-                                            return (
-                                                <div >
-                                                    {(values.categories?.length > 0) ? values.categories.map(t => {
-                                                        return <div><span value={t}>{t}</span><button type="button" value={t} onClick={(e) => {
-                                                            let extra = []
-                                                            for (let element of values.categories) {
-                                                                if (element !== e.target.value) { extra.push(element) }
-                                                            }
-                                                            values.categories = extra
-                                                            // setBoolean(!boolean)
-                                                        }
-
-                                                        }
-                                                        >x</button></div>
-                                                    }) : null}
-                                                </div>
-                                            )
-                                        }}
-                                    </FieldArray>
-                                </div>
-                                <div className='field'>
-                                    <label name="price">Price</label>
-                                    <Field
-                                        type="number"
-                                        name="price"
-                                        placeholder='Price'
-                                        min="1"
-
-                                    />
-                                    {touched.price && errors.price && <span className='errorMsg'>{errors.price}</span>}
-                                </div>
-                                <div className='field'>
-                                    <label name="stock">Stock</label>
-                                    <Field
-                                        type="number"
-                                        name="stock"
-                                        placeholder='Stock'
-                                        min="1"
-
-                                    />
-                                    {touched.stock && errors.stock && <span className='errorMsg'>{errors.stock}</span>}
-                                </div>
-                                <div className='field'>
-                                    <label name="iamge">Image URL</label>
-                                    <Field
-                                        type="text"
-                                        name="image"
-                                        placeholder='URL'
-                                    />
-                                </div>
-                                <div className='description'>
-                                    <label name="description">Summary</label>
-                                    <Field
-                                        type="text"
-                                        name="description"
-                                        placeholder='Some description?'
-                                        className="description"
-                                        as="textarea"
-
-                                    />
-                                    {touched.description && errors.description && <span className='errorMsg'>{errors.description}</span>}
-                                </div>
-                                {(bookEditDetail.id !== undefined) ? <button type="submit">Modify!</button> : <button type="submit">Create!</button>}
-                                {formSubmit && <span>Action successfully complete!</span>}
-                            </div>
-                        </Form>
-                    </div >
-                )
-                }
-            </Formik > 
-            {
-                bookEditDetail.id !== undefined &&
-                <div className='pastInfo'>
-
-                    <h1>See how It Was Before</h1>
-
-                    <div className='container'>
-                        {console.log(bookEditDetail.id)}
-                        <div>
-                            <div className='container__info'>
-                                <div className='image'>
-                                    <img src={base.image} alt="" />
-                                </div>
-                                <div className='info'>
-                                    <h1>{base.title}</h1>
-                                    <div className=''>
-                                        <p>Author: <strong>{base.author}</strong></p>
-                                        <p>{base.description}</p>
-                                        <p>Literary Genres:</p>
-                                        <ul className='genres'>
-                                            {base.categories?.map(e => {
-                                                return (
-                                                    <li className='genre'>{e}</li>
-                                                )
-                                            })}
-
-                                        </ul>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
+                <h1>Edit Book</h1>
+                <form className='formInfo formInfoContainer'>
+                    <div className='field'>
+                    <label name="title">Title</label>
+                    <input onChange={(e) => {handleChangeFormul(e)}} type="text" value={formul.title} name="title"></input>
+                    {errors.title && <span className='errorMsg'>{errors.title}</span>}
                     </div>
-                </div>
-            }
+                    
+                    <div className='field'>
+                    <label name="author">Author</label>
+                    <input onChange={(e) => {handleChangeFormul(e)}} type="text" value={formul.author} name="author"></input>
+                    {errors.author && <span className='errorMsg'>{errors.author}</span>}
+                    </div>
+
+                    <div className="field">
+                    <label className="label">Select type:</label>
+                    <select onChange={(e) => {handleTypeSelect(e)}}>
+                        <option value="categories">None</option>    
+                        {catego? catego.map(t => {    
+                            return (
+                                <option value={t.name} name="categories" key={t.id}>{t.name}</option>
+                            )
+                        }) : null
+                        }
+                    </select>
+                    </div>
+                    <div className="field">
+                    {formul.categories? formul.categories.map(t => {    
+                            return (
+                                <div>
+                                <span value={t.name} name="categories" >{t.name? t.name : t}</span><button type="button" value={t} onClick={(e) => {
+                                    let extra = []
+                                    for (let element of formul.categories) {
+                                        if (element !== e.target.value) {extra.push(element)}
+                                    }
+                                    formul.categories = extra
+                                    setBoolean(!boolean)
+                                    }
+                                    }
+                                >x</button>
+                                </div>
+                            )
+                    }) : null}
+                    {errors.categories && <span className="error">{errors.categories}</span>}
+                    </div>
+                    
+                    <div className='field'>
+                    <label name="price">Price</label>
+                    <input onChange={(e) => {handleChangeFormul(e)}} type="number" value={formul.price} name="price"></input>
+                    {errors.price && <span className='errorMsg'>{errors.price}</span>}
+                    </div>
+
+                    <div className='field'>
+                    <label name="stock">Stock</label>
+                    <input onChange={(e) => {handleChangeFormul(e)}} type="number" value={formul.stock} name="stock"></input>
+                    {errors.stock && <span className='errorMsg'>{errors.stock}</span>}
+                    </div>
+
+                    <div className='field'>
+                    <label name="description">Description</label>
+                    <input onChange={(e) => {handleChangeFormul(e)}} type="text" value={formul.description} name="description"></input>
+                    {errors.description && <span className='errorMsg'>{errors.description}</span>}
+                    </div>
+
+                    <div className='field'>
+                    <label name="image">Image URL</label>
+                    <input onChange={(e) => {handleChangeFormul(e)}} type="text" value={formul.image} name="image"></input>
+                    {errors.image && <span className='errorMsg'>{errors.image}</span>}
+                    </div>
+                    
+                    <button type="submit" disabled={validate} onClick={(e) => onSubmit(e)}>Modify!</button>
+                    {formSubmit && <span>Action successfully complete!</span>}
+                </form>
         </div>
     )
-
-}
+    }
