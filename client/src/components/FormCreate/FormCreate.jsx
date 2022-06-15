@@ -66,8 +66,8 @@ export default function FormCreate() {
 
     return (
         <div className='containerCreate'>
-            {/* <NavBar /> */}
             <Sidebar />
+            <h2 className='h1'>Book management</h2>
 
             <Formik
 
