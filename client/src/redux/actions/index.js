@@ -49,8 +49,11 @@ import {
   REPLY_SUPPORT,
   SET_DELIVERY_ADDRESS,
   REPLY_SUPPORT_GUEST,
+  UPDATE_SENT,
+  UPDATE_DONE,
   DELETE_ADM_REVIEW,
-  DISCARD_REPORT,
+  CHANGE_IMG,
+  BOOK_EDIT,
 } from "./types";
 
 import axios from "axios";
@@ -471,14 +474,10 @@ export function showComments(id) {
 export function getSupport() {
   return async function (dispatch) {
     try {
-      const res = await axios.get("http://localhost:3001/support", {
-        headers: {
-          Authorization: JSON.parse(localStorage.getItem("token")),
-        },
-      });
-      localStorage.setItem("token", JSON.stringify(res.data.token));
-      console.log(res.data);
-      console.log("id admin", localStorage.getItem("token"));
+      const res = await axios.get("http://localhost:3001/support");
+      // localStorage.setItem("token", JSON.stringify(res.data.token));
+      // console.log(res.data);
+      // console.log("id admin", localStorage.getItem("token"));
       return dispatch({ type: GET_SUPPORT, payload: res.data.supports });
     } catch (error) {
       console.log(error);
@@ -562,10 +561,10 @@ export function reportReview(id, idBook, obj) {
     }
   }
 }
-  export function deleteReview(user, book, review) {
+  export function deleteReview(book, review) {
     return async function (dispatch) {
       try {
-        const response = await axios.delete(`http://localhost:3001/reviews?user=${user}&book=${book}&review=${review}`);
+        const response = await axios.delete(`http://localhost:3001/reviews?book=${book}&review=${review}`);
         return dispatch({ type: DELETE_REVIEW, payload: response.data });
          } catch (error) {
         console.log(error);
@@ -705,8 +704,7 @@ export function getReviews() {
 export function deleteAdmReview(id, obj) {
   return async function (dispatch) {
     try {
-      const res = await axios.put(`http://localhost:3001/reviews/report/${id}`, obj)
-      console.log("DELETED", res.data)
+      const res = await axios.put(`http://localhost:3001/reviews/report/${id}`, {report:null})
       return dispatch({ type: DELETE_ADM_REVIEW, payload: res.data });
     } catch (err) {
       console.log(err)
@@ -714,16 +712,6 @@ export function deleteAdmReview(id, obj) {
   }
 }
 
-export function discardReport(){
-  return async function (dispatch){
-    try {
-      const res = await axios.delete('http://localhost:3001/reviews?user=idUSer&books=idBook&review=idReview')
-      return dispatch({type: DISCARD_REPORT, payload:res.data})
-    } catch (err) {
-      console.log(err)
-    }
-  }
-}
 
 export function filterSupportStatus (payload) {
   return ({
@@ -754,16 +742,58 @@ export function replySupportGuest(payload) {
           },
         } */
       );
-      const res = await axios.get("http://localhost:3001/support", {
-        headers: {
-          Authorization: JSON.parse(localStorage.getItem("token")),
-        },
-      });
-      localStorage.setItem("token", JSON.stringify(res.data.token));
-      return dispatch({ type: GET_SUPPORT, payload: res.data.supports });
       
     } catch (e) {
       console.log(e);
+    }
+  };
+}
+
+export function updateSent(id) {
+  return async function (dispatch) {
+    try {
+      var response = await axios.put("http://localhost:3001/paypal/payments/sent",{id:id})
+      return dispatch({ type: UPDATE_SENT });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+
+export function updateDone(id) {
+  return async function (dispatch) {
+    try {
+      var response = await axios.put("http://localhost:3001/paypal/payments/done",{id:id})
+      return dispatch({ type: UPDATE_DONE });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function changeImg(id, tipo, img) {
+    return async function (dispatch) {
+      try {
+        var response = await axios.put(`http://localhost:3001/upload/${tipo}/${id}`, img, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          }
+        });
+        console.log("change img", response.data);
+        return dispatch({ type: CHANGE_IMG, payload: response.data.url });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+}
+
+export function bookEdit(id) {
+  return async function (dispatch) {
+    try {
+      return dispatch({ type: BOOK_EDIT, payload: id });
+    } catch (error) {
+      console.log(error);
     }
   };
 }

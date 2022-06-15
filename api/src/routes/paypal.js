@@ -70,7 +70,7 @@ router.get("/execute-payment", executePayment)
 
 router.post("/", async (req, res, next) => {
     try {
-        const {data, totalPrice, infoBook, userId} = req.body
+        const {data, totalPrice, infoBook, userId, address} = req.body
         if(typeof data !== "string"){
         const {orderID, payerID, paymentSource} = data
         for (let i = 0; i < infoBook.length; i++) {
@@ -99,7 +99,8 @@ router.post("/", async (req, res, next) => {
             orderID,
             payerID,
             paymentSource,
-            totalPrice
+            totalPrice,
+            address
         })
         
         const user = await User.findOne({
@@ -144,7 +145,8 @@ router.post("/", async (req, res, next) => {
         const paymentCryptoCreated = await Paymentcrypto.create({
             hash:data,
             paymentSource:"Ethereum",
-            totalPrice
+            totalPrice,
+            address
         })
 
         const user = await User.findOne({
@@ -187,6 +189,61 @@ router.get("/payments/:id", async (req, res, next) => {
         })
 
         res.json(user)
+    } catch (error) {
+        next(error)
+    }
+})
+router.put("/payments/sent", async (req, res, next) => {
+    try {
+        const {id} = req.body
+        if(id){
+            const pay = await Payment.findOne({
+                where: {id: id}
+            })
+
+            if(pay){
+                await pay.update({
+                    deliveryStatus: "Send"
+                })
+            }
+            else{
+                await Paymentcrypto.update({
+                    deliveryStatus: "Send",
+                },{
+                    where: {id: id}
+                })
+            }
+        }
+
+        res.send('actualizado')
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.put("/payments/done", async (req, res, next) => {
+    try {
+        const {id} = req.body
+        if(id){
+            const pay = await Payment.findOne({
+                where: {id: id}
+            })
+
+            if(pay){
+                await pay.update({
+                    deliveryStatus: "Order received"
+                })
+            }
+            else{
+                await Paymentcrypto.update({
+                    deliveryStatus: "Order received",
+                },{
+                    where: {id: id}
+                })
+            }
+        }
+
+        res.send('actualizado')
     } catch (error) {
         next(error)
     }

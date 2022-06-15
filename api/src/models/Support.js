@@ -8,17 +8,16 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV4,
             allowNull: false,
         },
-        emailGuess: {
+        isUser: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        },
+        email: {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        nameGuess: {
+        name: {
             type: DataTypes.STRING,
-            allowNull: true,
-        },
-        //? idAdmin es el id del admin que responde al support 
-        idAdmin: {
-            type: DataTypes.UUID,
             allowNull: true,
         },
         comment: {
@@ -29,20 +28,11 @@ module.exports = (sequelize) => {
             type: DataTypes.DATE,
             allowNull: false,
         },
-        //? date response es la fecha en la que el admin responde al support
-        dateResponse: {
-            type: DataTypes.DATE,
-            allowNull: true,
-        },
         //? status: 0 = pendiente, 1 = respondido por admin, 2 = respondido por user 
         status: {
             type: DataTypes.INTEGER,
             allowNull: false,
-        },
-        response: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
+        }
     });
 
 }

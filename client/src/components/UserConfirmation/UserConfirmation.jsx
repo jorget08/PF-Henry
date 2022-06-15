@@ -29,7 +29,7 @@ export default function UserConfirmation() {
     return (
         <>
             {console.log('soy id', id)}
-            <NavBar />
+            
             <div className='containerGlobal'>
                 <div className='conteinerConfirmation'>
 

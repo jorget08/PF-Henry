@@ -9,7 +9,6 @@ const { createSupport, getSupports, updateSupport, deleteSupport, responseSuppor
 
 router.post('/', 
     [
-        // validarJwt,
         check('comment', 'El comentario es obligatorio').not().isEmpty(),
         validarCampos
     ],
@@ -17,7 +16,6 @@ router.post('/',
 );
 router.put('/',
     [
-        validarJwt,
         check('idSupport', 'El id del support es obligatorio').not().isEmpty(),
         check('response', 'La Respuesta es obligatoria').not().isEmpty(),
         validarCampos
@@ -25,10 +23,7 @@ router.put('/',
     responseSupport
 );
 router.get('/',
-    [
-        validarJwt
-    ], 
-    getSupports
+   getSupports
 );
 router.put('/:id',
     [

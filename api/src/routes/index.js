@@ -9,6 +9,7 @@ const reviews= require('./reviews')
 const favourites= require('./favourites')
 const email = require('./email.routes')
 const support = require('./support.routes')
+const uploadImg = require('./uploadFiles.routes')
 
 const router = Router();
 
@@ -24,5 +25,6 @@ router.use('/paypal', paypal)
 router.use('/favourites', favourites)
 router.use('/reviews', reviews)
 router.use('/support', support)
+router.use('/upload', uploadImg)
 
 module.exports = router;

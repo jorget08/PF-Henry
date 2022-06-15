@@ -24,3 +24,27 @@ table {
     background-color: #d85353;
     color: white;
   }
+
+  .selectora{
+    border-radius: 10px;
+    width: 100px;
+    max-width: 100px;
+    height: 50px;
+    margin-right: 250px
+    
+  }
+
+  .aviso {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .aviso h2{
+    text-align: center;
+  }
+
+  .boton {
+    background-color: red;
+  }

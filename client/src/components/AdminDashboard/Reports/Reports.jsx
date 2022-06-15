@@ -1,60 +1,118 @@
 import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import { useDispatch, useSelector } from 'react-redux'
-import { discardReport, deleteAdmReview, getReviews } from '../../../redux/actions'
-import { COLUMNS } from './Columns.jsx'
+import { Link } from 'react-router-dom';
+import { deleteAdmReview, getReviews, getBooks, getSales, getUsers, deleteReview } from '../../../redux/actions'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
+import Swal from "sweetalert2";
+import { ImCheckmark, ImCross } from "react-icons/im";
+
 
 
 export default function Reports() {
-  
+
   const dispatch = useDispatch()
- 
+  const user = useSelector(state => state.user)
   const allReviews = useSelector(state => state.reviews)
+  console.log("I'm the reviews bitch", allReviews)
 
   useEffect(() => {
-    dispatch(getReviews())    
+    dispatch(getUsers())
+    dispatch(getBooks)
+    dispatch(getSales())
+    dispatch(getReviews())
   }, [dispatch])
-  setTimeout(() => {
-    console.log('REVIEWS', allReviews);
-  }, "3000")
 
-  
+
+
+  const COLUMNS = [
+
+    {
+      Header: 'User',
+      accessor: (row) => {
+        console.log(row)
+        return row.user.name.charAt(0).toUpperCase() + row.user.name.slice(1) + ' ' + row.user.lastName.charAt(0).toUpperCase() + row.user.lastName.slice(1)
+      },
+    },
+    {
+      Header: "Email",
+      accessor: (row) => {
+        return row.user.email;
+      }
+    },
+    {
+      Header: "Book's Title",
+      accessor: (row) => {
+        return (
+          row.book.title
+        )
+      },
+    },
+    {
+      Header: "Reviews",
+      accessor: (row) => {
+        return (
+          row.description + ' | ' + row.createdAt.slice(0, 10)
+        )
+      },
+    },
+    {
+      Header: "Actions",
+      accessor: (row) => {
+        return (
+          <>
+            <div style={{ display: "flex", justifyContent: "space-between", width: '70px' }}>
+              <button className='iconTik' onClick={(e) => handleDelete(e, row.id)}><ImCheckmark></ImCheckmark></button>
+              <button className='iconDash delete' onClick={(e) => handleDiscard(e, row)}><ImCross /></button>
+            </div>
+          </>
+        )
+      },
+    },
+
+  ]
+
   const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => allReviews, [])
+  const data = useMemo(() => allReviews, [allReviews])
+
+  const handleDiscard = (e, row) => {
+    e.preventDefault()
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete review!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteReview(row.bookId, row.id))
+        window.location.reload()
+      }
+    })
+
+
+  }
 
   const handleDelete = (e, row) => {
-    // console.log ("SOY e", row)
-    // e.preventDefault();
-    // dispatch(discardReport(row, {report:null}))  
-    alert ('HOLA A TODOS, YO SOY EL LEON!')
-  }
-
-
-  const tableHooks = (hooks) => {
-    hooks.visibleColumns.push((columns) => [
-      ...columns,
-      {
-        id: "Actions",
-        Header: "Actions",
-        Cell: ({ row }) => (
-          <div style={{ display: 'flex' }}>
-            <button className='' >
-              Delete
-            </button>
-            <button className='' onClick={(row) => handleDelete(row)}>
-            
-              Discard
-            </button>
-          </div>
-
-        )
+    e.preventDefault()
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, discard report!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteAdmReview(row))
+        window.location.reload()
       }
-    ]
-    )
-  }
+    })
 
+
+  }
 
   const {
     getTableProps,
@@ -76,19 +134,21 @@ export default function Reports() {
     columns,
     data
   },
-  tableHooks,
-  useGlobalFilter,
-  useSortBy,
-  usePagination,
+    useGlobalFilter,
+    useSortBy,
+    usePagination,
   )
 
   const { globalFilter } = state
   const { pageIndex, pageSize } = state
   return (
     <>
+
+    {user.rols?.name === "admin" ?
+    <>
     <h2 className='h1'>Reports</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
-    <table {...getTableProps()} className={'Container'}>
+    {allReviews && <table {...getTableProps()} className={'Container'}>
       <thead >
         {headerGroups.map((headerGroups) => (
         <tr {...headerGroups.getHeaderGroupProps()}>
@@ -118,7 +178,7 @@ export default function Reports() {
           })
         }
       </tbody>
-    </table>
+    </table>}
     <div className="button">
       <span>
          Go to page : {' '}
@@ -149,6 +209,13 @@ export default function Reports() {
       <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
       <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</button>
     </div>
+    </>:
+    <div className="aviso">
+    <h2>You don't have access here, please go back home</h2>
+    <Link to={`/home`}>
+    <button className='minimize'>Back home</button>
+    </Link>
+    </div>}
     </>
   )
 }

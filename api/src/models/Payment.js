@@ -20,7 +20,14 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     totalPrice: {
-        type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
+    },
+    address: {
+      type: DataTypes.TEXT,
+    },
+    deliveryStatus: {
+      type: DataTypes.STRING,
+      defaultValue: 'Pending'
     },
   });
 };

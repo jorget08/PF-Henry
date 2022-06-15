@@ -1,4 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
 .span{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    font-size: 25px;
+    padding:18px 0 17px 30rem;
+    align-items: center;
+    width: 60%;   
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.span input{
+    margin: auto;
+    margin-left: 10px;
+    border-radius: 10px;
+    outline: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+    padding: 10px;
+    border: 1px solid gray;
+    width: 300px;
+    height: 30px;    
 }

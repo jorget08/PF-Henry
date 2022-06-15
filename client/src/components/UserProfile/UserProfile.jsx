@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUser, requestPassword, deleteProfile } from '../../redux/actions';
+import { getUser, requestPassword, deleteProfile, changeImg } from '../../redux/actions';
 import NavBar from '../NavBar/NavBar';
 import Modal from '../Modal/Modal';
 import ModalCopy from '../Maps/ModalCopy/ModalCopy';
@@ -19,7 +19,11 @@ export default function UserProfile() {
   var user = useSelector(state => state.user)
   const dispatch = useDispatch()
   const [isOpenModal, openModal, closeModal] = useModals(false);
+
   const [isOpenModalCopy, openModalCopy, closeModalCopy] = useModals(false);
+
+  const token = localStorage.getItem("token")
+
 
   useEffect(() => {
     dispatch(getUser())
@@ -65,13 +69,29 @@ export default function UserProfile() {
     })
   }
 
+  // const formDateishon = new FormData();
+  // formDateishon.append("img", selectedImage);
+
+  const handleImage = (e) => {
+    const image = e.target.files[0]
+    const formData = new FormData()
+    formData.append('img', image)
+
+    dispatch(changeImg(user.idUser, 'user', formData))
+  }
+
   return (
     <>
       <NavBar />
+      {token?
       <div className='allProfile'>
         <div className='profile'>
 
           <img src={user.imgProfile} alt="" />
+          <form>
+            <input type="file" onChange={handleImage} name="file" id="" />
+          </form>
+
           <h1>{user.name} {user.lastName}</h1>
           <h2>{user.email}</h2>
         </div>
@@ -140,7 +160,13 @@ export default function UserProfile() {
 
 
         </div>
-      </div>
+      </div>:
+      <div  className="aviso">
+      <h2>You need to be logged in to access here</h2>
+      <Link to={`/home`}>
+      <button className='minimize'>Back home</button>
+      </Link>
+      </div>}
     </>
 
   )

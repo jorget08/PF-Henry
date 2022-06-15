@@ -2,17 +2,20 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useTable, useSortBy, useGlobalFilter, useFilters } from 'react-table'
 import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { filterSupportStatus, getSupport, replySupport, replySupportGuest} from '../../../redux/actions'
 import { COLUMNS } from './Columns'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
 import { useModals } from '../../Utils/useModals'
 import Modal from '../../Modal/Modal'
+import Swal from "sweetalert2";
 
 export default function SupportAdmin() {
 
   const dispatch = useDispatch()
   const supportData = useSelector((state) => state.support)
+  const user = useSelector(state => state.user)
   const [isOpenModal, openModal, closeModal] = useModals(false);
   const [resp, setResp] = useState({name: "", email: "", message: "", id: null})
   const [bool, setBool] = useState(true) 
@@ -21,16 +24,14 @@ export default function SupportAdmin() {
 
   useEffect(() => {
     dispatch(getSupport())    
-  }, [dispatch, supportData])
+  }, [dispatch])
 
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => supportData, [supportData])
 
-  const handleClick = (e, {name, email, id}) => {
+  const handleClick = (e, row) => {
     e.preventDefault();
-    if (id === null) setResp({...resp, name: name, email: email})
-    else {setResp({response: "", idSupport: id})}
-    console.log("Soy el ID y el mail", name, email)
+    setResp({...resp, name: row.original.name, email: row.original.email})
     openModal()
   }
   
@@ -42,11 +43,29 @@ export default function SupportAdmin() {
 
   const submitReply = (e) => {
     e.preventDefault();
+    setResp({...resp, message: respon})
     dispatch(replySupportGuest(resp))
     console.log(resp)
-    alert("Answer sent!")
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: "Answer sent!"
+    })
+    
     setBool(!bool)
     closeModal()
+    window.location.reload()
   }
 
   const handleSelect = (e) => {
@@ -62,18 +81,7 @@ export default function SupportAdmin() {
           Header:"Actions",
           Cell: ({ row }) => ( 
             <div>
-              {
-                (row.values.userIdUser === undefined && row.values.status === 0)? <button onClick={(e) => handleClick(e, {
-                  name: row.values.nameGuess,
-                  email: row.values.emailGuess
-                })}>
-                Reply by mail 
-                </button>:
-                (row.values.userIdUser.length && row.values.status === 0)?
-                <button onClick={(e) => handleClick(e, {id: row.values.idSupport})}>
-                Reply
-                </button>: <span>-</span>
-              }
+              <button onClick={e => handleClick(e, row)}>Reply by mail</button>
             </div>
           )
         }
@@ -102,6 +110,8 @@ export default function SupportAdmin() {
   
   return (
     <>
+    {user.rols?.name === "admin" ?
+    <>
     <Modal isOpen={isOpenModal} closeModal={closeModal}>
         <div className="reply">
           <label>Put the reply here!</label>
@@ -111,7 +121,7 @@ export default function SupportAdmin() {
     </Modal>
     <h2 className='h1'>Support</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
-    <select style={{marginLeft:"150px", width:"150px"}}onChange={(e) => handleSelect(e)}>
+    <select className='selectora' style={{marginLeft:"150px", width:"150px"}}onChange={(e) => handleSelect(e)}>
       <option value="default">Filter by</option>
       <option value="to_answer">To answer</option>
       <option value="respond">Respond</option>
@@ -147,6 +157,13 @@ export default function SupportAdmin() {
         }
       </tbody>
     </table>
+    </>:
+    <div className="aviso">
+    <h2>You don't have access here, please go back home</h2>
+    <Link to={`/home`}>
+    <button className='minimize'>Back home</button>
+    </Link>
+    </div>}
     </>
   )
 }

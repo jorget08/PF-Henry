@@ -2,20 +2,15 @@ export const COLUMNS = [
     {
         Header: 'UserID',
         accessor: row => {if (row.userIdUser === null) return "None"
-                            else return row.user},
-    },
-    {
-        Header: 'User',
-        accessor: row => {if (row.user === null) return "Guest"
-                            else return row.user},
-    },  
+                            else return row.userIdUser},
+    }, 
     {
         Header: 'Email',
-        accessor: 'emailGuess',
+        accessor: 'email',
     },
     {
         Header: 'Name',
-        accessor: 'nameGuess',
+        accessor: 'name',
     },
     {
         Header: 'Comment',

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { getDetail, clearDetail, deleteBook, addComment, showComments, getBooks, reportReview, updateReview, deleteReview } from "../../redux/actions";
+import { getDetail, clearDetail, deleteBook, addComment, showComments, getBooks, reportReview, updateReview, deleteReview, changeImg } from "../../redux/actions";
 import DetailCompra from '../DetailCompra/DetailCompra';
 import { FaRegTrashAlt } from 'react-icons/fa'
 import Stars from '../Stars/Stars';
@@ -22,13 +22,10 @@ export default function BookDetail() {
   const token = localStorage.getItem("token")
   const [comment, setComment] = useState({ title: 'default', description: '', id: '' })
   const [errors, setErrors] = useState({})
+  const [news, setNews] = useState(false)
 
   console.log("hystory", history)
   var bookDet = useSelector(state => state.detail)
-
-  var stars = [false, false, false, false, false];
-
-
 
   const redirect = () => {
     history.push("/home")
@@ -51,13 +48,39 @@ export default function BookDetail() {
 
   function delet(e) {
     e.preventDefault();
-    if (window.confirm(`Are you sure you want to delete this book: ${bookDet.title}?`)) {
-      dispatch(deleteBook(bookDet.id))
-      alert("The book has been deleted successfully!")
+    Swal.fire({
+      title: "Are you sure you want to delete this book?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete book'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteBook(bookDet.id))
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: "The book has been deleted successfully!"
+        })
       dispatch(getBooks)
       redirect()
-    }
+      }
+    })
+
   }
+
   async function reportComment(element) {
 
     const { value: report } = await Swal.fire({
@@ -185,6 +208,15 @@ export default function BookDetail() {
       })
 
   }
+
+  const handleImage = (e) => {
+    const image = e.target.files[0]
+    const formData = new FormData()
+    formData.append('img', image)
+
+    dispatch(changeImg(bookDet.id, 'book', formData))
+    setNews(news ? false : true)
+  }
   return (
     <div className='all'>
       <NavBar />
@@ -193,6 +225,10 @@ export default function BookDetail() {
           <div className='container__info'>
             <div className='image'>
               <img src={bookDet.image} alt="" />
+              {user.rols?.name === "admin" ?
+              <form>
+                <input type="file" onChange={handleImage} name="file" id="" />
+              </form>:""}
               <DetailCompra title={bookDet.title} author={bookDet.author} price={bookDet.price} categories={bookDet.categories} id={bookDet.id} stock={bookDet.stock}></DetailCompra>
             </div>
             <div className='info'>
@@ -200,8 +236,8 @@ export default function BookDetail() {
               {
                 bookDet.score &&
                 <Stars score={bookDet.score} />
-
               }
+              <p style={{ marginTop: '0', fontSize: '14px', font: 'italic', color: 'gray', cursor: 'default' }}><em>Rated by our experts</em></p>
 
               <div className=''>
                 <p>Author: <strong>{bookDet.author}</strong></p>

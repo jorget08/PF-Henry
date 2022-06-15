@@ -5,14 +5,8 @@ export const GROUPED_COLUMNS = [
             {   
                 Header: 'Name',
                 accessor: (row) => {
-                    return row.users[0]?.name.charAt(0).toUpperCase() + row.users[0]?.name?.slice(1);
+                    return row.users[0]?.name.charAt(0).toUpperCase() + row.users[0]?.name?.slice(1) + ' ' + row.users[0]?.lastName.charAt(0).toUpperCase() + row.users[0]?.lastName?.slice(1);
                 },
-            },
-            {          
-                Header: 'Lastname',
-                accessor: (row) => {
-                    return row.users[0]?.lastName.charAt(0).toUpperCase() + row.users[0]?.lastName?.slice(1);
-                }
             },
             {        
                 Header: 'Email',
@@ -23,13 +17,26 @@ export const GROUPED_COLUMNS = [
     {
         Header: 'Purcharse Info',
         columns: [
+            {
+                Header: "ID Purchase",
+                accessor: (row) => {
+                    return row.id                
+                },
+            },
             {        
                 Header: 'Purchase',
                 accessor: (row) => {
                     return row.paymentbooks?.map(e => `${e.title} (${e.cant})`).join(',  ')                     
                 }  
                 
+            },            
+            {        
+                Header: 'Date',
+                accessor: (row) => {
+                    return row.createdAt.slice(0,10);       
             },
+            },
+
             {        
                 Header: 'Method of pay',
                 accessor: (row) => {
@@ -42,7 +49,19 @@ export const GROUPED_COLUMNS = [
                 accessor: (row) => {
                     return "$" + row.totalPrice + ".00";       
             },
-            }
+            },
+            {
+                Header: "Delivery Adress",
+                accessor: (row) => {
+                    return row.address
+                }
+            },
+            {
+                Header: "Delivery Status",
+                accessor: (row) => {
+                    return row.deliveryStatus
+                }
+            },
         ]
     }
 ]

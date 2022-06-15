@@ -9,6 +9,7 @@ import Sidebar from '../AdminDashboard/Sidebar'
 export default function FormCreate() {
 
     const dispatch = useDispatch()
+    const user = useSelector(state => state.user)
     var [formSubmit, setFormSubmit] = useState(false)
     var [last, setLast] = useState("")
     var [boolean, setBoolean] = useState(true)
@@ -65,9 +66,11 @@ export default function FormCreate() {
     var catego = useSelector(state => state.categories)
 
     return (
+        <>
+        {user.rols?.name === "admin" ?
         <div className='containerCreate'>
-            {/* <NavBar /> */}
             <Sidebar />
+            <h2 className='h1'>Book management</h2>
 
             <Formik
 
@@ -114,8 +117,8 @@ export default function FormCreate() {
                 }}
 
                 onSubmit={(valores, { resetForm }) => {
-                    if(valores.image===""){
-                        valores.image='https://us.123rf.com/450wm/urric/urric1810/urric181000005/118555840-libro-marr%C3%B3n-sobre-fondo-blanco.jpg?ver=6'
+                    if (valores.image === "") {
+                        valores.image = 'https://us.123rf.com/450wm/urric/urric1810/urric181000005/118555840-libro-marr%C3%B3n-sobre-fondo-blanco.jpg?ver=6'
                     }
                     (detail.id !== undefined) ? dispatch(putBook(valores, detail.id)) : dispatch(postBook(valores))
                     resetForm()
@@ -180,8 +183,7 @@ export default function FormCreate() {
                                         }}
                                     </FieldArray>
                                 </div>
-                                <div className='field'>
-                                    <label name="categories">Categories selected:</label>
+                                <div className='field categoriesSelected'>
                                     <FieldArray
                                         name="categories"
                                     >
@@ -190,8 +192,10 @@ export default function FormCreate() {
                                             const { values } = form
                                             return (
                                                 <div >
-                                                    {(values.categories.length > 0) ? values.categories.map(t => {
-                                                        return <div><span value={t}>{t}</span><button type="button" value={t} onClick={(e) => {
+                                                    {(values.categories.length > 0) && <label name="categories">Categories selected:</label>}
+
+                                                    {(values.categories.length > 0) && values.categories.map((t, i) => {
+                                                        return <div key={t} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', borderTop: i > 0 ? '1px solid gray' : '', padding: '5px 0 10px 0', fontSize: '15px' }}><span style={{ marginRight: '10px' }} value={t}>{t}</span><button type="button" value={t} onClick={(e) => {
                                                             let extra = []
                                                             for (let element of values.categories) {
                                                                 if (element !== e.target.value) { extra.push(element) }
@@ -202,7 +206,7 @@ export default function FormCreate() {
 
                                                         }
                                                         >x</button></div>
-                                                    }) : null}
+                                                    })}
                                                 </div>
                                             )
                                         }}
@@ -253,7 +257,7 @@ export default function FormCreate() {
                                 {(detail.id !== undefined) ? <button type="submit">Modify!</button> : <button type="submit">Create!</button>}
                                 {formSubmit && <span>Action successfully complete!</span>}
                             </div>
-                        </Form>
+                        </Form >
                     </div >
                 )
                 }
@@ -294,7 +298,13 @@ export default function FormCreate() {
                     </div>
                 </div>
             }
-        </div>
-    )
+        </div >:
+        <div className="aviso">
+        <h2>You don't have access here, please go back home</h2>
+        <Link to={`/home`}>
+        <button className='minimize'>Back home</button>
+        </Link>
+        </div>}
+        </>)
 
 }

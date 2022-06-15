@@ -25,7 +25,6 @@ export default function NewPassword() {
   return (
     <>
       <div>
-      <NavBar />
       <div className='containerGlobal'>
                 <div className='conteinerConfirmation'>
 

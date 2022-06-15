@@ -37,7 +37,8 @@ function Crypto({ value, infoBook, userId, email, name, lastName, payment }) {
   const [error, setError] = useState();
   const [txs, setTxs] = useState([]);
   const dispatch = useDispatch();
-
+  let address = localStorage.getItem('address')
+  console.log("adres crpyo",address)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,7 +56,8 @@ function Crypto({ value, infoBook, userId, email, name, lastName, payment }) {
       data: x?.hash,
       totalPrice: value,
       infoBook: infoBook,
-      userId: userId
+      userId: userId,
+      address:address
     }
 
     dispatch(infoSoldBooks(totalInfo));
