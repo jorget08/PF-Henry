@@ -10,6 +10,7 @@ import { getSales, updateSent} from "../../../redux/actions";
 import { GROUPED_COLUMNS } from "./Columns.jsx";
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
+import { BsCartCheckFill} from "react-icons/bs";
 
 
 
@@ -46,8 +47,8 @@ export default function Sales() {
         Cell: ({ row }) => (
           <div>
             {row.original.deliveryStatus === "Pending" ? (
-              <button onClick={(e) => handleChange({ e, id: row.original.id })}>
-                Send the order
+              <button className='sendorder' style={{borderRadius:"40px",backgroundColor:"##dbdbdb",color:"black",cursor:"pointer"}}onClick={(e) => handleChange({ e, id: row.original.id })}>
+                Send order<BsCartCheckFill/>
               </button>
             ) : null}
             {row.original.deliveryStatus === "Order received" ? <p>Complete</p> : null}
