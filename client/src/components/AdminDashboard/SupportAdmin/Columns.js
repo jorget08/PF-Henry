@@ -1,8 +1,7 @@
 export const COLUMNS = [
     {
-        Header: 'UserID',
-        accessor: row => {if (row.userIdUser === null) return "None"
-                            else return row.userIdUser},
+        Header: 'Type',
+        accessor: row => { return row.isUser ? "User" : "Guest"},
     }, 
     {
         Header: 'Email',
@@ -14,19 +13,19 @@ export const COLUMNS = [
     },
     {
         Header: 'Comment',
-        accessor: 'comment',
-    },
-    {
-        Header: 'Response',
-        accessor: 'response',
+        accessor: row => <div style={{width:"400px", height:"100px"}}>{row.comment}</div>,
     },
     {
         Header: 'Status',
-        accessor: 'status',
+        accessor: row => { return (row.status === 0) ? 
+        <div style={{color:"red", border:"solid red 5px", padding:"10px"}}>Pending</div> : 
+        <div style={{color:"green", border:"solid green 5px", padding:"10px"}}>Answered</div>},
     },
     {
         Header: 'Comment Date',
-        accessor: 'date',
+        accessor: (row) => {
+            return (row.date.slice(0,10) + " - " + row.date.slice(11,19));       
+    },
     },
     {
         Header: 'Id Support',

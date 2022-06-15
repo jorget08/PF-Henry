@@ -41,8 +41,8 @@ export default function SupportUser() {
 
                         let errors = {};
 
-                        if (!valores.comment) {
-                            errors.comment = 'The comment is required!'
+                        if (valores.comment.length > 255) {
+                            errors.comment = 'Your question can not be longer than 255 characters!'
                         }
                         return errors;
 

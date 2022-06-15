@@ -20,8 +20,6 @@ export default function SupportAdmin() {
   const [resp, setResp] = useState({name: "", email: "", message: "", id: null})
   const [bool, setBool] = useState(true) 
 
-  const [respon, setResponse] = useState("")
-
   useEffect(() => {
     dispatch(getSupport())    
   }, [dispatch])
@@ -31,21 +29,18 @@ export default function SupportAdmin() {
 
   const handleClick = (e, row) => {
     e.preventDefault();
-    setResp({...resp, name: row.original.name, email: row.original.email})
+    setResp({...resp, name: row.original.name, email: row.original.email, id: row.original.idSupport})
     openModal()
   }
   
   const handleChangeInput = (e) => {
-    setResponse(e.target.value)
-    setResp({...resp, message: respon})
-    console.log(respon)
+    setResp({...resp, message: e.target.value})
   }
 
   const submitReply = (e) => {
     e.preventDefault();
-    setResp({...resp, message: respon})
-    dispatch(replySupportGuest(resp))
     console.log(resp)
+    dispatch(replySupportGuest(resp))
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -62,10 +57,9 @@ export default function SupportAdmin() {
       icon: 'success',
       title: "Answer sent!"
     })
-    
     setBool(!bool)
     closeModal()
-    window.location.reload()
+    setTimeout(() => window.location.reload(), 2000) 
   }
 
   const handleSelect = (e) => {
@@ -80,7 +74,7 @@ export default function SupportAdmin() {
           id:"Actions",
           Header:"Actions",
           Cell: ({ row }) => ( 
-            <div>
+            (row.original.status === 0) && <div>
               <button onClick={e => handleClick(e, row)}>Reply by mail</button>
             </div>
           )
@@ -115,16 +109,16 @@ export default function SupportAdmin() {
     <Modal isOpen={isOpenModal} closeModal={closeModal}>
         <div className="reply">
           <label>Put the reply here!</label>
-          <input type="text" value={respon} onChange={e => handleChangeInput(e)}></input>
+          <input type="text" value={resp.message} onChange={e => handleChangeInput(e)}></input>
           <button onClick={(e) => submitReply(e)}>Send reply!</button>
         </div>
     </Modal>
     <h2 className='h1'>Support</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     <select className='selectora' style={{marginLeft:"150px", width:"150px"}}onChange={(e) => handleSelect(e)}>
-      <option value="default">Filter by</option>
+      <option value="default" disabled>Filter by</option>
       <option value="to_answer">To answer</option>
-      <option value="respond">Respond</option>
+      <option value="respond">Answered</option>
       <option value="all">All</option>
     </select>
     <table {...getTableProps()} className={'Container'}>
