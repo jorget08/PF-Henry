@@ -92,6 +92,7 @@ export default function Maps() {
                 title: 'This address does not exist or not found!!',
                 text:"Do you want to add it anyway?",
                 showCancelButton: true,
+                timer: 1500,
                 confirmButtonText: 'Yes, I want to add it',
               }).then( async(result) => {
                 /* Read more about isConfirmed, isDenied below */
