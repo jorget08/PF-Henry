@@ -9,6 +9,7 @@ import Sidebar from '../AdminDashboard/Sidebar'
 export default function FormCreate() {
 
     const dispatch = useDispatch()
+    const user = useSelector(state => state.user)
     var [formSubmit, setFormSubmit] = useState(false)
     var [last, setLast] = useState("")
     var [boolean, setBoolean] = useState(true)
@@ -65,6 +66,8 @@ export default function FormCreate() {
     var catego = useSelector(state => state.categories)
 
     return (
+        <>
+        {user.rols?.name === "admin" ?
         <div className='containerCreate'>
             <Sidebar />
             <h2 className='h1'>Book management</h2>
@@ -295,7 +298,13 @@ export default function FormCreate() {
                     </div>
                 </div>
             }
-        </div >
-    )
+        </div >:
+        <div className="aviso">
+        <h2>You don't have access here, please go back home</h2>
+        <Link to={`/home`}>
+        <button className='minimize'>Back home</button>
+        </Link>
+        </div>}
+        </>)
 
 }

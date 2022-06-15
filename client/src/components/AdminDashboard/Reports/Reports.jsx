@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { deleteAdmReview, getReviews, getBooks, getSales, getUsers, deleteReview } from '../../../redux/actions'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
@@ -12,6 +13,7 @@ import { ImCheckmark2,ImCross} from "react-icons/im";
 export default function Reports() {
   
   const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
   const allReviews = useSelector(state => state.reviews)
   console.log("I'm the reviews bitch", allReviews)
   
@@ -141,6 +143,8 @@ export default function Reports() {
   const { pageIndex, pageSize } = state
   return (
     <>
+    {user.rols?.name === "admin" ?
+    <>
     <h2 className='h1'>Reports</h2>
     <SearchBar filter={globalFilter} setFilter={setGlobalFilter}/>
     {allReviews && <table {...getTableProps()} className={'Container'}>
@@ -204,6 +208,13 @@ export default function Reports() {
       <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
       <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</button>
     </div>
+    </>:
+    <div className="aviso">
+    <h2>You don't have access here, please go back home</h2>
+    <Link to={`/home`}>
+    <button className='minimize'>Back home</button>
+    </Link>
+    </div>}
     </>
   )
 }

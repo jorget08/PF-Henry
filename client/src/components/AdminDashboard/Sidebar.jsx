@@ -1,14 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {useSelector } from 'react-redux';
 import s from './Sidebar.module.css'
 import { RiHome2Line } from 'react-icons/ri'
 import { BiSupport, BiBookAdd, BiUserCheck, BiTrendingUp, BiDollar, BiCommentX } from 'react-icons/bi'
 import { SiBookstack } from 'react-icons/si'
 
 export default function Sidebar() {
-
+  const user = useSelector(state => state.user)
   return (
     <>
+    {user.rols?.name === "admin" ?
       <div className={s.sidebar}>
 
         <Link to='/'> <siBookstack/><img className={s.Logo} src="https://cdn-icons-png.flaticon.com/512/695/695896.png" /></Link>
@@ -43,7 +45,8 @@ export default function Sidebar() {
           </li>
           <hr />
         </ul>
-      </div>
+      </div>:
+      ""}
     </>
   )
 }

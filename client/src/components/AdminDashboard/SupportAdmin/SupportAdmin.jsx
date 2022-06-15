@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useTable, useSortBy, useGlobalFilter, useFilters } from 'react-table'
 import './styles.css'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { filterSupportStatus, getSupport, replySupport, replySupportGuest} from '../../../redux/actions'
 import { COLUMNS } from './Columns'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
@@ -14,6 +15,7 @@ export default function SupportAdmin() {
 
   const dispatch = useDispatch()
   const supportData = useSelector((state) => state.support)
+  const user = useSelector(state => state.user)
   const [isOpenModal, openModal, closeModal] = useModals(false);
   const [resp, setResp] = useState({name: "", email: "", message: "", id: null})
   const [bool, setBool] = useState(true) 
@@ -108,6 +110,8 @@ export default function SupportAdmin() {
   
   return (
     <>
+    {user.rols?.name === "admin" ?
+    <>
     <Modal isOpen={isOpenModal} closeModal={closeModal}>
         <div className="reply">
           <label>Put the reply here!</label>
@@ -153,6 +157,13 @@ export default function SupportAdmin() {
         }
       </tbody>
     </table>
+    </>:
+    <div className="aviso">
+    <h2>You don't have access here, please go back home</h2>
+    <Link to={`/home`}>
+    <button className='minimize'>Back home</button>
+    </Link>
+    </div>}
     </>
   )
 }
