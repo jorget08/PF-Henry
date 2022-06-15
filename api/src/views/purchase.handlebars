@@ -68,33 +68,30 @@
                                 {{/if}}
                 </strong>
             </p>
-            <ul>
+            <ol>
                 {{#each payment}}
                     <li>
                         {{!-- imagen con titulo --}}
                         <div>
                             <img style="display: inline-block;" src="{{#if image}}
                                     {{image}}
-                            {{/if}}" width="15%" alt="">
+                            {{/if}}" width="12%" alt="">
                             <span class="subTitle">
                                 {{title}} 
                             </span>
                         </div>
                         <p>
-                            {{description}}
+                           <span style="color: #3f5497"> Price:</span> {{price}}$
                         </p>
                         <p>
-                            {{price}}
-                        </p>
-                        <p>
-                            {{cant}}
+                           <span style="color: #3f5497"> Quantity:</span> {{cant}}
                         </p>
                     </li>
                 {{/each}}
-            </ul>
+            </ol>
             <p>
                 <strong>
-                    Total: {{ totalPrice }}
+                    <span style="color: #3f5497">Total Price:</span> {{ totalPrice }}$
                 </strong>
             </p>
         </div>
