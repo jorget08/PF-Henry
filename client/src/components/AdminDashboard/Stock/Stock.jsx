@@ -11,6 +11,8 @@ import { useModals } from '../../Utils/useModals'
 import EditBook from './EditBook'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { AiFillEdit } from 'react-icons/ai'
+import Swal from "sweetalert2";
+
 export default function Stock() {
 
   const dispatch = useDispatch()
@@ -51,10 +53,21 @@ export default function Stock() {
 
   function handleDelete(e, row) {
     e.preventDefault()
-    console.log('SOY ROW', row)
-    dispatch(deleteBook(row.original.id))
-    alert('Are you sure?')
-    window.location.reload()
+   
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete book!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteBook(row.original.id))
+    window.location.reload()     
+      }
+    })
+   
   }
 
   const handleEdit = (e, row) => {
@@ -159,7 +172,7 @@ export default function Stock() {
           }
         </select>
         <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</button>
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+        <button  onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
         <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
         <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</button>
       </div>

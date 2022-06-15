@@ -8,6 +8,7 @@ import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import SearchBar from '../SearchBar/SearchBar'
 import { useModals } from '../../Utils/useModals'
 import Modal from '../../Modal/Modal'
+import Swal from "sweetalert2";
 
 export default function SupportAdmin() {
 
@@ -44,7 +45,23 @@ export default function SupportAdmin() {
     e.preventDefault();
     dispatch(replySupportGuest(resp))
     console.log(resp)
-    alert("Answer sent!")
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: "Answer sent!"
+    })
+    
     setBool(!bool)
     closeModal()
   }

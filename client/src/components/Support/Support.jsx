@@ -147,6 +147,12 @@ export default function Support() {
                         render.Write &&
                         <div>
 
+                            <p className='text'>
+                                Down below you have the option to send us an email, and we will response you quickly. You can
+                                ask what ever you want. In spite of that, the best way to clean all your doubts is being a
+                                member of our community, we can follow all your request closer. If you are not register
+                                in our page yet, we recomends you to do it now clicking here.
+                            </p>
 
                             {isLogged ?
 

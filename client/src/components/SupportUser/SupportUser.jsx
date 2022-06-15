@@ -61,6 +61,7 @@ export default function SupportUser() {
                                 title: 'Thanks!',
                                 text: "Your message was sent, we'll see what we can do about it",
                             })
+
                             resetForm()
                         }
                     }}>

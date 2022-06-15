@@ -48,13 +48,39 @@ export default function BookDetail() {
 
   function delet(e) {
     e.preventDefault();
-    if (window.confirm(`Are you sure you want to delete this book: ${bookDet.title}?`)) {
-      dispatch(deleteBook(bookDet.id))
-      alert("The book has been deleted successfully!")
+    Swal.fire({
+      title: "Are you sure you want to delete this book?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete book'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteBook(bookDet.id))
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: "The book has been deleted successfully!"
+        })
       dispatch(getBooks)
       redirect()
-    }
+      }
+    })
+
   }
+
   async function reportComment(element) {
 
     const { value: report } = await Swal.fire({
