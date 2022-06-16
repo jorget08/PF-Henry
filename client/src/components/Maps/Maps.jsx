@@ -205,7 +205,7 @@ export default function Maps() {
                     </Form>
                 )}
             </Formik>
-            <button onClick={addAddressToUser}>Add an address <RiMapPinAddLine size={20} color="white"/></button>
+            <button onClick={addAddressToUser}>Add address <RiMapPinAddLine size={20} color="white"/></button>
             </div>
             <div ref={mapContainer} className="map-container" id="mapita"/>
 
