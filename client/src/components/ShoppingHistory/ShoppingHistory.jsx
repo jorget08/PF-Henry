@@ -47,10 +47,10 @@ export default function ShoppingHistory() {
         Cell: ({ row }) => (
           <div>
             {row.original.deliveryStatus === "Send" ? (
-              <button style={{ borderRadius: "40px", backgroundColor: "##dbdbdb", color: "black", cursor: "pointer" }}
+              <button className='sendorder' style={{ borderRadius: "10px", backgroundColor: "##dbdbdb", width: '150px', height: '50px', cursor: "pointer" }}
                 onClick={(e) => handleChange2({ e, id: row.original.id })}
               >
-                I already received my order<BsFillBagCheckFill />
+                I've already received my order<BsFillBagCheckFill className="iconOrder" />
               </button>
             ) : null}
             {row.original.deliveryStatus === "Order received" ? <p>Complete</p> : null}
