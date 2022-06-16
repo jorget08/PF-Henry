@@ -11,6 +11,8 @@ import Footer from '../Footer/Footer';
 import "./styles.css";
 import { AiFillEdit } from 'react-icons/ai';
 import { MdWarning } from 'react-icons/md'
+import {FiEdit3} from 'react-icons/fi'
+import {AiTwotoneDelete} from 'react-icons/ai'
 // import { helpCallPut, helpCallUpdate } from '../../helCall';
 import Swal from 'sweetalert2'
 
@@ -226,8 +228,9 @@ export default function BookDetail() {
             <div className='image'>
               <img src={bookDet.image} alt="" />
               {user.rols?.name === "admin" ?
-              <form>
-                <input type="file" onChange={handleImage} name="file" id="" />
+              <form className='admin'>
+
+                <input type="file"  onChange={handleImage} name="file" id="" />
               </form>:""}
               <DetailCompra title={bookDet.title} author={bookDet.author} price={bookDet.price} categories={bookDet.categories} id={bookDet.id} stock={bookDet.stock}></DetailCompra>
             </div>
@@ -261,9 +264,9 @@ export default function BookDetail() {
                       detail: { ...bookDet }
                     }
                   }}>
-                    <button type="button">Modify book</button>
+                    <button type="button" className='buttonAdmin'>Modify book <FiEdit3  className='icons' size={20}   />  </button>
                   </Link>
-                  <button type="button" onClick={(e) => delet(e)}>Delete Book</button>
+                  <button type="button"  className='buttonAdmin' onClick={(e) => delet(e)}>Delete Book <AiTwotoneDelete className='icons' size={20} /></button>
                 </>
                 : ""}
             </div>
