@@ -157,3 +157,33 @@
   background-color: #521616;
   cursor: pointer;
 }
+
+.buttonAdmin{
+  padding: 5px;
+  background-color: white;
+  border: 2px solid #001044;
+  font-family: 'Merriweather';
+  border-radius: 5px;
+  cursor: pointer;
+}
+.buttonAdmin:hover{
+  background-color: #001044;
+  color: white;
+}
+
+.admin input{
+  padding: 5px;
+  background-color: white;
+  border: 2px solid #001044;
+  font-family: 'Merriweather';
+  border-radius: 5px;
+  cursor: pointer;
+}
+.admin{
+  margin-top: 5px;
+}
+.icons{
+ 
+   color:"#001044";
+   padding-left: 3px;
+}
