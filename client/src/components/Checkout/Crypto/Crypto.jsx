@@ -8,8 +8,9 @@ import Swal from "sweetalert2";
 import { FaEthereum } from 'react-icons/fa'
 const startPayment = async ({ setError, setTxs, ether, addr }) => {
   try {
-    if (!window.ethereum)
+    if (!window.ethereum){
       throw new Error("No crypto wallet found. Please install it.");
+    }
 
     await window.ethereum.send("eth_requestAccounts");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -26,7 +27,9 @@ const startPayment = async ({ setError, setTxs, ether, addr }) => {
     setTxs([tx]);
     return tx
   } catch (err) {
+    
     setError(err.message);
+    window.location.reload() 
   }
 };
 
@@ -107,7 +110,7 @@ function Crypto({ value, infoBook, userId, email, name, lastName, payment }) {
           Pay With Metamask
           <FaEthereum size={15} style={{ marginLeft: '1px', marginBottom: '-2px' }} />
         </button>
-        <ErrorMessage message={error} />
+        
 
       </div>
     </form>

@@ -178,8 +178,8 @@ export default function Support() {
                                                 errors.password = 'Name has been required!'
                                             }
 
-                                            if (!valores.comment) {
-                                                errors.comment = 'At least your question must be longer than 100 characters!'
+                                            if (valores.comment.length > 255) {
+                                                errors.comment = 'Your question can not be longer than 255 characters!'
                                             }
                                             return errors;
 
