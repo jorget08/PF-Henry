@@ -205,7 +205,9 @@ export default function Maps() {
                     </Form>
                 )}
             </Formik>
-            <button onClick={addAddressToUser}>Add an address </button>
+
+            <button onClick={addAddressToUser}>Add address </button>
+
             </div>
             <div ref={mapContainer} className="map-container" id="mapita"/>
 
