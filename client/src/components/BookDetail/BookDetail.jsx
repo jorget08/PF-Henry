@@ -142,7 +142,7 @@ export default function BookDetail() {
           showConfirmButton: false,
           timer: 1500
         })
-        dispatch(deleteReview(user.idUser, bookDet.id, element.id))
+        dispatch(deleteReview(bookDet.id, element.id))
       }
     })
 
