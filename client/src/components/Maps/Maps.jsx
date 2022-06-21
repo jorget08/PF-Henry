@@ -10,8 +10,8 @@ import { addAdress } from '../../redux/actions';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './styles.css'
 import Swal from "sweetalert2";
-import {TbMapSearch} from 'react-icons/tb'
-import {RiMapPinAddLine} from 'react-icons/ri'
+/* import {TbMapSearch} from 'react-icons/tb'
+import {RiMapPinAddLine} from 'react-icons/ri' */
 
 import axios from 'axios'
 
@@ -199,12 +199,12 @@ export default function Maps() {
                             {touched.number && errors.number && <span className="errorsMap">{errors.number}</span>}
                         </div>
                         <div >
-                            <button type="submit" >Search address  <TbMapSearch size={20} /> </button>
+                            <button type="submit" >Search address   </button>
                         </div>
                     </Form>
                 )}
             </Formik>
-            <button onClick={addAddressToUser}>Add an address <RiMapPinAddLine size={20} color="white"/></button>
+            <button onClick={addAddressToUser}>Add an address </button>
             </div>
             <div ref={mapContainer} className="map-container" id="mapita"/>
 
